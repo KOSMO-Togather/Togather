@@ -171,7 +171,7 @@
 
         <nav id="navbar" class="navbar order-last order-lg-0">
           <ul>
-            <li><a class="active" href="/">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="../about">About</a></li>
             <li><a href="../board/listPage">게시판</a></li>
             <c:if test="${m ne null}">
@@ -194,7 +194,7 @@
 
             <c:choose>
               <c:when test="${m eq null}">
-                <li><a href="../member/login.do">로그인 ${sessionScope.m} </a></li>
+                <li><a href="login.do">로그인 ${sessionScope.m} </a></li>
               </c:when>
               <c:otherwise>
                 <li><a href="javascript:void(0);" onclick="signout();">로그아웃</a></li>
@@ -210,10 +210,10 @@
         <!--로그인전에는 회원가입만 보이고 로그인하면 모임만들기만 보이게 하는건 어떤지??-->
         <c:choose>
           <c:when test="${m eq null}">
-            <a href="member/joinform.do" class="get-started-btn">회원가입</a>
+            <a href="joinform.do" class="get-started-btn">회원가입</a>
           </c:when>
           <c:otherwise>
-            <a href="groupTab/groupCreate.do" class="get-started-btn">모임만들기</a>
+            <a href="../groupTab/groupCreate.do" class="get-started-btn">모임만들기</a>
           </c:otherwise>
         </c:choose>
 
