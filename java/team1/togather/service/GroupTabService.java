@@ -18,7 +18,7 @@ public interface GroupTabService {
 	public Integer pageCount(Member member); //로그인했을때 그멤버의 카테고리로 검색한 그룹의 총 갯수
 	public Integer notCategorypageCount();//로그인했는데 카테고리에 관한글 없을때 모든그룹 갯수
 	List<String> groupMemberNames(Map<String,Object> map);//로그인했을때 모임장이름
-	
+
 	GroupTab selectByGSeqS(long gseq);
 	void insertS(GroupTab groupTab);
 	void updateS(GroupTab groupTab);
@@ -58,4 +58,10 @@ public interface GroupTabService {
 	Integer galleryPageCount(long gseq);
 	void galleryDelete(GroupTabGallery groupTabGallery);
 	Integer writerCheck(GroupTabGallery groupTabGallery);
+
+	void delegate(MemInGroup memInGroup);
+	MemInGroup selectKing(MemInGroup memInGroup);
+
+	List<GroupTab> searchGroup(GroupTab groupTab);
+	String kingName(long gseq);
 }

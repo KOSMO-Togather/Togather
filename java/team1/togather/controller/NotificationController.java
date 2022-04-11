@@ -16,11 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.AllArgsConstructor;
+import team1.togather.domain.*;
 import team1.togather.service.NotificationService;
-import team1.togather.domain.NotificationCriteria;
-import team1.togather.domain.Member;
-import team1.togather.domain.Notification;
-import team1.togather.domain.nPageMaker;
 
 @AllArgsConstructor
 @Controller
@@ -53,19 +50,13 @@ public class NotificationController {
 	
 	@GetMapping("notice")
 	public String notificationList(NotificationCriteria cri, Model model, HttpServletRequest request) {
-		System.out.println("notification 송: cri값: " +cri);
 		model.addAttribute("notificationList", service.listPageCri(cri)); // =listPageCri()
-		
-		System.out.println("1 :" + service.listPageCri(cri));
-		
 		if(request.getParameter("page")!=null) {
 			String pageAt = request.getParameter("page");
-			System.out.println("현재 페이지: "+pageAt);
 			cri.setPage(Integer.parseInt(pageAt));
 		}
 		if(request.getParameter("pageSize")!=null) {
 			String pageSize = request.getParameter("pageSize");
-			System.out.println("현재 페이지사이즈: "+pageSize);
 			cri.setPageSize(Integer.parseInt(pageSize));
 		}
 		nPageMaker pm = new nPageMaker();
@@ -75,7 +66,6 @@ public class NotificationController {
 		
 		model.addAttribute("pm", pm);
 		model.addAttribute("cri", cri);
-		System.out.println("notification컨트롤러안  송: cri2값: " +cri);
 		return "notification/notice";
 	}
 	
@@ -103,7 +93,6 @@ public class NotificationController {
 		pm.setTotalCount(service.pageCount()); //calcDate()실행
 		model.addAttribute("pm", pm);
 		model.addAttribute("cri", cri);
-		System.out.println("오냐 여기" + cri);
 		return "notification/notice";
 		
 	}
@@ -126,7 +115,6 @@ public class NotificationController {
 	public ModelAndView noticeInput(HttpSession session) {
 		Member member =(Member)session.getAttribute("m");
 		ModelAndView mv = new ModelAndView("notification/noticeInput","member",member);
-		System.out.println("씨발년아");
 		return mv;		
 	}
 	
@@ -144,7 +132,6 @@ public class NotificationController {
 		Notification notification = service.getNotificationContent(nseq);
 		ModelAndView mv = new ModelAndView("notification/noticeUpdate" ,"notification",notification);
 		mv.addObject(member);
-		System.out.print("송송보석 : "+ notification);
 		return mv;
 	}
 	// 업데이트 수정하기 누르면
@@ -160,7 +147,7 @@ public class NotificationController {
 		System.out.println();
 		return "redirect:notice";
 	}
-	
+
 	
 
 

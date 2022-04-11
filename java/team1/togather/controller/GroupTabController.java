@@ -67,6 +67,7 @@ public class GroupTabController {
 		mv.addObject("namelist", namelist);
 		return mv;
 	}
+
 	@GetMapping("groupInfo.do")
 	public ModelAndView groupInfo(long gseq,MemInGroup memInGroup, HttpSession session) throws ParseException {
 		GroupTab groupInfo = groupTabService.selectByGSeqS(gseq);
@@ -76,7 +77,9 @@ public class GroupTabController {
 		Long memInGroupCheck = groupTabService.memInGroupCheck(memInGroup);
 		List<Gathering> gatheringList = gatheringService.ga_selectByGseqS(gseq); //정모 목록 가져오기 (대현추가)
 		Long gatheringCountInGroup = groupTabService.gatheringCountInGroup(gseq);
-		
+		Member memberInfo = memberService.memberInfo(memInGroup);
+		Long grade = groupTabService.grade(memInGroup);
+
 		ModelAndView mv = new ModelAndView("groupTab/groupInfo", "groupInfo", groupInfo);
 		mv.addObject("groupMemberCount", groupMemberCount);
 		mv.addObject("groupMemberName", groupMemberName);
@@ -84,17 +87,19 @@ public class GroupTabController {
 		mv.addObject("memInGroupName",memInGroupName);
 		mv.addObject("gatheringList", gatheringList);//정모 목록 가져오기 (대현추가)
 		mv.addObject("gatheringCountInGroup", gatheringCountInGroup);//모임info 정모갯수(대현추가)
-		
+		mv.addObject("memberInfo", memberInfo);
+		mv.addObject("grade", grade);
+
 		List<String> gatheringDate = new ArrayList<>();
 		List<String> gatheringTime = new ArrayList<>();
 		List<Gathering> endTimeGathering = new ArrayList<>();
-		
+
 		Member m = (Member)session.getAttribute("m");
 		HashMap<String,Object> map = new HashMap<>();
 		map.put("mnum",m.getMnum());
 		map.put("gseq",groupInfo.getGseq());
 		List<HashMap<String,Object>> endTime = groupTabService.endTime(map);
-		System.out.println("endTime: "+endTime); 
+		System.out.println("endTime: "+endTime);
 		if(endTime.size()!=0) {
 			for(int i =0;i<endTime.size();i++) {
 				gatheringDate.add((String)endTime.get(i).get("GA_DATE"));
@@ -108,10 +113,10 @@ public class GroupTabController {
 				String ttime = gatheringTime.get(i);
 				dday+= " "+ttime+":00";
 				//비교할 date와 today를데이터 포맷으로 변경
-				Date date = new Date(dateFormat.parse(dday).getTime()); 
-				Date today = new Date(dateFormat.parse(todayfm).getTime()); 
+				Date date = new Date(dateFormat.parse(dday).getTime());
+				Date today = new Date(dateFormat.parse(todayfm).getTime());
 				//compareTo메서드를 통한 날짜비교
-				int compare = date.compareTo(today); 
+				int compare = date.compareTo(today);
 				int index=dday.indexOf(" ");
 				dday = dday.substring(0, index);
 				//조건문
@@ -120,11 +125,11 @@ public class GroupTabController {
 					System.out.println("date가 today보다 큽니다.(date > today)");
 				}else if(compare < 0) {
 					groupTabService.gatheringDelete(dday);
-				  System.out.println("today가 date보다 큽니다.(date < today)");
+					System.out.println("today가 date보다 큽니다.(date < today)");
 				}
-			} 
+			}
 			if(endTimeGathering.size()!=0) {
-				String memberName = groupTabService.endTimeName(endTimeGathering.get(0).getGseq());				
+				String memberName = groupTabService.endTimeName(endTimeGathering.get(0).getGseq());
 				MemInGathering mig = new MemInGathering();
 				mig.setGa_seq(endTimeGathering.get(0).getGa_seq());
 				mig.setMnum(m.getMnum());
@@ -139,7 +144,7 @@ public class GroupTabController {
 				notice.setNotice(1);
 				mv.addObject("notice", notice);
 				System.out.println("notice: "+notice);
-			}		
+			}
 		}else {
 			MemInGathering notice =new MemInGathering();
 			notice.setGa_seq(0);
@@ -149,6 +154,7 @@ public class GroupTabController {
 		}
 		return mv;
 	}
+
 	@GetMapping("groupCreate.do")
 	public ModelAndView groupCreate() {
 		List<Category> firstCategory = memberService.firstCategory();
@@ -156,255 +162,332 @@ public class GroupTabController {
 		return mv;
 	}
 	@PostMapping("groupCreate.do")
-	public String groupCreate(GroupTab groupTab,HttpSession session) {
+	public String groupCreate(GroupTab groupTab, HttpSession session) {
 		String fname = null;
 		MultipartFile uploadFile = groupTab.getUploadFile();
-		if(!uploadFile.isEmpty()) {
+		if (!uploadFile.isEmpty()) {
 			String ofname = uploadFile.getOriginalFilename(); //파일의 원본이름
+			int idx = ofname.lastIndexOf("."); //파일명까지 자르기
+			String ofheader = ofname.substring(0, idx); //확장자 자르기 
 			String ext = FilenameUtils.getExtension(ofname); //파일의 확장자 구하기
-			
-			UUID uuid = UUID.randomUUID(); //UUID 구하기 -> 뭔지 잘 모르겠음. //아마 저장할 때 이름 겹치지않게 하려고 랜덤으로 이름을 부여하는 용도?...
-			fname = ofname + uuid + "." + ext;
+
+			UUID uuid = UUID.randomUUID(); //(대현수정 4/3) uuid 5글자까지 자르기
+			String randomfname = uuid.toString();
+			String rfname = randomfname.substring(0, 5);
+			fname = ofheader + rfname + "." + ext;
 			try {
 				uploadFile.transferTo(new File(Path.FILE_STORE + fname));
-			}catch(IOException ie) {}
+			} catch (IOException ie) {
+			}
 			groupTab.setFname(fname);
 		}
 		groupTabService.insertS(groupTab);
 		GroupTab g = groupTabService.insertGroupInfo(groupTab);
-		Member m =(Member)session.getAttribute("m");
-		return "redirect:groupInfo.do?gseq="+g.getGseq()+"&mnum="+m.getMnum();	
+		Member m = (Member) session.getAttribute("m");
+		return "redirect:groupInfo.do?gseq=" + g.getGseq() + "&mnum=" + m.getMnum();
 	}
+
 	@GetMapping("groupDelete.do")
 	public String groupDelete(long gseq) {
 		groupTabService.memInGroupDelete(gseq);
 		groupTabService.deleteS(gseq);
 		return "redirect:/";
-	} 
+	}
+
 	@PostMapping("groupUpdatecheck")
 	@ResponseBody
 	public Long groupUpdatecheck(MemInGroup memInGroup) {
 		//0=모임장 1=운영진 2=일반
 		Long grade = groupTabService.grade(memInGroup);
-		if(grade ==null) {//가입안한 사람
-			grade=(long) 3;
+		if (grade == null) {//가입안한 사람
+			grade = (long) 3;
 			return grade;
-		}else {	
-			if(grade==0 || grade ==1) {//모임장이거나 운영자
+		} else {
+			if (grade == 0 || grade == 1) {//모임장이거나 운영자
 				return grade;
-			}else {//일반회원
+			} else {//일반회원
 				return grade;
 			}
 		}
 	}
+
 	@PostMapping("groupDeletecheck")
 	@ResponseBody
 	public Long groupDeletecheck(MemInGroup memInGroup) {
 		//0=모임장 1=운영진 2=일반
 		Long grade = groupTabService.grade(memInGroup);
-		if(grade ==null) {//가입안한 사람
-			grade=(long) 3;
+		if (grade == null) {//가입안한 사람
+			grade = (long) 3;
 			return grade;
-		}else {	
+		} else {
 			return grade;
 		}
 	}
+
 	@GetMapping("groupUpdate.do")
 	public ModelAndView groupUpdate(long gseq) {
 		GroupTab updateList = groupTabService.selectByGSeqS(gseq);
 		ModelAndView mv = new ModelAndView("groupTab/groupUpdate", "updateList", updateList);
 		return mv;
-		
+
 	}
+
 	@PostMapping("groupUpdate.do")
 	public String groupUpdate(GroupTab groupTab, HttpSession session) {
 		System.out.println("들어옴업두");
 		long gseq = groupTab.getGseq();
 		System.out.println("groupUpdate_gseq: " + gseq + "groupUpdate_groupTab: " + groupTab);
-		
+
 		String fname = groupTab.getFname();
 		MultipartFile uploadFile = groupTab.getUploadFile();
-		if(!uploadFile.isEmpty()) {
+		if (!uploadFile.isEmpty()) {
 			String ofname = uploadFile.getOriginalFilename(); //파일의 원본이름
 			int idx = ofname.lastIndexOf("."); //파일명까지 자르기
 			String ofheader = ofname.substring(0, idx);
 			String ext = FilenameUtils.getExtension(ofname); //파일의 확장자 구하기
-			
-			UUID uuid = UUID.randomUUID(); 
-			fname = ofheader + uuid + "." + ext;
+
+			UUID uuid = UUID.randomUUID(); //(대현수정 4/3) uuid 5글자까지 자르기
+			String randomfname = uuid.toString();
+			String rfname = randomfname.substring(0, 5);
+			fname = ofheader + rfname + "." + ext;
 			try {
 				uploadFile.transferTo(new File(Path.FILE_STORE + fname));
-			}catch(IOException ie) {}
+			} catch (IOException ie) {
+			}
 			groupTab.setFname(fname);
 		}
-		
+
 		groupTabService.updateS(groupTab);
-		
-		Member m =(Member)session.getAttribute("m");
-		return "redirect:groupInfo.do?gseq="+gseq+"&mnum="+m.getMnum();
+
+		Member m = (Member) session.getAttribute("m");
+		return "redirect:groupInfo.do?gseq=" + gseq + "&mnum=" + m.getMnum();
 	}
+
 	@PostMapping("memInGroup")
 	@ResponseBody
-	public int memInGroup(MemInGroup memInGroup,HttpSession session) {
-		int check=0;
+	public int memInGroup(MemInGroup memInGroup, HttpSession session) {
+		int check = 0;
 		long limit = groupTabService.LIMIT(memInGroup);
 		Long groupMemberCount = groupTabService.groupMemberCount(memInGroup.getGseq());
-		if(limit<=groupMemberCount) {
-			check=1;
-			
-			
-		}else {
+		if (limit <= groupMemberCount) {
+			check = 1;
+
+
+		} else {
 			groupTabService.memInGroup(memInGroup);
-			check=0;
+			check = 0;
 		}
 		return check;
 	}
+
 	@PostMapping("groupQuit")
 	@ResponseBody
-	public String groupQuit(MemInGroup memInGroup,long gseq, long mnum) {
-		List<Map<String,String>> memInGroupName = groupTabService.memInGroupName(memInGroup);
+	public String groupQuit(MemInGroup memInGroup, long gseq, long mnum) {
+		List<Map<String, String>> memInGroupName = groupTabService.memInGroupName(memInGroup);
 		groupTabService.groupQuit(memInGroup);
 		groupTabService.quitGroupDeleteGathering(mnum); //대현추가 (그룹탈퇴시 본인이 만든 정모 삭제/ 파라미터 mnum 추가)
 		Long groupMemberCount = groupTabService.groupMemberCount(gseq);
-		String result="";
-		if(groupMemberCount==0) {
+		String result = "";
+		if (groupMemberCount == 0) {
 			groupTabService.memInGroupDelete(gseq);
 			groupTabService.deleteS(gseq);
-			result="0";
-		}else {
-			result="1";
+
+			result = "0";
+		} else {
+			result = "1";
 		}
 		return result;
 	}
-	
+
 	//03.26 대현추가
-		@PostMapping("gatheringCreateCheck")
-		@ResponseBody
-		public Long gatheringCreateCheck(long gseq) {
-			System.out.println("#Controller: " + gseq);
-			Long check = groupTabService.gatheringCountInGroup(gseq);
-			if(check >= 5) {
-				System.out.println("#gatheringCreateCheck: " + check);
-				return (long)0;
-			}else{
-				return (long)1;
-			}
+	@PostMapping("gatheringCreateCheck")
+	@ResponseBody
+	public Long gatheringCreateCheck(long gseq) {
+		System.out.println("#Controller: " + gseq);
+		Long check = groupTabService.gatheringCountInGroup(gseq);
+		if (check >= 5) {
+			System.out.println("#gatheringCreateCheck: " + check);
+			return (long) 0;
+		} else {
+			return (long) 1;
 		}
-		@PostMapping("noticeChecked")
-		@ResponseBody
-		public void noticeChecked(MemInGathering mig) {
-			groupTabService.endTimeNoticeChange(mig);
-			
-		}
-		//04.04범수추가
-		@PostMapping("groupMembercheck")
-		@ResponseBody
-		public Long groupMembercheck(MemInGroup memInGroup) {
-			Long grade = groupTabService.grade(memInGroup);
-			if (grade == null) {
-				return (long) 3;
-			} else {
-				return grade;
-			}
-		}
+	}
 
-		//04.05 대현추가 (사진첩)
-		@PostMapping("galleryCheck")
-		@ResponseBody
-		public Long galleryCheck(MemInGroup memInGroup) {
-			Long grade = groupTabService.grade(memInGroup);
-			if (grade == null) {
-				return (long) 3;
-			} else {
-				return grade;
-			}
-		}
-
-		@GetMapping("groupGallery.do")
-		public ModelAndView groupGallery(IndexCriteria cri, long gseq, GroupTabGallery groupTabGallery, HttpServletRequest request) {
-			GroupTab groupGallery = groupTabService.selectByGSeqS(gseq);
-			IndexPage pm = new IndexPage();
-			pm.setCri(cri);
-			pm.setTotalCount(groupTabService.galleryPageCount(gseq));
-
-			if(request.getParameter("page")!=null) {
-				String pageAt = request.getParameter("page");
-				cri.setPage(Integer.parseInt(pageAt));
-			}
-			if(request.getParameter("pageSize")!=null) {
-				String pageSize = request.getParameter("pageSize");
-				cri.setPageSize(Integer.parseInt(pageSize));
-			}
-			HashMap<String, Object> map = new HashMap<>();
-			List<GroupTabGallery> list = new ArrayList<>();
-			map.put("startRow",cri.getStartRow());
-			map.put("endRow",cri.getEndRow());
-			map.put("gseq", gseq);
-			list.addAll(groupTabService.selectPhoto(map));
-			ModelAndView mv = new ModelAndView("groupTab/groupGallery", "groupGallery", groupGallery);
-			mv.addObject("gallery", list);
-			mv.addObject("pm", pm);
-			mv.addObject("cri", cri);
-			return mv;
-		}
-		@GetMapping("galleryUpload.do")
-		public ModelAndView galleryUpload(long gseq) {
-			GroupTab galleryUpload = groupTabService.selectByGSeqS(gseq);
-			ModelAndView mv = new ModelAndView("groupTab/galleryUpload", "galleryUpload", galleryUpload);
-			return mv;
-		}
-		@ResponseBody
-		@RequestMapping("galleryUpload")
-		public String galleryUpload(GroupTabGallery groupTabGallery, MemInGroup memInGroup, HttpSession session,MultipartHttpServletRequest mRequest) {
-			String galleryFNname = null;
-			MultipartFile galleryPhoto = groupTabGallery.getUploadFile();
-			Member member = (Member)session.getAttribute("m");
-			memInGroup.setGseq(groupTabGallery.getGseq());
-			memInGroup.setMnum(member.getMnum());
-			Long grade = groupTabService.grade(memInGroup);
-			
-			if (!galleryPhoto.isEmpty()) {
-				String galleryOFNname = galleryPhoto.getOriginalFilename(); //파일의 원본이름
-				int idx = galleryOFNname.lastIndexOf("."); //파일명까지 자르기
-				String ofheader = galleryOFNname.substring(0, idx); //확장자 자르기
-				String ext = FilenameUtils.getExtension(galleryOFNname); //파일의 확장자 구하기
-
-				UUID uuid = UUID.randomUUID();
-				String randomGFname = uuid.toString();
-				String rGFname = randomGFname.substring(0, 5);
-				galleryFNname = ofheader + rGFname + "." + ext;
-				try {
-					galleryPhoto.transferTo(new File(Path.GALLERY_PHOTO + galleryFNname));
-				} catch (IOException ie) {
-				}
-				groupTabGallery.setPname(galleryFNname);
-			}
-			System.out.println("#groupTabGallery(sout): "+ groupTabGallery);
-			log.trace("#groupTabGallery(log): "+ groupTabGallery);
-			groupTabGallery.setGrade(Math.toIntExact(grade));
-			groupTabService.galleryUpload(groupTabGallery);
-			return "1";
-		}
-		
-		@PostMapping("galleryDeleteCheck")
-		@ResponseBody
-		public Long galleryDeleteCheck(MemInGroup memInGroup) {
-			//0=모임장 1=운영진 2=일반
-			Long grade = groupTabService.grade(memInGroup);
+	//04.04범수추가
+	@PostMapping("groupMembercheck")
+	@ResponseBody
+	public Long groupMembercheck(MemInGroup memInGroup) {
+		Long grade = groupTabService.grade(memInGroup);
+		if (grade == null) {
+			return (long) 3;
+		} else {
 			return grade;
 		}
-		@PostMapping("galleryDeleteCheck2")
-		@ResponseBody
-		public Integer galleryDeleteCheck2(GroupTabGallery groupTabGallery) {
-			Integer count = groupTabService.writerCheck(groupTabGallery);
-			return count;
+	}
+
+	//04.05 대현추가 (사진첩)
+	@PostMapping("galleryCheck")
+	@ResponseBody
+	public Long galleryCheck(MemInGroup memInGroup) {
+		Long grade = groupTabService.grade(memInGroup);
+		if (grade == null) {
+			return (long) 3;
+		} else {
+			return grade;
 		}
+	}
+
+	@GetMapping("groupGallery.do")
+	public ModelAndView groupGallery(IndexCriteria cri, long gseq, GroupTabGallery groupTabGallery, HttpServletRequest request) {
+		GroupTab groupGallery = groupTabService.selectByGSeqS(gseq);
+		IndexPage pm = new IndexPage();
+		pm.setCri(cri);
+		pm.setTotalCount(groupTabService.galleryPageCount(gseq));
+
+		if(request.getParameter("page")!=null) {
+			String pageAt = request.getParameter("page");
+			cri.setPage(Integer.parseInt(pageAt));
+		}
+		if(request.getParameter("pageSize")!=null) {
+			String pageSize = request.getParameter("pageSize");
+			cri.setPageSize(Integer.parseInt(pageSize));
+		}
+		HashMap<String, Object> map = new HashMap<>();
+		List<GroupTabGallery> list = new ArrayList<>();
+		map.put("startRow",cri.getStartRow());
+		map.put("endRow",cri.getEndRow());
+		map.put("gseq", gseq);
+		list.addAll(groupTabService.selectPhoto(map));
+		ModelAndView mv = new ModelAndView("groupTab/groupGallery", "groupGallery", groupGallery);
+		mv.addObject("gallery", list);
+		mv.addObject("pm", pm);
+		mv.addObject("cri", cri);
+		return mv;
+	}
+
+	@GetMapping("galleryUpload.do")
+	public ModelAndView galleryUpload(long gseq) {
+		GroupTab galleryUpload = groupTabService.selectByGSeqS(gseq);
+		ModelAndView mv = new ModelAndView("groupTab/galleryUpload", "galleryUpload", galleryUpload);
+		return mv;
+	}
+	@ResponseBody
+	@RequestMapping("galleryUpload")
+	public String galleryUpload(GroupTabGallery groupTabGallery, MemInGroup memInGroup, HttpSession session,MultipartHttpServletRequest mRequest) {
+		String galleryFNname = null;
+		MultipartFile galleryPhoto = groupTabGallery.getUploadFile();
+		Member member = (Member)session.getAttribute("m");
+		memInGroup.setGseq(groupTabGallery.getGseq());
+		memInGroup.setMnum(member.getMnum());
+		Long grade = groupTabService.grade(memInGroup);
 		
-		@GetMapping("galleryDelete.do")
-		public String galleryDelte(IndexCriteria cri, long gseq, GroupTabGallery groupTabGallery, HttpServletRequest request, long mnum) {
-			System.out.println("#galleryDelete(1): "+ groupTabGallery);
-			groupTabService.galleryDelete(groupTabGallery); 
-			System.out.println("#galleryDelete(2): "+ groupTabGallery);
-			return "redirect:groupGallery.do?page="+cri.getPage()+"&pageSize="+cri.getPageSize()+"&gseq="+gseq+"&mnum="+mnum;
+		if (!galleryPhoto.isEmpty()) {
+			String galleryOFNname = galleryPhoto.getOriginalFilename(); //파일의 원본이름
+			int idx = galleryOFNname.lastIndexOf("."); //파일명까지 자르기
+			String ofheader = galleryOFNname.substring(0, idx); //확장자 자르기
+			String ext = FilenameUtils.getExtension(galleryOFNname); //파일의 확장자 구하기
+
+			UUID uuid = UUID.randomUUID();
+			String randomGFname = uuid.toString();
+			String rGFname = randomGFname.substring(0, 5);
+			galleryFNname = ofheader + rGFname + "." + ext;
+			try {
+				galleryPhoto.transferTo(new File(Path.GALLERY_PHOTO + galleryFNname));
+			} catch (IOException ie) {
+			}
+			groupTabGallery.setPname(galleryFNname);
 		}
+		System.out.println("#groupTabGallery(sout): "+ groupTabGallery);
+		log.trace("#groupTabGallery(log): "+ groupTabGallery);
+		groupTabGallery.setGrade(Math.toIntExact(grade));
+		groupTabService.galleryUpload(groupTabGallery);
+		return "1";
+	}
+	
+	@PostMapping("galleryDeleteCheck")
+	@ResponseBody
+	public Long galleryDeleteCheck(MemInGroup memInGroup) {
+		//0=모임장 1=운영진 2=일반
+		Long grade = groupTabService.grade(memInGroup);
+		return grade;
+	}
+	@PostMapping("galleryDeleteCheck2")
+	@ResponseBody
+	public Integer galleryDeleteCheck2(GroupTabGallery groupTabGallery) {
+		Integer count = groupTabService.writerCheck(groupTabGallery);
+		return count;
+	}
+
+	
+	@GetMapping("galleryDelete.do")
+	public String galleryDelte(IndexCriteria cri, long gseq, GroupTabGallery groupTabGallery, HttpServletRequest request, long mnum) {
+		log.info("#galleryDelete(1): "+ groupTabGallery);
+		groupTabService.galleryDelete(groupTabGallery); 
+		log.info("#galleryDelete(2): "+ groupTabGallery);
+		return "redirect:groupGallery.do?page="+cri.getPage()+"&pageSize="+cri.getPageSize()+"&gseq="+gseq+"&mnum="+mnum;
+	}
+
+	@PostMapping("delegateCheck")
+	@ResponseBody
+	public long delegateCheck(MemInGroup memInGroup) {
+		long grade = memInGroup.getGrade();
+
+		if(grade == 0) {
+			return 0;
+		}else if(grade == 1) {
+			return 1;
+		}else {
+			return 2;
+		}
+	}
+
+	@GetMapping("delegate.do")
+	public String delegate(MemInGroup memInGroup, HttpSession session) {
+		long grade = memInGroup.getGrade();
+		long gseq = memInGroup.getGseq();
+		long mnum = memInGroup.getMnum();
+
+		Member m =(Member)session.getAttribute("m");
+
+		if(grade == 2) { //일반회원을 운영진으로 위임할 때
+			grade = 1;
+			memInGroup.setGrade(grade);
+			groupTabService.delegate(memInGroup);
+			return "redirect:groupInfo.do?gseq="+gseq+"&mnum="+m.getMnum()+"";
+		}else if(grade ==1) { //운영진을 일반회원으로 위임해제할 때
+			grade = 2;
+			memInGroup.setGrade(grade);
+			groupTabService.delegate(memInGroup);
+			return "redirect:groupInfo.do?gseq="+gseq+"&mnum="+m.getMnum()+"";
+		}else {
+			System.out.println("mnum: " + mnum);
+			groupTabService.groupQuit(memInGroup); //모임장 탈퇴..
+			MemInGroup mig = groupTabService.selectKing(memInGroup);
+
+			Long groupMemberCount = groupTabService.groupMemberCount(gseq);
+			if(groupMemberCount==0) {
+				groupTabService.memInGroupDelete(gseq);
+				groupTabService.deleteS(gseq);
+				return "redirect:../";
+			}else {
+				mig.setGrade(0);
+				groupTabService.delegate(mig); //운영진 맨 윗 사람에게 모임장 자동 위임
+				return "redirect:groupInfo.do?gseq="+gseq+"&mnum="+m.getMnum()+"";
+			}
+		}
+	}
+
+	@PostMapping("kingQuitCheck")
+	@ResponseBody
+	public long kingQuitCheck(MemInGroup memInGroup) {
+		long grade = memInGroup.getGrade();
+		System.out.println("gradeeeee: " + grade);
+		if(grade == 0) {
+			return 0;
+		}else {
+			return 1;
+		}
+	}
 }
+
+

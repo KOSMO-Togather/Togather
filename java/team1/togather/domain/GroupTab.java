@@ -28,5 +28,5 @@ public class GroupTab {
 	//== nameList, numberOfmem-in-group
 	private String mname;
 	private Long memInGroupCount;
-	
+
 }

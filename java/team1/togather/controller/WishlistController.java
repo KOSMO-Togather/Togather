@@ -23,7 +23,7 @@ public class WishlistController {
 	private GroupTabService groupservice;
 	@Autowired
 	private WishListService wishservice;
-	
+
 	@GetMapping("/wishList")
 	public ModelAndView wishList(Long mnum) {
 		System.out.println("mnum: "+ mnum);

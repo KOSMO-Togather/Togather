@@ -22,7 +22,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         
-        System.out.println("preHandle1");
+
         
         HttpSession session = request.getSession();
         Member m = (Member)session.getAttribute("m");
@@ -47,8 +47,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
             ModelAndView modelAndView) throws Exception {
-        
-        System.out.println("postHandle1");
+
         
         /*ModelMap modelMap = modelAndView.getModelMap();
         //GroupTab updateList = (GroupTab) modelMap.get("updateList");
@@ -64,7 +63,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
         
-        System.out.println("afterCompletion1");
+
         
         
     }    

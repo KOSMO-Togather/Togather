@@ -60,7 +60,7 @@
     <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
         <li><a class="active" href="/">Home</a></li>
-        <li><a href="notification/aboutUs">About</a></li>
+        <li><a href="about">About</a></li>
         <li><a href="board/listPage">게시판</a></li>
         <c:if test="${m ne null}">
           <li><a href="groupTab/myGroup.do?mnum=${m.mnum }">나의 모임</a></li><!--로그인시에만 보이게 하기-->
@@ -216,12 +216,12 @@
   </section>
   <!-- End Counts Section -->
 
-  <!-- ======= Testimonials Section ======= -->
+  <!-- ======= 개발후기 Section(김진운, 김지수, 박범수, 송보석, 조현기, 최대현) ======= -->
   <section id="testimonials" class="testimonials">
     <div class="container" data-aos="fade-up">
       <div class="section-title">
-        <h2>사용후기</h2>
-        <p>생생한 후기를 들어보세요!</p>
+        <h2>개발후기</h2>
+        <p>KOSMO 1팀의 개발 스토리</p>
       </div>
 
       <div
@@ -238,8 +238,8 @@
                         class="testimonial-img"
                         alt=""
                 />
-                <h3>최대현</h3>
-                <h4>인천</h4>
+                <h3>김진운[팀장]</h3>
+                <h4>맡은 파트</h4>
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                   같은 취미를 같이 즐기고 싶었던 갈증을 완벽히 해결해줬어요!
@@ -260,8 +260,8 @@
                         class="testimonial-img"
                         alt=""
                 />
-                <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
+                <h3>김지수</h3>
+                <h4>맡은 파트</h4>
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                   Export tempor illum tamen malis malis eram quae irure esse
@@ -279,17 +279,17 @@
             <div class="testimonial-wrap">
               <div class="testimonial-item">
                 <img
-                        src="/assets/img/testimonials/testimonials-3.jpg"
+                        src="/assets/img/testimonials/bumsoo.jpg"
                         class="testimonial-img"
                         alt=""
                 />
-                <h3>Jena Karlis</h3>
-                <h4>Store Owner</h4>
+                <h3>박범수</h3>
+                <h4>모임게시판, 회원관리</h4>
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Enim nisi quem export duis labore cillum quae magna enim
-                  sint quorum nulla quem veniam duis minim tempor labore
-                  quem eram duis noster aute amet eram fore quis sint minim.
+                  프로젝트를 진행하면서 다양한 난관을 거치면서 성취감과 동시에 재미를 느낄 수 있었으며,
+                  프로젝트 진행 전과 후를 비교해 보았을 때
+                  어느순간 한 단계 성장해있는 자신을 보면서 뿌듯함과 대견함을 느낄 수 있었습니다.
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
               </div>
@@ -305,8 +305,8 @@
                         class="testimonial-img"
                         alt=""
                 />
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
+                <h3>송보석</h3>
+                <h4>팀원</h4>
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                   Fugiat enim eram quae cillum dolore dolor amet nulla culpa
@@ -328,8 +328,30 @@
                         class="testimonial-img"
                         alt=""
                 />
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
+                <h3>조현기</h3>
+                <h4>팀원</h4>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Quis quorum aliqua sint quem legam fore sunt eram irure
+                  aliqua veniam tempor noster veniam enim culpa labore duis
+                  sunt culpa nulla illum cillum fugiat legam esse veniam
+                  culpa fore nisi cillum quid.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- End testimonial item -->
+          <div class="swiper-slide">
+            <div class="testimonial-wrap">
+              <div class="testimonial-item">
+                <img
+                        src="/assets/img/testimonials/testimonials-5.jpg"
+                        class="testimonial-img"
+                        alt=""
+                />
+                <h3>최대현</h3>
+                <h4>정모, 사진첩, 프론트 구현</h4>
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                   Quis quorum aliqua sint quem legam fore sunt eram irure

@@ -36,7 +36,7 @@ public class WishListServiceImpl implements WishListService {
 		wishmapper.deleteWishList(wishMap);
 	}
 	@Override
-	public Integer wishListFlagCheck(Map<String,Long> map) { 
+	public Integer wishListFlagCheck(Map<String,Long> map) {
 		return wishmapper.wishListFlagCheck(map);
 	}
 

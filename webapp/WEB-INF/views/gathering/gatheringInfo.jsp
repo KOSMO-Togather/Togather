@@ -375,7 +375,7 @@
 					if(climateFlag==0){
 						$('#clioption').remove();
 						$('#climateInfo').after(
-							"<div id=\"clioption\" class=\"course-info d-flex justify-content-between align-items-center\"> "	
+							"<div id=\"clioption\" class=\"text-center\"> "
 							+" <p>3일뒤 오전날씨: "+wf3Am+" 오후날씨: "+wf3Pm+"<br>"
 							+" 4일뒤 오전날씨: "+wf4Am+" 오후날씨: "+wf4Pm+"<br>"
 							+" 5일뒤 오전날씨: "+wf5Am+" 오후날씨: "+wf5Pm+"<br>"

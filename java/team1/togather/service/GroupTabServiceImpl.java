@@ -21,13 +21,13 @@ import team1.togather.mapper.GroupTabMapper;
 @AllArgsConstructor
 public class GroupTabServiceImpl implements GroupTabService {
 	private GroupTabMapper groupTabMapper;
-	
+
 	@Override
 	public List<GroupTab> selectAllS(IndexCriteria cri) {
 		List<GroupTab> list = groupTabMapper.selectAll(cri);
 		return list;
 	}
-	
+
 	@Override
 	public GroupTab selectByGSeqS(long gseq) {
 		return groupTabMapper.selectByGSeq(gseq);
@@ -47,27 +47,27 @@ public class GroupTabServiceImpl implements GroupTabService {
 	public void deleteS(long gseq) {
 		groupTabMapper.delete(gseq);
 	}
-	//03.16지수추가 
+	//03.16지수추가
 	@Override
 	public List<String> selectAllname(long mnum) {
-		
+
 		return groupTabMapper.selectAllname(mnum);
 	}
 
 	@Override
 	public long groupCount() {
-		
+
 		return groupTabMapper.groupCount();
 	}
 
 	@Override
-	public Long groupMemberCount(long gseq) {	
+	public Long groupMemberCount(long gseq) {
 		return groupTabMapper.groupMemberCount(gseq);
 	}
 
 	@Override
 	public Member groupInfoMemberName(long gseq) {
-		
+
 		return groupTabMapper.groupInfoMemberName(gseq);
 	}
 
@@ -77,7 +77,7 @@ public class GroupTabServiceImpl implements GroupTabService {
 	}
 
 	@Override
-	public Long grade(MemInGroup memInGroup) {		
+	public Long grade(MemInGroup memInGroup) {
 		return groupTabMapper.grade(memInGroup);
 	}
 	//03.17지수추가
@@ -88,31 +88,31 @@ public class GroupTabServiceImpl implements GroupTabService {
 
 	@Override
 	public void groupQuit(MemInGroup memInGroup) {
-		groupTabMapper.groupQuit(memInGroup);		
+		groupTabMapper.groupQuit(memInGroup);
 	}
 
 	@Override
-	public List<Map<String,String>> memInGroupName(MemInGroup memInGroup) {		
+	public List<Map<String,String>> memInGroupName(MemInGroup memInGroup) {
 		return groupTabMapper.memInGroupName(memInGroup);
 	}
 
 	@Override
 	public void memInGroupDelete(long gseq) {
 		groupTabMapper.memInGroupDelete(gseq);
-		
+
 	}
 
 	@Override
-	public List<GroupTab> myGroup(MemInGroup memInGroup) {		
+	public List<GroupTab> myGroup(MemInGroup memInGroup) {
 		return groupTabMapper.myGroup(memInGroup);
 	}
 
 	@Override
 	public GroupTab insertGroupInfo(GroupTab groupTab) {
-		
+
 		return groupTabMapper.insertGroupInfo(groupTab);
 	}
-	
+
 	@Override
 	public List<GroupTab> loginGroupList(Map<String,Object> map) {
 		List<GroupTab> list = groupTabMapper.loginGroupList(map);
@@ -120,23 +120,23 @@ public class GroupTabServiceImpl implements GroupTabService {
 	}
 
 	@Override
-	public Integer pageCount(Member member) {	
+	public Integer pageCount(Member member) {
 		return groupTabMapper.pageCount(member);
 	}
 
 	@Override
 	public Integer notCategorypageCount() {
-		
+
 		return groupTabMapper.notCategorypageCount();
 	}
 
 	@Override
-	public long LIMIT(MemInGroup memInGroup) {	
+	public long LIMIT(MemInGroup memInGroup) {
 		return groupTabMapper.LIMIT(memInGroup);
 	}
 
 	@Override
-	public List<String> NoCategoryNames(IndexCriteria cri) {	
+	public List<String> NoCategoryNames(IndexCriteria cri) {
 		return groupTabMapper.NoCategoryNames(cri);
 	}
 
@@ -144,7 +144,7 @@ public class GroupTabServiceImpl implements GroupTabService {
 	public void quitGroupDeleteGathering(long mnum) {
 		groupTabMapper.quitGroupDeleteGathering(mnum);
 	}
-	
+
 	@Override
 	public Long gatheringCountInGroup(long gseq) {
 		return groupTabMapper.gatheringCountInGroup(gseq);
@@ -156,7 +156,7 @@ public class GroupTabServiceImpl implements GroupTabService {
 	}
 
 	@Override
-	public List<HashMap<String,Object>> endTime(HashMap<String,Object> map) {		
+	public List<HashMap<String,Object>> endTime(HashMap<String,Object> map) {
 		return groupTabMapper.endTime(map);
 	}
 
@@ -167,22 +167,22 @@ public class GroupTabServiceImpl implements GroupTabService {
 
 	@Override
 	public String endTimeName(long gseq) {
-		return groupTabMapper.endTimeName(gseq);		
+		return groupTabMapper.endTimeName(gseq);
 	}
 
 	@Override
 	public void gatheringDelete(String ga_date) {
-		groupTabMapper.gatheringDelete(ga_date);		
+		groupTabMapper.gatheringDelete(ga_date);
 	}
 
 	@Override
-	public MemInGathering endTimeNotice(MemInGathering mig) {		
+	public MemInGathering endTimeNotice(MemInGathering mig) {
 		return groupTabMapper.endTimeNotice(mig);
 	}
 
 	@Override
 	public void endTimeNoticeChange(MemInGathering mig) {
-		groupTabMapper.endTimeNoticeChange(mig);		
+		groupTabMapper.endTimeNoticeChange(mig);
 	}
 	@Override
 	public void galleryUpload(GroupTabGallery groupTabGallery){
@@ -204,6 +204,23 @@ public class GroupTabServiceImpl implements GroupTabService {
 	public Integer writerCheck(GroupTabGallery groupTabGallery) {
 		return groupTabMapper.writerCheck(groupTabGallery);
 	}
-	
+	@Override
+	public void delegate(MemInGroup memInGroup) {
+		groupTabMapper.delegate(memInGroup);
+	}
+
+	@Override
+	public MemInGroup selectKing(MemInGroup memInGroup) {
+		return groupTabMapper.selectKing(memInGroup);
+	}
+
+	@Override
+	public List<GroupTab> searchGroup(GroupTab groupTab){
+		return groupTabMapper.searchGroup(groupTab);
+	}
+	@Override
+	public String kingName(long gseq){
+		return groupTabMapper.kingName(gseq);
+	}
 
 }

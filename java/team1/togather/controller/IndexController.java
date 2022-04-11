@@ -44,7 +44,7 @@ public class IndexController {
 	private CategoryService cateService;
 	@Autowired
 	private GatheringService gatheringService;
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index(HttpSession session, HttpServletRequest request, IndexCriteria cri) {
 		List<GroupTab> list = new ArrayList<>();
@@ -84,21 +84,21 @@ public class IndexController {
 			}else {
 				namelist=groupTabService.groupMemberNames(map);
 			}
-			viewCheck = memberService.messageViewCheck(mnum);//로그인 되었으면 가져오는데 알림을 안꺼놓은거의 갯수 		
+			viewCheck = memberService.messageViewCheck(mnum);//로그인 되었으면 가져오는데 알림을 안꺼놓은거의 갯수
 		}else {
 			viewCheck=null;
 			list = groupTabService.selectAllS(cri);
 			namelist = groupTabService.NoCategoryNames(cri);
-			
+
 		}
 		long membercount = memberService.memberCount();
-		
+
 		long gatheringcount = gatheringService.gatheringCount();
 		for(int i =0;i<list.size();i++) {
 			groupMemberCount.add(groupTabService.groupMemberCount(list.get(i).getGseq()));
 		}
 		long groupcount = groupTabService.groupCount();
-		
+
 		if(m!=null) {
 			List<WishList> WishOfM = wishService.getWishLists(m.getMnum());
 			wishNumOfM = WishOfM.size();
@@ -110,7 +110,7 @@ public class IndexController {
 					wishmap.clear();
 				}
 			}
-			
+
 		}
 		System.out.println("컨트롤러namelist: "+namelist);
 		mv.addObject("list", list);
@@ -199,16 +199,45 @@ public class IndexController {
 		}
 		return cateList;
 	}
+//	대현추가
 	@GetMapping("about")
 	public ModelAndView aboutUs() {
-	long membercount = memberService.memberCount();
-	   long groupcount = groupTabService.groupCount();
-	   long gatheringcount = gatheringService.gatheringCount();
-	   ModelAndView mv = new ModelAndView("aboutUs", "membercount", membercount);
-	   mv.addObject("groupcount",groupcount);
-	   mv.addObject("gatheringcount", gatheringcount);
-	   return mv;
+		long membercount = memberService.memberCount();
+		long groupcount = groupTabService.groupCount();
+		long gatheringcount = gatheringService.gatheringCount();
+		ModelAndView mv = new ModelAndView("aboutUs", "membercount", membercount);
+		mv.addObject("groupcount",groupcount);
+		mv.addObject("gatheringcount", gatheringcount);
+		return mv;
 	}
-	
-	
+//	현기추가
+	@GetMapping("getSearchGroupList")
+	@ResponseBody
+	public List<GroupTab> getSearchGroupList(GroupTab groupTab) {
+		System.out.println("gname: " + groupTab.getGname());
+		System.out.println("interest: " + groupTab.getInterest());
+		System.out.println("gloc: " + groupTab.getGloc());
+
+		List<GroupTab> groupList = groupTabService.searchGroup(groupTab);
+		System.out.println("groupList: " + groupList);
+		for(int i=0; i<groupList.size(); i++) {
+			String kingName = groupTabService.kingName(groupList.get(i).getGseq());
+			for(GroupTab li : groupList) {
+				li.setMname(kingName);
+			}
+		}
+		return groupList;
+	}
+	//	대현추가
+	@GetMapping("contact")
+	public ModelAndView contactUs() {
+		long membercount = memberService.memberCount();
+		long groupcount = groupTabService.groupCount();
+		long gatheringcount = gatheringService.gatheringCount();
+		ModelAndView mv = new ModelAndView("contactUs", "membercount", membercount);
+		mv.addObject("groupcount",groupcount);
+		mv.addObject("gatheringcount", gatheringcount);
+		return mv;
+	}
+
 }
