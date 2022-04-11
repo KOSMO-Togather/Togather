@@ -10,3 +10,4 @@ java/team1/togather/fileset/GBPath.java
 webapp/WEB-INF/classes
 webapp/WEB-INF/spring
 webapp/WEB-INF/web.xml
+Webapp/WEB-INF/lib
