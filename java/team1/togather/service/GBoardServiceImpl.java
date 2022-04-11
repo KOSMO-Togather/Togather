@@ -11,9 +11,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
+<<<<<<< HEAD
 import team1.togather.fileset.Path;
 import team1.togather.domain.GBoardCriteria;
 import team1.togather.domain.GBoard;
+=======
+import team1.togather.domain.GBoardCriteria;
+import team1.togather.domain.GBoard;
+import team1.togather.fileset.Path;
+>>>>>>> 269ae310e6e9b51098320f1449b98cab30634bb2
 import team1.togather.mapper.GBoardMapper;
 
 @Log4j

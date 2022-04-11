@@ -210,7 +210,7 @@ public class IndexController {
 		mv.addObject("gatheringcount", gatheringcount);
 		return mv;
 	}
-//	현기추가
+//	현기추가ㅎㅎㅎ
 	@GetMapping("getSearchGroupList")
 	@ResponseBody
 	public List<GroupTab> getSearchGroupList(GroupTab groupTab) {

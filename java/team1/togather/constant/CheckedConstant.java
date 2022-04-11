@@ -13,4 +13,8 @@ public class CheckedConstant {
 	public static final int NOTSAME_PWD = 1;
 	public static final int SAME_EMAIL = 0;
 	public static final int NOTSAME_EMAIL = 1;
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 269ae310e6e9b51098320f1449b98cab30634bb2
 }

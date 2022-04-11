@@ -573,7 +573,11 @@ mark,
 }
 
 .img-fluid {
+<<<<<<< HEAD
   width: 100%;
+=======
+  max-width: 100%;
+>>>>>>> 269ae310e6e9b51098320f1449b98cab30634bb2
   height: auto;
 }
 
@@ -3331,6 +3335,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-light {
+<<<<<<< HEAD
   color: #f8f9fa;
   border-color: #f8f9fa;
 }
@@ -3339,6 +3344,16 @@ fieldset:disabled a.btn {
   color: #212529;
   background-color: #f8f9fa;
   border-color: #f8f9fa;
+=======
+  color: #212529;
+  border-color: #212529;
+}
+
+.btn-outline-light:hover {
+  color: #f8f9fa;
+  background-color: #f8f9fa;
+  border-color: #212529;
+>>>>>>> 269ae310e6e9b51098320f1449b98cab30634bb2
 }
 
 .btn-outline-light:focus,
