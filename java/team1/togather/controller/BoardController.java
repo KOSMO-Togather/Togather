@@ -1,5 +1,9 @@
 package team1.togather.controller;
+<<<<<<< HEAD
 //진운git테스트
+=======
+
+>>>>>>> 1e395bb8bd4a01b565db203d6f2248a77e418a5f
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
