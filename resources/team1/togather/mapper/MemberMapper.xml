@@ -127,7 +127,14 @@
 	<select id="thirdCategory" resultMap="thirdCategoryMap">
 		select DISTINCT FIRST_OPTION from category where INT_IN=#{int_in}
 	</select>
-
+	<!-- 로그인유지하기 누르기 체크 -->
+	<update id="keepLogin" parameterType="Map">
+		update member set sessionKey=#{sessionId},sessionLimit=#{sessionLimit} where mnum=#{mnum}
+	</update>
+	<!-- 자동로그인을 누른 상태 유저 찾기 -->
+	<select id="checkUserWithSessionKey" resultType="Member" parameterType="String">
+		select * from member where sessionKey =#{sessionKey}  and sessionLimit > SYSDATE
+	</select>
 
 </mapper>
 

@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import team1.togather.domain.GBoardCriteria;
 import team1.togather.domain.GBoard;
-import team1.togather.fileset.Path;
+import team1.togather.domain.fileset.Path;
 import team1.togather.mapper.GBoardMapper;
 
 @Log4j

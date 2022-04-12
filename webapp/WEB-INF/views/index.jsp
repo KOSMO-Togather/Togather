@@ -291,10 +291,10 @@
         $(function(){
             $("#getSearch").on("click", function(){
                 var gname = $("#gname").val();
-                var interest = $("#interest").val();
+                var int_out = $("#int_out").val();
                 var gloc = $("#gloc").val();
                 var popularCourses = document.getElementById('popular-courses'); //모임리스트 보여주는 디자인 갖고오는 메소드
-                if(gname=="" && interest=="" && gloc==""){
+                if(gname=="" && int_out=="" && gloc==""){
                     alert("모임이름, 관심사, 지역 중 한 가지 이상을 입력해주세요.");
                     $("#gname").focus();
                     return false;
@@ -492,7 +492,7 @@
                             />
                         </div>
                         <div class="col-md-4">
-                            <select class="form-select border-0 py-3" name="interest" id="interest">
+                            <select class="form-select border-0 py-3" name="int_out" id="int_out">
                                 <option selected value="">관심사</option>
                                 <option value="아웃도어/여행">아웃도어/여행</option>
                                 <option value="외국/언어">외국/언어</option>

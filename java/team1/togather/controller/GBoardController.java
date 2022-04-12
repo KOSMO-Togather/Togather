@@ -27,7 +27,7 @@ import team1.togather.domain.GBoard;
 import team1.togather.domain.GBPageMaker;
 import team1.togather.domain.GBoardCriteria;
 import team1.togather.domain.Member;
-import team1.togather.fileset.Path;
+import team1.togather.domain.fileset.Path;
 import team1.togather.service.GBReplyService;
 import team1.togather.service.GBoardService;
 

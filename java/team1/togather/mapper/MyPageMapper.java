@@ -5,6 +5,7 @@ import java.util.List;
 
 import team1.togather.domain.Category;
 import team1.togather.domain.Member;
+
 public interface MyPageMapper {
 
 	Member list(long mnum);
@@ -16,6 +17,8 @@ public interface MyPageMapper {
 	List<Category> firstCategory();//첫번째 카테고리
 	List<Category> secondCategory(Category category);//두번쨰카테고리
 	List<Category> thirdCategory(Category category);//세번쨰카테고리
-	
+
 	void updateCategory(Member member); // 카테고리 업데이트
+	void makesecondCategoryblank(long mnum);
+	void makethirdCategoryblank(long mnum);
 }

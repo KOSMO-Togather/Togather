@@ -199,10 +199,10 @@
             <thead>
               <tr>
                 <th class="col-sm-1">글번호</th>
-                <th class="col-sm-2">제목</th>
-                <th scope="col-sm-3">작성자</th>
-                <th scope="col-sm-4">조회수</th>
-                <th scope="col-sm-5">등록일</th>
+                <th class="col-sm-1">작성자</th>
+                <th class="col-sm-6">제목</th>
+                <th class="col-sm-1">조회수</th>
+                <th class="col-sm-4">등록일</th>
               </tr>
             </thead>
             <tbody>
@@ -215,10 +215,10 @@
 				   <c:forEach var="gboard" items="${gboardList }">
 	                    <tr onClick="location.href='gbcontent.do?gbnum=${gboard.gbnum}&gseq=${cri.gseq}'">
 	                      <td class="col-sm-1">${gboard.gbnum}</td>
-	                      <td class="col-sm-2">${gboard.gbtitle }</td>
-	                      <td class="col-sm-3">${gboard.mname }</td>
-	                      <td class="col-sm-4">${gboard.gbview }</td>
-	                      <td class="col-sm-5" ><fmt:formatDate value="${gboard.rdate }" pattern="yyyy-MM-dd (E) HH:mm" /></td>
+                          <td class="col-sm-1">${gboard.mname }</td>
+	                      <td class="col-sm-6">${gboard.gbtitle }</td>
+	                      <td class="col-sm-1">${gboard.gbview }</td>
+	                      <td class="col-sm-4"><fmt:formatDate value="${gboard.rdate }" pattern="yyyy-MM-dd (E) HH:mm" /></td>
 	                    </tr>
 				 	  </c:forEach>
                     </c:if>

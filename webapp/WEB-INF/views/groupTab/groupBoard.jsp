@@ -154,7 +154,7 @@
               <tr>
                 <th class="col-sm-2">글번호</th>
                 <th class="col-sm-6">제목</th>
-                <th scope="col-sm-4">작성자</th>
+                <th scope="col-sm-2">작성자</th>
                 <th scope="col-sm-2">조회수</th>
                 <th scope="col-sm-2">작성일</th>
               </tr>
@@ -165,7 +165,7 @@
                 <th scope="row">${groupBoard.gbnum}</th>
                 <td><a href="/groupBoard/read?gbnum=${groupboard.gbnum}">${groupBoard.gbtitle}</a></td>
                 <td>${groupBoard.mname}</td>
-                <td><span class="badge bg-red">${groupBoard.gbview}</td>
+                <td><span class="badge bg-red">${groupBoard.gbview}></span></td>
                 <td><fmt:formatDate value="${groupBoard.rdate}" pattern="yyyy-MM-dd (E) HH:mm" /></td>
               </tr>
              </c:forEach>

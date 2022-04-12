@@ -34,30 +34,12 @@ public class MemberServiceImpl implements MemberService {
 		int join = 0;
 		int joincheck_phone = joincheck(member.getPhone());
 		int joincheck_email = joincheck2(member.getEmail());
-		//System.out.println("joincheck: "+joincheck_phone);
-		//System.out.println("member.getPhone(): "+member.getPhone());
-		//System.out.println("joincheck_email: "+joincheck_email);
-		//System.out.println("member.getEmail(): "+member.getEmail());
 		if(joincheck_phone==NO_ID && joincheck_email==NO_ID) {//데이터 베이스에 없으면 회원가입성공
-			//System.out.println("암호화 전 비밀번호 : "+member.getPwd());
 			String encrypted = BCrypt.hashpw(member.getPwd(), BCrypt.gensalt());
-			//System.out.println("암호화 후 비밀번호 : "+member.getPwd());
 			member.setPwd(encrypted);
 			String addr = member.getMaddr();
 			member.setMaddr(addr.replaceAll(","," "));
 			join = mapper.join(member);
-			/*System.out.println(member.getMnum());
-			System.out.println("주소 : " +member.getMaddr());
-			System.out.println("관심지역 :"+member.getPfr_loc());
-			System.out.println("이름 : "+member.getMname());
-			System.out.println("성별 : "+member.getGender());
-			System.out.println("생일 : "+member.getBirth());
-			System.out.println("데이터베이스 들어간 후 비밀번호 : "+member.getPwd());
-			System.out.println("이메일 : " +member.getEmail());
-			System.out.println("폰번호 : " +member.getPhone());
-			System.out.println("카테고리 : " +member.getCategory());
-			System.out.println("이건뭐임 : " +member.getAthur());*/
-			System.out.println("주소 : " +member.getMaddr());
 			join = YES_JOIN;
 		}else if(joincheck_phone==already){
 			join =already_phone;
@@ -202,6 +184,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String getMnameByMnum(Long mnum) {
 		return mapper.getMnameByMnum(mnum);
+	}
+
+	@Override
+	public void keepLogin(Map<String, Object> map) {
+		mapper.keepLogin(map);
+
+	}
+	@Override
+	public Member checkUserWithSessionKey(String sessionKey) {
+		return mapper.checkUserWithSessionKey(sessionKey);
 	}
 
 }

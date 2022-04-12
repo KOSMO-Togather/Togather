@@ -36,7 +36,7 @@ import team1.togather.domain.IndexPage;
 import team1.togather.domain.MemInGathering;
 import team1.togather.domain.MemInGroup;
 import team1.togather.domain.Member;
-import team1.togather.fileset.Path;
+import team1.togather.domain.fileset.Path;
 import team1.togather.service.GatheringService;
 import team1.togather.service.GroupTabService;
 import team1.togather.service.MemberService;

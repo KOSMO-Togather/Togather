@@ -156,40 +156,30 @@
                     type: "GET",
                     data: result,
                     success: function(data){
-                        console.log("success");
                         var secondCategory=data;
                         let catagory="";
                         for(var i =0;i<data.length;i++){
                             let idNum=i;
                             catagory+="<li><a id='"+i+"' class='dropdown-item' href='javascript:categorys(3,"+i+")' onclick='javascript:reset2()' data-value='"+secondCategory[i].int_in+"'>"+secondCategory[i].int_in+"</a></li>";
                         }
-                        console.log("12");
                         $('#ul2').append(
                             catagory
                         );
                     }
                 });
-                console.log("14");
             }else if(sequence==3){
                 let index=i;
                 let categoryValue=document.getElementById(index).getAttribute('data-value');
-                console.log("16");
                 $('#span2').text(categoryValue);
                 var result = {"int_in":categoryValue,"sequence":sequence};
-                console.log("dddd");
-                console.log("result:" + result.int_in +" sequnce: "+sequence);
                 $.ajax({
                     url: "../member/category.json",
                     type: "GET",
                     data: result,
                     success: function(data){
-                        console.log("1df");
                         var thirdCategory=data;
                         let catagory="";
-                        //if(Object.keys(data).length!=1){
-                        console.log("1");
-                        if(!jQuery.isEmptyObject(data)){
-                            console.log("2");
+                        if(Object.keys(data).length!=1){
                             $('#button3').show();
                             for(var i =0;i<data.length;i++){
                                 catagory+="<li><a id='"+i+"li' class='dropdown-item' href='javascript:categorys(4,"+i+")' onclick='reset3()' data-value='"+thirdCategory[i].first_option+"'>"+thirdCategory[i].first_option+"</a></li>";

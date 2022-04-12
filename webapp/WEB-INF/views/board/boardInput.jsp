@@ -63,7 +63,7 @@
             <c:if test="${m ne null}">
               <li><a href="../groupTab/myGroup.do?mnum=${m.mnum }">나의 모임</a></li><!--로그인시에만 보이게 하기-->
               <li><a href="../wishTab/wishList?mnum=${m.mnum }">찜목록
-                <span id="numberOfWish" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                <span id="numberOfWish" class="badge bg-dark text-white ms-1 rounded-pill">${wishsize }</span>
               </a></li>
             </c:if>
             <li class="dropdown">
@@ -72,7 +72,7 @@
               ></a>
               <ul>
                 <li><a href="../notification/notice">공지사항</a></li>
-                <li><a href="../faq/listPage">자주묻는 질문</a></li>
+                <li><a href="../faq/faqList">자주묻는 질문</a></li>
                 <li><a href="../qa">Q&A</a></li>
                 <li><a href="../contact">Contact</a></li>
               </ul>

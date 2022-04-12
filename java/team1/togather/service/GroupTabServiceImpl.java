@@ -7,14 +7,8 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
-import team1.togather.domain.Gathering;
-import team1.togather.domain.GroupTab;
+import team1.togather.domain.*;
 import team1.togather.domain.GroupTabGallery;
-import team1.togather.domain.GroupTabGallery;
-import team1.togather.domain.IndexCriteria;
-import team1.togather.domain.MemInGathering;
-import team1.togather.domain.MemInGroup;
-import team1.togather.domain.Member;
 import team1.togather.mapper.GroupTabMapper;
 
 @Service
