@@ -3,6 +3,42 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
+<style>
+  table.type07 {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border: 1px solid #ccc;
+    margin: 20px 10px;
+  }
+  table.type07 thead {
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    background: #d1c7c7;
+  }
+  table.type07 thead th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+  }
+  table.type07 tbody th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #fcf1f4;
+  }
+  table.type07 td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+  }
+  table.type07 .even {
+    background: #fdf3f5;
+  }
+</style>
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -50,36 +86,41 @@
   <script src="http://code.jquery.com/jquery-latest.js"></script>
   <script type="text/javascript">
     $(function(){
-      $("#gboardSearch").on("keyup",function(){
-        var gseq = "${gseq}";
-        var table = document.getElementById('gboardTest');
+      $("#membermgSearch").on("keyup",function(){
+        var mnum = "${mnum}";
+        var table = document.getElementById('membermgTest');
         $.ajax({
-          url:"gblistRest",
+          url:"mmlistRest",
           type:"GET",
           dataType:"json",
           contentType: "application/json",
           data: {
-            gboardSearch: $("#gboardSearch").val(),
+            membermgSearch: $("#membermgSearch").val(),
             option:$("#option").val(),
-            gseq:gseq
+            mnum:mnum
           },
           success: function(result){
             var data=result;
 
             var obj_length = Object.keys(result).length;
-            var trlength = $('#gboardTest tr').length;
+            var trlength = $('#membermgTest tr').length;
             for(var t=trlength-1;t>0;t--){
               table.deleteRow(t);
             }
 
             for(var i=0;i<obj_length;i++){
-              $('#gboardTest').append(
-                      "<tr onClick=\"location.href='gbcontent.do?gbnum="+result[i].gbnum+"&gseq="+result[i].gseq+"'\">"
-                      + "<td class='col-sm-1'>"+result[i].gbnum+"</td>"
-                      + "<td class='col-sm-1'>"+result[i].mname+"</td>"
-                      + "<td class='col-sm-6'>"+result[i].gbtitle+"</td>"
-                      + "<td class='col-sm-1'>"+result[i].gbview+"</td>"
-                      + "<td class='col-sm-4'>"+result[i].rdate+"</td></tr>"
+              $('#membermgTest').append(
+                      "<tr>"
+                      + "<td class='column1'>"+result[i].mnum+"</td>"
+                      + "<td class='column2'>"+result[i].maddr+"</td>"
+                      + "<td class='column3'>"+result[i].mname+"</td>"
+                      + "<td class='column4'>"+result[i].gender+"</td>"
+                      + "<td class='column5'>"+result[i].birth+"</td>"
+                      + "<td class='column6'>"+result[i].email+"</td>"
+                      + "<td class='column7'>"+result[i].phone+"</td>"
+                      + "<td class='column8'>"+result[i].athur+"</td>"
+                      + "<td class='column9'><a href='mmupdate.do?mnum="+result[i].mnum+"'>수정</a></td>"
+                      + "<td class='column9'><a href='mmdel.do?mnum="+result[i].mnum+"'>삭제</a></td></tr>"
               );
             }
 
@@ -92,6 +133,11 @@
       });
     });
 
+    $(function(){
+      //$("tr:odd").css("background","red");
+      $("tr:even").css("background","#faf7f2");
+
+    });
   </script>
 </head>
 <body>
@@ -117,11 +163,6 @@
             >
           </a>
         </li>
-        <c:if test="${m.athur eq 0}">
-          <li><a href="/membermg/mmlistPage">회원관리
-            <span id="numberOfWish" class="badge bg-dark text-white ms-1 rounded-pill">${wishsize }</span>
-          </a></li>
-        </c:if>
 
         <li class="dropdown">
           <a href="#"
@@ -150,80 +191,71 @@
   <!-- ======= Breadcrumbs ======= -->
   <div class="breadcrumbs" data-aos="fade-in">
     <div class="container">
-      <h1>모임 게시판</h1>
+      <h1>회원관리</h1>
     </div>
   </div>
   <!-- End Breadcrumbs -->
 
   <!-- ======= Cource Details Section ======= -->
 
-  <section id="course-details" class="course-details">
-    <div class="container" data-aos="fade-up">
-      <ul class="nav nav-tabs mb-3">
-        <li class="nav-item">
-          <a class="nav-link" href="#">정보</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">사진첩</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">게시판</a>
-        </li>
-      </ul>
+  <section id="course-details" class="course-details" >
+    <div class="container" data-aos="fade-up" style="margin-top:10px">
       <div class="button_group">
-        <button
-                class="btn btn-outline-dark btn-sm dropdown-toggle mb-1 mx-md-0"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                style="float: left"
+        <button  style="margin-top:10px"
+                 class="btn btn-outline-dark btn-sm dropdown-toggle mb-1 mx-md-0"
+                 type="button"
+                 data-bs-toggle="dropdown"
+                 aria-expanded="false"
+                 style="float: left"
         >
           페이지당 게시글 수
         </button>
-        <c:forEach var="gboard" items="${gboardList }">
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="gblistPage?pageSize=1&gseq=${gboard.gseq}">1</a></li>
-            <li><a class="dropdown-item" href="gblistPage?pageSize=5&gseq=${gboard.gseq}">5</a></li>
-            <li><a class="dropdown-item" href="gblistPage?pageSize=10&gseq=${gboard.gseq}">10</a></li>
-            <li><a class="dropdown-item" href="gblistPage?pageSize=15&gseq=${gboard.gseq}">15</a></li>
-          </ul>
-        </c:forEach>
-
-        <a
-                type="submit"
-                class="btn btn-dark btn-sm mb-1"
-                style="float: right"
-                href="gbwrite.do?gseq=${cri.gseq}"
-        >
-          글쓰기
-        </a>
-
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="mmlistPage?pageSize=1">1</a></li>
+          <li><a class="dropdown-item" href="mmlistPage?pageSize=5">5</a></li>
+          <li><a class="dropdown-item" href="mmlistPage?pageSize=10">10</a></li>
+          <li><a class="dropdown-item" href="mmlistPage?pageSize=15">15</a></li>
+        </ul>
       </div>
-      <table id="gboardTest" class="table table-hover" style="text-align: center">
+
+      <table id="membermgTest" class="type07" style="text-align: center; margin-left:0px">
         <thead>
         <tr>
-          <th class="col-sm-1">글번호</th>
-          <th class="col-sm-1">작성자</th>
-          <th class="col-sm-6">제목</th>
-          <th class="col-sm-1">조회수</th>
-          <th class="col-sm-4">등록일</th>
+          <th class="col-sm-1">회원번호</th>
+          <th class="col-sm-1">거주지</th>
+          <th class="col-sm-1">회원이름</th>
+          <th class="col-sm-1">성별</th>
+          <th class="col-sm-2">생년월일</th>
+          <th class="col-sm-1">이메일</th>
+          <th class="col-sm-2">핸드폰번호</th>
+          <th class="col-sm-1">회원권한</th>
+          <th class="col-sm-1"><a style="margin-right:10px">회원관리</a></th>
         </tr>
         </thead>
         <tbody>
-        <c:if test="${empty gboardList}">
+        <c:if test="${empty MembermgList}">
           <tr align="center">
             <td colspan="5">데이터가 하나도 없음</td>
           </tr>
         </c:if>
-        <c:if test="${not empty gboardList}">
-          <c:forEach var="gboard" items="${gboardList }">
-            <tr onClick="location.href='gbcontent.do?gbnum=${gboard.gbnum}&gseq=${cri.gseq}'">
-              <td class="col-sm-1">${gboard.gbnum}</td>
-              <td class="col-sm-1">${gboard.mname }</td>
-              <td class="col-sm-6">${gboard.gbtitle }</td>
-              <td class="col-sm-1">${gboard.gbview }</td>
-              <td class="col-sm-4"><fmt:formatDate value="${gboard.rdate }" pattern="yyyy-MM-dd (E) HH:mm" /></td>
+        <c:if test="${not empty MembermgList}">
+          <c:forEach var="member" items="${MembermgList }">
+            <tr>
+              <td class="col-sm-1">${member.mnum}</td>
+              <td class="col-sm-1">${member.maddr }</td>
+              <td class="col-sm-1">${member.mname }</td>
+              <td class="col-sm-1">${member.gender }</td>
+              <td class="col-sm-2">${member.birth }</td>
+              <td class="col-sm-1">${member.email }</td>
+              <td class="col-sm-2">${member.phone }</td>
+              <td class="col-sm-1">${member.athur }</td>
+              <td class="col-sm-1"><a style="color:blue" href="mmupdate.do?mnum=${member.mnum}">수정</a>
+                <a style="color:blue"  href="mmdel.do?mnum=${member.mnum}">삭제</a>
+              </td>
+
             </tr>
+
+
           </c:forEach>
         </c:if>
         </tbody>
@@ -240,12 +272,12 @@
                 name="option"
                 id="option"
         >
-          <option value="gbtitle">제목</option>
-          <option value="mname">작성자</option>
+          <option value="mname">이름</option>
+          <option value="athur">회원권환</option>
         </select>
         <input
-                id="gboardSearch"
-                name="gboardSearch"
+                id="membermgSearch"
+                name="membermgSearch"
                 type="text"
                 aria-label="Text input with dropdown button"
         />
@@ -260,27 +292,27 @@
           >
             <c:if test="${pm.prev}">
               <li class="page-item">
-                <a class="page-link" href="gblistPage?page=${pm.startPage-1}&pageSize=${cri.pageSize}&gseq=${cri.gseq}">처음</a>
+                <a class="page-link" href="mmlistPage?page=${pm.startPage-1}&pageSize=${cri.pageSize}">처음</a>
               </li>
             </c:if>
             <c:if test="${pm.prev}">
               <li class="page-item">
-                <a class="page-link" href="gblistPage?page=${cri.page-1}&pageSize=${cri.pageSize}&gseq=${cri.gseq}">이전</a>
+                <a class="page-link" href="mmlistPage?page=${cri.page-1}&pageSize=${cri.pageSize}">이전</a>
               </li>
             </c:if>
             <c:forEach var="idx" begin="${pm.startPage }" end="${pm.endPage }">
               <li class="page-item">
-                <a class="page-link" href="gblistPage?page=${idx }&pageSize=${cri.pageSize}&gseq=${cri.gseq}">${idx}</a>
+                <a class="page-link" href="mmlistPage?page=${idx }&pageSize=${cri.pageSize}">${idx}</a>
               </li>
             </c:forEach>
             <c:if test="${pm.next && pm.endPage > 0}">
               <li class="page-item">
-                <a class="page-link" href="gblistPage?page=${cri.page+1}&pageSize=${cri.pageSize}&gseq=${cri.gseq}">다음</a>
+                <a class="page-link" href="mmlistPage?page=${cri.page+1}&pageSize=${cri.pageSize}">다음</a>
               </li>
             </c:if>
             <c:if test="${pm.next && pm.endPage > 0}">
               <li class="page-item">
-                <a class="page-link" href="gblistPage?page=${pm.endPage}&pageSize=${cri.pageSize}&gseq=${cri.gseq}">끝</a>
+                <a class="page-link" href="mmlistPage?page=${pm.endPage}&pageSize=${cri.pageSize}">끝</a>
               </li>
             </c:if>
           </ul>

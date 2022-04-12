@@ -1,4 +1,4 @@
-package team1.togather.domain.fileset;
+package team1.togather.fileset;
 
 import java.io.File;
 import java.io.FileInputStream;

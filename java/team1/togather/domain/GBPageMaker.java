@@ -6,14 +6,14 @@ public class GBPageMaker {
 	private int endPage;
 	private boolean prev;
 	private boolean next;
-	
+
 	private GBoardCriteria cri;
-	
+
 	private int displayPageNum = 10;
 
 	public GBPageMaker() {}
 	public GBPageMaker(int totalCount, int startPage, int endPage, boolean prev, boolean next, GBoardCriteria cri,
-			int displayPageNum) {
+					   int displayPageNum) {
 		super();
 		this.totalCount = totalCount;
 		this.startPage = startPage;
@@ -32,7 +32,7 @@ public class GBPageMaker {
 		this.totalCount = totalCount;
 		calcDate();
 	}
-	
+
 	private void calcDate() {
 		endPage = (int) (Math.ceil(cri.getPage()/(double)displayPageNum) * displayPageNum);
 		startPage = (endPage - displayPageNum) +1;
@@ -89,7 +89,7 @@ public class GBPageMaker {
 	public void setDisplayPageNum(int displayPageNum) {
 		this.displayPageNum = displayPageNum;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "PageMaker [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", prev="

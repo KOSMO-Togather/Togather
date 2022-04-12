@@ -408,6 +408,9 @@
                         <span id="numberOfWish" class="badge bg-dark text-white ms-1 rounded-pill">${wishsize }</span>
                     </a></li>
                 </c:if>
+                <c:if test="${m.athur eq 0}">
+                    <li><a href="/membermg/mmlistPage">회원관리 </a></li>
+                </c:if>
                 <li class="dropdown">
                     <a href="#"
                     ><span>고객지원</span> <i class="bi bi-chevron-down"></i

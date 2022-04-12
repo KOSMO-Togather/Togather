@@ -57,7 +57,9 @@
 									 #{category_first},
 									 #{category_second,jdbcType=VARCHAR},
 									 #{category_third,jdbcType=VARCHAR},
-									 default)
+									 default,
+		                          	#{sessionkey,jdbcType=VARCHAR},
+		                          	#{sessionlimit,jdbcType=TIMESTAMP})
 	</insert>
 	<!-- 메세지 보내기 -->
 	<insert id="sendMessage" parameterType="Message" >

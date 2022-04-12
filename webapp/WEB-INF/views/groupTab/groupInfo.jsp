@@ -432,34 +432,41 @@
     		location="../gathering/gatheringCreate.do?gseq=${groupInfo.gseq}&mnum=${m.mnum}";
     	}
     </script>
+    <!-- 04/11 범수추가 (모임멤버체크)-->
     <c:forEach items="${memInGroupName}" var="memInGroupName">
       <script type="text/javascript">
-    function groupMembercheck(){
-    		var mnum = ${m.mnum};
-  			var gseq = ${groupInfo.gseq};
-  			var result = {"mnum":mnum,"gseq":gseq};
-	   			$(function(){
-    				$.ajax({
-	   					url: "groupMembercheck.json",
-	   					type: "POST",
-	   					data: result,
-	   					success: function(data){
-	   						if(data!=3){
-	   							groupMember();
-	   						}else {
-	   							Swal.fire({
-		  							  title: "가입회원만 조회가 가능합니다.",
-		  							  icon: "error"
-	   							});
-	   						}
-	   					}
-	   				});
-	   			});
-    	}
-    	function groupMember(){
-    		location="../gboard/gblistPage?gseq=${groupInfo.gseq}&mnum=${memInGroupName.MNUM}";
-    	}
-    	</script>
+        function groupMembercheck(){
+          var mnum = ${m.mnum};
+          var gseq = ${groupInfo.gseq};
+          var result = {"mnum":mnum,"gseq":gseq};
+          $(function(){
+            $.ajax({
+              url: "groupMembercheck.json",
+              type: "POST",
+              data: result,
+              success: function(data){
+                if(data==0 || ${m.athur eq 0}){//모임장일때일때
+                  groupMember();
+                }else if(data==1  || ${m.athur eq 1}){//운영진일때
+                  groupMember();
+                  //swal("모임장,운영자만 수정 가능합니다");
+                }else if(data==2){//일반회원
+                  groupMember();
+                }else {//모임에없을때
+                  Swal.fire({
+                    title: "가입회원만 조회가 가능합니다.",
+                    icon: "error"
+                  });
+                }
+              }
+            });
+          });
+        }
+
+        function groupMember(){
+          location="../gboard/gblistPage?gseq=${groupInfo.gseq}&mnum=${memInGroupName.MNUM}";
+        }
+      </script>
     </c:forEach>
     <!-- 04/05 대현추가 (사진첩 멤버체크)-->
     <c:forEach items="${memInGroupName}" var="memInGroupName">
