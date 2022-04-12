@@ -119,10 +119,15 @@
 	<select id="secondCategory" resultType="Category">
 		select DISTINCT INT_IN from category where int_out=#{int_out}
 	</select>
+	<resultMap id="thirdCategoryMap" type="Category">
+		<result column="INT_IN" property="int_in" />
+		<result column="FIRST_OPTION" property="first_option" />
+	</resultMap>
 	<!-- 회원가입 세번째 카테고리 리스트 가져오기 -->
-	<select id="thirdCategory" resultType="Category">
+	<select id="thirdCategory" resultMap="thirdCategoryMap">
 		select DISTINCT FIRST_OPTION from category where INT_IN=#{int_in}
 	</select>
+
 
 </mapper>
 

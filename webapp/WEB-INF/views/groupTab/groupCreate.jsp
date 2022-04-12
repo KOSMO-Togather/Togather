@@ -278,7 +278,13 @@
         window.history.forward();
         function noBack(){window.history.forward();}
     </script>
-
+    <style>
+        .dropdown-menu {
+            height: auto;
+            max-height: 200px;
+            overflow-x: hidden;
+        }
+    </style>
 </head>
 
 <body onload="noBack();categorys(1,0)" onpageshow="if(event.persisted) noBack();" onunload="">
