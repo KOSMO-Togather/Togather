@@ -1,17 +1,13 @@
 package team1.togather.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.AllArgsConstructor;
@@ -42,7 +38,7 @@ public class GBReplyController {
 	}
 	
 	@PostMapping("gbrupdate.do")
-	public String gbrupdate(GBReply gbreply, HttpServletRequest request, HttpServletResponse response) {
+	public String gbrupdate(GBReply gbreply, HttpServletRequest request) {
 		gbreplyService.gbrupdateS(gbreply); 
 		long gbnum = Long.parseLong(request.getParameter("gbnum"));
 		long gbrseq = Long.parseLong(request.getParameter("gbrseq"));
@@ -52,7 +48,7 @@ public class GBReplyController {
 		
 	}
 	@GetMapping("gbrdel.do")
-	public String gbdelete(long gbrseq, HttpServletRequest request, HttpServletResponse response) {
+	public String gbdelete(long gbrseq, HttpServletRequest request) {
 		gbreplyService.gbrdeleteS(gbrseq);
 		long gbnum = Long.parseLong(request.getParameter("gbnum"));
 		return "redirect:../gboard/gbcontent.do?gbnum="+gbnum+"";

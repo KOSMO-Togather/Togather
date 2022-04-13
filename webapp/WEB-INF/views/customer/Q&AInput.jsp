@@ -38,72 +38,82 @@
 
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet" />
-
-    <!-- =======================================================
-  * Template Name: Mentor - v4.7.0
-  * Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+      Kakao.init('11400a9267d93835389eb9255fcaad0b');
+      function signout(){
+        if(Kakao.Auth.getAccessToken() != null){
+          Kakao.Auth.logout(function(){
+            setTimeout(function(){
+              location.href="../member/logout.do";
+            },500);
+          });
+        }else{
+          location.href="../member/logout.do";
+        }
+      }
+    </script>
   </head>
-	<script>
-	
-	</script>
   <body >
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top">
       <div class="container d-flex align-items-center">
-        <h1 class="logo me-auto"><a href="/">Togather</a></h1>
+        <h1 class="logo me-auto"><a href="../">Togather</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
         <nav id="navbar" class="navbar order-last order-lg-0">
           <ul>
-            <li><a class="active" href="/">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="groupTab/myGroup.do?mnum=${m.mnum }">나의 모임</a></li>
-            <!--로그인시에만 보이게 하기-->
-            <li><a href="board/listPage">게시판</a></li>
-            <li>
-              <a href="wishlist.html"
-                >찜목록
-                <span class="badge bg-dark text-white ms-1 rounded-pill"
-                  >0</span
-                >
-              </a>
-            </li>
-
+            <c:if test="${m.athur eq 0}">
+              <li><a class="manage" href="../membermg/mmlistPage">회원관리</a></li>
+            </c:if>
+            <li><a class="active" href="../">Home</a></li>
+            <li><a href="../about">About</a></li>
+            <li><a href="../board/listPage">게시판</a></li>
+            <c:if test="${m ne null}">
+              <li><a href="../groupTab/myGroup.do?mnum=${m.mnum }">나의 모임</a></li><!--로그인시에만 보이게 하기-->
+              <li><a href="../wishTab/wishList?mnum=${m.mnum }">찜목록
+                <span id="numberOfWish" class="badge bg-dark text-white ms-1 rounded-pill">${wishsize }</span>
+              </a></li>
+            </c:if>
             <li class="dropdown">
               <a href="#"
-                ><span>고객지원</span> <i class="bi bi-chevron-down"></i
+              ><span>고객지원</span> <i class="bi bi-chevron-down"></i
               ></a>
               <ul>
-                <li><a href="notice.html">공지사항</a></li>
-                <li><a href="FAQ.html">자주묻는 질문</a></li>
+                <li><a href="../notification/notice">공지사항</a></li>
+                <li><a href="../faq/faqList">자주묻는 질문</a></li>
                 <li><a href="qa">Q&A</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="../contact">Contact</a></li>
               </ul>
             </li>
+
             <c:choose>
-           		<c:when test="${m eq null}">
-            		<li><a href="member/login.do">로그인 ${sessionScope.m} </a></li>
-        		</c:when>
-          		<c:otherwise>
-            		<li><a href="javascript:void(0);" onclick="signout();">로그아웃</a></li>
-            	</c:otherwise>
-         </c:choose>
+              <c:when test="${m eq null}">
+                <li><a href="../member/login.do">로그인 ${sessionScope.m} </a></li>
+              </c:when>
+              <c:otherwise>
+                <li><a href="javascript:void(0);" onclick="signout();">로그아웃</a></li>
+                <li><a href="../mypage/main">마이페이지</a></li>
+              </c:otherwise>
+            </c:choose>
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
+
         </nav>
         <!-- .navbar -->
+
+        <!--로그인전에는 회원가입만 보이고 로그인하면 모임만들기만 보이게 하는건 어떤지??-->
         <c:choose>
-           		<c:when test="${m eq null}">
-		        	<a href="member/joinform.do" class="get-started-btn">회원가입</a>
-		        </c:when>
-		        <c:otherwise>
-        			<a href="groupTab/groupCreate.do" class="get-started-btn">모임만들기</a>
-        		</c:otherwise>
-         </c:choose>
+          <c:when test="${m eq null}">
+            <a href="../member/joinform.do" class="get-started-btn">회원가입</a>
+          </c:when>
+          <c:otherwise>
+            <a href="../groupTab/groupCreate.do" class="get-started-btn">모임만들기</a>
+          </c:otherwise>
+        </c:choose>
+
+
       </div>
     </header>
     <!-- End Header -->
@@ -228,18 +238,18 @@
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <footer id="footer" style="padding-top: 50px">
+    <footer id="footer">
       <div class="footer-top">
         <div class="container">
           <div class="row">
             <div class="col-lg-3 col-md-6 footer-contact">
-              <h3>Mentor</h3>
+              <h3>Togather</h3>
               <p>
-                A108 Adam Street <br />
-                New York, NY 535022<br />
-                United States <br /><br />
-                <strong>Phone:</strong> +1 5589 55488 55<br />
-                <strong>Email:</strong> info@example.com<br />
+                서울시 금천구<br/>
+                가산 디지털 2로 123<br/>
+                월드메르디앙 2차<br/><br/>
+                <strong>Phone:</strong>+82 2 1234 1234<br/>
+                <strong>Email:</strong>service@togather.com<br/>
               </p>
             </div>
 
@@ -247,10 +257,10 @@
               <h4>Useful Links</h4>
               <ul>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#">Home</a>
+                  <i class="bx bx-chevron-right"></i> <a href="../">Home</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#">About us</a>
+                  <i class="bx bx-chevron-right"></i> <a href="../about">About us</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
@@ -266,41 +276,36 @@
               </ul>
             </div>
 
-            <div class="col-lg-3 col-md-6 footer-links">
+            <div  class="col-lg-3 col-md-6 footer-links">
               <h4>Our Services</h4>
               <ul>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#">Web Design</a>
+                  <i class="bx bx-chevron-right"></i> <a href="../notification/notice">공지사항</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i>
-                  <a href="#">Web Development</a>
+                  <a href="../faq/listPage">자주 묻는 질문</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i>
-                  <a href="#">Product Management</a>
+                  <a href="qa">Q & A</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#">Marketing</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="#">Graphic Design</a>
+                  <i class="bx bx-chevron-right"></i> <a href="../contact">Contact</a>
                 </li>
               </ul>
             </div>
 
             <div class="col-lg-4 col-md-6 footer-newsletter">
-              <h4>Join Our Newsletter</h4>
+              <h4>뉴스레터 구독하기</h4>
               <p>
-                Tamen quem nulla quae legam multos aute sint culpa legam noster
-                magna
+                최신뉴스 및 프로모션 행사에 대한 안내메일을 받으실 수 있습니다.
               </p>
               <form action="" method="post">
-                <input type="email" name="email" /><input
-                  type="submit"
-                  value="Subscribe"
-                />
+                <input type="email" name="email"/><input
+                      type="submit"
+                      value="Subscribe"
+              />
               </form>
             </div>
           </div>
@@ -310,15 +315,8 @@
       <div class="container d-md-flex py-4">
         <div class="me-md-auto text-center text-md-start">
           <div class="copyright">
-            &copy; Copyright <strong><span>Mentor</span></strong
-            >. All Rights Reserved
-          </div>
-          <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/ -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            &copy; Copyright<strong><span>Togather</span></strong
+          >. All Rights Reserved
           </div>
         </div>
         <div class="social-links text-center text-md-right pt-3 pt-md-0">

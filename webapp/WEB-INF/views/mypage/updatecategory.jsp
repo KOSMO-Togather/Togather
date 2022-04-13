@@ -42,13 +42,6 @@
 	<!-- alert -->
 	<!-- Template Main CSS File -->
 	<link href="/assets/css/style.css" rel="stylesheet" />
-
-	<!-- =======================================================
-  * Template Name: Mentor - v4.7.0
-  * Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 	<script type="text/javascript"
 			src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -96,10 +89,6 @@
 				console.log("checked: "+checked);
 				console.log("box.checked: "+box.checked);
 			}
-
-			/*<input id="checkBox1" type="hidden"  value="">
-            <input id="checkBox2" type="hidden"  value="">
-            <input id="checkBox3" type="hidden"  value="">*/
 
 		}
 
@@ -164,7 +153,7 @@
 		function reset3(){
 
 		}
-		//<button id='Cancelbutton' type='button' class='btn btn-secondary' onclick='categorys(6,0)' style='margin:7px 0px 0px 5px' >취소</button>
+
 		function selectedCategory(){
 			let categoryValue1 =$('#category_first1').val();
 			let categoryValue2 =$('#category_first2').val();
@@ -230,9 +219,6 @@
 							categoryCheckValue1 =$('#category_firstCheck1').val();
 							categoryCheckValue2 =$('#category_firstCheck2').val();
 							categoryCheckValue3 =$('#category_firstCheck3').val();
-							console.log("categoryCheckValue1: "+categoryCheckValue1);
-							console.log("categoryCheckValue2: "+categoryCheckValue2);
-							console.log("categoryCheckValue3: "+categoryCheckValue3);
 						}else {
 							console.log("4");
 							Swal.fire({
@@ -243,7 +229,6 @@
 					}
 				}else{
 					if($('#category_firstCheck1').val()==""){
-						console.log("1: ");
 						let selectedText1="";
 						selectedText1+="<input id='ck1' value='ck1' type='checkbox' onclick='checkedBox(this)'></input>";
 						selectedText1+="<input id='category_first' type='text' name='category_first' style='width:100px;height:50px;border:none;text-align: center' value='"+categoryValue1+"' readonly>";
@@ -252,7 +237,6 @@
 						);
 						$('#category_firstCheck1').val("1");
 					}else if($('#category_firstCheck1').val()!="" && $('#category_firstCheck2').val()==""){
-						console.log("2");
 						let selectedText2="";
 						selectedText2+="<input id='ck2' value='ck2' type='checkbox' onclick='checkedBox(this)'></input>";
 						selectedText2+="<input id='category_second' type='text' name='category_second' style='width:100px;height:50px;border:none;text-align: center' value='"+categoryValue2+"' readonly>";
@@ -261,7 +245,6 @@
 						);
 						$('#category_firstCheck2').val("2");
 					}else if($('#category_firstCheck1').val()!="" && $('#category_firstCheck2').val()!="" && $('#category_firstCheck3').val()==""){
-						console.log("3");
 						let selectedText3="";
 						selectedText3+="<input id='ck3' value='ck3' type='checkbox' onclick='checkedBox(this)'></input>";
 						selectedText3+="<input id='category_third' type='text' name='category_third' style='width:100px;height:50px;border:none;text-align: center' value='"+categoryValue3+"' readonly>";
@@ -281,11 +264,7 @@
 						categoryCheckValue1 =$('#category_firstCheck1').val();
 						categoryCheckValue2 =$('#category_firstCheck2').val();
 						categoryCheckValue3 =$('#category_firstCheck3').val();
-						console.log("categoryCheckValue1: "+categoryCheckValue1);
-						console.log("categoryCheckValue2: "+categoryCheckValue2);
-						console.log("categoryCheckValue3: "+categoryCheckValue3);
 					}else {
-						console.log("4");
 						Swal.fire({
 							title:"카테고리는 3개까지만 선택가능합니다.",
 							icon:"error"
@@ -373,7 +352,7 @@
 								categorys(5,0);
 							}
 							let catagoryButton="<button id='Selectbutton' type='button' class='btn btn-secondary' onclick='selectedCategory()' style='margin-top:7px' >선택</button>";
-							console.log("엘스안 categoryValue: "+categoryValue);
+
 							$('#Cancelbutton').before(
 									catagoryButton
 							);
@@ -566,7 +545,6 @@
 							success:function(data){
 								opener.location.reload();
 								window.close();
-								console.log("result2 : " + result);
 							}
 						});
 					}

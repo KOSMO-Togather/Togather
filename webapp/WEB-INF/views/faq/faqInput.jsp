@@ -47,7 +47,21 @@
 
   <!-- Template Main CSS File -->
   <link href="/assets/css/style.css" rel="stylesheet" />
-
+  <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+  <script>
+    Kakao.init('11400a9267d93835389eb9255fcaad0b');
+    function signout(){
+      if(Kakao.Auth.getAccessToken() != null){
+        Kakao.Auth.logout(function(){
+          setTimeout(function(){
+            location.href="../member/logout.do";
+          },500);
+        });
+      }else{
+        location.href="../member/logout.do";
+      }
+    }
+  </script>
 
 </head>
 
@@ -57,27 +71,31 @@
   <div class="container d-flex align-items-center">
     <h1 class="logo me-auto"><a href="../">Togather</a></h1>
     <!-- Uncomment below if you prefer to use an image logo -->
-    <!-- <a href="index.html" class="logo me-auto"><img src="/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+    <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
     <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
-        <li><a href="../">Home</a></li>
-        <li><a href="about.html">About</a></li>
+        <c:if test="${m.athur eq 0}">
+          <li><a class="manage" href="../membermg/mmlistPage">회원관리</a></li>
+        </c:if>
+        <li><a class="active" href="../">Home</a></li>
+        <li><a href="../about">About</a></li>
+        <li><a href="../board/listPage">게시판</a></li>
         <c:if test="${m ne null}">
-          <li><a href="myGroup.html">나의 모임</a></li><!--로그인시에만 보이게 하기-->
-          <li><a href="wishlist.html">찜목록<span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+          <li><a href="../groupTab/myGroup.do?mnum=${m.mnum }">나의 모임</a></li><!--로그인시에만 보이게 하기-->
+          <li><a href="../wishTab/wishList?mnum=${m.mnum }">찜목록
+            <span id="numberOfWish" class="badge bg-dark text-white ms-1 rounded-pill">${wishsize }</span>
           </a></li>
         </c:if>
-        <li><a href="boardMain.html">게시판</a></li>
         <li class="dropdown">
           <a href="#"
           ><span>고객지원</span> <i class="bi bi-chevron-down"></i
           ></a>
           <ul>
-            <li><a href="notice.html">공지사항</a></li>
-            <li><a href="listPage">자주묻는 질문</a></li>
-            <li><a href="QA.html">Q&A</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="../notification/notice">공지사항</a></li>
+            <li><a href="../faq/faqList">자주묻는 질문</a></li>
+            <li><a href="../qa">Q&A</a></li>
+            <li><a href="../contact">Contact</a></li>
           </ul>
         </li>
 
@@ -87,6 +105,7 @@
           </c:when>
           <c:otherwise>
             <li><a href="javascript:void(0);" onclick="signout();">로그아웃</a></li>
+            <li><a href="../mypage/main">마이페이지</a></li>
           </c:otherwise>
         </c:choose>
       </ul>
@@ -104,6 +123,8 @@
         <a href="../groupTab/groupCreate.do" class="get-started-btn">모임만들기</a>
       </c:otherwise>
     </c:choose>
+
+
   </div>
 </header>
 <!-- End Header -->
@@ -116,7 +137,7 @@
   </div>
 
   <section
-          class="vh-100"
+          class="h-100"
           style="background-color: #eee; box-sizing: content-box"
   >
     <div class="container h-100" data-aos="flip-down">
@@ -210,11 +231,11 @@
           <ul>
             <li>
               <i class="bx bx-chevron-right"></i>
-              <a href="../">Home</a>
+              <a href="../../">Home</a>
             </li>
             <li>
               <i class="bx bx-chevron-right"></i>
-              <a href="about.html">About us</a>
+              <a href="./about">About us</a>
             </li>
             <li>
               <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
@@ -235,19 +256,19 @@
           <ul>
             <li>
               <i class="bx bx-chevron-right"></i>
-              <a href="notice.html">공지사항</a>
+              <a href="../notification/notice">공지사항</a>
             </li>
             <li>
               <i class="bx bx-chevron-right"></i>
-              <a href="FAQ.html">자주 묻는 질문</a>
+              <a href="../faq/faqList">자주 묻는 질문</a>
             </li>
             <li>
               <i class="bx bx-chevron-right"></i>
-              <a href="QA.html">Q & A</a>
+              <a href="../qa">Q & A</a>
             </li>
             <li>
               <i class="bx bx-chevron-right"></i>
-              <a href="contact.html">Contact</a>
+              <a href="../contact">Contact</a>
             </li>
           </ul>
         </div>

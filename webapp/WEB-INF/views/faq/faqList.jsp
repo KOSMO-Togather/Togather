@@ -89,25 +89,31 @@
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top">
   <div class="container d-flex align-items-center">
-    <h1 class="logo me-auto"><a href="../../">Togather</a></h1>
+    <h1 class="logo me-auto"><a href="../">Togather</a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
     <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
-        <li><a href="../">Home</a></li>
+        <c:if test="${m.athur eq 0}">
+          <li><a class="manage" href="../membermg/mmlistPage">회원관리</a></li>
+        </c:if>
+        <li><a class="active" href="../">Home</a></li>
         <li><a href="../about">About</a></li>
+        <li><a href="../board/listPage">게시판</a></li>
         <c:if test="${m ne null}">
           <li><a href="../groupTab/myGroup.do?mnum=${m.mnum }">나의 모임</a></li><!--로그인시에만 보이게 하기-->
-          <li><a href="../wishTab/wishList?mnum=${m.mnum }">찜목록<span class="badge bg-dark text-white ms-1 rounded-pill">${wishsize}</span>
+          <li><a href="../wishTab/wishList?mnum=${m.mnum }">찜목록
+            <span id="numberOfWish" class="badge bg-dark text-white ms-1 rounded-pill">${wishsize }</span>
           </a></li>
         </c:if>
-        <li><a href="../board/listPage">게시판</a></li>
         <li class="dropdown">
           <a href="#"
           ><span>고객지원</span> <i class="bi bi-chevron-down"></i
           ></a>
           <ul>
             <li><a href="../notification/notice">공지사항</a></li>
-            <li><a href="../faq/listPage">자주묻는 질문</a></li>
+            <li><a href="../faq/faqList">자주묻는 질문</a></li>
             <li><a href="../qa">Q&A</a></li>
             <li><a href="../contact">Contact</a></li>
           </ul>
@@ -119,6 +125,7 @@
           </c:when>
           <c:otherwise>
             <li><a href="javascript:void(0);" onclick="signout();">로그아웃</a></li>
+            <li><a href="../mypage/main">마이페이지</a></li>
           </c:otherwise>
         </c:choose>
       </ul>
@@ -133,9 +140,11 @@
         <a href="../member/joinform.do" class="get-started-btn">회원가입</a>
       </c:when>
       <c:otherwise>
-        <a href="../group/groupCreate.do" class="get-started-btn">모임만들기</a>
+        <a href="../groupTab/groupCreate.do" class="get-started-btn">모임만들기</a>
       </c:otherwise>
     </c:choose>
+
+
   </div>
 </header>
 <!-- End Header -->
@@ -150,7 +159,7 @@
   <!-- End Breadcrumbs -->
 
   <!-- ======= Trainers Section ======= -->
-  <section id="trainers" class="trainers" style="padding-top: 0">
+  <section id="trainers" class="h-100" style="padding-top: 0">
     <div class="table">
       <div class="container-table100">
         <div class="wrap-table100">
@@ -158,7 +167,7 @@
           <!-- 상단 알림바 -->
           <div class="alert alert-secondary text-center" role="alert" style="background-color: lightgray">
             1:1 문의는
-            <a href="Q&A.html" class="Q&A">Q&A</a>를 이용해 주세요.
+            <a href="../qa" class="Q&A">Q&A</a>를 이용해 주세요.
           </div>
 
           <div class="button_group" style="padding-top: 0">
@@ -174,10 +183,10 @@
               </a>
             </c:if>
           </div>
-          <div class="table100" style="padding-top: 50" id="faqList">
-            <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="table100" style="padding-top: 50px" id="faqList">
+            <div class="accordion accordion-flush border" id="accordionFlushExample">
               <c:forEach var="faqList" items="${list}" varStatus="index">
-                <h2 class="accordion-header" id="flush-heading${faqList.fseq}">
+                <h2 class="accordion-header border" id="flush-heading${faqList.fseq}">
                   <button
                           class="accordion-button collapsed"
                           type="button"
@@ -193,7 +202,7 @@
                         class="accordion-collapse collapse"
                         aria-labelledby="flush-heading${faqList.fseq}"
                         data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body" style="background-color: lightblue">
+                  <div class="accordion-body border" style="background-color: lightblue">
                       ${faqList.fcontent}<br/>
                     <c:if test="${m.athur eq 0}">
                       <a href="faqUpdate?fseq=${faqList.fseq}">
@@ -241,7 +250,7 @@
             </li>
             <li>
               <i class="bx bx-chevron-right"></i>
-              <a href="about.html">About us</a>
+              <a href="./about">About us</a>
             </li>
             <li>
               <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
@@ -262,19 +271,19 @@
           <ul>
             <li>
               <i class="bx bx-chevron-right"></i>
-              <a href="notice.html">공지사항</a>
+              <a href="../notification/notice">공지사항</a>
             </li>
             <li>
               <i class="bx bx-chevron-right"></i>
-              <a href="FAQ.html">자주 묻는 질문</a>
+              <a href="../faq/faqList">자주 묻는 질문</a>
             </li>
             <li>
               <i class="bx bx-chevron-right"></i>
-              <a href="QA.html">Q & A</a>
+              <a href="../qa">Q & A</a>
             </li>
             <li>
               <i class="bx bx-chevron-right"></i>
-              <a href="contact.html">Contact</a>
+              <a href="../contact">Contact</a>
             </li>
           </ul>
         </div>

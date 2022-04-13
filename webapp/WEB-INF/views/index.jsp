@@ -157,7 +157,6 @@
                                 +"</div>"
                                 +"<div class=\"trainer-rank d-flex align-items-center\">"
                                 +"<i class=\"bx bx-user\"></i>&nbsp;"+this.memInGroupCount+" &nbsp;&nbsp;"
-                                +"<i class=\"bx bx-heart\"></i>&nbsp;65"
                                 +"</div></div></div></div></div>"
                             );
                         })
@@ -346,7 +345,6 @@
                                 +"</div>"
                                 +"<div class='trainer-rank d-flex align-items-center'>"
                                 +"<i class='bx bx-user'></i>&nbsp;"+item.limit+"&nbsp;&nbsp;"
-                                +"<i class='bx bx-heart'></i>&nbsp;65"
                                 +"</div>"
                                 +"</div>"
                                 +"</div>"
@@ -394,11 +392,12 @@
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
         <h1 class="logo me-auto"><a href="/">Togather</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
+                <c:if test="${m.athur eq 0}">
+                    <li><a class="manage" href="/membermg/mmlistPage">회원관리</a></li>
+                </c:if>
                 <li><a class="active" href="/">Home</a></li>
                 <li><a href="about">About</a></li>
                 <li><a href="board/listPage">게시판</a></li>
@@ -407,9 +406,6 @@
                     <li><a href="wishTab/wishList?mnum=${m.mnum }">찜목록
                         <span id="numberOfWish" class="badge bg-dark text-white ms-1 rounded-pill">${wishsize }</span>
                     </a></li>
-                </c:if>
-                <c:if test="${m.athur eq 0}">
-                    <li><a href="/membermg/mmlistPage">회원관리 </a></li>
                 </c:if>
                 <li class="dropdown">
                     <a href="#"
@@ -786,8 +782,7 @@
                                     <span>${namelist[status.index]}</span>
                                 </div>
                                 <div class="trainer-rank d-flex align-items-center">
-                                    <i class="bx bx-user"></i>&nbsp;${groupMemberCount[status.index]} &nbsp;&nbsp;
-                                    <i class="bx bx-heart"></i>&nbsp;65
+                                    <i class="bx bx-user"></i>&nbsp;${groupMemberCount[status.index]}
                                 </div>
                             </div>
                         </div>
@@ -895,7 +890,7 @@
                             <a href="qa">Q & A</a>
                         </li>
                         <li>
-                            <i class="bx bx-chevron-right"></i> <a href="contact.html">Contact</a>
+                            <i class="bx bx-chevron-right"></i> <a href="contact">Contact</a>
                         </li>
                     </ul>
                 </div>
