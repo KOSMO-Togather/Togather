@@ -553,7 +553,7 @@
 						</li>
 						<li>
 							<i class="bx bx-chevron-right"></i>
-							<a href="../faq/listPage">자주 묻는 질문</a>
+							<a href="../faq/faqList">자주 묻는 질문</a>
 						</li>
 						<li>
 							<i class="bx bx-chevron-right"></i>

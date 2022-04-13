@@ -282,7 +282,16 @@
         }
         window.history.forward();
         function noBack(){window.history.forward();}
-
+        function categoryCheck(){
+            var category=$('#category_firstCheck1').val();
+            if(category==""){
+                Swal.fire({
+                    title: "관심사를 선택 해 주세요",
+                    icon: "error"
+                });
+            }
+            else f.submit();
+            }
 
     </script>
     <style>
@@ -380,7 +389,7 @@
                                 <!-- col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1 -->
                                 <div style="width:auto">
                                     <!--모임지역/이름/모임소개/관심사/정원/모임사진-->
-                                    <form id="form" class="mx-1 mx-md-4" method="post" action="groupCreate.do?mnum=${m.mnum}" enctype="multipart/form-data">
+                                    <form id="form" name="f" class="mx-1 mx-md-4" method="post" action="groupCreate.do?mnum=${m.mnum}" enctype="multipart/form-data">
                                         <div class="d-flex flex-row align-items-center mb-0">
                                             <i class="bi bi-map fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-2">
@@ -527,9 +536,10 @@
                                                 class="d-flex justify-content-center mx-4 mb-3 mb-lg-4"
                                         >
                                             <button
-                                                    type="submit"
+                                                    type="button"
                                                     class="btn btn-success"
                                                     style="margin-right: 30px"
+                                                    onclick="categoryCheck()"
                                             >
                                                 개설
                                             </button>
@@ -596,7 +606,7 @@
                         </li>
                         <li>
                             <i class="bx bx-chevron-right"></i>
-                            <a href="../faq/listPage">자주 묻는 질문</a>
+                            <a href="../faq/faqList">자주 묻는 질문</a>
                         </li>
                         <li>
                             <i class="bx bx-chevron-right"></i>
