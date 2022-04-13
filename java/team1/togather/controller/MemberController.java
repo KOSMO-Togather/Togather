@@ -2,12 +2,15 @@ package team1.togather.controller;
 
 import static team1.togather.constant.CheckedConstant.*;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import lombok.extern.log4j.Log4j;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.AllArgsConstructor;
+import org.springframework.web.util.WebUtils;
 import team1.togather.domain.Block;
 import team1.togather.domain.Category;
 import team1.togather.domain.IndexCriteria;
@@ -59,7 +63,6 @@ public class MemberController {
 			log.info("categorys: "+ categorys);
 			log.warn("categorys: "+ categorys);
 		}
-
 		return categorys;
 	}
 
@@ -119,11 +122,34 @@ public class MemberController {
 	}
 	@PostMapping("/login")
 	@ResponseBody
-	public int logincheck(Member member,HttpSession session) {
+	public int logincheck(Member member, HttpSession session, String useCookie, HttpServletResponse response) {
 		int logincheck = service.logincheck(member);
 		if(logincheck==YES_ID_PWD) {
 			Member m = service.login(member);
 			session.setAttribute("m", m);
+			if(useCookie!=null) {
+				// 쿠키 사용한다는게 체크되어 있으면...
+				// 쿠키를 생성하고 현재 로그인되어 있을 때 생성되었던 세션의 id를 쿠키에 저장한다.
+				Cookie cookie =new Cookie("loginCookie", session.getId());
+				// 쿠키를 찾을 경로를 컨텍스트 경로로 변경해 주고...
+				cookie.setPath("/");
+				cookie.setMaxAge(60*60*24*7);// 단위는 (초)임으로 7일정도로 유효시간을 설정해 준다.
+				// 쿠키를 적용해 준다.
+				response.addCookie(cookie);
+				// currentTimeMills()가 1/1000초 단위임으로 1000곱해서 더해야함
+				int amount = 60*60*24*7;
+				Date sessionLimit =new Date(System.currentTimeMillis() + (1000*amount));
+
+				Map<String,Object> map =new HashMap<>();
+				map.put("mnum",m.getMnum());
+				map.put("sessionId",session.getId());
+				map.put("sessionLimit",sessionLimit);
+				service.keepLogin(map);
+				System.out.println("sessionId: "+session.getId());
+				System.out.println("sessionLimit: "+sessionLimit);
+				System.out.println("useCookie: "+useCookie);
+			}
+
 		}
 		return logincheck;
 	}
@@ -139,8 +165,28 @@ public class MemberController {
 		return  kakaologincheck;
 	}
 	@GetMapping("/logout.do")
-	public String logout(HttpSession session) {
-		session.invalidate();
+	public String logout(HttpSession session,HttpServletRequest request, HttpServletResponse response) {
+		Member m = (Member)session.getAttribute("m");
+		if(m!=null) {
+			session.removeAttribute("m");
+			session.invalidate();
+			Cookie loginCookie = WebUtils.getCookie(request,"loginCookie");
+			if ( loginCookie !=null ){
+				// null이 아니면 존재하면!
+				loginCookie.setPath("/");
+				// 쿠키는 없앨 때 유효시간을 0으로 설정하는 것 !!! invalidate같은거 없음.
+				loginCookie.setMaxAge(0);
+				// 쿠키 설정을 적용한다.
+				response.addCookie(loginCookie);
+				// 사용자 테이블에서도 유효기간을 현재시간으로 다시 세팅해줘야함.
+				Date date =new Date(System.currentTimeMillis());
+				Map<String,Object> map =new HashMap<>();
+				map.put("mnum",m.getMnum());
+				map.put("sessionId",session.getId());
+				map.put("sessionLimit",date);
+				service.keepLogin(map);
+			}
+		}
 		return "redirect:/";
 	}
 	/////////////////////////

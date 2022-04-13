@@ -3,6 +3,7 @@ package team1.togather.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import team1.togather.domain.WishList;
 import team1.togather.service.GroupTabService;
 import team1.togather.service.WishListService;
 
+@Log4j
 @Controller
 @RequestMapping("/wishTab")
 public class WishlistController {
@@ -28,6 +30,7 @@ public class WishlistController {
 	public ModelAndView wishList(Long mnum) {
 		System.out.println("mnum: "+ mnum);
 		System.out.println("위시리스트안");
+		log.info("mnum: "+ mnum);
 		List<WishList> wishList = wishservice.getWishLists(mnum);
 		List<GroupTab> groupList = new ArrayList<>();
 		List<Member> namelist = new ArrayList<>();
@@ -45,6 +48,7 @@ public class WishlistController {
 			}
 		}
 		ModelAndView mv = new ModelAndView("wishTab/wishList","groupList",groupList);
+		System.out.println("groupList = " + groupList);
 		mv.addObject("namelist", namelist);
 		return mv;
 	}

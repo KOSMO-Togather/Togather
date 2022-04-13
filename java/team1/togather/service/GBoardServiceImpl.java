@@ -11,9 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import team1.togather.fileset.Path;
 import team1.togather.domain.GBoardCriteria;
 import team1.togather.domain.GBoard;
-import team1.togather.fileset.Path;
 import team1.togather.mapper.GBoardMapper;
 
 @Log4j
@@ -21,8 +21,8 @@ import team1.togather.mapper.GBoardMapper;
 @AllArgsConstructor
 public class GBoardServiceImpl implements GBoardService {
 	private GBoardMapper gboardMapper;
-	
-	
+
+
 	@Override
 	public List<GBoard> gblistCri(GBoardCriteria cri) {
 		return gboardMapper.gblistPageCri(cri);
@@ -31,13 +31,13 @@ public class GBoardServiceImpl implements GBoardService {
 	public int gbpageCount(long gseq) {
 		return gboardMapper.gbpageCount(gseq);
 	}
-	
+
 	@Override
 	public GBoard getGBoard(long gbnum) {
 		GBoard gboard = gboardMapper.selectgbnum(gbnum);
 		return gboard;
 	}
-	
+
 	@Override
 	public void gbwrite(GBoard gboard, MultipartFile gbfiles) {
 		String gbofname = gbfiles.getOriginalFilename();
@@ -46,17 +46,17 @@ public class GBoardServiceImpl implements GBoardService {
 			String ofheader = gbofname.substring(0, idx);
 			String ext = gbofname.substring(idx);
 			long ms = System.currentTimeMillis();
-			
+
 			StringBuilder sb = new StringBuilder();
 			sb.append(ofheader);
 			sb.append("_");
 			sb.append(ms);
 			sb.append(ext);
 			String gbsaveFileName = sb.toString();
-			
+
 			long gbfsize = gbfiles.getSize();
 			log.info("gbofname: " + gbofname + ", gbsaveFileName" +gbsaveFileName+ ", gbfsize: " + gbfsize);
-			
+
 			boolean flag = gbwriteFile(gbfiles, gbofname);
 			if(flag) {
 				log.info("#그룹보드파일 업로드 성공");
@@ -67,7 +67,7 @@ public class GBoardServiceImpl implements GBoardService {
 			gboard.setGbofname(gbofname);
 			gboard.setGbfsize(gbfsize);
 		}
-		
+
 		gboardMapper.gbinsert(gboard);
 	}
 	@Override
@@ -78,18 +78,18 @@ public class GBoardServiceImpl implements GBoardService {
 	public void gbremove(long gbnum) {
 		gboardMapper.gbdelete(gbnum);
 	}
-	
+
 	private boolean gbwriteFile(MultipartFile gbfile, String gbsaveFileName) {
 		File gbdir = new File(Path.GBFILE_STORE);
 		if(!gbdir.exists()) gbdir.mkdirs();
-		
+
 		FileOutputStream fos = null;
 		try {
 			byte data[] = gbfile.getBytes();
 			fos = new FileOutputStream(Path.GBFILE_STORE + gbsaveFileName);
 			fos.write(data);
 			fos.flush();
-			
+
 			return true;
 		}catch(IOException ie) {
 			return false;
@@ -99,18 +99,18 @@ public class GBoardServiceImpl implements GBoardService {
 			}catch(IOException ie) {}
 		}
 	}
-	
+
 	@Override
 	public List<GBoard> getGBoardBySearch(Map map){
 		return gboardMapper.getGBoardBySearch(map);
 	}
-	
+
 	@Override
 	public GBoard getGseq(long gseq) {
 		GBoard gboard = gboardMapper.selectgseq(gseq);
 		return gboard;
 	}
-	
+
 	@Override
 	public void updateGBView(Long gbnum) {
 		gboardMapper.updateGBView(gbnum);

@@ -40,4 +40,7 @@ public interface MemberService {
 	List<Category> thirdCategory(Category category);//세번쨰카테고리
 
 	String getMnameByMnum(Long mnum);
+
+	void keepLogin(Map<String,Object> map);
+	Member checkUserWithSessionKey(String sessionKey);
 }

@@ -112,6 +112,7 @@ public class IndexController {
 			}
 
 		}
+		session.setAttribute("wishsize",wishNumOfM);
 		System.out.println("컨트롤러namelist: "+namelist);
 		mv.addObject("list", list);
 		mv.addObject("namelist", namelist);
@@ -211,11 +212,11 @@ public class IndexController {
 		return mv;
 	}
 //	현기추가ㅎㅎㅎ
-	@GetMapping("getSearchGroupList")
+	@RequestMapping("getSearchGroupList")
 	@ResponseBody
 	public List<GroupTab> getSearchGroupList(GroupTab groupTab) {
 		System.out.println("gname: " + groupTab.getGname());
-		System.out.println("interest: " + groupTab.getInterest());
+		System.out.println("Int_out: " + groupTab.getInt_out());
 		System.out.println("gloc: " + groupTab.getGloc());
 
 		List<GroupTab> groupList = groupTabService.searchGroup(groupTab);

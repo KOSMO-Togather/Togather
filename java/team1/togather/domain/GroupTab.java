@@ -29,4 +29,5 @@ public class GroupTab {
 	private String mname;
 	private Long memInGroupCount;
 
+	private String int_out;
 }

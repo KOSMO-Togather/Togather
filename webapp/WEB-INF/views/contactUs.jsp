@@ -64,6 +64,21 @@
 
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet" />
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        Kakao.init('11400a9267d93835389eb9255fcaad0b');
+        function signout(){
+            if(Kakao.Auth.getAccessToken() != null){
+                Kakao.Auth.logout(function(){
+                    setTimeout(function(){
+                        location.href="member/logout.do";
+                    },500);
+                });
+            }else{
+                location.href="member/logout.do";
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -72,10 +87,13 @@
     <div class="container d-flex align-items-center">
         <h1 class="logo me-auto"><a href="/">Togather</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo me-auto"><img src="/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
+                <c:if test="${m.athur eq 0}">
+                    <li><a class="manage" href="/membermg/mmlistPage">회원관리</a></li>
+                </c:if>
                 <li><a class="active" href="/">Home</a></li>
                 <li><a href="about">About</a></li>
                 <li><a href="board/listPage">게시판</a></li>
@@ -91,9 +109,9 @@
                     ></a>
                     <ul>
                         <li><a href="notification/notice">공지사항</a></li>
-                        <li><a href="faq/listPage">자주묻는 질문</a></li>
+                        <li><a href="faq/faqList">자주묻는 질문</a></li>
                         <li><a href="qa">Q&A</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="contact">Contact</a></li>
                     </ul>
                 </li>
 
@@ -103,6 +121,7 @@
                     </c:when>
                     <c:otherwise>
                         <li><a href="javascript:void(0);" onclick="signout();">로그아웃</a></li>
+                        <li><a href="mypage/main">마이페이지</a></li>
                     </c:otherwise>
                 </c:choose>
             </ul>
@@ -302,12 +321,10 @@
                     <h4>Useful Links</h4>
                     <ul>
                         <li>
-                            <i class="bx bx-chevron-right"></i>
-                            <a href="index.html">Home</a>
+                            <i class="bx bx-chevron-right"></i> <a href="/">Home</a>
                         </li>
                         <li>
-                            <i class="bx bx-chevron-right"></i>
-                            <a href="about.html">About us</a>
+                            <i class="bx bx-chevron-right"></i> <a href="about">About us</a>
                         </li>
                         <li>
                             <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
@@ -323,24 +340,22 @@
                     </ul>
                 </div>
 
-                <div class="col-lg-3 col-md-6 footer-links">
+                <div  class="col-lg-3 col-md-6 footer-links">
                     <h4>Our Services</h4>
                     <ul>
                         <li>
-                            <i class="bx bx-chevron-right"></i>
-                            <a href="notice.html">공지사항</a>
+                            <i class="bx bx-chevron-right"></i> <a href="notification/notice">공지사항</a>
                         </li>
                         <li>
                             <i class="bx bx-chevron-right"></i>
-                            <a href="FAQ.html">자주 묻는 질문</a>
+                            <a href="faq/listPage">자주 묻는 질문</a>
                         </li>
                         <li>
                             <i class="bx bx-chevron-right"></i>
-                            <a href="QA.html">Q & A</a>
+                            <a href="qa">Q & A</a>
                         </li>
                         <li>
-                            <i class="bx bx-chevron-right"></i>
-                            <a href="contact.html">Contact</a>
+                            <i class="bx bx-chevron-right"></i> <a href="contact">Contact</a>
                         </li>
                     </ul>
                 </div>

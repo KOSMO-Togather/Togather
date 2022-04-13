@@ -13,7 +13,7 @@ public class GBoardCriteria {
 	private String option ="글쓴이";
 	private String ocontent = "장";
 	private long gseq;
-	
+
 	public GBoardCriteria(long page, long pageSize, long gseq) {
 		this.page = page;
 		this.pageSize = pageSize;
@@ -33,7 +33,7 @@ public class GBoardCriteria {
 	public long getPage() {
 		return page;
 	}
-	
+
 	public void setPage(long page) {
 		if(page <=0) {
 			this.page = 1;
@@ -48,24 +48,24 @@ public class GBoardCriteria {
 
 	public void setPageSize(long pageSize) {
 		if(pageSize <=0 || pageSize > 100) {
-			this.pageSize = 10;			
+			this.pageSize = 10;
 			return;
 		}
-		this.pageSize = pageSize;			
+		this.pageSize = pageSize;
 	}
-	
-	
+
+
 	public long getPageStart() {
 		return (this.page - 1)*this.pageSize;
 	}
-	
+
 	public long getGseq() {
 		return gseq;
 	}
 	public void setGseq(long gseq) {
 		this.gseq = gseq;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Criteria [page=" + page + ", pageSize=" + pageSize + "]";

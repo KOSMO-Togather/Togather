@@ -1,5 +1,13 @@
 
 
+
+/*대현추가 0412 for 회원관리*/
+.navbar a:hover,
+.navbar .manage,
+.navbar .manage:focus,
+.navbar li:hover > a {
+  color: #721c24;
+}
 /* 텍스트 디바이더 */
 .divider-text {
   position: relative;
@@ -232,6 +240,7 @@ h6 {
   line-height: 0;
   margin-left: 5px;
 }
+
 .navbar a:hover,
 .navbar .active,
 .navbar .active:focus,

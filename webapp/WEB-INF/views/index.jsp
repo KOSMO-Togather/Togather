@@ -157,7 +157,6 @@
                                 +"</div>"
                                 +"<div class=\"trainer-rank d-flex align-items-center\">"
                                 +"<i class=\"bx bx-user\"></i>&nbsp;"+this.memInGroupCount+" &nbsp;&nbsp;"
-                                +"<i class=\"bx bx-heart\"></i>&nbsp;65"
                                 +"</div></div></div></div></div>"
                             );
                         })
@@ -291,10 +290,10 @@
         $(function(){
             $("#getSearch").on("click", function(){
                 var gname = $("#gname").val();
-                var interest = $("#interest").val();
+                var int_out = $("#int_out").val();
                 var gloc = $("#gloc").val();
                 var popularCourses = document.getElementById('popular-courses'); //모임리스트 보여주는 디자인 갖고오는 메소드
-                if(gname=="" && interest=="" && gloc==""){
+                if(gname=="" && int_out=="" && gloc==""){
                     alert("모임이름, 관심사, 지역 중 한 가지 이상을 입력해주세요.");
                     $("#gname").focus();
                     return false;
@@ -346,7 +345,6 @@
                                 +"</div>"
                                 +"<div class='trainer-rank d-flex align-items-center'>"
                                 +"<i class='bx bx-user'></i>&nbsp;"+item.limit+"&nbsp;&nbsp;"
-                                +"<i class='bx bx-heart'></i>&nbsp;65"
                                 +"</div>"
                                 +"</div>"
                                 +"</div>"
@@ -394,11 +392,12 @@
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
         <h1 class="logo me-auto"><a href="/">Togather</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
+                <c:if test="${m.athur eq 0}">
+                    <li><a class="manage" href="/membermg/mmlistPage">회원관리</a></li>
+                </c:if>
                 <li><a class="active" href="/">Home</a></li>
                 <li><a href="about">About</a></li>
                 <li><a href="board/listPage">게시판</a></li>
@@ -492,7 +491,7 @@
                             />
                         </div>
                         <div class="col-md-4">
-                            <select class="form-select border-0 py-3" name="interest" id="interest">
+                            <select class="form-select border-0 py-3" name="int_out" id="int_out">
                                 <option selected value="">관심사</option>
                                 <option value="아웃도어/여행">아웃도어/여행</option>
                                 <option value="외국/언어">외국/언어</option>
@@ -783,8 +782,7 @@
                                     <span>${namelist[status.index]}</span>
                                 </div>
                                 <div class="trainer-rank d-flex align-items-center">
-                                    <i class="bx bx-user"></i>&nbsp;${groupMemberCount[status.index]} &nbsp;&nbsp;
-                                    <i class="bx bx-heart"></i>&nbsp;65
+                                    <i class="bx bx-user"></i>&nbsp;${groupMemberCount[status.index]}
                                 </div>
                             </div>
                         </div>
@@ -892,7 +890,7 @@
                             <a href="qa">Q & A</a>
                         </li>
                         <li>
-                            <i class="bx bx-chevron-right"></i> <a href="contact.html">Contact</a>
+                            <i class="bx bx-chevron-right"></i> <a href="contact">Contact</a>
                         </li>
                     </ul>
                 </div>

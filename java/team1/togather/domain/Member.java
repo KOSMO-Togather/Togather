@@ -22,4 +22,6 @@ public class Member {
 	private String category_second;
 	private String category_third;
 	private long athur;
+	private String sessionkey;
+	private String sessionlimit;
 }

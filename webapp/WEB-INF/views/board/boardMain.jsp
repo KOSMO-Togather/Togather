@@ -130,6 +130,21 @@
   		});
   	
   	</script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+      Kakao.init('11400a9267d93835389eb9255fcaad0b');
+      function signout(){
+        if(Kakao.Auth.getAccessToken() != null){
+          Kakao.Auth.logout(function(){
+            setTimeout(function(){
+              location.href="../member/logout.do";
+            },500);
+          });
+        }else{
+          location.href="../member/logout.do";
+        }
+      }
+    </script>
   
   </head>
   <body>
@@ -142,7 +157,10 @@
 
         <nav id="navbar" class="navbar order-last order-lg-0">
           <ul>
-            <li><a href="../">Home</a></li>
+            <c:if test="${m.athur eq 0}">
+              <li><a class="manage" href="../membermg/mmlistPage">회원관리</a></li>
+            </c:if>
+            <li><a class="active" href="../">Home</a></li>
             <li><a href="../about">About</a></li>
             <li><a href="../board/listPage">게시판</a></li>
             <c:if test="${m ne null}">
@@ -157,7 +175,7 @@
               ></a>
               <ul>
                 <li><a href="../notification/notice">공지사항</a></li>
-                <li><a href="../faq/listPage">자주묻는 질문</a></li>
+                <li><a href="../faq/faqList">자주묻는 질문</a></li>
                 <li><a href="../qa">Q&A</a></li>
                 <li><a href="../contact">Contact</a></li>
               </ul>
@@ -169,6 +187,7 @@
               </c:when>
               <c:otherwise>
                 <li><a href="javascript:void(0);" onclick="signout();">로그아웃</a></li>
+                <li><a href="../mypage/main">마이페이지</a></li>
               </c:otherwise>
             </c:choose>
           </ul>
@@ -189,30 +208,6 @@
 
 
       </div>
-      <script src="http://code.jquery.com/jquery-latest.js"></script>
-      <script>
-        function cancelWishList(e){
-          console.log($(e).val());
-          var data = JSON.stringify({
-            gseq:$(e).val()
-
-          });
-          $.ajax({
-            url:"../cancelWishList",
-            type:"POST",
-            dataType:"json",
-            contentType:"application/json",
-            data:data,
-            success: function(result){
-              console.log("success!: "+result);
-              $(e).parents('.col-lg-4').remove();
-            },
-            error:function(error){
-              console.log("failure!: "+error);
-            }
-          });
-        }
-      </script>
     </header>
     <!-- End Header -->
 
@@ -371,11 +366,11 @@
             <div class="col-lg-3 col-md-6 footer-contact">
               <h3>Togather</h3>
               <p>
-                서울시 금천구 <br />
-                가산 디지털 2로 123<br />
-                월드메르디앙 2차 <br /><br />
-                <strong>Phone:</strong> +82 2 1234 1234<br />
-                <strong>Email:</strong> service@togather.com<br />
+                서울시 금천구<br/>
+                가산 디지털 2로 123<br/>
+                월드메르디앙 2차<br/><br/>
+                <strong>Phone:</strong>+82 2 1234 1234<br/>
+                <strong>Email:</strong>service@togather.com<br/>
               </p>
             </div>
 
@@ -383,12 +378,10 @@
               <h4>Useful Links</h4>
               <ul>
                 <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="../../">Home</a> 
+                  <i class="bx bx-chevron-right"></i> <a href="../">Home</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="about.html">About us</a>
+                  <i class="bx bx-chevron-right"></i> <a href="../about">About us</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
@@ -404,24 +397,22 @@
               </ul>
             </div>
 
-            <div class="col-lg-3 col-md-6 footer-links">
+            <div  class="col-lg-3 col-md-6 footer-links">
               <h4>Our Services</h4>
               <ul>
                 <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="notice.html">공지사항</a>
+                  <i class="bx bx-chevron-right"></i> <a href="../notification/notice">공지사항</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i>
-                  <a href="FAQ.html">자주 묻는 질문</a>
+                  <a href="../faq/listPage">자주 묻는 질문</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i>
-                  <a href="QA.html">Q & A</a>
+                  <a href="../qa">Q & A</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="contact.html">Contact</a>
+                  <i class="bx bx-chevron-right"></i> <a href="../contact">Contact</a>
                 </li>
               </ul>
             </div>
@@ -432,10 +423,10 @@
                 최신뉴스 및 프로모션 행사에 대한 안내메일을 받으실 수 있습니다.
               </p>
               <form action="" method="post">
-                <input type="email" name="email" /><input
-                  type="submit"
-                  value="Subscribe"
-                />
+                <input type="email" name="email"/><input
+                      type="submit"
+                      value="Subscribe"
+              />
               </form>
             </div>
           </div>
@@ -445,8 +436,8 @@
       <div class="container d-md-flex py-4">
         <div class="me-md-auto text-center text-md-start">
           <div class="copyright">
-            &copy; Copyright <strong><span>Togather</span></strong
-            >. All Rights Reserved
+            &copy; Copyright<strong><span>Togather</span></strong
+          >. All Rights Reserved
           </div>
         </div>
         <div class="social-links text-center text-md-right pt-3 pt-md-0">

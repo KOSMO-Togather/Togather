@@ -198,9 +198,22 @@
 	</select>
 	<!-- 모임이름으로 검색 -->
 	<select id="searchGroup" resultType="GroupTab" parameterType="GroupTab">
-		select * from GROUPTAB where GNAME like '%'||#{gname}||'%' and INTEREST like '%'||#{interest}||'%' and GLOC like '%'||#{gloc}||'%' order by GSEQ desc
+		select * from GROUPTAB
+		where GNAME
+		like '%'||#{gname}||'%'
+		and
+		INTEREST
+		= any(select INT_IN from CATEGORY where INT_OUT=#{int_out}
+		  UNION ALL
+		  select FIRST_OPTION from CATEGORY where int_out=#{int_out}
+		  INTERSECT
+		  select INTEREST from GROUPTAB)
+		  and
+		GLOC like '%'||#{gloc}||'%'
+		order by GSEQ desc
 	</select>
 	<select id="kingName" resultType="String" parameterType="long">
 		select mname from member where mnum=(select mnum from grouptab where gseq=#{gseq})
 	</select>
+
 </mapper>

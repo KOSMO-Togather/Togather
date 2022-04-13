@@ -4,13 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import team1.togather.domain.Gathering;
-import team1.togather.domain.GroupTab;
-import team1.togather.domain.GroupTabGallery;
-import team1.togather.domain.IndexCriteria;
-import team1.togather.domain.MemInGathering;
-import team1.togather.domain.MemInGroup;
-import team1.togather.domain.Member;
+import team1.togather.domain.*;
 
 public interface GroupTabService {
 	List<GroupTab> selectAllS(IndexCriteria cri);//로그인안했을때 리스트

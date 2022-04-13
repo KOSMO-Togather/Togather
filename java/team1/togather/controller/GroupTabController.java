@@ -313,15 +313,20 @@ public class GroupTabController {
 		}
 	}
 
-	//04.04범수추가
+	//04.11범수수정(그룹멤버체크)
 	@PostMapping("groupMembercheck")
 	@ResponseBody
 	public Long groupMembercheck(MemInGroup memInGroup) {
 		Long grade = groupTabService.grade(memInGroup);
-		if (grade == null) {
-			return (long) 3;
-		} else {
+		if(grade ==null) {//가입안한 사람
+			grade=(long) 3;
 			return grade;
+		}else {
+			if(grade==0 || grade ==1) {//모임장이거나 운영자
+				return grade;
+			}else {//일반회원
+				return grade;
+			}
 		}
 	}
 
@@ -476,7 +481,6 @@ public class GroupTabController {
 			}
 		}
 	}
-
 	@PostMapping("kingQuitCheck")
 	@ResponseBody
 	public long kingQuitCheck(MemInGroup memInGroup) {

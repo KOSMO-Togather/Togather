@@ -432,34 +432,41 @@
     		location="../gathering/gatheringCreate.do?gseq=${groupInfo.gseq}&mnum=${m.mnum}";
     	}
     </script>
+    <!-- 04/11 범수추가 (모임멤버체크)-->
     <c:forEach items="${memInGroupName}" var="memInGroupName">
       <script type="text/javascript">
-    function groupMembercheck(){
-    		var mnum = ${m.mnum};
-  			var gseq = ${groupInfo.gseq};
-  			var result = {"mnum":mnum,"gseq":gseq};
-	   			$(function(){
-    				$.ajax({
-	   					url: "groupMembercheck.json",
-	   					type: "POST",
-	   					data: result,
-	   					success: function(data){
-	   						if(data!=3){
-	   							groupMember();
-	   						}else {
-	   							Swal.fire({
-		  							  title: "가입회원만 조회가 가능합니다.",
-		  							  icon: "error"
-	   							});
-	   						}
-	   					}
-	   				});
-	   			});
-    	}
-    	function groupMember(){
-    		location="../gboard/gblistPage?gseq=${groupInfo.gseq}&mnum=${memInGroupName.MNUM}";
-    	}
-    	</script>
+        function groupMembercheck(){
+          var mnum = ${m.mnum};
+          var gseq = ${groupInfo.gseq};
+          var result = {"mnum":mnum,"gseq":gseq};
+          $(function(){
+            $.ajax({
+              url: "groupMembercheck.json",
+              type: "POST",
+              data: result,
+              success: function(data){
+                if(data==0 || ${m.athur eq 0}){//모임장일때일때
+                  groupMember();
+                }else if(data==1  || ${m.athur eq 1}){//운영진일때
+                  groupMember();
+                  //swal("모임장,운영자만 수정 가능합니다");
+                }else if(data==2){//일반회원
+                  groupMember();
+                }else {//모임에없을때
+                  Swal.fire({
+                    title: "가입회원만 조회가 가능합니다.",
+                    icon: "error"
+                  });
+                }
+              }
+            });
+          });
+        }
+
+        function groupMember(){
+          location="../gboard/gblistPage?gseq=${groupInfo.gseq}&mnum=${memInGroupName.MNUM}";
+        }
+      </script>
     </c:forEach>
     <!-- 04/05 대현추가 (사진첩 멤버체크)-->
     <c:forEach items="${memInGroupName}" var="memInGroupName">
@@ -526,8 +533,6 @@
 		  />
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top">
-    <div id="count" ></div>
-    <input id="hiddenInput" type="hidden"  value=""/>
       <div class="container d-flex align-items-center">
         <h1 class="logo me-auto"><a href="../">Togather</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
@@ -535,53 +540,56 @@
 
         <nav id="navbar" class="navbar order-last order-lg-0">
           <ul>
+            <c:if test="${m.athur eq 0}">
+              <li><a class="manage" href="../membermg/mmlistPage">회원관리</a></li>
+            </c:if>
             <li><a class="active" href="../">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="myGroup.do?mnum=${m.mnum }">나의 모임</a></li>
-            <!--로그인시에만 보이게 하기-->
-            <li><a href="boardMain.html">게시판</a></li>
-            <li>
-              <a href="wishlist.html"
-                >찜목록
-                <span class="badge bg-dark text-white ms-1 rounded-pill"
-                  >0</span
-                >
-              </a>
-            </li>
-
+            <li><a href="../about">About</a></li>
+            <li><a href="../board/listPage">게시판</a></li>
+            <c:if test="${m ne null}">
+              <li><a href="../groupTab/myGroup.do?mnum=${m.mnum }">나의 모임</a></li><!--로그인시에만 보이게 하기-->
+              <li><a href="../wishTab/wishList?mnum=${m.mnum }">찜목록
+                <span id="numberOfWish" class="badge bg-dark text-white ms-1 rounded-pill">${wishsize }</span>
+              </a></li>
+            </c:if>
             <li class="dropdown">
               <a href="#"
-                ><span>고객지원</span> <i class="bi bi-chevron-down"></i
+              ><span>고객지원</span> <i class="bi bi-chevron-down"></i
               ></a>
               <ul>
-                <li><a href="notice.html">공지사항</a></li>
-                <li><a href="FAQ.html">자주묻는 질문</a></li>
+                <li><a href="../notification/notice">공지사항</a></li>
+                <li><a href="../faq/faqList">자주묻는 질문</a></li>
                 <li><a href="../qa">Q&A</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="../contact">Contact</a></li>
               </ul>
             </li>
+
             <c:choose>
-           		<c:when test="${m eq null}">
-		            <li><a href="login.html">로그인</a></li>		       
-	          	</c:when>
-       			<c:otherwise>
-       			<li><a href="javascript:void(0);" onclick="signout();">로그아웃</a></li>
-            	</c:otherwise>
-         	</c:choose>
-            </ul>
+              <c:when test="${m eq null}">
+                <li><a href="../member/login.do">로그인 ${sessionScope.m} </a></li>
+              </c:when>
+              <c:otherwise>
+                <li><a href="javascript:void(0);" onclick="signout();">로그아웃</a></li>
+                <li><a href="../mypage/main">마이페이지</a></li>
+              </c:otherwise>
+            </c:choose>
+          </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
+
         </nav>
         <!-- .navbar -->
 
         <!--로그인전에는 회원가입만 보이고 로그인하면 모임만들기만 보이게 하는건 어떤지??-->
         <c:choose>
-           		<c:when test="${m eq null}">
-		        	<a href="../member/joinform.do" class="get-started-btn">회원가입</a>
-		        </c:when>
-		        <c:otherwise>
-		        	<a href="groupCreate.do" class="get-started-btn">모임만들기</a>
-		        </c:otherwise>
-         </c:choose>
+          <c:when test="${m eq null}">
+            <a href="../member/joinform.do" class="get-started-btn">회원가입</a>
+          </c:when>
+          <c:otherwise>
+            <a href="../groupTab/groupCreate.do" class="get-started-btn">모임만들기</a>
+          </c:otherwise>
+        </c:choose>
+
+
       </div>
     </header>
     <!-- End Header -->
@@ -784,11 +792,11 @@
             <div class="col-lg-3 col-md-6 footer-contact">
               <h3>Togather</h3>
               <p>
-                서울시 금천구 <br />
-                가산 디지털 2로 123<br />
-                월드메르디앙 2차 <br /><br />
-                <strong>Phone:</strong> +82 2 1234 1234<br />
-                <strong>Email:</strong> service@togather.com<br />
+                서울시 금천구<br/>
+                가산 디지털 2로 123<br/>
+                월드메르디앙 2차<br/><br/>
+                <strong>Phone:</strong>+82 2 1234 1234<br/>
+                <strong>Email:</strong>service@togather.com<br/>
               </p>
             </div>
 
@@ -796,12 +804,10 @@
               <h4>Useful Links</h4>
               <ul>
                 <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="../">Home</a>
+                  <i class="bx bx-chevron-right"></i> <a href="../">Home</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="../about">About us</a>
+                  <i class="bx bx-chevron-right"></i> <a href="../about">About us</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
@@ -817,24 +823,22 @@
               </ul>
             </div>
 
-            <div class="col-lg-3 col-md-6 footer-links">
+            <div  class="col-lg-3 col-md-6 footer-links">
               <h4>Our Services</h4>
               <ul>
                 <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="notice.html">공지사항</a>
+                  <i class="bx bx-chevron-right"></i> <a href="../notification/notice">공지사항</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i>
-                  <a href="FAQ.html">자주 묻는 질문</a>
+                  <a href="../faq/listPage">자주 묻는 질문</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i>
-                  <a href="QA.html">Q & A</a>
+                  <a href="../qa">Q & A</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="contact.html">Contact</a>
+                  <i class="bx bx-chevron-right"></i> <a href="../contact">Contact</a>
                 </li>
               </ul>
             </div>
@@ -845,10 +849,10 @@
                 최신뉴스 및 프로모션 행사에 대한 안내메일을 받으실 수 있습니다.
               </p>
               <form action="" method="post">
-                <input type="email" name="email" /><input
-                  type="submit"
-                  value="Subscribe"
-                />
+                <input type="email" name="email"/><input
+                      type="submit"
+                      value="Subscribe"
+              />
               </form>
             </div>
           </div>
@@ -858,8 +862,8 @@
       <div class="container d-md-flex py-4">
         <div class="me-md-auto text-center text-md-start">
           <div class="copyright">
-            &copy; Copyright <strong><span>Togather</span></strong
-            >. All Rights Reserved
+            &copy; Copyright<strong><span>Togather</span></strong
+          >. All Rights Reserved
           </div>
         </div>
         <div class="social-links text-center text-md-right pt-3 pt-md-0">

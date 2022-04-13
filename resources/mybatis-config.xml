@@ -32,7 +32,8 @@
 		<typeAlias alias="GBPageMaker" type="team1.togather.domain.GBPageMaker" />
 		<typeAlias alias="GBReply" type="team1.togather.domain.GBReply" />
 		<typeAlias alias="GroupTabGallery" type="team1.togather.domain.GroupTabGallery" />
-
+		<typeAlias alias="MembermgCriteria" type="team1.togather.domain.MembermgCriteria"/>
+		<typeAlias alias="MMPageMaker" type="team1.togather.domain.MMPageMaker" />
 
 	</typeAliases>
    <!-- 
