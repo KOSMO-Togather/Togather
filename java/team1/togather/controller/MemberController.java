@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,7 @@ import team1.togather.service.GroupTabService;
 import team1.togather.service.MemberService;
 
 
-
+@Log4j
 @Controller
 @AllArgsConstructor
 @RequestMapping("/member/")
@@ -53,7 +54,10 @@ public class MemberController {
 		if(sequence==2) {
 			categorys = service.secondCategory(category);
 		}else if(sequence==3) {
+			log.info(sequence);
 			categorys = service.thirdCategory(category);
+			log.info("categorys: "+ categorys);
+			log.warn("categorys: "+ categorys);
 		}
 
 		return categorys;

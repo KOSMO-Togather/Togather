@@ -33,6 +33,7 @@
 		<typeAlias alias="GBReply" type="team1.togather.domain.GBReply" />
 		<typeAlias alias="GroupTabGallery" type="team1.togather.domain.GroupTabGallery" />
 
+
 	</typeAliases>
    <!-- 
    <mappers>
