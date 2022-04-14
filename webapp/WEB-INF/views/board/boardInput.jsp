@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" import="java.util.*, team1.togather.domain.*"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+import="java.util.*, team1.togather.domain.*"%> <%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core" %> <%@ taglib prefix="fmt"
+uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,7 +33,10 @@
       href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="/assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
     <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
@@ -40,20 +44,19 @@
     <link href="/assets/css/style.css" rel="stylesheet" />
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script>
-      Kakao.init('11400a9267d93835389eb9255fcaad0b');
-      function signout(){
-        if(Kakao.Auth.getAccessToken() != null){
-          Kakao.Auth.logout(function(){
-            setTimeout(function(){
-              location.href="../member/logout.do";
-            },500);
+      Kakao.init("11400a9267d93835389eb9255fcaad0b");
+      function signout() {
+        if (Kakao.Auth.getAccessToken() != null) {
+          Kakao.Auth.logout(function () {
+            setTimeout(function () {
+              location.href = "../member/logout.do";
+            }, 500);
           });
-        }else{
-          location.href="../member/logout.do";
+        } else {
+          location.href = "../member/logout.do";
         }
       }
     </script>
-
   </head>
 
   <body>
@@ -67,20 +70,32 @@
         <nav id="navbar" class="navbar order-last order-lg-0">
           <ul>
             <c:if test="${m.athur eq 0}">
-              <li><a class="manage" href="../membermg/mmlistPage">회원관리</a></li>
+              <li>
+                <a class="manage" href="../membermg/mmlistPage">회원관리</a>
+              </li>
             </c:if>
             <li><a class="active" href="../">Home</a></li>
             <li><a href="../about">About</a></li>
             <li><a href="../board/listPage">게시판</a></li>
             <c:if test="${m ne null}">
-              <li><a href="../groupTab/myGroup.do?mnum=${m.mnum }">나의 모임</a></li><!--로그인시에만 보이게 하기-->
-              <li><a href="../wishTab/wishList?mnum=${m.mnum }">찜목록
-                <span id="numberOfWish" class="badge bg-dark text-white ms-1 rounded-pill">${wishsize }</span>
-              </a></li>
+              <li>
+                <a href="../groupTab/myGroup.do?mnum=${m.mnum }">나의 모임</a>
+              </li>
+              <!--로그인시에만 보이게 하기-->
+              <li>
+                <a href="../wishTab/wishList?mnum=${m.mnum }"
+                  >찜목록
+                  <span
+                    id="numberOfWish"
+                    class="badge bg-dark text-white ms-1 rounded-pill"
+                    >${wishsize }</span
+                  >
+                </a>
+              </li>
             </c:if>
             <li class="dropdown">
               <a href="#"
-              ><span>고객지원</span> <i class="bi bi-chevron-down"></i
+                ><span>고객지원</span> <i class="bi bi-chevron-down"></i
               ></a>
               <ul>
                 <li><a href="../notification/notice">공지사항</a></li>
@@ -92,16 +107,21 @@
 
             <c:choose>
               <c:when test="${m eq null}">
-                <li><a href="../member/login.do">로그인 ${sessionScope.m} </a></li>
+                <li>
+                  <a href="../member/login.do">로그인 ${sessionScope.m} </a>
+                </li>
               </c:when>
               <c:otherwise>
-                <li><a href="javascript:void(0);" onclick="signout();">로그아웃</a></li>
+                <li>
+                  <a href="javascript:void(0);" onclick="signout();"
+                    >로그아웃</a
+                  >
+                </li>
                 <li><a href="../mypage/main">마이페이지</a></li>
               </c:otherwise>
             </c:choose>
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
-
         </nav>
         <!-- .navbar -->
 
@@ -111,11 +131,11 @@
             <a href="../member/joinform.do" class="get-started-btn">회원가입</a>
           </c:when>
           <c:otherwise>
-            <a href="../groupTab/groupCreate.do" class="get-started-btn">모임만들기</a>
+            <a href="../groupTab/groupCreate.do" class="get-started-btn"
+              >모임만들기</a
+            >
           </c:otherwise>
         </c:choose>
-
-
       </div>
     </header>
     <!-- End Header -->
@@ -144,7 +164,12 @@
                   <div class="row justify-content-center">
                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                       <!--거주지/관심지역/이름/생년월일/비번/비번확인/전화번호/성별-->
-                      <form class="mx-1 mx-md-4" name="board" method="post" action="boardInsert">
+                      <form
+                        class="mx-1 mx-md-4"
+                        name="board"
+                        method="post"
+                        action="boardInsert"
+                      >
                         <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
@@ -160,7 +185,7 @@
                           </div>
                         </div>
 
-						<div class="d-flex flex-row align-items-center mb-0">
+                        <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
                             <label class="form-label mb-0" for="form3Example1c"
@@ -189,22 +214,21 @@
                             </select>
                           </div>
                         </div>
-                        
-						
-						<div class="d-flex flex-row align-items-center mb-0">
+
+                        <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
-                           <label class="form-label mb-0" for="form3Example4c"
-                            >모임소개</label
-							  >
-							  <textarea
-								name="bcontent"
-								placeholder="글을 작성해주세요"
-								row="10"
-								cols="53"
-								id="form3Example4c"
-								class="form-control"
-							  ></textarea>
+                            <label class="form-label mb-0" for="form3Example4c"
+                              >모임소개</label
+                            >
+                            <textarea
+                              name="bcontent"
+                              placeholder="글을 작성해주세요"
+                              row="10"
+                              cols="53"
+                              id="form3Example4c"
+                              class="form-control"
+                            ></textarea>
                           </div>
                         </div>
 
@@ -213,7 +237,6 @@
                         >
                           <button
                             type="submit"
-                            
                             class="btn btn-success"
                             style="margin-right: 30px"
                           >
@@ -259,7 +282,8 @@
                   <i class="bx bx-chevron-right"></i> <a href="../">Home</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="../about">About us</a>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="../about">About us</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
@@ -275,11 +299,12 @@
               </ul>
             </div>
 
-            <div  class="col-lg-3 col-md-6 footer-links">
+            <div class="col-lg-3 col-md-6 footer-links">
               <h4>Our Services</h4>
               <ul>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="../notification/notice">공지사항</a>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="../notification/notice">공지사항</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i>
@@ -290,7 +315,8 @@
                   <a href="../qa">Q & A</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="../contact">Contact</a>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="../contact">Contact</a>
                 </li>
               </ul>
             </div>
@@ -302,9 +328,9 @@
               </p>
               <form action="" method="post">
                 <input type="email" name="email" /><input
-                      type="submit"
-                      value="Subscribe"
-              />
+                  type="submit"
+                  value="Subscribe"
+                />
               </form>
             </div>
           </div>
@@ -315,7 +341,7 @@
         <div class="me-md-auto text-center text-md-start">
           <div class="copyright">
             &copy; Copyright <strong><span>Togather</span></strong
-          >. All Rights Reserved
+            >. All Rights Reserved
           </div>
         </div>
         <div class="social-links text-center text-md-right pt-3 pt-md-0">
