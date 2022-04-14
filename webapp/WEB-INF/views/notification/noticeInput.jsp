@@ -119,14 +119,14 @@
       <!-- ======= Breadcrumbs ======= -->
       <div class="breadcrumbs" data-aos="fade-in">
         <div class="container">
-          <h1>게시판 글쓰기</h1>
+          <h1>공지사항 작성</h1>
         </div>
       </div>
       <!-- End Breadcrumbs -->
 
       <!-- ======= Pricing Section ======= -->
       <section
-        class="vh-100"
+        class="h-100"
         style="background-color: #eee; box-sizing: content-box"
       >
         <div class="container h-100" data-aos="flip-down">

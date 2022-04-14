@@ -129,7 +129,7 @@
 
       <!-- ======= Pricing Section ======= -->
       <section
-        class="vh-100"
+        class="h-100"
         style="background-color: #eee; box-sizing: content-box"
       >
         <div class="container h-100" data-aos="flip-down">

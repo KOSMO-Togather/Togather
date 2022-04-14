@@ -244,7 +244,7 @@
                   <li><a class="dropdown-item" href="notice?pageSize=10">10</a></li>
                   
                 </ul>
-                <c:if test = "${ m.athur eq 0}" >
+                <c:if test = "${ m.athur eq 0 || m.athur eq 1}" >
 	                  <a 
 	                    type="submit"
 	                    class="btn btn-dark btn-sm mb-1"

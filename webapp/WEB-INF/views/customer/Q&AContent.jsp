@@ -349,8 +349,10 @@
           <h1>Q & A</h1>
         </div>
       </div>
+
+
 	  <section class="text-11 py-5">
-    <div class="text11 py-md-5 py-4">
+    <div class="text11 py-4">
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 text11-content m-auto">

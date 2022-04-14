@@ -232,7 +232,22 @@
           type: "POST",
           data: result,
           success: function(data){
-            if(data==0){//모임장일때일때
+            if(data==0 || ${m.athur eq 0}){//모임장일때일때
+              Swal.fire({
+                title: '모임을 삭제 하시겠습니까?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+              }).then((result) => {
+                console.log(result.isConfirmed);
+                if (result.isConfirmed) {
+                  groupDelete();
+                }
+              });
+              console.log("check0: "+data);
+            }else if(data==1 || ${m.athur eq 1}){//운영진일때
               Swal.fire({
                 title: '모임을 삭제 하시겠습니까?',
                 icon: 'question',
@@ -269,10 +284,10 @@
           type: "POST",
           data: result,
           success: function(data){
-            if(data==0){//모임장일때일때
+            if(data==0 || ${m.athur eq 0}){//모임장일때일때
               groupUpdate();
               console.log("check0: "+data);
-            }else if(data==1){//운영진일때
+            }else if(data==1 || ${m.athur eq 1}){//운영진일때
               groupUpdate();
               console.log("check1: "+data);
               //swal("모임장,운영자만 수정 가능합니다");
@@ -664,7 +679,7 @@
             <p>${groupMemberCount}/${groupInfo.limit}</p>
           </div>
           <!-- 정모목록 부분-->
-          <c:if test="${memInGroupCheck ne null}">
+          <c:if test="${memInGroupCheck ne null || m.athur eq 0 || m.athur eq 1}">
             <div class="accordion acoordion-flush" id="accordionExample">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
@@ -695,7 +710,7 @@
           </c:if>
           <!--정모목록 끝-->
           <div class="d-grid gap-2 mt-3 mb-3">
-            <c:if test="${memInGroupCheck ne null}">
+            <c:if test="${memInGroupCheck ne null || m.athur eq 0 || m.athur eq 1}">
               <button
                       type="button"
                       class="btn btn-outline-success"
@@ -713,7 +728,7 @@
               모임 삭제하기
             </button>
             <c:choose>
-              <c:when test="${memInGroupCheck eq null }">
+              <c:when test="${memInGroupCheck eq null}">
                 <button type="button" class="btn btn-outline-secondary"
                         onclick="location.href='javascript:groupJoin()'">
                   모임 가입하기
@@ -744,10 +759,10 @@
           <ul class="nav nav-tabs flex-column">
             <c:forEach var='memInGroupName' items='${memInGroupName}' varStatus="index">
               <c:choose>
-                <c:when test="${memInGroupName.GRADE eq 0}">
+                <c:when test="${memInGroupName.GRADE eq 0 || m.athur eq 0}">
                   <c:set var="grade" value="모임장"/>
                 </c:when>
-                <c:when test="${memInGroupName.GRADE eq 1}">
+                <c:when test="${memInGroupName.GRADE eq 1 || m.athur eq 1}">
                   <c:set var="grade" value="운영진"/>
                 </c:when>
                 <c:otherwise>

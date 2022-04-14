@@ -152,13 +152,17 @@
   					type: "POST",
   					data: result,
   					success: function(data){
-  						if(data==0){//모임장일때일때
-  							gatheringDelete();
-  						}else{//모임장 아닐때
-  							Swal.fire({
-  							  title: "작성자만 삭제 가능합니다",
-  							  icon: "error"
-  							});
+                      if(data==0 || ${m.athur eq 0}){//모임장일때일때
+                        gatheringDelete();
+                        console.log("check0: "+data);
+                      }else if(data==1  || ${m.athur eq 1}){//운영진일때
+                        gatheringDelete();
+                      }else{//모임장 아닐때
+                        console.log("check1: "+data);
+                        Swal.fire({
+                          title: "작성자만 삭제 가능합니다",
+                          icon: "error"
+                        });
   						}
   					}
   				});  
@@ -175,21 +179,24 @@
   					type: "POST",
   					data: result,
   					success: function(data){
-  						if(data==0){//모임장일때일때
-  							gatheringUpdate();
-  						}else if(data==1){//운영진일때
-  							gatheringUpdate();
-  							//swal("모임장,운영자만 수정 가능합니다");
-  						}else if(data==2){//일반회원
-  							Swal.fire({
-  							  title: "작성자만 수정 가능합니다",
-  							  icon: "error"
-  							});
-  						}else {//모임에없을때
-  							Swal.fire({
-  							  title: "작성자만 수정 가능합니다",
-  							  icon: "error"
-  							});
+                      if(data==0 || ${m.athur eq 0}){//모임장일때일때
+                        gatheringUpdate();
+                        console.log("check0: "+data);
+                      }else if(data==1 || ${m.athur eq 1}){//운영진일때
+                        gatheringUpdate();
+                        console.log("check1: "+data);
+                        //swal("모임장,운영자만 수정 가능합니다");
+                      }else if(data==2){//일반회원
+                        console.log("check2: "+data);
+                        Swal.fire({
+                          title: "작성자만 수정 가능합니다",
+                          icon: "error"
+                        });
+                      }else {//모임에없을때
+                        Swal.fire({
+                          title: "작성자만 수정 가능합니다",
+                          icon: "error"
+                        });
   						}
   					}
   				});  
@@ -499,27 +506,6 @@
 	            </div>
 	            </nav>
               </div>
-              <!--  
-              <div class="course-info d-flex justify-content-between align-items-center">
-				
-					<label><b>채팅방</b></label>
-				</div>
-				<div>
-					<div id="msgArea" class="col">
-					
-					</div>
-					<div class="col-6">
-					<div class="input-group mb-3">
-						<input type="text" id="msg" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
-						<div class="input-group-append">
-							<button class="btn btn-outline-secondary" type="button" id="button-send">전송</button>
-						</div>
-					</div>
-					</div>
-			</div>
-			-->
-              
-              
               <div class="d-grid gap-2 mt-3 mb-3">
               <c:choose>
 	              <c:when test="${memInGatheringCheck eq null}">

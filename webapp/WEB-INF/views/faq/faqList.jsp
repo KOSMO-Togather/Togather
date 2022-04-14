@@ -172,7 +172,7 @@
 
           <div class="button_group" style="padding-top: 0">
             <!--운영자만 가능한 글쓰기 버튼 만들기-->
-            <c:if test="${m.athur eq 0}">
+            <c:if test="${m.athur eq 0 || m.athur eq 1}">
               <a
                       type="submit"
                       class="btn btn-dark btn-sm mb-1"
