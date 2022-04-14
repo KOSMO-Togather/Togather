@@ -99,7 +99,7 @@
   		  					);
   						$("#content").val("");
   						var totalreply = result.length;
-   						document.getElementById('commentsNum').innerHTMLb = "Recent Comments("+totalreply+")";
+   						document.getElementById('commentsNum').innerHTML = "Recent Comments("+totalreply+")";
   						
   					})
   				},
