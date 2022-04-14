@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" import="java.sql.Date, java.util.*, team1.togather.domain.* "%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+import="java.sql.Date, java.util.*, team1.togather.domain.* "%> <%@ taglib
+prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <%@ taglib prefix="fmt"
+uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,19 +33,15 @@
       href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="/assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
     <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet" />
-
-    <!-- =======================================================
-  * Template Name: Mentor - v4.7.0
-  * Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="/table/images/icons/favicon.ico" />
@@ -81,71 +78,80 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="/table/css/util.css" />
     <link rel="stylesheet" type="text/css" href="/table/css/main.css" />
-  	<script src="http://code.jquery.com/jquery-latest.js"></script>  
-  	<script type="text/javascript">
-  		$(function(){
-  			$("#boardSearch").on("keyup",function(){
-  				var page ="${cri.page}";
-  				var pageSize ="${cri.pageSize}";
-  				var table = document.getElementById('boardTest');
-  				var data ={
-	  						boardSearch: $("#boardSearch").val(),
-							option:$("#option").val(),
-							page: page,
-							pageSize: pageSize
-						}
-  				console.log("page1: "+page+" pageSize: "+pageSize);
-  				$.ajax({
-					url:"/board/listRest",
-					type:"GET",
-					dataType:"json",
-					contentType: "application/json",
-					data: data,
-					success: function(result){
-						console.log("##result: "+result); 
-						var trlength = $('#boardTest tr').length;
-						for(var t=trlength-1;t>0;t--){
-							table.deleteRow(t);
-						}
-							$(result).each(function(){
-								$('#boardTest').append(
-									"<tr onClick=\"location.href='boardContent?bnum="+this.bnum+"&page=${cri.page}&pageSize=${cri.pageSize}'\">"
-									+ "<td class='column1'>"+this.bnum+"</td>"
-									+ "<td class='column2'>"+this.bcategory+"</td>"
-									+ "<td class='column3'>"+this.btitle+"</td>"
-									+ "<td class='column4'>"+this.mname+"</td>"
-									+ "<td class='column5'>"+this.bview+"</td>"
-									+ "<td class='column6'>"+this.rdate+"</td></tr>"
-							);
-								
-						})
-						
-					},
-					error:function(error){
-						console.log("##error: "+error); 
-					}
-  					
-  				})
-  			});
-  		});
-  	
-  	</script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">
+      $(function () {
+        $("#boardSearch").on("keyup", function () {
+          var page = "${cri.page}";
+          var pageSize = "${cri.pageSize}";
+          var table = document.getElementById("boardTest");
+          var data = {
+            boardSearch: $("#boardSearch").val(),
+            option: $("#option").val(),
+            page: page,
+            pageSize: pageSize,
+          };
+          console.log("page1: " + page + " pageSize: " + pageSize);
+          $.ajax({
+            url: "/board/listRest",
+            type: "GET",
+            dataType: "json",
+            contentType: "application/json",
+            data: data,
+            success: function (result) {
+              console.log("##result: " + result);
+              var trlength = $("#boardTest tr").length;
+              for (var t = trlength - 1; t > 0; t--) {
+                table.deleteRow(t);
+              }
+              $(result).each(function () {
+                $("#boardTest").append(
+                  "<tr onClick=\"location.href='boardContent?bnum=" +
+                    this.bnum +
+                    "&page=${cri.page}&pageSize=${cri.pageSize}'\">" +
+                    "<td class='column1'>" +
+                    this.bnum +
+                    "</td>" +
+                    "<td class='column2'>" +
+                    this.bcategory +
+                    "</td>" +
+                    "<td class='column3'>" +
+                    this.btitle +
+                    "</td>" +
+                    "<td class='column4'>" +
+                    this.mname +
+                    "</td>" +
+                    "<td class='column5'>" +
+                    this.bview +
+                    "</td>" +
+                    "<td class='column6'>" +
+                    this.rdate +
+                    "</td></tr>"
+                );
+              });
+            },
+            error: function (error) {
+              console.log("##error: " + error);
+            },
+          });
+        });
+      });
+    </script>
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script>
-      Kakao.init('11400a9267d93835389eb9255fcaad0b');
-      function signout(){
-        if(Kakao.Auth.getAccessToken() != null){
-          Kakao.Auth.logout(function(){
-            setTimeout(function(){
-              location.href="../member/logout.do";
-            },500);
+      Kakao.init("11400a9267d93835389eb9255fcaad0b");
+      function signout() {
+        if (Kakao.Auth.getAccessToken() != null) {
+          Kakao.Auth.logout(function () {
+            setTimeout(function () {
+              location.href = "../member/logout.do";
+            }, 500);
           });
-        }else{
-          location.href="../member/logout.do";
+        } else {
+          location.href = "../member/logout.do";
         }
       }
     </script>
-  
   </head>
   <body>
     <!-- ======= Header ======= -->
@@ -158,20 +164,32 @@
         <nav id="navbar" class="navbar order-last order-lg-0">
           <ul>
             <c:if test="${m.athur eq 0}">
-              <li><a class="manage" href="../membermg/mmlistPage">회원관리</a></li>
+              <li>
+                <a class="manage" href="../membermg/mmlistPage">회원관리</a>
+              </li>
             </c:if>
             <li><a class="active" href="../">Home</a></li>
             <li><a href="../about">About</a></li>
             <li><a href="../board/listPage">게시판</a></li>
             <c:if test="${m ne null}">
-              <li><a href="../groupTab/myGroup.do?mnum=${m.mnum }">나의 모임</a></li><!--로그인시에만 보이게 하기-->
-              <li><a href="../wishTab/wishList?mnum=${m.mnum }">찜목록
-                <span id="numberOfWish" class="badge bg-dark text-white ms-1 rounded-pill">${wishsize }</span>
-              </a></li>
+              <li>
+                <a href="../groupTab/myGroup.do?mnum=${m.mnum }">나의 모임</a>
+              </li>
+              <!--로그인시에만 보이게 하기-->
+              <li>
+                <a href="../wishTab/wishList?mnum=${m.mnum }"
+                  >찜목록
+                  <span
+                    id="numberOfWish"
+                    class="badge bg-dark text-white ms-1 rounded-pill"
+                    >${wishsize }</span
+                  >
+                </a>
+              </li>
             </c:if>
             <li class="dropdown">
               <a href="#"
-              ><span>고객지원</span> <i class="bi bi-chevron-down"></i
+                ><span>고객지원</span> <i class="bi bi-chevron-down"></i
               ></a>
               <ul>
                 <li><a href="../notification/notice">공지사항</a></li>
@@ -183,16 +201,21 @@
 
             <c:choose>
               <c:when test="${m eq null}">
-                <li><a href="../member/login.do">로그인 ${sessionScope.m} </a></li>
+                <li>
+                  <a href="../member/login.do">로그인 ${sessionScope.m} </a>
+                </li>
               </c:when>
               <c:otherwise>
-                <li><a href="javascript:void(0);" onclick="signout();">로그아웃</a></li>
+                <li>
+                  <a href="javascript:void(0);" onclick="signout();"
+                    >로그아웃</a
+                  >
+                </li>
                 <li><a href="../mypage/main">마이페이지</a></li>
               </c:otherwise>
             </c:choose>
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
-
         </nav>
         <!-- .navbar -->
 
@@ -202,11 +225,11 @@
             <a href="../member/joinform.do" class="get-started-btn">회원가입</a>
           </c:when>
           <c:otherwise>
-            <a href="../groupTab/groupCreate.do" class="get-started-btn">모임만들기</a>
+            <a href="../groupTab/groupCreate.do" class="get-started-btn"
+              >모임만들기</a
+            >
           </c:otherwise>
         </c:choose>
-
-
       </div>
     </header>
     <!-- End Header -->
@@ -236,53 +259,67 @@
                   페이지당 게시글 수
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="listPage?pageSize=1">1</a></li>
-                  <li><a class="dropdown-item" href="listPage?pageSize=5">5</a></li>
-                  <li><a class="dropdown-item" href="listPage?pageSize=10">10</a></li>
-                  <li><a class="dropdown-item" href="listPage?pageSize=15">15</a></li>
+                  <li>
+                    <a class="dropdown-item" href="listPage?pageSize=1">1</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="listPage?pageSize=5">5</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="listPage?pageSize=10">10</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="listPage?pageSize=15">15</a>
+                  </li>
                 </ul>
 
                 <!--운영자만 가능한 글쓰기 버튼-->
-            
-                  <a
-                    type="submit"
-                    class="btn btn-dark btn-sm mb-1"
-                    style="float: right"
-                    href="boardInput"
-                  >
-                    글쓰기
-                  </a>
+
+                <a
+                  type="submit"
+                  class="btn btn-dark btn-sm mb-1"
+                  style="float: right"
+                  href="boardInput"
+                >
+                  글쓰기
+                </a>
               </div>
               <div class="table100">
-                <table id = "boardTest">
+                <table id="boardTest">
                   <thead>
-	                    <tr class="table100-head">
-	                      <th class="column1">글번호</th>
-	                      <th class="column2">관심사</th>
-	                      <th class="column3">제목</th>
-	                      <th class="column4">작성자</th>
-	                      <th class="column5">조회수</th>
-	                      <th class="column6">등록일</th>
-	                    </tr>
-	                  </thead>
-	                  <tbody>
-
-	               <c:if test="${empty boardList}">
-						<tr align="center" noshade>
-						   <td colspan="6">데이터가 하나도 없음</td>
-						</tr>
-				   </c:if>
-				   <c:if test="${not empty boardList}">
-				   <c:forEach var="board" items="${boardList }">
-	                    <tr onClick="location.href='boardContent?bnum=${board.bnum}&page=${cri.page}&pageSize=${cri.pageSize}'">
-	                      <td class="column1">${board.bnum}</td>
-	                      <td class="column2">${board.bcategory }</td>
-	                      <td class="column3">${board.btitle }</td>
-	                      <td class="column4">${board.mname }</td>
-	                      <td class="column5">${board.bview }</td>
-	                      <td class="column6" ><fmt:formatDate value="${board.rdate }" pattern="yyyy-MM-dd (E) HH:mm" /></td>
-	                    </tr>
-				 	  </c:forEach>
+                    <tr class="table100-head">
+                      <th class="column1">글번호</th>
+                      <th class="column2">관심사</th>
+                      <th class="column3">제목</th>
+                      <th class="column4">작성자</th>
+                      <th class="column5">조회수</th>
+                      <th class="column6">등록일</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <c:if test="${empty boardList}">
+                      <tr align="center" noshade>
+                        <td colspan="6">데이터가 하나도 없음</td>
+                      </tr>
+                    </c:if>
+                    <c:if test="${not empty boardList}">
+                      <c:forEach var="board" items="${boardList }">
+                        <tr
+                          onClick="location.href='boardContent?bnum=${board.bnum}&page=${cri.page}&pageSize=${cri.pageSize}'"
+                        >
+                          <td class="column1">${board.bnum}</td>
+                          <td class="column2">${board.bcategory }</td>
+                          <td class="column3">${board.btitle }</td>
+                          <td class="column4">${board.mname }</td>
+                          <td class="column5">${board.bview }</td>
+                          <td class="column6">
+                            <fmt:formatDate
+                              value="${board.rdate }"
+                              pattern="yyyy-MM-dd (E) HH:mm"
+                            />
+                          </td>
+                        </tr>
+                      </c:forEach>
                     </c:if>
                   </tbody>
                 </table>
@@ -291,68 +328,91 @@
                 class="input-group input-group-sm mb-3"
                 style="width: 300px; height: auto"
               >
-              <form name="searchbar" method="post" action="boardWithSearch">
-                <select
-                  class="btn btn-outline-dark"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  name="option"
-                  id="option"
-                >
-                	<option value="btitle">제목</option>
-					<option value="bcategory">관심사</option>
-					<option value="mname">작성자</option>
-                </select>
-                <input
-                  id="boardSearch"
-                  name="boardSearch"
-                  type="text"
-                  aria-label="Text input with dropdown button" 
-                />
+                <form name="searchbar" method="post" action="boardWithSearch">
+                  <select
+                    class="btn btn-outline-dark"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    name="option"
+                    id="option"
+                  >
+                    <option value="btitle">제목</option>
+                    <option value="bcategory">관심사</option>
+                    <option value="mname">작성자</option>
+                  </select>
+                  <input
+                    id="boardSearch"
+                    name="boardSearch"
+                    type="text"
+                    aria-label="Text input with dropdown button"
+                  />
                 </form>
               </div>
-			  <!--  class="form-control"이거 input안에 있었음 -->
+              <!--  class="form-control"이거 input안에 있었음 -->
               <!--Page navigation-->
               <div>
-              		
                 <nav aria-label="Page navigation example">
                   <ul
                     id="paging"
                     class="pagination"
                     style="justify-content: center"
                   >
-                  <c:if test="${pm.prev}">
-                    <li class="page-item">
-                      <a class="page-link" href="listPage?page=${pm.startPage-1}&pageSize=${cri.pageSize}">처음</a>
-                    </li>
-                  </c:if>
-                  <c:if test="${pm.prev}">
-                    <li class="page-item">
-                      <a class="page-link" href="listPage?page=${cri.page-1}&pageSize=${cri.pageSize}">이전</a>
-                    </li>
-                  </c:if>
-                  <c:forEach var="idx" begin="${pm.startPage }" end="${pm.endPage }">
-                    <li class="page-item">
-                      <a class="page-link" href="listPage?page=${idx }&pageSize=${cri.pageSize}">${idx}</a>
-                    </li> 
-                  </c:forEach>
-                  <c:if test="${pm.next && pm.endPage > 0}">
-                    <li class="page-item">
-                      <a class="page-link" href="listPage?page=${cri.page+1}&pageSize=${cri.pageSize}">다음</a>
-                    </li>
-                  </c:if>
-                  <c:if test="${pm.next && pm.endPage > 0}">
-                    <li class="page-item">
-                      <a class="page-link" href="listPage?page=${pm.endPage}&pageSize=${cri.pageSize}">끝</a>
-                    </li>
-                  </c:if>
+                    <c:if test="${pm.prev}">
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="listPage?page=${pm.startPage-1}&pageSize=${cri.pageSize}"
+                          >처음</a
+                        >
+                      </li>
+                    </c:if>
+                    <c:if test="${pm.prev}">
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="listPage?page=${cri.page-1}&pageSize=${cri.pageSize}"
+                          >이전</a
+                        >
+                      </li>
+                    </c:if>
+                    <c:forEach
+                      var="idx"
+                      begin="${pm.startPage }"
+                      end="${pm.endPage }"
+                    >
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="listPage?page=${idx }&pageSize=${cri.pageSize}"
+                          >${idx}</a
+                        >
+                      </li>
+                    </c:forEach>
+                    <c:if test="${pm.next && pm.endPage > 0}">
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="listPage?page=${cri.page+1}&pageSize=${cri.pageSize}"
+                          >다음</a
+                        >
+                      </li>
+                    </c:if>
+                    <c:if test="${pm.next && pm.endPage > 0}">
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="listPage?page=${pm.endPage}&pageSize=${cri.pageSize}"
+                          >끝</a
+                        >
+                      </li>
+                    </c:if>
                   </ul>
                 </nav>
               </div>
-              <center><p>${cri.page} / ${pm.endPage }</p></center> 
+              <center><p>${cri.page} / ${pm.endPage }</p></center>
             </div>
           </div>
-        </div>          
+        </div>
       </section>
       <!-- End Trainers Section -->
     </main>
@@ -366,11 +426,11 @@
             <div class="col-lg-3 col-md-6 footer-contact">
               <h3>Togather</h3>
               <p>
-                서울시 금천구<br/>
-                가산 디지털 2로 123<br/>
-                월드메르디앙 2차<br/><br/>
-                <strong>Phone:</strong>+82 2 1234 1234<br/>
-                <strong>Email:</strong>service@togather.com<br/>
+                서울시 금천구<br />
+                가산 디지털 2로 123<br />
+                월드메르디앙 2차<br /><br />
+                <strong>Phone:</strong>+82 2 1234 1234<br />
+                <strong>Email:</strong>service@togather.com<br />
               </p>
             </div>
 
@@ -381,7 +441,8 @@
                   <i class="bx bx-chevron-right"></i> <a href="../">Home</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="../about">About us</a>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="../about">About us</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
@@ -397,11 +458,12 @@
               </ul>
             </div>
 
-            <div  class="col-lg-3 col-md-6 footer-links">
+            <div class="col-lg-3 col-md-6 footer-links">
               <h4>Our Services</h4>
               <ul>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="../notification/notice">공지사항</a>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="../notification/notice">공지사항</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i>
@@ -412,7 +474,8 @@
                   <a href="../qa">Q & A</a>
                 </li>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="../contact">Contact</a>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="../contact">Contact</a>
                 </li>
               </ul>
             </div>
@@ -423,10 +486,10 @@
                 최신뉴스 및 프로모션 행사에 대한 안내메일을 받으실 수 있습니다.
               </p>
               <form action="" method="post">
-                <input type="email" name="email"/><input
-                      type="submit"
-                      value="Subscribe"
-              />
+                <input type="email" name="email" /><input
+                  type="submit"
+                  value="Subscribe"
+                />
               </form>
             </div>
           </div>
@@ -437,7 +500,7 @@
         <div class="me-md-auto text-center text-md-start">
           <div class="copyright">
             &copy; Copyright<strong><span>Togather</span></strong
-          >. All Rights Reserved
+            >. All Rights Reserved
           </div>
         </div>
         <div class="social-links text-center text-md-right pt-3 pt-md-0">
@@ -467,6 +530,5 @@
 
     <!-- Template Main JS File -->
     <script src="/assets/js/main.js"></script>
-    
   </body>
 </html>

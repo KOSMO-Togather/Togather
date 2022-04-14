@@ -14,7 +14,7 @@
   table.type07 thead {
     border-right: 1px solid #ccc;
     border-left: 1px solid #ccc;
-    background: #d1c7c7;
+    background: #b7adad;
   }
   table.type07 thead th {
     padding: 10px;
@@ -126,12 +126,12 @@
               $('#membermgTest').append(
                       "<tr>"
                       + "<td class='column1'>"+result[i].mnum+"</td>"
-                      + "<td class='column1'>"+result[i].maddr+"</td>"
+                      + "<td class='column3'>"+result[i].maddr+"</td>"
                       + "<td class='column1'>"+result[i].mname+"</td>"
                       + "<td class='column1'>"+result[i].gender+"</td>"
-                      + "<td class='column2'>"+result[i].birth+"</td>"
+                      + "<td class='column1'>"+result[i].birth+"</td>"
                       + "<td class='column1'>"+result[i].email+"</td>"
-                      + "<td class='column2'>"+result[i].phone+"</td>"
+                      + "<td class='column1'>"+result[i].phone+"</td>"
                       + "<td class='column1'>"+result[i].athur+"</td>"
                       + "<td class='column1'><a style='color:#05b1f0' href='mmupdate.do?mnum="+result[i].mnum+"'>수정</a>"
                       + "<a style='color:#05b1f0'  href='mmdel.do?mnum="+result[i].mnum+"'>삭제</a></td></tr>"
@@ -260,12 +260,12 @@
         <thead>
         <tr>
           <th class="col-sm-1">회원번호</th>
-          <th class="col-sm-1">거주지</th>
+          <th class="col-sm-3">거주지</th>
           <th class="col-sm-1">회원이름</th>
           <th class="col-sm-1">성별</th>
-          <th class="col-sm-2">생년월일</th>
+          <th class="col-sm-1">생년월일</th>
           <th class="col-sm-1">이메일</th>
-          <th class="col-sm-2">핸드폰번호</th>
+          <th class="col-sm-1">핸드폰번호</th>
           <th class="col-sm-1">회원권한</th>
           <th class="col-sm-1"><a style="margin-right:10px">회원관리</a></th>
         </tr>
@@ -280,12 +280,12 @@
           <c:forEach var="member" items="${MembermgList }">
             <tr>
               <td class="col-sm-1">${member.mnum}</td>
-              <td class="col-sm-1">${member.maddr }</td>
+              <td class="col-sm-3">${member.maddr }</td>
               <td class="col-sm-1">${member.mname }</td>
               <td class="col-sm-1">${member.gender }</td>
-              <td class="col-sm-2">${member.birth }</td>
+              <td class="col-sm-1">${member.birth }</td>
               <td class="col-sm-1">${member.email }</td>
-              <td class="col-sm-2">${member.phone }</td>
+              <td class="col-sm-1">${member.phone }</td>
               <c:choose>
                 <c:when test="${member.athur eq 2}">
                   <td class="col-sm-1">일반회원</td>

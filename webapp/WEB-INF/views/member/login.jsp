@@ -212,7 +212,7 @@
 
         <c:choose>
           <c:when test="${m eq null}">
-            <a href="member/joinform.do" class="get-started-btn">회원가입</a>
+            <a href="../member/joinform.do" class="get-started-btn">회원가입</a>
           </c:when>
           <c:otherwise>
             <a href="../groupTab/groupCreate.do" class="get-started-btn">모임만들기</a>
