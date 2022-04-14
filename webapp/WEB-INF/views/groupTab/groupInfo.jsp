@@ -480,9 +480,14 @@
             type: "POST",
             data: result,
             success: function(data){
-              if(data!=3){
+              if(data==0 || ${m.athur eq 0}){//모임장일때일때
                 galleryMember();
-              }else {
+              }else if(data==1  || ${m.athur eq 1}){//운영진일때
+                galleryMember();
+                //swal("모임장,운영자만 수정 가능합니다");
+              }else if(data==2){//일반회원
+                galleryMember();
+              }else {//모임에없을때
                 Swal.fire({
                   title: "가입회원만 조회가 가능합니다.",
                   icon: "error"
