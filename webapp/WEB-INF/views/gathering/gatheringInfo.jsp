@@ -82,7 +82,6 @@
 			  cancelButtonColor: '#d33',
 			  confirmButtonText: 'Yes'
 			}).then((result) => {
-				console.log(result.isConfirmed);
 				if(${gatheringMemberCount} >= ${gatheringInfo.ga_limit}){
 					Swal.fire({
 						title: '정모 참여 인원이 다 찼습니다',
@@ -120,7 +119,6 @@
 			  cancelButtonColor: '#d33',
 			  confirmButtonText: 'Yes'
 			}).then((result) => {
-				console.log(result.isConfirmed);
 			  if (result.isConfirmed) {
 				var mnum = ${m.mnum};
 					var gseq = ${gatheringInfo.gseq};
@@ -156,9 +154,7 @@
   					success: function(data){
   						if(data==0){//모임장일때일때
   							gatheringDelete();
-  							console.log("check0: "+data);
   						}else{//모임장 아닐때
-  							console.log("check1: "+data);
   							Swal.fire({
   							  title: "작성자만 삭제 가능합니다",
   							  icon: "error"
@@ -181,13 +177,10 @@
   					success: function(data){
   						if(data==0){//모임장일때일때
   							gatheringUpdate();
-  							console.log("check0: "+data);
   						}else if(data==1){//운영진일때
   							gatheringUpdate();
-  							console.log("check1: "+data);
   							//swal("모임장,운영자만 수정 가능합니다");
   						}else if(data==2){//일반회원
-  							console.log("check2: "+data);
   							Swal.fire({
   							  title: "작성자만 수정 가능합니다",
   							  icon: "error"
@@ -197,7 +190,6 @@
   							  title: "작성자만 수정 가능합니다",
   							  icon: "error"
   							});
-  							console.log("check3: "+data);
   						}
   					}
   				});  
@@ -215,8 +207,6 @@
 		<c:forEach var="memInGatheringName" items="${memInGatheringName}">	              
         	arr.push({mnum:"${memInGatheringName.MNUM}"});
     	</c:forEach>
-    	console.log(arr);
-    	console.log(arr[index].mnum);
     	baby_login = window.open(
     	  "../member/memberInfo?mnum="+arr[index].mnum+"&ga_seq=${gatheringInfo.ga_seq}", "memberInfo", 
     	   "width=1000, height=900, top=100, left=100");
@@ -350,11 +340,8 @@
 				var geocoder = new kakao.maps.services.Geocoder();
 				var callback = function(result, status) {
 				    if (status === kakao.maps.services.Status.OK) {
-				        console.log('지역 명칭 : ' + result[0].address_name);
-				        console.log('행정구역 코드 : ' + result[0].code);
 				        $('#acodeId').val(result[0].code);
 				        var applidate = $('#applidate').text();
-				        console.log("applidate: "+applidate);
 				        $.ajax({
 			  				url:"getWeather",
 			  				type:"GET",

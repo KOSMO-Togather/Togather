@@ -52,6 +52,7 @@
     <link href="/assets/css/style.css" rel="stylesheet" />
     <script type="text/javascript"
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script>
         Kakao.init('11400a9267d93835389eb9255fcaad0b');

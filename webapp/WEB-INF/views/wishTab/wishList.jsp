@@ -146,7 +146,7 @@
 	            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
 	              <div class="course-item">
 	                <img
-	                  src="/assets/img/course-1.jpg"
+	                  src="/assets/img/groupImages/${groupList.fname }"
 	                  class="img-fluid"
 	                  alt="..."
 	                />

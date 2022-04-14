@@ -36,7 +36,7 @@
 	</select>
 	<!-- 정모 참여하는 sql -->
 	<insert id="memInGathering" parameterType="MemInGathering">
-		insert into MEM_IN_GATHERING values(#{ga_seq}, #{mnum}, 2,default)
+		insert into MEM_IN_GATHERING values(#{ga_seq}, #{mnum}, 2, default)
 	</insert>
 	<!-- 정모 참여 취소 sql -->
 	<delete id="gatheringQuit" parameterType="MemInGathering">

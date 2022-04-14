@@ -69,15 +69,13 @@
   <script>
     window.onload = function() {
       today = new Date();
-      console.log("today.toISOString() >>>" + today.toISOString());
       today = today.toISOString().slice(0, 10);
-      console.log("today >>>> " + today);
       bir = document.getElementById("now_date");
       bir.value = today;
       bir.min= bir.value;
 
       document.getElementById('time').value = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(11, 16);
-      console.log(new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString());
+
     }
 
     function Check(){
@@ -91,10 +89,6 @@
       var nowTimeCheck=nowDateCheck;
       nowTimeCheck+="T";
       nowTimeCheck+= document.getElementById('time').value;
-      //var nowTimeCheck = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 11);
-
-      console.log("nowTime: "+nowTime);
-      console.log("nowTimeCheck: "+nowTimeCheck);
 
       if(bir.value<today){
         Swal.fire({
@@ -398,7 +392,6 @@
       $('#latitude2').val(latitude);
       $('#longitude2').val(longitude);
       //alert("현재 위치는 : " + latitude + ", "+ longitude);
-      console.log("1: "+$('#latitude2').val());
       getAddr($('#latitude2').val(),$('#longitude2').val());
     });
 
@@ -406,17 +399,13 @@
     let lng = 126.570667;
     getAddr(lat,lng);*/
     function getAddr(lat,lng){
-      console.log("2: "+$('#latitude2').val());
       let geocoder = new kakao.maps.services.Geocoder();
 
       let coord = new kakao.maps.LatLng(lat, lng);
       let callback = function(result, status) {
         if (status === kakao.maps.services.Status.OK) {
-          console.log("result[0]: ",result);
-          console.log("result[0].address.address_name: ",result[0].address.address_name);
           $('#place').val(result[0].address.region_3depth_name);
           let place=$('#place').val();
-          console.log("place: "+place);
 
           window.name="parentForm";
           openWin = window.open(

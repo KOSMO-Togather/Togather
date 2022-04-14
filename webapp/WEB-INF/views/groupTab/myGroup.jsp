@@ -145,9 +145,10 @@
 	            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4">
 	              <div class="course-item">
 	                <img
-	                  src="/assets/img/course-1.jpg"
-	                  class="img-fluid"
-	                  alt="..."
+	                  src="/assets/img/groupImages/${myGrouplist.fname}"
+                      width="414px"
+                      height="275px"
+                      alt="그룹사진"
 	                />
 	                <div class="course-content">
 	                  <div
