@@ -161,35 +161,30 @@
                         </c:if>
                     </div>
                     <div id="outerreplyform" class="comments mt-5">
-                        <h3 id="commentsNum" class="aside-title ">Recent comments(${totalReply })</h3>
-                        <c:forEach items="${gbrlist}" var="gbreply">
-                            <div class="comments-grids">
-                                <!-- 여기부터 루프 -->
-
-
-
-                                <div id="middleform" class="media-grid">
-                                    <div class="media">
-                                        <a class="comment-img" href="#url"><img src="/assets/images/team1.jpg"
-                                                                                class="img-responsive" width="100px" alt="placeholder image"></a>
-                                        <div class="media-body comments-grid-right" style="width:700px">
-                                            <h5>${gbreply.mname }</h5>
-                                            <ul class="p-0 comment">
-                                                <li class=""><fmt:formatDate value="${gboard.rdate}" pattern="yyyy-MM-dd (E) HH:mm" /></li>
-                                            </ul>
-                                            <p style="word-break:break-word">${gbreply.gbrcontent}</p>
-                                        </div>
+                        <h3 id="commentsNum" class="aside-title ">Posted Comment</h3>
+                        <div class="comments-grids">
+                            <div id="middleform" class="media-grid">
+                                <div class="media">
+                                    <div class="me"style="width: 100px; height: 100px; transform: scaleX(-1); left: 50%; right: 50%; margin-left: -40px;">
+                                        <h1><i class="bi bi-chat-dots"></i></h1>
+                                    </div>
+                            <div class="media-body comments-grid-right" style="width:700px">
+                                        <h5>${mname }</h5>
+                                        <ul class="p-0 comment">
+                                            <li class=""><fmt:formatDate value="${rdate}" pattern="yyyy-MM-dd (E) HH:mm" /></li>
+                                        </ul>
+                                        <p style="word-break:break-word">${gbrcontent}</p>
                                     </div>
                                 </div>
-
                             </div>
-                        </c:forEach>
+
+                        </div>
                     </div>
 
 
 
                     <div class="Update-comment-form" id="comment">
-                        <h3 class="aside-title">Update a reply</h3>
+                        <h3 class="aside-title">Update a Comment</h3>
                         <form action="gbrupdate.do?gbrseq=${gbrseq}&gbnum=${gbnum}" method="post">
                             <div class="input-grids">
                                 <div class="form-group">

@@ -51,13 +51,6 @@
     <link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
     <!-- Template CSS Style link -->
     <link rel="stylesheet" href="/assets/css/style-liberty.css">
-
-    <!-- =======================================================
-  * Template Name: Mentor - v4.7.0
-  * Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
  	<script src="http://code.jquery.com/jquery-latest.js"></script>  
   	<script type="text/javascript">
   		$(document).on("click","#postComment" ,function(){
@@ -106,7 +99,7 @@
   		  					);
   						$("#content").val("");
   						var totalreply = result.length;
-   						document.getElementById('commentsNum').innerHTML = "Recent Comments("+totalreply+")";
+   						document.getElementById('commentsNum').innerHTMLb = "Recent Comments("+totalreply+")";
   						
   					})
   				},
@@ -162,8 +155,6 @@
     <header id="header" class="fixed-top">
         <div class="container d-flex align-items-center">
             <h1 class="logo me-auto"><a href="../">Togather</a></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
@@ -225,29 +216,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 text11-content m-auto">
-                    
                     <h4>${board.btitle}</h4> 
                     <h6><span class="fa fa-user mr-1 icon-color"></span>${board.mname}, ${board.rdate}</h6>
                     <a href="#post" class="post">${board.bcategory}</a>
                     <p class="mt-4 mb-3">${board.bcontent}</p>
-                    
-
-                    <!--
-                    글 공유 
-                        <div class="social-share-blog mt-5 pb-4">
-                        <ul class="column3 social m-0 p-0">
-                            <li>
-                                <p class="m-0 mr-4">Share this post :</p>
-                            </li>
-                            <li><a href="#facebook" class="facebook"><span class="fab fa-facebook-f"></span></a>
-                            </li>
-                            <li><a href="#twitter" class="twitter"><span class="fab fa-twitter"></span></a></li>
-                            <li><a href="#instagram" class="instagram"><span class="fab fa-instagram"></span></a>
-                            </li>
-                            <li><a href="#linkedin" class="linkedin"><span class="fab fa-linkedin-in"></span></a>
-                            </li>
-                        </ul>
-                    </div> -->
                     <div class="new-posts mt-5">
                         <a class="prev-post pull-left" href="#prev"><span class="fa fa-arrow-left"
                                 aria-hidden="true"></span>
@@ -262,14 +234,15 @@
                         <h3 id="commentsNum" class="aside-title ">Recent comments(${totalReply })</h3>
                         <div class="comments-grids">
                             <!-- 여기부터 루프 -->
-<c:if test="${not empty reply }">
-<c:forEach var="replyList" items="${reply }">
+                    <c:if test="${not empty reply }">
+                    <c:forEach var="replyList" items="${reply }">
 							<div  >
-                            <div id="middleform" class="media-grid">
-                                <div class="media">
-                                    <a class="comment-img" href="#url"><img src="/assets/images/team1.jpg"
-                                            class="img-responsive" width="100px" alt="placeholder image"></a>
-                                    <div id="innerreplyform" class="media-body comments-grid-right">
+                                <div id="middleform" class="media-grid">
+                                    <div class="media">
+                                        <div class="me"style="width: 100px; height: 100px; transform: scaleX(-1); left: 50%; right: 50%; margin-left: -40px;">
+                                            <h1><i class="bi bi-chat-dots"></i></h1>
+                                        </div>
+                                    <div id="innerreplyform" class="media-body comments-grid-right" style="width: 700px">
                                         <h5>${replyList.mname }</h5>
                                         <ul class="p-0 comment">
                                             <li class="">${replyList.rdate }</li>
@@ -298,8 +271,8 @@
                                 </div>
                             </div>
                             </div>
-</c:forEach>
-</c:if>
+                    </c:forEach>
+                    </c:if>
                         </div>
                     </div>
                     <div class="leave-comment-form" id="comment">

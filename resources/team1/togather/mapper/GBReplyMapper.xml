@@ -7,7 +7,7 @@
 		 select * from GBREPLY where GBNUM=#{gbnum} order by gbrseq desc
 	</select>
 	<insert id="gbrinsert" parameterType="GBReply">
-	    insert into GBREPLY values(GBRSEQ_SEQ.nextval, #{gbnum}, #{mname}, #{mnum}, #{gbrcontent}, #{gbr_like}, SYSDATE)
+	    insert into GBREPLY values(GBR_SEQ.nextval, #{gbnum}, #{mname}, #{mnum}, #{gbrcontent}, #{gbr_like}, SYSDATE)
 	</insert>
 	<update id="gbrupdate" parameterType="GBReply">
         update GBREPLY set GBRCONTENT=#{gbrcontent}, RDATE=SYSDATE where GBRSEQ=#{gbrseq}

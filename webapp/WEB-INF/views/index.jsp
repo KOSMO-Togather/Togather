@@ -317,10 +317,9 @@
                             "<section id='popular-courses' class='courses'>"
                             +"<div class='container' data-aos='fade-up'>"
                             +"<div class='section-title' style='padding-bottom: 0px' id='section-title'>"
-                            +"<h2 id='showGroupform'>소모임</h2>"
-                            +"<p>Searched Groups</p>"
+                            +"<h2>소모임</h2>"
+                            +"<p id='showGroupform'>Searched Groups</p>"
                             +"</div>"
-                            +"<div id='popularSection' class='row' data-aos='zoom-in' data-aos-delay='100'>"
                         );
 
                         $(result).each(function(index, item){

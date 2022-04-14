@@ -85,6 +85,13 @@
   <link href="/assets/css/style.css" rel="stylesheet" />
   <script src="http://code.jquery.com/jquery-latest.js"></script>
   <script type="text/javascript">
+
+    $(function(){
+      //$("tr:odd").css("background","red");
+      $("tr:even").css("background","#faf7f2");
+
+    });
+
     $(function(){
       $("#membermgSearch").on("keyup",function(){
         var mnum = "${mnum}";
@@ -100,30 +107,36 @@
             mnum:mnum
           },
           success: function(result){
-            var data=result;
-
+            var data = result;
             var obj_length = Object.keys(result).length;
             var trlength = $('#membermgTest tr').length;
             for(var t=trlength-1;t>0;t--){
               table.deleteRow(t);
             }
-
-            for(var i=0;i<obj_length;i++){
+            console.log("result: " + result[0].athur);
+            for(var i=0;i<=obj_length;i++){
+              if(result[i].athur==2){
+                result[i].athur = "일반회원";
+              }else if(result[i].athur==1){
+                result[i].athur = "운영진";
+              }else{
+                result[i].athur = "관리자";
+              }
+              $('#membermgTest tr:even').css("background","#faf7f2");
               $('#membermgTest').append(
                       "<tr>"
                       + "<td class='column1'>"+result[i].mnum+"</td>"
-                      + "<td class='column2'>"+result[i].maddr+"</td>"
-                      + "<td class='column3'>"+result[i].mname+"</td>"
-                      + "<td class='column4'>"+result[i].gender+"</td>"
-                      + "<td class='column5'>"+result[i].birth+"</td>"
-                      + "<td class='column6'>"+result[i].email+"</td>"
-                      + "<td class='column7'>"+result[i].phone+"</td>"
-                      + "<td class='column8'>"+result[i].athur+"</td>"
-                      + "<td class='column9'><a href='mmupdate.do?mnum="+result[i].mnum+"'>수정</a></td>"
-                      + "<td class='column9'><a href='mmdel.do?mnum="+result[i].mnum+"'>삭제</a></td></tr>"
+                      + "<td class='column1'>"+result[i].maddr+"</td>"
+                      + "<td class='column1'>"+result[i].mname+"</td>"
+                      + "<td class='column1'>"+result[i].gender+"</td>"
+                      + "<td class='column2'>"+result[i].birth+"</td>"
+                      + "<td class='column1'>"+result[i].email+"</td>"
+                      + "<td class='column2'>"+result[i].phone+"</td>"
+                      + "<td class='column1'>"+result[i].athur+"</td>"
+                      + "<td class='column1'><a style='color:#05b1f0' href='mmupdate.do?mnum="+result[i].mnum+"'>수정</a>"
+                      + "<a style='color:#05b1f0'  href='mmdel.do?mnum="+result[i].mnum+"'>삭제</a></td></tr>"
               );
             }
-
           },
           error:function(error){
             console.log("##error: "+error);
@@ -131,12 +144,6 @@
 
         })
       });
-    });
-
-    $(function(){
-      //$("tr:odd").css("background","red");
-      $("tr:even").css("background","#faf7f2");
-
     });
   </script>
   <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -279,13 +286,22 @@
               <td class="col-sm-2">${member.birth }</td>
               <td class="col-sm-1">${member.email }</td>
               <td class="col-sm-2">${member.phone }</td>
-              <td class="col-sm-1">${member.athur }</td>
-              <td class="col-sm-1"><a style="color:blue" href="mmupdate.do?mnum=${member.mnum}">수정</a>
-                <a style="color:blue"  href="mmdel.do?mnum=${member.mnum}">삭제</a>
+              <c:choose>
+                <c:when test="${member.athur eq 2}">
+                  <td class="col-sm-1">일반회원</td>
+                </c:when>
+                <c:when test="${member.athur eq 1}">
+                  <td class="col-sm-1">운영진</td>
+                </c:when>
+                <c:otherwise>
+                  <td class="col-sm-1">관리자</td>
+                </c:otherwise>
+              </c:choose>
+              <td class="col-sm-1"><a style="color:#05b1f0" href="mmupdate.do?mnum=${member.mnum}">수정</a>
+                <a style="color:#05b1f0"  href="mmdel.do?mnum=${member.mnum}">삭제</a>
               </td>
 
             </tr>
-
 
           </c:forEach>
         </c:if>
@@ -304,7 +320,8 @@
                 id="option"
         >
           <option value="mname">이름</option>
-          <option value="athur">회원권환</option>
+          <option value="athur">회원권한</option>
+          <option value="maddr">주소</option>
         </select>
         <input
                 id="membermgSearch"

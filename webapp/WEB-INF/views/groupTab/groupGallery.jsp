@@ -165,8 +165,6 @@
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
         <h1 class="logo me-auto"><a href="../">Togather</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
@@ -208,8 +206,6 @@
 
         </nav>
         <!-- .navbar -->
-
-        <!--로그인전에는 회원가입만 보이고 로그인하면 모임만들기만 보이게 하는건 어떤지??-->
         <c:choose>
             <c:when test="${m eq null}">
                 <a href="../member/joinform.do" class="get-started-btn">회원가입</a>

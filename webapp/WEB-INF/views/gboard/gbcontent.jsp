@@ -162,18 +162,15 @@
                         </c:if>
                     </div>
                     <div id="outerreplyform" class="comments mt-5">
-                        <h3 id="commentsNum" class="aside-title ">Recent comments(${totalReply })</h3>
+                        <h3 id="commentsNum" class="aside-title ">Recent comments</h3>
                         <c:forEach items="${gbrlist}" var="gbreply">
                             <div class="comments-grids">
-                                <!-- 여기부터 루프 -->
-
-
-
                                 <div id="middleform" class="media-grid">
                                     <div class="media">
-                                        <a class="comment-img" href="#url"><img src="/assets/images/team1.jpg"
-                                                                                class="img-responsive" width="100px" alt="placeholder image"></a>
-                                        <div class="media-body comments-grid-right" style="width:700px">
+                                        <div class="me"style="width: 100px; height: 100px; transform: scaleX(-1); left: 50%; right: 50%; margin-left: -40px;">
+                                            <h1><i class="bi bi-chat-dots"></i></h1>
+                                        </div>
+                                            <div class="media-body comments-grid-right" style="width:700px">
                                             <h5>${gbreply.mname }</h5>
                                             <ul class="p-0 comment">
                                                 <li class=""><fmt:formatDate value="${gbreply.rdate}" pattern="yyyy-MM-dd (E) HH:mm" /></li>
@@ -181,7 +178,8 @@
                                             <p style="word-break:break-word">${gbreply.gbrcontent}</p>
                                             <c:if test = "${ m.mnum eq gbreply.mnum || m.athur ne 2}" >
                                                 <div align="right">
-                                                    <a style="color:blue; margin-right:15px" href='../gbreply/gbrupdate.do?gbnum=${gboard.gbnum}&gbrseq=${gbreply.gbrseq}&gbrcontent=${gbreply.gbrcontent}'>수정</a>
+                                                    <a style="color:blue; margin-right:15px" href='../gbreply/gbrupdate.do?gbnum=${gboard.gbnum}&gbrseq=${gbreply.gbrseq}&gbrcontent=${gbreply.gbrcontent}
+                                                       &mname=${gbreply.mname}&rdate=${gbreply.rdate}'>수정</a>
                                                     <a style="color:blue" href='../gbreply/gbrdel.do?gbnum=${gboard.gbnum}&gbrseq=${gbreply.gbrseq}'>삭제</a>
                                                 </div>
                                             </c:if>
