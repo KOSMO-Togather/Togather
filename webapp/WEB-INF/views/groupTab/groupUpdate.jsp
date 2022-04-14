@@ -139,7 +139,7 @@
       </div>
 
       <section
-        class="vh-100"
+        class="h-100"
         style="background-color: #eee; box-sizing: content-box"
       >
         <div class="container h-100" data-aos="flip-down">
@@ -155,7 +155,7 @@
                       <form class="mx-1 mx-md-4" method="post" action="groupUpdate.do" enctype="multipart/form-data">
                       <input type="hidden" id="gseq" name="gseq" value="${updateList.gseq}"/>
                         <div class="d-flex flex-row align-items-center mb-0">
-                          <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                          <i class="bi bi-map fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
                             <label class="form-label mb-0" for="form3Example1c"
                               >모임지역</label
@@ -180,7 +180,7 @@
                         </div>
 
 						<div class="d-flex flex-row align-items-center mb-0">
-                          <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                          <i class="bi bi-tag fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
                             <label class="form-label mb-0" for="form3Example1c"
                               >모임이름</label
@@ -196,7 +196,7 @@
                         </div>
                         
 						<div class="d-flex flex-row align-items-center mb-0">
-                          <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                          <i class="bi bi-chat-right-text fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
                            <label class="form-label mb-0" for="form3Example4c"
                             >모임소개</label
@@ -213,7 +213,7 @@
                         </div>
 						
 						<div class="d-flex flex-row align-items-center mb-0">
-                          <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                          <i class="bi bi-star fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
                             <label class="form-label mb-0" for="form3Example4cd"
                               >관심사</label
@@ -230,7 +230,7 @@
                         </div>
                         
                         <div class="d-flex flex-row align-items-center mb-0">
-                          <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                          <i class="bi bi-people fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
                             <label class="form-label mb-0" for="form3Example1c"
                               >정원</label
@@ -249,7 +249,7 @@
                         </div>
                         
                         <div class="d-flex flex-row align-items-center mb-0">
-                          <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                          <i class="bi bi-card-image fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
                             <label class="form-label mb-0" for="form3Example1c"
                               >모임대표사진</label

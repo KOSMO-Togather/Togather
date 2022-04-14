@@ -202,8 +202,8 @@
                           </tr>               
 					</body>
 				</table>
-				
-				<c:if test = "${ m.mname eq noticeContent.getMname() }">
+
+                <c:if test = "${ m.mname eq noticeContent.getMname() || m.athur eq 0 || m.athur eq 1}">
 						 <a 
 	                    type="submit"
 	                    class="btn btn-dark btn-sm mb-1"

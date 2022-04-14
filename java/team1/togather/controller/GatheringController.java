@@ -338,7 +338,11 @@ public class GatheringController {
 			grade=(long)3;
 			return grade;
 		}else {
-			return grade;
+			if(grade==0 || grade ==1) {//모임장이거나 운영자
+				return grade;
+			}else {//일반회원
+				return grade;
+			}
 		}
 	}
 
@@ -357,7 +361,11 @@ public class GatheringController {
 			grade = (long) 3;
 			return grade;
 		}else {
-			return grade;
+			if(grade==0 || grade ==1) {//모임장이거나 운영자
+				return grade;
+			}else {//일반회원
+				return grade;
+			}
 		}
 	}
 

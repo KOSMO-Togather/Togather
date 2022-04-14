@@ -216,11 +216,15 @@ public class GroupTabController {
 	public Long groupDeletecheck(MemInGroup memInGroup) {
 		//0=모임장 1=운영진 2=일반
 		Long grade = groupTabService.grade(memInGroup);
-		if (grade == null) {//가입안한 사람
-			grade = (long) 3;
+		if(grade ==null) {//가입안한 사람
+			grade=(long) 3;
 			return grade;
-		} else {
-			return grade;
+		}else {
+			if(grade==0 || grade ==1) {//모임장이거나 운영자
+				return grade;
+			}else {//일반회원
+				return grade;
+			}
 		}
 	}
 

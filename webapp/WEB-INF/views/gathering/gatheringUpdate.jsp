@@ -146,9 +146,9 @@
     <!-- End Header -->
     <main id="main">
       <!-- ======= Breadcrumbs ======= -->
-      <div class="breadcrumbs" data-aos="fade-in">
+      <div class="breadcrumbs" data-aos="fa기e-in">
         <div class="container">
-          <h1>정모 만들기</h1>
+          <h1>정모 수정하기</h1>
         </div>
       </div>
 

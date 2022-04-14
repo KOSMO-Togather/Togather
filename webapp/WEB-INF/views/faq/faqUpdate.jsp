@@ -132,12 +132,12 @@
   <!-- ======= Breadcrumbs ======= -->
   <div class="breadcrumbs" data-aos="fade-in">
     <div class="container">
-      <h1>FAQ 글쓰기</h1>
+      <h1>FAQ 수정</h1>
     </div>
   </div>
 
   <section
-          class="vh-100"
+          class="h-100"
           style="background-color: #eee; box-sizing: content-box"
   >
     <div class="container h-100" data-aos="flip-down">
