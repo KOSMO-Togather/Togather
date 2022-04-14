@@ -161,32 +161,65 @@
     }
 
     function groupQuit(){
-      Swal.fire({
-        title: '모임에서 탈퇴 하시겠습니까?',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes'
-      }).then((result) => {
-        console.log(result.isConfirmed);
-        if (result.isConfirmed) {
-          var mnum = ${m.mnum};
-          var gseq = ${groupInfo.gseq};
-          var result = {"mnum":mnum,"gseq":gseq};
-          $(function(){
-            $.ajax({
-              url: "groupQuit.json",
-              type: "POST",
-              data: result,
-              success: function(data){
-              }
-            });
-            location.reload();
-          });
+      var mnum = ${m.mnum};
+      var arr = new Array();
+      <c:forEach var="memInGroupName" items="${memInGroupName}" varStatus="index">
+      arr.push({gseq: "${groupInfo.gseq}", mnum: "${memInGroupName.MNUM}", grade: "${memInGroupName.GRADE}"});
+      </c:forEach>
 
-        }
-      });
+      if(mnum == arr[0].mnum){ //로그인 한 사람이 모임장인가? ( 모임장이 제일 위로 나오게 정렬함 => order by grade, mnum )
+        grade = arr[0].grade;
+      }else{ //운영진 or 일반회원
+      }
+
+      $(function(){
+        $.ajax({
+          url: "kingQuitCheck.json",
+          type: "POST",
+          data: {gseq: "${groupInfo.gseq}", mnum: "${m.mnum}", grade: "${grade}"},
+          success: function(data){
+            if(data == 0){
+              Swal.fire({
+                title: '모임장이 탈퇴하면 맨 위의 </br> 멤버에게 모임장을 위임합니다.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+              }).then((result) => {
+                if(result.isConfirmed){
+                  location="delegate.do?gseq=${groupInfo.gseq}&mnum=${m.mnum}&grade=${grade}";
+                }
+              })
+            }else{
+              Swal.fire({
+                title: '모임에서 탈퇴 하시겠습니까?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  var mnum = ${m.mnum};
+                  var gseq = ${groupInfo.gseq};
+                  var result = {"mnum":mnum,"gseq":gseq};
+                  $(function(){
+                    $.ajax({
+                      url: "groupQuit.json",
+                      type: "POST",
+                      data: result,
+                      success: function(data){
+                      }
+                    });
+                    location.reload();
+                  });
+                }
+              });
+            }
+          }
+        })
+      })
     }
 
     function groupDeleteCheck(){
@@ -271,15 +304,102 @@
 
     function memberInfo(index){
       var arr = new Array();
-      <c:forEach var="memInGroupName" items="${memInGroupName}">
-      arr.push({mnum:"${memInGroupName.MNUM}"});
+      <c:forEach var="memInGroupName" items="${memInGroupName}" varStatus="index">
+      arr.push({mnum: "${memInGroupName.MNUM}", mname: "${memInGroupName.MNAME}", birth: "${memInGroupName.BIRTH}", maddr: "${memInGroupName.MADDR}"});
+      </c:forEach>
+
+      $("#memInfo").replaceWith(
+              "<div class='col-lg-9 mt-4 mt-lg-0' id='memInfo'>"
+              +"<div class='tab-content'>"
+              +"<div class='tab-pane active show' id='tab-1'>"
+              +"<div class='row'>"
+              +"<div class='col-lg-8 details order-2 order-lg-1'>"
+              +"<h3>멤버정보</h3>"
+              +"<p>이름: "+arr[index].mname+"</p>"
+              +"<p>생년월일: "+arr[index].birth+"</p>"
+              +"<p>거주지: "+arr[index].maddr+"</p>"
+              +"<div class='d-grid gap-2 mt-3 mb-3'>"
+              +"<c:if test='${grade == 0 || grade==1}'>"
+              +"<button type='button' id='deleMan' class='btn btn-outline-secondary' onclick='delegateManCheck("+index+")'>"
+              +"운영진 위임/해제"
+              +"</button>"
+              +"</c:if>"
+              +"</div>"
+              +"</div>"
+              +"<div class='col-lg-4 text-center order-1 order-lg-2'>"
+              +"</div>"
+              +"</div>"
+              +"</div>"
+              +"</div>"
+              +"</div>"
+      );
+    }
+
+    function delegateManCheck(index){
+      console.log(index);
+      console.log("운영진 위임");
+      var arr = new Array();
+      <c:forEach var="memInGroupName" items="${memInGroupName}" varStatus="index">
+      arr.push({gseq: "${groupInfo.gseq}", mnum: "${memInGroupName.MNUM}", grade: "${memInGroupName.GRADE}"});
       </c:forEach>
       console.log(arr);
-      console.log(arr[index].mnum);
-      baby_login = window.open(
-              "../member/memberInfo?mnum="+arr[index].mnum+"&gseq=${groupInfo.gseq}", "memberInfo",
-              "width=1000, height=900, top=100, left=100");
+
+      $(function(){
+        $.ajax({
+          url: "delegateCheck.json",
+          type: "POST",
+          data: {gseq: "${groupInfo.gseq}", mnum: arr[index].mnum, grade: arr[index].grade},
+          success: function(data){
+            console.log("controller_delegate return 값: " + data);
+            if(data == 0){
+              Swal.fire({
+                title: "이미 모임장입니다.",
+                icon: "error"
+              });
+            }else if(data == 1){
+              Swal.fire({
+                title: "이미 운영진입니다. 해제하시겠습니까?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+              }).then((result) => {
+                console.log("운영진일 때: " + result.isConfirmed);
+                if(result.isConfirmed){
+                  Swal.fire({
+                    title: "운영진 권한을 해제했습니다.",
+                    icon: "success"
+                  }).then((result) =>{
+                    location="delegate.do?gseq=${groupInfo.gseq}&mnum="+arr[index].mnum+"&grade="+arr[index].grade+"";
+                  })
+                }
+              })
+            }else{
+              Swal.fire({
+                title: '운영진 위임을 하시겠습니까?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+              }).then((result) => {
+                console.log("일반 회원일 때: " + result.isConfirmed);
+                if(result.isConfirmed){
+                  Swal.fire({
+                    title: "운영진으로 위임했습니다.",
+                    icon: "success"
+                  }).then((result) =>{
+                    location="delegate.do?gseq=${groupInfo.gseq}&mnum="+arr[index].mnum+"&grade="+arr[index].grade+"";
+                  })
+                }
+              })
+            }
+          }
+        });
+      });
     }
+
   </script>
   <script type="text/javascript">
     function gatheringCreateCheck(){
@@ -310,12 +430,75 @@
     function gatheringCreate(){
       location="../gathering/gatheringCreate.do?gseq=${groupInfo.gseq}&mnum=${m.mnum}";
     }
-    function testText(){
-      console.log("테스트");
-
-      location.href="chat";
-    }
   </script>
+  <!-- 04/11 범수추가 (모임멤버체크)-->
+  <c:forEach items="${memInGroupName}" var="memInGroupName">
+    <script type="text/javascript">
+      function groupMembercheck(){
+        var mnum = ${m.mnum};
+        var gseq = ${groupInfo.gseq};
+        var result = {"mnum":mnum,"gseq":gseq};
+        $(function(){
+          $.ajax({
+            url: "groupMembercheck.json",
+            type: "POST",
+            data: result,
+            success: function(data){
+              if(data==0 || ${m.athur eq 0}){//모임장일때일때
+                groupMember();
+              }else if(data==1  || ${m.athur eq 1}){//운영진일때
+                groupMember();
+                //swal("모임장,운영자만 수정 가능합니다");
+              }else if(data==2){//일반회원
+                groupMember();
+              }else {//모임에없을때
+                Swal.fire({
+                  title: "가입회원만 조회가 가능합니다.",
+                  icon: "error"
+                });
+              }
+            }
+          });
+        });
+      }
+
+      function groupMember(){
+        location="../gboard/gblistPage?gseq=${groupInfo.gseq}&mnum=${memInGroupName.MNUM}";
+      }
+    </script>
+  </c:forEach>
+  <!-- 04/05 대현추가 (사진첩 멤버체크)-->
+  <c:forEach items="${memInGroupName}" var="memInGroupName">
+    <script type="text/javascript">
+      function galleryCheck(){
+        var mnum = ${m.mnum};
+        var gseq = ${groupInfo.gseq};
+        var result = {"mnum":mnum,"gseq":gseq};
+        $(function(){
+          $.ajax({
+            url: "galleryCheck.json",
+            type: "POST",
+            data: result,
+            success: function(data){
+              if(data!=3){
+                galleryMember();
+              }else {
+                Swal.fire({
+                  title: "가입회원만 조회가 가능합니다.",
+                  icon: "error"
+                });
+              }
+            }
+          });
+        });
+      }
+      function galleryMember(){
+        location="groupGallery.do?gseq=${groupInfo.gseq}&mnum=${m.mnum}";
+      }
+    </script>
+  </c:forEach>
+  <!-- 04/05 대현추가 끝-->
+
   <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
   <script>
     Kakao.init('11400a9267d93835389eb9255fcaad0b');
@@ -330,19 +513,18 @@
         location.href="../member/logout.do";
       }
     }
-    <c:choose>
-    <c:when test="${endTimeGathering eq null}">
-    <c:set value="null" var="endTimeGathering"/>
-    </c:when>
-    <c:otherwise>
-    <c:set value="1" var="endTimeGathering"/>
-    </c:otherwise>
-    </c:choose>
   </script>
 </head>
 
 <body>
-
+<c:choose>
+  <c:when test="${endTimeGathering eq null}">
+    <c:set value="null" var="endTimeGathering"/>
+  </c:when>
+  <c:otherwise>
+    <c:set value="1" var="endTimeGathering"/>
+  </c:otherwise>
+</c:choose>
 <input
         id='my_btn'
         type='button'
@@ -350,12 +532,10 @@
 />
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top">
-  <div id="count" ></div>
+  <div id="count"></div>
   <input id="hiddenInput" type="hidden"  value=""/>
   <div class="container d-flex align-items-center">
     <h1 class="logo me-auto"><a href="../">Togather</a></h1>
-    <!-- Uncomment below if you prefer to use an image logo -->
-    <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
     <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
@@ -404,9 +584,11 @@
         <a href="../member/joinform.do" class="get-started-btn">회원가입</a>
       </c:when>
       <c:otherwise>
-        <a href="groupCreate.do" class="get-started-btn">모임만들기</a>
+        <a href="../groupTab/groupCreate.do" class="get-started-btn">모임만들기</a>
       </c:otherwise>
     </c:choose>
+
+
   </div>
 </header>
 <!-- End Header -->
@@ -429,10 +611,10 @@
           <a class="nav-link active" aria-current="page" href="#">정보</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">사진첩</a>
+          <a class="nav-link" href="javascript:galleryCheck()">사진첩</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">게시판</a>
+          <a class="nav-link" href="javascript:groupMembercheck()">게시판</a>
         </li>
       </ul>
       <div class="row">
@@ -507,48 +689,6 @@
             </div>
           </c:if>
           <!--정모목록 끝-->
-          <div
-                  class="course-info d-flex justify-content-between align-items-center"
-          >
-            <nav id="navbar" class="navbar order-last order-lg-0">
-              <ul>
-                <li class="dropdown">
-                  <a href="#">
-                    모임멤버
-                    <i class="bi bi-chevron-down"></i>
-                  </a>
-                  <ul >
-                    <c:forEach var="memInGroupName" items="${memInGroupName}" varStatus="index">
-                      <c:choose>
-                        <c:when test="${memInGroupName.GRADE eq 0}">
-                          <c:set var="grade" value="모임장"/>
-                        </c:when>
-                        <c:when test="${memInGroupName.GRADE eq 1}">
-                          <c:set var="grade" value="운영진"/>
-                        </c:when>
-                        <c:otherwise>
-                          <c:set var="grade" value=""/>
-                        </c:otherwise>
-                      </c:choose>
-                      <c:choose>
-                        <c:when test="${m.mnum eq memInGroupName.MNUM}">
-                          <li><a href="javascript:void(0)">
-                              ${memInGroupName.MNAME}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${grade}(나)</a>
-                          </li>
-                        </c:when>
-                        <c:otherwise>
-                          <li><a href="javascript:void(0)"
-                                 onclick="location.href='javascript:memberInfo(${index.index})'">
-                              ${memInGroupName.MNAME}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${grade}</a></li>
-                        </c:otherwise>
-                      </c:choose>
-                    </c:forEach>
-                  </ul>
-
-                </li>
-              </ul>
-            </nav>
-          </div>
           <div class="d-grid gap-2 mt-3 mb-3">
             <c:if test="${memInGroupCheck ne null}">
               <button
@@ -597,165 +737,35 @@
       <div class="row">
         <div class="col-lg-3">
           <ul class="nav nav-tabs flex-column">
-            <li class="nav-item">
-              <a
-                      class="nav-link active show"
-                      data-bs-toggle="tab"
-                      href="#tab-1"
-              >Modi sit est</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#tab-2"
-              >Unde praesentium sed</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#tab-3"
-              >Pariatur explicabo vel</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#tab-4"
-              >Nostrum qui quasi</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#tab-5"
-              >Iusto ut expedita aut</a
-              >
-            </li>
+            <c:forEach var='memInGroupName' items='${memInGroupName}' varStatus="index">
+              <c:choose>
+                <c:when test="${memInGroupName.GRADE eq 0}">
+                  <c:set var="grade" value="모임장"/>
+                </c:when>
+                <c:when test="${memInGroupName.GRADE eq 1}">
+                  <c:set var="grade" value="운영진"/>
+                </c:when>
+                <c:otherwise>
+                  <c:set var="grade" value=""/>
+                </c:otherwise>
+              </c:choose>
+              <li class='nav-item'>
+                <a class='nav-link' data-bs-toggle='tab' href="javascript:void(0);" onclick="memberInfo(${index.index});">${memInGroupName.MNAME}&nbsp;&nbsp;&nbsp;${grade}</a>
+              </li>
+            </c:forEach>
           </ul>
         </div>
-        <div class="col-lg-9 mt-4 mt-lg-0">
+        <div class="col-lg-9 mt-4 mt-lg-0" id="memInfo">
           <div class="tab-content">
             <div class="tab-pane active show" id="tab-1">
               <div class="row">
                 <div class="col-lg-8 details order-2 order-lg-1">
-                  <h3>Architecto ut aperiam autem id</h3>
-                  <p class="fst-italic">
-                    Qui laudantium consequatur laborum sit qui ad sapiente
-                    dila parde sonata raqer a videna mareta paulona marka
-                  </p>
-                  <p>
-                    Et nobis maiores eius. Voluptatibus ut enim blanditiis
-                    atque harum sint. Laborum eos ipsum ipsa odit magni.
-                    Incidunt hic ut molestiae aut qui. Est repellat minima
-                    eveniet eius et quis magni nihil. Consequatur dolorem
-                    quaerat quos qui similique accusamus nostrum rem vero
-                  </p>
+                  <h3>멤버정보</h3>
+                  <p> 이름: ${memberInfo.mname}</p>
+                  <p> 생년월일: ${memberInfo.birth} </p>
+                  <p> 거주지: ${memberInfo.maddr} </p>
                 </div>
                 <div class="col-lg-4 text-center order-1 order-lg-2">
-                  <img
-                          src="/assets/img/course-details-tab-1.png"
-                          alt=""
-                          class="img-fluid"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane" id="tab-2">
-              <div class="row">
-                <div class="col-lg-8 details order-2 order-lg-1">
-                  <h3>Et blanditiis nemo veritatis excepturi</h3>
-                  <p class="fst-italic">
-                    Qui laudantium consequatur laborum sit qui ad sapiente
-                    dila parde sonata raqer a videna mareta paulona marka
-                  </p>
-                  <p>
-                    Ea ipsum voluptatem consequatur quis est. Illum error
-                    ullam omnis quia et reiciendis sunt sunt est. Non
-                    aliquid repellendus itaque accusamus eius et velit ipsa
-                    voluptates. Optio nesciunt eaque beatae accusamus lerode
-                    pakto madirna desera vafle de nideran pal
-                  </p>
-                </div>
-                <div class="col-lg-4 text-center order-1 order-lg-2">
-                  <img
-                          src="/assets/img/course-details-tab-2.png"
-                          alt=""
-                          class="img-fluid"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane" id="tab-3">
-              <div class="row">
-                <div class="col-lg-8 details order-2 order-lg-1">
-                  <h3>Impedit facilis occaecati odio neque aperiam sit</h3>
-                  <p class="fst-italic">
-                    Eos voluptatibus quo. Odio similique illum id quidem non
-                    enim fuga. Qui natus non sunt dicta dolor et. In
-                    asperiores velit quaerat perferendis aut
-                  </p>
-                  <p>
-                    Iure officiis odit rerum. Harum sequi eum illum corrupti
-                    culpa veritatis quisquam. Neque necessitatibus illo
-                    rerum eum ut. Commodi ipsam minima molestiae sed
-                    laboriosam a iste odio. Earum odit nesciunt fugiat sit
-                    ullam. Soluta et harum voluptatem optio quae
-                  </p>
-                </div>
-                <div class="col-lg-4 text-center order-1 order-lg-2">
-                  <img
-                          src="/assets/img/course-details-tab-3.png"
-                          alt=""
-                          class="img-fluid"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane" id="tab-4">
-              <div class="row">
-                <div class="col-lg-8 details order-2 order-lg-1">
-                  <h3>
-                    Fuga dolores inventore laboriosam ut est accusamus
-                    laboriosam dolore
-                  </h3>
-                  <p class="fst-italic">
-                    Totam aperiam accusamus. Repellat consequuntur iure
-                    voluptas iure porro quis delectus
-                  </p>
-                  <p>
-                    Eaque consequuntur consequuntur libero expedita in
-                    voluptas. Nostrum ipsam necessitatibus aliquam fugiat
-                    debitis quis velit. Eum ex maxime error in consequatur
-                    corporis atque. Eligendi asperiores sed qui veritatis
-                    aperiam quia a laborum inventore
-                  </p>
-                </div>
-                <div class="col-lg-4 text-center order-1 order-lg-2">
-                  <img
-                          src="/assets/img/course-details-tab-4.png"
-                          alt=""
-                          class="img-fluid"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane" id="tab-5">
-              <div class="row">
-                <div class="col-lg-8 details order-2 order-lg-1">
-                  <h3>
-                    Est eveniet ipsam sindera pad rone matrelat sando reda
-                  </h3>
-                  <p class="fst-italic">
-                    Omnis blanditiis saepe eos autem qui sunt debitis porro
-                    quia.
-                  </p>
-                  <p>
-                    Exercitationem nostrum omnis. Ut reiciendis repudiandae
-                    minus. Omnis recusandae ut non quam ut quod eius qui.
-                    Ipsum quia odit vero atque qui quibusdam amet. Occaecati
-                    sed est sint aut vitae molestiae voluptate vel
-                  </p>
-                </div>
-                <div class="col-lg-4 text-center order-1 order-lg-2">
-                  <img
-                          src="/assets/img/course-details-tab-5.png"
-                          alt=""
-                          class="img-fluid"
-                  />
                 </div>
               </div>
             </div>
@@ -776,11 +786,11 @@
         <div class="col-lg-3 col-md-6 footer-contact">
           <h3>Togather</h3>
           <p>
-            서울시 금천구 <br />
-            가산 디지털 2로 123<br />
-            월드메르디앙 2차 <br /><br />
-            <strong>Phone:</strong> +82 2 1234 1234<br />
-            <strong>Email:</strong> service@togather.com<br />
+            서울시 금천구<br/>
+            가산 디지털 2로 123<br/>
+            월드메르디앙 2차<br/><br/>
+            <strong>Phone:</strong>+82 2 1234 1234<br/>
+            <strong>Email:</strong>service@togather.com<br/>
           </p>
         </div>
 
@@ -788,12 +798,10 @@
           <h4>Useful Links</h4>
           <ul>
             <li>
-              <i class="bx bx-chevron-right"></i>
-              <a href="../">Home</a>
+              <i class="bx bx-chevron-right"></i> <a href="../">Home</a>
             </li>
             <li>
-              <i class="bx bx-chevron-right"></i>
-              <a href="about.html">About us</a>
+              <i class="bx bx-chevron-right"></i> <a href="../about">About us</a>
             </li>
             <li>
               <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
@@ -809,24 +817,22 @@
           </ul>
         </div>
 
-        <div class="col-lg-3 col-md-6 footer-links">
+        <div  class="col-lg-3 col-md-6 footer-links">
           <h4>Our Services</h4>
           <ul>
             <li>
-              <i class="bx bx-chevron-right"></i>
-              <a href="notice.html">공지사항</a>
+              <i class="bx bx-chevron-right"></i> <a href="../notification/notice">공지사항</a>
             </li>
             <li>
               <i class="bx bx-chevron-right"></i>
-              <a href="FAQ.html">자주 묻는 질문</a>
+              <a href="../faq/faqList">자주 묻는 질문</a>
             </li>
             <li>
               <i class="bx bx-chevron-right"></i>
-              <a href="QA.html">Q & A</a>
+              <a href="../qa">Q & A</a>
             </li>
             <li>
-              <i class="bx bx-chevron-right"></i>
-              <a href="contact.html">Contact</a>
+              <i class="bx bx-chevron-right"></i> <a href="../contact">Contact</a>
             </li>
           </ul>
         </div>
@@ -837,7 +843,7 @@
             최신뉴스 및 프로모션 행사에 대한 안내메일을 받으실 수 있습니다.
           </p>
           <form action="" method="post">
-            <input type="email" name="email" /><input
+            <input type="email" name="email"/><input
                   type="submit"
                   value="Subscribe"
           />
@@ -850,7 +856,7 @@
   <div class="container d-md-flex py-4">
     <div class="me-md-auto text-center text-md-start">
       <div class="copyright">
-        &copy; Copyright <strong><span>Togather</span></strong
+        &copy; Copyright<strong><span>Togather</span></strong
       >. All Rights Reserved
       </div>
     </div>
@@ -867,7 +873,7 @@
 
 <div id="preloader"></div>
 <a
-        href="javascript:testText()"
+        href="#"
         class="back-to-top d-flex align-items-center justify-content-center"
 ><i class="bi bi-arrow-up-short"></i
 ></a>
