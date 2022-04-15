@@ -152,28 +152,30 @@
                   <!--모임지역/이름/모임소개/관심사/정원/모임사진-->
                   <form class="mx-1 mx-md-4" method="post" action="faqUpdate?fseq=${faq.fseq}">
                     <div class="d-flex flex-row align-items-center mb-0">
-                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <i class="bi bi-question-circle fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-2">
                         <label class="form-label mb-0" for="form3Example4c"
                         >자주하는 질문</label
                         >
-                        <input
-                                type="text"
-                                id="form3Example1c"
-                                class="form-control"
+                        <textarea
+                                style="width: 100%; height: 3em; resize:none"
                                 name="ftitle"
-                                value="${faq.ftitle}"
-                        />
+                                maxlength="550"
+                                cols="53"
+                                id="form3Example4c"
+                                class="form-control"
+                        >${faq.ftitle}</textarea>
                       </div>
                     </div>
 
                     <div class="d-flex flex-row align-items-center mb-0">
-                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <i class="bi bi-exclamation-circle fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-2">
                         <label class="form-label mb-0" for="form3Example4c"
                         >답변</label
                         >
                         <textarea
+                                style="width: 100%; height: 15em; resize:none"
                                 name="fcontent"
                                 maxlength="550"
                                 cols="53"
@@ -191,7 +193,7 @@
                               class="btn btn-success"
                               style="margin-right: 30px"
                       >
-                        완료
+                        수정하기
                       </button>
                       <button type="button" class="btn btn-secondary">
                         취소

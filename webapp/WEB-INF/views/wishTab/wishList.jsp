@@ -183,7 +183,7 @@
 	                      <span>${namelist[status.index].mname}</span>        
 	                    </div>
 	                    <div class="trainer-rank d-flex align-items-center">
-	                      <i class="bx bx-user"></i>&nbsp;수정필요 &nbsp;&nbsp;
+	                      <i class="bx bx-user"></i>&nbsp;&nbsp;${groupMemberCount[status.index]}
 	                    </div>
 	                  </div>
 	                </div>

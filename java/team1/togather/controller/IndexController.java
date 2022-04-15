@@ -113,7 +113,6 @@ public class IndexController {
 
 		}
 		session.setAttribute("wishsize",wishNumOfM);
-		System.out.println("컨트롤러namelist: "+namelist);
 		mv.addObject("list", list);
 		mv.addObject("namelist", namelist);
 		mv.addObject("membercount",membercount);
@@ -137,8 +136,6 @@ public class IndexController {
 	public Integer handleWishList(@RequestBody HashMap<String, Object> map, HttpSession session) {
 		Member member = (Member)session.getAttribute("m");
 		Long gseq = Long.parseLong((String)map.get("gseq"));
-		System.out.println("handleWishList안 gseq: " +gseq);
-		System.out.println(" mnum: "+member.getMnum());
 		Map<String, Long> wishMap = new HashMap<>();
 		wishMap.put("mnum",member.getMnum());
 		wishMap.put("gseq",gseq);
@@ -161,8 +158,6 @@ public class IndexController {
 	public Integer cancelWishList(@RequestBody HashMap<String, Object> map, HttpSession session) {
 		Member member = (Member)session.getAttribute("m");
 		Long gseq = Long.parseLong((String)map.get("gseq"));
-		System.out.println("handleWishList안 gseq: " +gseq);
-		System.out.println(" mnum: "+member.getMnum());
 		Map<String, Long> wishMap = new HashMap<>();
 		wishMap.put("mnum",member.getMnum());
 		wishMap.put("gseq",gseq);
@@ -190,8 +185,6 @@ public class IndexController {
 	@ResponseBody
 	@GetMapping("showGroups")
 	public List<GroupTab> showGroups(String category){
-		System.out.println("인덱스컨트롤러 쇼그룹들어옴");
-		System.out.println("category: "+ category);
 		category = category.trim();
 		List<GroupTab> cateList = cateService.getGroupsByCategory(category);
 		for(GroupTab li : cateList) {
@@ -215,12 +208,7 @@ public class IndexController {
 	@RequestMapping("getSearchGroupList")
 	@ResponseBody
 	public List<GroupTab> getSearchGroupList(GroupTab groupTab) {
-		System.out.println("gname: " + groupTab.getGname());
-		System.out.println("Int_out: " + groupTab.getInt_out());
-		System.out.println("gloc: " + groupTab.getGloc());
-
 		List<GroupTab> groupList = groupTabService.searchGroup(groupTab);
-		System.out.println("groupList: " + groupList);
 		for(int i=0; i<groupList.size(); i++) {
 			String kingName = groupTabService.kingName(groupList.get(i).getGseq());
 			for(GroupTab li : groupList) {

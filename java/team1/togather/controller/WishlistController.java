@@ -28,12 +28,12 @@ public class WishlistController {
 
 	@GetMapping("/wishList")
 	public ModelAndView wishList(Long mnum) {
-		System.out.println("mnum: "+ mnum);
-		System.out.println("위시리스트안");
 		log.info("mnum: "+ mnum);
 		List<WishList> wishList = wishservice.getWishLists(mnum);
 		List<GroupTab> groupList = new ArrayList<>();
 		List<Member> namelist = new ArrayList<>();
+		List<Long> groupMemberCount = new ArrayList<>();
+
 		for(WishList wli: wishList) {
 			groupList.add(groupservice.selectByGSeqS(wli.getGseq()));
 			System.out.println(wli.getGseq());
@@ -47,9 +47,14 @@ public class WishlistController {
 				groupList.remove(8);
 			}
 		}
+		for(GroupTab gli: groupList){
+			groupMemberCount.add(groupservice.groupMemberCount(gli.getGseq()));
+		}
+
 		ModelAndView mv = new ModelAndView("wishTab/wishList","groupList",groupList);
 		System.out.println("groupList = " + groupList);
 		mv.addObject("namelist", namelist);
+		mv.addObject("groupMemberCount", groupMemberCount);
 		return mv;
 	}
 
