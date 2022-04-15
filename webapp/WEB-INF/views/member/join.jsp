@@ -652,6 +652,13 @@
 	        }).open();
 	    }
 	</script>
+    <style>
+      .dropdown-menu {
+        height: auto;
+        max-height: 200px;
+        overflow-x: hidden;
+      }
+    </style>
   </head>
 
   <body onload="noBack();categorys(1,0)" onpageshow="if(event.persisted) noBack();">
@@ -659,9 +666,6 @@
     <header id="header" class="fixed-top">
       <div class="container d-flex align-items-center">
         <h1 class="logo me-auto"><a href="../">Togather</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
         <nav id="navbar" class="navbar order-last order-lg-0">
           <ul>
             <c:if test="${m.athur eq 0}">
