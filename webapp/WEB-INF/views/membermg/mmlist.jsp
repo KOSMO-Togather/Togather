@@ -126,10 +126,10 @@
               $('#membermgTest').append(
                       "<tr>"
                       + "<td class='column1'>"+result[i].mnum+"</td>"
-                      + "<td class='column3'>"+result[i].maddr+"</td>"
                       + "<td class='column1'>"+result[i].mname+"</td>"
                       + "<td class='column1'>"+result[i].gender+"</td>"
                       + "<td class='column1'>"+result[i].birth+"</td>"
+                      + "<td class='column3'>"+result[i].maddr+"</td>"
                       + "<td class='column1'>"+result[i].email+"</td>"
                       + "<td class='column1'>"+result[i].phone+"</td>"
                       + "<td class='column1'>"+result[i].athur+"</td>"
@@ -260,10 +260,10 @@
         <thead>
         <tr>
           <th class="col-sm-1">회원번호</th>
-          <th class="col-sm-3">거주지</th>
           <th class="col-sm-1">회원이름</th>
           <th class="col-sm-1">성별</th>
           <th class="col-sm-1">생년월일</th>
+          <th class="col-sm-3">거주지</th>
           <th class="col-sm-1">이메일</th>
           <th class="col-sm-1">핸드폰번호</th>
           <th class="col-sm-1">회원권한</th>
@@ -280,10 +280,10 @@
           <c:forEach var="member" items="${MembermgList }">
             <tr>
               <td class="col-sm-1">${member.mnum}</td>
-              <td class="col-sm-3">${member.maddr }</td>
               <td class="col-sm-1">${member.mname }</td>
               <td class="col-sm-1">${member.gender }</td>
               <td class="col-sm-1">${member.birth }</td>
+              <td class="col-sm-3">${member.maddr }</td>
               <td class="col-sm-1">${member.email }</td>
               <td class="col-sm-1">${member.phone }</td>
               <c:choose>

@@ -247,7 +247,7 @@
             <tr onClick="location.href='gbcontent.do?gbnum=${gboard.gbnum}&gseq=${cri.gseq}'">
               <td class="col-sm-1">${gboard.gbnum}</td>
               <td class="col-sm-1">${gboard.mname }</td>
-              <td class="col-sm-6">${gboard.gbtitle }</td>
+              <td class="col-sm-6" style="cursor:pointer;">${gboard.gbtitle }</td>
               <td class="col-sm-1">${gboard.gbview }</td>
               <td class="col-sm-4"><fmt:formatDate value="${gboard.rdate }" pattern="yyyy-MM-dd (E) HH:mm" /></td>
             </tr>

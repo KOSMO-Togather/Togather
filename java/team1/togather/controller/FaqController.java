@@ -39,6 +39,7 @@ public class FaqController {
 	@GetMapping("faqUpdate")
 	public ModelAndView faqUpdate(long fseq) {
 		Faq faq = faqService.selectBySeqS(fseq);
+		System.out.println("###faq.getFtitle() = " + faq.getFtitle());
 		ModelAndView mv = new ModelAndView("faq/faqUpdate", "faq", faq);
 		return mv;
 	}

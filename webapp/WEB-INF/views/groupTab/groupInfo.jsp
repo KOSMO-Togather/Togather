@@ -723,19 +723,19 @@
                     onclick="location.href='javascript:groupUpdateCheck()'">
               모임 수정하기
             </button>
-            <button type="button" class="btn btn-outline-secondary"
+            <button type="button" class="btn btn-outline-danger"
                     onclick="location.href='javascript:groupDeleteCheck()'">
               모임 삭제하기
             </button>
             <c:choose>
               <c:when test="${memInGroupCheck eq null}">
-                <button type="button" class="btn btn-outline-secondary"
+                <button type="button" class="btn btn-outline-primary"
                         onclick="location.href='javascript:groupJoin()'">
                   모임 가입하기
                 </button>
               </c:when>
               <c:otherwise>
-                <button type="button" class="btn btn-outline-secondary"
+                <button type="button" class="btn btn-outline-dark"
                         onclick="location.href='javascript:groupQuit()'">
                   모임 탈퇴하기
                 </button>
@@ -759,10 +759,10 @@
           <ul class="nav nav-tabs flex-column">
             <c:forEach var='memInGroupName' items='${memInGroupName}' varStatus="index">
               <c:choose>
-                <c:when test="${memInGroupName.GRADE eq 0 || m.athur eq 0}">
+                <c:when test="${memInGroupName.GRADE eq 0}">
                   <c:set var="grade" value="모임장"/>
                 </c:when>
-                <c:when test="${memInGroupName.GRADE eq 1 || m.athur eq 1}">
+                <c:when test="${memInGroupName.GRADE eq 1}">
                   <c:set var="grade" value="운영진"/>
                 </c:when>
                 <c:otherwise>
