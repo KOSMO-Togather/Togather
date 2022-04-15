@@ -333,6 +333,7 @@
               +"<p>이름: "+arr[index].mname+"</p>"
               +"<p>생년월일: "+arr[index].birth+"</p>"
               +"<p>거주지: "+arr[index].maddr+"</p>"
+              +"<button class='btn btn-outline-dark btn-sm' onclick=''>쪽지보내기</button>"
               +"<div class='d-grid gap-2 mt-3 mb-3'>"
               +"<c:if test='${grade == 0 || grade==1}'>"
               +"<button type='button' id='deleMan' class='btn btn-outline-secondary' onclick='delegateManCheck("+index+")'>"
@@ -481,6 +482,14 @@
         location="../gboard/gblistPage?gseq=${groupInfo.gseq}&mnum=${memInGroupName.MNUM}";
       }
     </script>
+    <script type="text/javascript">
+      function groupChat(){
+        window.name="parentForm";
+        openWin = window.open(
+        "chat?gseq=${groupInfo.gseq}&gname=${groupInfo.gname}", "gatheringSearchMap",
+        "width=1000, height=530, top=100, left=100");
+      }
+    </script>
   </c:forEach>
   <!-- 04/05 대현추가 (사진첩 멤버체크)-->
   <c:forEach items="${memInGroupName}" var="memInGroupName">
@@ -626,17 +635,23 @@
   <!-- ======= Cource Details Section ======= -->
   <section id="course-details" class="course-details">
     <div class="container" data-aos="fade-up">
-      <ul class="nav nav-tabs mb-3">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">정보</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="javascript:galleryCheck()">사진첩</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="javascript:groupMembercheck()">게시판</a>
-        </li>
-      </ul>
+      <!-- 채팅버튼 위치 잡기위한 div (0415 대현추가)-->
+      <div style="position: relative">
+        <ul class="nav nav-tabs mb-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">정보</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:galleryCheck()">사진첩</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:groupMembercheck()">게시판</a>
+          </li>
+          <c:if test="${memInGroupCheck ne null || m.athur eq 0 || m.athur eq 1}">
+            <button class="btn btn-outline-dark" style="position: absolute; left: 93%" onclick="javascript:groupChat()">채팅하기</button>
+          </c:if>
+        </ul>
+      </div>
       <div class="row">
         <div class="col-lg-8">
           <img

@@ -143,7 +143,9 @@
 	   					success: function(data){
 	   						if(athur==0){
 	   							upDate();
-	   						}else{
+	   						}else if(athur==1){
+                                upDate();
+                            }else{
 		   						if(data==0){//없을때
 		   							Swal.fire({
 		   								title:"본인만 수정가능합니다",
@@ -171,7 +173,9 @@
 	   					success: function(data){
 	   						if(athur==0){
 	   							qaDelete();
-	   						}else{
+	   						}else if(athur==1){
+                                qaDelete();
+                            }else{
 		   						if(data==0){//없을때
 		   							Swal.fire({
 		   								title:"본인만 삭제가능합니다",
@@ -410,8 +414,8 @@
                         <div class="comments-grids">
                             <!-- 여기부터 루프 -->
 
-<c:if test="${qaReply ne null }">
-<c:forEach var="qaReply" items="${qaReply }" varStatus="index">
+                <c:if test="${qaReply ne null }">
+                <c:forEach var="qaReply" items="${qaReply }" varStatus="index">
                             <div class="media-grid">
                                 <div class="media">
                                     <a class="comment-img" href="javascript:void(0)"><img src="/assets/img/trainers/trainer-1.jpg"
@@ -429,10 +433,10 @@
                                 </div>
                             </div>
                     </c:forEach>
-</c:if>
+                </c:if>
 					</div>
                 </div>
-                    <c:if test="${m.athur eq 0}">
+                    <c:if test="${m.athur eq 0 || m.athur eq 1}">
                     
 	                    <div class="leave-comment-form" id="comment">
 	                        <h3 class="aside-title">Leave a reply</h3>

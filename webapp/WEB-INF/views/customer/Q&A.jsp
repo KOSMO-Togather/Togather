@@ -58,7 +58,7 @@
     <script>
     function secretQA(index,athurCheck){
         var athur = athurCheck;
-        if(athur!=0){
+        if(athur==2){
         swal({  		
               title: "비밀번호를 입력해주세요", 	
               content:{

@@ -413,9 +413,9 @@ public class GroupTabController {
 			groupTabGallery.setPname(galleryFNname);
 		}
 		System.out.println("#groupTabGallery(sout): "+ groupTabGallery);
-		log.trace("#groupTabGallery(log): "+ groupTabGallery);
 		groupTabGallery.setGrade(Math.toIntExact(grade));
 		groupTabService.galleryUpload(groupTabGallery);
+		log.info("#groupTabGallery(log): "+ groupTabGallery);
 		return "1";
 	}
 	
@@ -501,6 +501,13 @@ public class GroupTabController {
 		}else {
 			return 1;
 		}
+	}
+	//0415 지수추가 채팅
+	@GetMapping("chat")
+	public ModelAndView chat(long gseq,String gname) {
+		ModelAndView mv = new ModelAndView("groupTab/chat", "gseq", gseq);
+		mv.addObject("gname", gname);
+		return mv;
 	}
 }
 
