@@ -71,8 +71,8 @@
 			    contentType: false,
 				data: formData,
 				success: function(data){
-					console.log(data);
-					swal({
+					console.log("#uploadCheck(data): "+data);
+					swal.({
 						  title: "업로드 성공!",
 						  icon: "success",
 						  button: {

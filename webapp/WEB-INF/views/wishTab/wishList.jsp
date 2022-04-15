@@ -62,6 +62,30 @@
               }
           }
       </script>
+      <script src="http://code.jquery.com/jquery-latest.js"></script>
+      <script>
+          function cancelWishList(e){
+              console.log($(e).val());
+              var data = JSON.stringify({
+                  gseq:$(e).val()
+
+              });
+              $.ajax({
+                  url:"../cancelWishList",
+                  type:"POST",
+                  dataType:"json",
+                  contentType:"application/json",
+                  data:data,
+                  success: function(result){
+                      console.log("success!: "+result);
+                      $(e).parents('.col-lg-4').remove();
+                  },
+                  error:function(error){
+                      console.log("failure!: "+error);
+                  }
+              });
+          }
+      </script>
   </head>
 
   <body>
