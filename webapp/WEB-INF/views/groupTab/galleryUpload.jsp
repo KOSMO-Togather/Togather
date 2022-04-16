@@ -72,7 +72,7 @@
 				data: formData,
 				success: function(data){
 					console.log("#uploadCheck(data): "+data);
-					swal.({
+					swal({
 						  title: "업로드 성공!",
 						  icon: "success",
 						  button: {

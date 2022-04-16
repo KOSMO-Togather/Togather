@@ -89,7 +89,7 @@ public class GroupTabController {
 		mv.addObject("gatheringCountInGroup", gatheringCountInGroup);//모임info 정모갯수(대현추가)
 		mv.addObject("memberInfo", memberInfo);
 		mv.addObject("grade", grade);
-		log.warn("grade:"+grade);
+		log.warn("#groupInfo.do (grade): "+grade);
 
 		List<String> gatheringDate = new ArrayList<>();
 		List<String> gatheringTime = new ArrayList<>();

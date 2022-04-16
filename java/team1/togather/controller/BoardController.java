@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import team1.togather.domain.Board;
 import team1.togather.domain.BoardCriteria;
 import team1.togather.domain.Member;
@@ -36,20 +40,20 @@ public class BoardController {
   @ResponseBody
   @GetMapping("listRest")
   public List<Board> listRest(
-    String option,
-    String boardSearch,
-    Integer page,
-    Integer pageSize
+          String option,
+          String boardSearch,
+          Integer page,
+          Integer pageSize
   ) {
     System.out.println(
-      "listRest안 option: " +
-      option +
-      " boardSearch: " +
-      boardSearch +
-      " page: " +
-      page +
-      " pagesize: " +
-      pageSize
+            "listRest안 option: " +
+                    option +
+                    " boardSearch: " +
+                    boardSearch +
+                    " page: " +
+                    page +
+                    " pagesize: " +
+                    pageSize
     );
 
     Map<String, String> map = new HashMap<String, String>();
@@ -67,6 +71,15 @@ public class BoardController {
     replyservice.insert(reply);
     return replyservice.getReply(reply.getBnum());
   }
+  @GetMapping("deleteReply")
+  public String deleteReply(Reply reply, HttpSession session) {
+    System.out.println("deletereply안");
+    Long rseq = reply.getRseq();
+    System.out.println("deletereply안 resq: "+rseq);
+    replyservice.deleteReply(rseq);
+    return "redirect:boardContent?bnum="+reply.getBnum()+"";
+  }
+
 
   @GetMapping("/listCri")
   public void listCriGET(Model model, BoardCriteria cri) {
@@ -93,9 +106,9 @@ public class BoardController {
 
   @GetMapping("listPage")
   public String boardList(
-    BoardCriteria cri,
-    Model model,
-    HttpServletRequest request
+          BoardCriteria cri,
+          Model model,
+          HttpServletRequest request
   ) {
     System.out.println("board컨트롤러안 listpageGET: cri값: " + cri);
     model.addAttribute("boardList", service.listCri(cri)); // =listPageCri()
@@ -120,9 +133,9 @@ public class BoardController {
 
   @PostMapping("boardWithSearch")
   public String boardListWithSearch(
-    BoardCriteria cri,
-    Model model,
-    HttpServletRequest request
+          BoardCriteria cri,
+          Model model,
+          HttpServletRequest request
   ) {
     System.out.println("board컨트롤러안 listpageGET: cri값: " + cri);
     model.addAttribute("boardList", service.listCri(cri)); // =listPageCri()
@@ -166,9 +179,9 @@ public class BoardController {
     Board board = service.getBoardContent(bnum);
     ArrayList<Reply> reply = replyservice.getReply(bnum);
     ModelAndView mv = new ModelAndView(
-      "board/boardMainContent",
-      "board",
-      board
+            "board/boardMainContent",
+            "board",
+            board
     );
     if (request.getParameter("page") != null) {
       String pageAt = request.getParameter("page");
@@ -182,6 +195,9 @@ public class BoardController {
     }
     mv.addObject("bnum", bnum);
     mv.addObject("reply", reply);
+    for(Reply li: reply) {
+      System.out.println(li.getMnum());
+    }
     mv.addObject("totalReply", reply.size());
     return mv;
   }
@@ -191,7 +207,6 @@ public class BoardController {
     service.delete(bnum);
     return "redirect:listPage";
   }
-
   @GetMapping("boardUpdate")
   public ModelAndView boardUpdatePage(Long bnum) {
     Board board = service.getBoardContent(bnum);
