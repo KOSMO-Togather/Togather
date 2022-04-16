@@ -189,7 +189,6 @@ public class MemberController {
 		}
 		return "redirect:/";
 	}
-	/////////////////////////
 	@GetMapping("/sendMessageForm")
 	public ModelAndView sendMessageForm(Message message,long gseq) {
 		ModelAndView mv = new ModelAndView("member/sendMessageForm", "message", message);
@@ -197,12 +196,12 @@ public class MemberController {
 		return mv;
 	}
 
-	@PostMapping("/sendMessage")
-	public String sendMessage(Message message,long gseq) {
+	@ResponseBody
+	@RequestMapping("/sendMessage")
+	public long sendMessage(Message message,long gseq) {
 		service.sendMessage(message);
-		String memberInfoBack="";
-		memberInfoBack+="redirect:memberInfo?mnum="+message.getFrom_mnum()+"&gseq="+gseq;
-		return memberInfoBack;
+		log.warn("#MemberController(SendMessage)" + message);
+		return gseq;
 	}
 
 	@GetMapping("/messageList")

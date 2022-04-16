@@ -46,4 +46,8 @@ public class ReplyServiceImpl implements ReplyService {
 	public Long getR_like(Long rseq) {
 		return replymapper.getR_like(rseq);
 	}
+	@Override
+	public void deleteReply(Long rseq) {
+		replymapper.deleteReply(rseq);
+	}
 }

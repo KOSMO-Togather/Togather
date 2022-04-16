@@ -335,6 +335,9 @@
 									<h5 class="user-name">${m.mname}</h5>
 									<h6 class="user-email">${member.email}</h6>
 								</div>
+								<div class="user-profile">
+									<button type="button" class="btn btn-sm btn-outline-dark" onclick="location.href='../member/messageList?mnum=${m.mnum}'">받은 메세지</button>
+								</div>
 								<div class="about">
 									<h5>관심사</h5>
 

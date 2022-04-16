@@ -15,4 +15,5 @@ public interface ReplyMapper {
 	public void insertRLIKE(Map map);
 	public void deleteRLIKE(Map map);
 	public Long getR_like(Long rseq);
+	public void deleteReply(Long rseq);
 }
