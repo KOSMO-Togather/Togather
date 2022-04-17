@@ -3,6 +3,8 @@ package team1.togather.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,7 @@ import team1.togather.domain.QandA;
 import team1.togather.domain.QaReply;
 import team1.togather.service.QandA_Service;
 
+@Log4j
 @Controller
 @AllArgsConstructor
 public class CustomerController {
@@ -44,11 +47,6 @@ public class CustomerController {
 		model.addAttribute("pm", pm);
 		model.addAttribute("cri", cri);
 		return "customer/Q&A";
-		//List<QandA> list = service.QAlist();
-		//ModelAndView mv = new ModelAndView("customer/Q&A", "list", list);
-		//mv.addObject("nameList", service.qaNameList());
-		//System.out.println(list);
-		//return mv;
 	}
 	@GetMapping("/qaContent")
 	public ModelAndView qacontent(QandA qanda,HttpServletRequest request) {
@@ -99,16 +97,12 @@ public class CustomerController {
 	@PostMapping("/qaUpdateCheck")
 	@ResponseBody
 	public Long qaUpdatecheck(QandA qanda) {
-		
 		return service.upDateCheck(qanda);
-		
 	}
 	@PostMapping("/qaNextPostCheck")
 	@ResponseBody
 	public Long qaNextPostCheck(long qseq,Member member) {
-		System.out.println("권한: "+member.getAthur());
 		Long nextQseq = (long) 0;
-		System.out.println("qseq: " +qseq);
 		if(member.getAthur()==0) {
 			nextQseq=service.nextPost(qseq);
 		}else {
@@ -121,38 +115,26 @@ public class CustomerController {
 	@PostMapping("/qaPreviousPostCheck")
 	@ResponseBody
 	public Long previousPost(long qseq,Member member) {
-		System.out.println("previousPost시작");
-		System.out.println("qanda: " +qseq);
-		System.out.println("권한: "+member.getAthur());
 		Long previousQseq = (long) 0;
-		
 		if(member.getAthur()==0) {
-			System.out.println("if안");
 			previousQseq=service.previousPost(qseq);
-			System.out.println("if 안 previousQseq :"+previousQseq);
 		}else {
-			System.out.println("else안");
 			previousQseq=service.previousPostUser(qseq);
-			System.out.println("else 안 previousQseq :"+previousQseq);
-			System.out.println("else 안 previousQseq :"+qseq);
 		}
-		System.out.println("previousQseq :"+previousQseq);
 		return previousQseq;
-		
 	}
 	
 	@GetMapping("/qaUpDate")
 	public ModelAndView qaUpDate(QandA qanda) {
-		
 		qanda = service.qaContent(qanda);
 		ModelAndView mv = new ModelAndView("customer/Q&AupDate", "qanda", qanda);
 		return mv;
 	}
 	
 	@PostMapping("/qaUpDate")
-	public String qaUpDate2(QandA qanda) {
+	public String qaUpDate2(QandA qanda, HttpServletRequest request) {
 		service.update(qanda);
-		return "redirect:qaContent?qseq="+qanda.getQseq();
+		return "redirect:qaContent?qseq="+qanda.getQseq()+"&page=1&pageSize10";
 	}
 	
 	@RequestMapping("/qaDelete")

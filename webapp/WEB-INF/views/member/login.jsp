@@ -94,7 +94,7 @@
   							  title: "로그인성공!",
   							  icon: "success",
   							  button: {
-  								  text:"버튼을 눌러주세요!",
+  								  text:"확인",
   								  value:true
   								  },
   							  closeOnClickOutside : false
@@ -133,7 +133,7 @@
 							  title: "로그인성공!",
 							  icon: "success",
 							  button: {
-								  text:"버튼을 눌러주세요!",
+								  text:"확인",
 								  value:true
 								  },
 							  closeOnClickOutside : false

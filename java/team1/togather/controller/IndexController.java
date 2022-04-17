@@ -66,7 +66,6 @@ public class IndexController {
 				String pageSize = request.getParameter("pageSize");
 				cri.setPageSize(Integer.parseInt(pageSize));
 			}
-
 			IndexPage pm = new IndexPage();
 			pm.setCri(cri);
 			pm.setTotalCount(groupTabService.pageCount(m));
@@ -89,16 +88,13 @@ public class IndexController {
 			viewCheck=null;
 			list = groupTabService.selectAllS(cri);
 			namelist = groupTabService.NoCategoryNames(cri);
-
 		}
 		long membercount = memberService.memberCount();
-
 		long gatheringcount = gatheringService.gatheringCount();
 		for(int i =0;i<list.size();i++) {
 			groupMemberCount.add(groupTabService.groupMemberCount(list.get(i).getGseq()));
 		}
 		long groupcount = groupTabService.groupCount();
-
 		if(m!=null) {
 			List<WishList> WishOfM = wishService.getWishLists(m.getMnum());
 			wishNumOfM = WishOfM.size();
@@ -110,7 +106,6 @@ public class IndexController {
 					wishmap.clear();
 				}
 			}
-
 		}
 		session.setAttribute("wishsize",wishNumOfM);
 		mv.addObject("list", list);
