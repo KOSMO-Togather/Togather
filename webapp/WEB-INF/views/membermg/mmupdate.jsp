@@ -123,20 +123,19 @@
                                             <label class="form-label mb-0" for="form3Example1c"
                                             >회원권한</label
                                             >
-
                                             <input
                                                     type="text"
-                                            <c:choose>
-                                                <c:when test="${member.athur eq 2}">
-                                                    readonly value="일반회원"
-                                                </c:when>
-                                                <c:when test="${member.athur eq 1}">
-                                                    readonly value="운영진"
-                                                </c:when>
-                                                <c:otherwise>
-                                                    readonly value="관리자"
-                                                </c:otherwise>
-                                            </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${member.athur eq 2}">
+                                                            readonly value="일반회원"
+                                                        </c:when>
+                                                        <c:when test="${member.athur eq 1}">
+                                                            readonly value="운영진"
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            readonly value="관리자"
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                     disabled="disabled"
                                                     id="form3Example1c"
                                                     class="form-control"

@@ -87,7 +87,6 @@
   <script type="text/javascript">
 
     $(function(){
-      //$("tr:odd").css("background","red");
       $("tr:even").css("background","#faf7f2");
 
     });
@@ -124,7 +123,7 @@
               }
               $('#membermgTest tr:even').css("background","#faf7f2");
               $('#membermgTest').append(
-                      "<tr>"
+                      "<tr onClick=\"location.href='MmGbListPage?mnum="+result[i].mnum+"'\">"
                       + "<td class='column1'>"+result[i].mnum+"</td>"
                       + "<td class='column1'>"+result[i].mname+"</td>"
                       + "<td class='column1'>"+result[i].gender+"</td>"
@@ -190,6 +189,7 @@
         >
           페이지당 게시글 수
         </button>
+        <i style="margin-left:1200px; font-weight : bold; width: 1500px" class="bi bi-person-badge-fill" >   ${pm.totalCount}명</i>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="mmlistPage?pageSize=1">1</a></li>
           <li><a class="dropdown-item" href="mmlistPage?pageSize=5">5</a></li>
@@ -209,7 +209,7 @@
           <th class="col-sm-1">이메일</th>
           <th class="col-sm-1">핸드폰번호</th>
           <th class="col-sm-1">회원권한</th>
-          <th class="col-sm-1"><a style="margin-right:10px">권한수정</a></th>
+          <th class="col-sm-1"><a style="margin-right:10px">회원관리</a></th>
         </tr>
         </thead>
         <tbody>
@@ -220,7 +220,10 @@
         </c:if>
         <c:if test="${not empty MembermgList}">
           <c:forEach var="member" items="${MembermgList }">
-            <tr>
+            <tr style='cursor:pointer;' onmouseover='this.style.background="#e0e0e0";'
+                onmouseleave=' $("tr:even").css("background","#faf7f2"); $("tr:odd").css("background","white");'
+                onClick="location.href='MmGbListPage?mnum=${member.mnum}'">
+
               <td class="col-sm-1">${member.mnum}</td>
               <td class="col-sm-1">${member.mname }</td>
               <td class="col-sm-1">${member.gender }</td>
@@ -270,7 +273,6 @@
                 name="membermgSearch"
                 type="text"
                 aria-label="Text input with dropdown button"
-                style="border: solid 1px"
         />
 
       </div>
@@ -310,7 +312,6 @@
         </nav>
 
       </div>
-      <center><p>${cri.page} / ${pm.endPage }</p></center>
 
     </div>
   </section>

@@ -138,6 +138,7 @@
           <a class="nav-link active" aria-current="page" href="#">게시판</a>
         </li>
       </ul>
+      <i class="bi bi-journal-text" style="margin-left:1100px; font-weight : bold; width: 1500px">    총 게시글: ${pm.totalCount}개</i>
       <div class="button_group">
         <button
                 class="btn btn-outline-dark btn-sm dropdown-toggle mb-1 mx-md-0"
@@ -185,7 +186,9 @@
         </c:if>
         <c:if test="${not empty gboardList}">
           <c:forEach var="gboard" items="${gboardList }">
-            <tr onClick="location.href='gbcontent.do?gbnum=${gboard.gbnum}&gseq=${cri.gseq}'">
+            <tr style='cursor:pointer;' onmouseover='this.style.background="#8ef5b0";'
+                onmouseleave='this.style.background="white";'
+                onClick="location.href='gbcontent.do?gbnum=${gboard.gbnum}&gseq=${cri.gseq}'">
               <td class="col-sm-1">${gboard.gbnum}</td>
               <td class="col-sm-1">${gboard.mname }</td>
               <td class="col-sm-6" style="cursor:pointer;">${gboard.gbtitle }</td>
@@ -255,7 +258,6 @@
         </nav>
 
       </div>
-      <center><p>${cri.page} / ${pm.endPage }</p></center>
 
     </div>
   </section>
