@@ -84,7 +84,10 @@
                   <div class="row justify-content-center">
                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                       <!--거주지/관심지역/이름/생년월일/비번/비번확인/전화번호/성별-->
-                      <form class="mx-1 mx-md-4"  method="post" action="qaUpDate?qseq=${qanda.qseq}">
+                      <form name="f"  method="post" action="update">
+                        <input type="hidden" name="page" value="${page}"/>
+                        <input type="hidden" name="pageSize" value="${pageSize}"/>
+                        <input type="hidden" name="qseq" value="${qanda.qseq}"/>
                         <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
@@ -109,14 +112,14 @@
                             >
                             <input
                               type="text"
-                              name="mnum"
+                              name="mname"
                               id="form3Example1c"
                               class="form-control"
-                              value="${qanda.mname }" 
+                              value="${qanda.mname }"
                             />
                           </div>
                         </div>
-                        
+
                         <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
@@ -133,8 +136,8 @@
                           </div>
                         </div>
 
-                        
-						
+
+
 						<div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
@@ -157,7 +160,7 @@
                           class="d-flex justify-content-center mx-4 mb-3 mb-lg-4"
                         >
                           <button
-                            type="submit"  
+                            type="submit"
                             class="btn btn-success"
                             style="margin-right: 30px"
                           >
