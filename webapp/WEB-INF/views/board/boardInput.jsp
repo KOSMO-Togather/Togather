@@ -128,7 +128,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                           <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
                             <label class="form-label mb-0" for="form3Example4cd"
-                              >관심사</label
+                              >주제</label
                             >
                             <select class="form-control" name="bcategory" required>
                               <option value="">선택</option>

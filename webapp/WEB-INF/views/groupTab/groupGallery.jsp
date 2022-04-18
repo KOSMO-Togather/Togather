@@ -198,7 +198,7 @@
                 <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
                     <c:if test="${gallery[0].pname ne null}">
                     	<div class="jisu"style="position:relative">
-		                    <a href="/groupGallery/${gallery[0].pname}" data-title="upload by ${gallery[0].mname}" data-lightbox="example-set" class="img_link">
+		                    <a href="/groupGallery/${gallery[0].pname}" data-title="uploaded by ${gallery[0].mname}" data-lightbox="example-set" class="img_link">
 			                    <img
 			                            src="/groupGallery/${gallery[0].pname}"
 			                            class="w-100 shadow-1-strong rounded mb-4"
@@ -209,7 +209,7 @@
                     </c:if>
                     <c:if test="${gallery[3].pname ne null}">
 	                    <div class="jisu"style="position:relative">
-		                    <a href="/groupGallery/${gallery[3].pname}" data-title="upload by ${gallery[3].mname}" data-lightbox="example-set" class="img_link">
+		                    <a href="/groupGallery/${gallery[3].pname}" data-title="uploaded by ${gallery[3].mname}" data-lightbox="example-set" class="img_link">
 		                    <img
 		                            src="/groupGallery/${gallery[3].pname}"
 		                            class="w-100 shadow-1-strong rounded mb-4"
@@ -223,7 +223,7 @@
                 <div class="col-lg-4 mb-4 mb-lg-0">
                     <c:if test="${gallery[1].pname ne null}">
 	                    <div class="jisu"style="position:relative">
-		                    <a href="/groupGallery/${gallery[1].pname}" data-title="upload by ${gallery[1].mname}" data-lightbox="example-set" class="img_link">
+		                    <a href="/groupGallery/${gallery[1].pname}" data-title="uploaded by ${gallery[1].mname}" data-lightbox="example-set" class="img_link">
 		                    <img
 		                            src="/groupGallery/${gallery[1].pname}"
 		                            class="w-100 shadow-1-strong rounded mb-4"
@@ -234,7 +234,7 @@
                     </c:if>
                     <c:if test="${gallery[4].pname ne null}">
 	                    <div class="jisu"style="position:relative">
-		                    <a href="/groupGallery/${gallery[4].pname}" data-title="upload by ${gallery[4].mname}" data-lightbox="example-set" class="img_link">
+		                    <a href="/groupGallery/${gallery[4].pname}" data-title="uploaded by ${gallery[4].mname}" data-lightbox="example-set" class="img_link">
 		                    <img
 		                            src="/groupGallery/${gallery[4].pname}"
 		                            class="w-100 shadow-1-strong rounded mb-4"
@@ -248,7 +248,7 @@
                 <div class="col-lg-4 mb-4 mb-lg-0">
                     <c:if test="${gallery[2].pname ne null}">
 	                    <div class="jisu"style="position:relative">
-		                    <a href="/groupGallery/${gallery[2].pname}" data-title="upload by ${gallery[2].mname}" data-lightbox="example-set" class="img_link">
+		                    <a href="/groupGallery/${gallery[2].pname}" data-title="uploaded by ${gallery[2].mname}" data-lightbox="example-set" class="img_link">
 		                    <img
 		                            src="/groupGallery/${gallery[2].pname}"
 		                            class="w-100 shadow-1-strong rounded mb-4"
@@ -259,7 +259,7 @@
                     </c:if>
                     <c:if test="${gallery[5].pname ne null}">
 	                    <div class="jisu"style="position:relative">
-		                    <a href="/groupGallery/${gallery[5].pname}" data-title="upload by ${gallery[5].mname}" data-lightbox="example-set" class="img_link">
+		                    <a href="/groupGallery/${gallery[5].pname}" data-title="uploaded by ${gallery[5].mname}" data-lightbox="example-set" class="img_link">
 		                    <img
 		                            src="/groupGallery/${gallery[5].pname}"
 		                            class="w-100 shadow-1-strong rounded mb-4"

@@ -7,7 +7,7 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-  <title>Pricing - Mentor Bootstrap Template</title>
+  <title>Togather</title>
   <meta content="" name="description" />
   <meta content="" name="keywords" />
 
@@ -117,11 +117,12 @@
                         <textarea
                                 name="gbcontent"
                                 placeholder="글을 작성해주세요"
-                                row="10"
-                                cols="53"
                                 id="form3Example4c"
                                 class="form-control"
                                 required=""
+                                style="width: 100%;
+                                      height: 12em;
+                                      resize: none;"
                         ></textarea>
                       </div>
                     </div>
@@ -188,7 +189,7 @@
                               class="btn btn-success"
                               style="margin-right: 30px"
                       >
-                        개설
+                        등록
                       </button>
                       <button type="button"  onclick="location.href='gblistPage?gseq=${gseq}'" class="btn btn-secondary">
                         취소

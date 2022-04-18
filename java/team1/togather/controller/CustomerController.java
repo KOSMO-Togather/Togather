@@ -3,8 +3,6 @@ package team1.togather.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-
-import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +19,6 @@ import team1.togather.domain.QandA;
 import team1.togather.domain.QaReply;
 import team1.togather.service.QandA_Service;
 
-@Log4j
 @Controller
 @AllArgsConstructor
 public class CustomerController {
@@ -43,10 +40,15 @@ public class CustomerController {
 		PageMaker pm = new PageMaker();
 		pm.setCri(cri);
 		pm.setTotalCount(service.pageCount()); //calcDate()실행
-		
+
 		model.addAttribute("pm", pm);
 		model.addAttribute("cri", cri);
 		return "customer/Q&A";
+		//List<QandA> list = service.QAlist();
+		//ModelAndView mv = new ModelAndView("customer/Q&A", "list", list);
+		//mv.addObject("nameList", service.qaNameList());
+		//System.out.println(list);
+		//return mv;
 	}
 	@GetMapping("/qaContent")
 	public ModelAndView qacontent(QandA qanda,HttpServletRequest request) {
@@ -67,7 +69,7 @@ public class CustomerController {
 		mv.addObject("qreplyCount", qreplyCount);
 		return mv;
 	}
-	
+
 	@PostMapping("/qaPwdContent")
 	@ResponseBody
 	public String qaPwdContent(QandA qanda) {
@@ -81,77 +83,106 @@ public class CustomerController {
 			return "1";
 		}
 	}
-	
+
 	@GetMapping("/qaCreate")
 	public String qaCreate() {
 		return "customer/Q&AInput";
 	}
-	
+
 	@PostMapping("/qaCreate")
 	public String qaCreate(QandA qanda) {
 		service.qaCreate(qanda);
 		QandA q = service.createqaInfo(qanda);
 		return "redirect:qaContent?qseq="+q.getQseq()+"&page=1&pageSize=10";
 	}
-	
+
 	@PostMapping("/qaUpdateCheck")
 	@ResponseBody
 	public Long qaUpdatecheck(QandA qanda) {
+
 		return service.upDateCheck(qanda);
+
 	}
+
+	@RequestMapping("/update")
+	public String update(QandA qanda,HttpServletRequest request) {
+		System.out.println(qanda);
+		System.out.println("큐엔에이들어옴2");
+		String pageAt = request.getParameter("page");
+		String pageSize = request.getParameter("pageSize");
+		service.update(qanda);
+		return "redirect:qaContent?qseq="+qanda.getQseq()+"&page="+pageAt+"&pageSize="+pageSize;
+	}
+
 	@PostMapping("/qaNextPostCheck")
 	@ResponseBody
 	public Long qaNextPostCheck(long qseq,Member member) {
+		System.out.println("권한: "+member.getAthur());
 		Long nextQseq = (long) 0;
+		System.out.println("qseq: " +qseq);
 		if(member.getAthur()==0) {
 			nextQseq=service.nextPost(qseq);
 		}else {
 			nextQseq=service.nextPostUser(qseq);
 		}
 		return nextQseq;
-		
+
 	}
-	
+
 	@PostMapping("/qaPreviousPostCheck")
 	@ResponseBody
 	public Long previousPost(long qseq,Member member) {
 		Long previousQseq = (long) 0;
+
 		if(member.getAthur()==0) {
 			previousQseq=service.previousPost(qseq);
 		}else {
+			System.out.println("else안");
 			previousQseq=service.previousPostUser(qseq);
+			System.out.println("else 안 previousQseq :"+previousQseq);
+			System.out.println("else 안 previousQseq :"+qseq);
 		}
+		System.out.println("previousQseq :"+previousQseq);
 		return previousQseq;
+
 	}
-	
+
 	@GetMapping("/qaUpDate")
-	public ModelAndView qaUpDate(QandA qanda) {
+	public ModelAndView qaUpDate(QandA qanda,HttpServletRequest request) {
 		qanda = service.qaContent(qanda);
 		ModelAndView mv = new ModelAndView("customer/Q&AupDate", "qanda", qanda);
+		if(request.getParameter("page")!=null) {
+			String pageAt = request.getParameter("page");
+			mv.addObject("page", pageAt);
+		}
+		if(request.getParameter("pageSize")!=null) {
+			String pageSize = request.getParameter("pageSize");
+			mv.addObject("pageSize", pageSize);
+		}
 		return mv;
 	}
-	
-	@PostMapping("/qaUpDate")
-	public String qaUpDate2(QandA qanda, HttpServletRequest request) {
-		service.update(qanda);
-		return "redirect:qaContent?qseq="+qanda.getQseq()+"&page=1&pageSize10";
-	}
-	
+
+
+
 	@RequestMapping("/qaDelete")
 	public String qaDelete(QandA qanda) {
 		service.delete(qanda);
 		return "redirect:qa";
 	}
-	
+
 	@RequestMapping("/admin/qaReply")
-	public String adminQaReply(QaReply qaReply) {
+	public String adminQaReply(QaReply qaReply,HttpServletRequest request) {
 		service.qaReply(qaReply);
-		return "redirect:../qaContent?qseq="+qaReply.getQseq();
+		String pageAt = request.getParameter("page");
+		String pageSize = request.getParameter("pageSize");
+		return "redirect:../qaContent?qseq="+qaReply.getQseq()+"&page="+pageAt+"&pageSize="+pageSize;
 	}
-	
+
 	@RequestMapping("/qaReply")
-	public String UserQaReply(QaReply qaReply) {
+	public String UserQaReply(QaReply qaReply,HttpServletRequest request) {
 		service.qaReply(qaReply);
-		return "redirect:qaContent?qseq="+qaReply.getQseq();
+		String pageAt = request.getParameter("page");
+		String pageSize = request.getParameter("pageSize");
+		return "redirect:qaContent?qseq="+qaReply.getQseq()+"&page="+pageAt+"&pageSize="+pageSize;
 	}
 }

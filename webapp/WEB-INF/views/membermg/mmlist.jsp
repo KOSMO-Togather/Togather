@@ -270,6 +270,7 @@
                 name="membermgSearch"
                 type="text"
                 aria-label="Text input with dropdown button"
+                style="border: solid 1px"
         />
 
       </div>

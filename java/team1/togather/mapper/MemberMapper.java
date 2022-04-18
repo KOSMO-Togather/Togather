@@ -40,6 +40,7 @@ public interface MemberMapper {
 
 	void keepLogin(Map<String,Object> map);
 	Member checkUserWithSessionKey(String sessionKey);
+	void viewChecked2(long meseq);
 
 }
 

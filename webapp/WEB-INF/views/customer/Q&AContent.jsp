@@ -191,7 +191,7 @@
     	}
     	
     	function upDate(){
-    		location="qaUpDate?qseq=${qanda.qseq}";
+            location="qaUpDate?qseq=${qanda.qseq}&page=${page}&pageSize=${pageSize}";
     	}
     	function qaDelete(){
     		location="qaDelete?qseq=${qanda.qseq}";
@@ -220,12 +220,6 @@
     	}
     	
     	function comment(i,index,mnumCheck,athur){
-    		//var arr = new Array();
-    		//<c:forEach var="qaReply" items="${qaReply}">	              
-	       // 	arr.push({qarDate:"${qaReply.qardate}"});
-        	//</c:forEach>
-        	//console.log(arr);
-        	//console.log(arr[index].qarDate);
         	var num=index;
         	var liUp="liup";
     		liUp+=index;

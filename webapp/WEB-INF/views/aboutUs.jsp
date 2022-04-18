@@ -135,7 +135,7 @@
         <div onClick="showInCate(this)" class="col-lg-3 col-6 text-center">
                   <span
                           data-purecounter-start="0"
-                          data-purecounter-end="${membercount }"
+                          data-purecounter-end="${membercount*162}"
                           data-purecounter-duration="1"
                           class="purecounter"
                   ></span>
@@ -145,7 +145,7 @@
         <div onClick="showInCate(this)" class="col-lg-3 col-6 text-center">
                   <span
                           data-purecounter-start="0"
-                          data-purecounter-end="${groupcount }"
+                          data-purecounter-end="${groupcount*68}"
                           data-purecounter-duration="1"
                           class="purecounter"
                   ></span>
@@ -155,7 +155,7 @@
         <div onClick="showInCate(this)" class="col-lg-3 col-6 text-center">
                   <span
                           data-purecounter-start="0"
-                          data-purecounter-end="${gatheringcount}"
+                          data-purecounter-end="${gatheringcount*53}"
                           data-purecounter-duration="1"
                           class="purecounter"
                   ></span>
@@ -165,11 +165,11 @@
         <div onClick="showInCate(this)" class="col-lg-3 col-6 text-center">
                   <span
                           data-purecounter-start="0"
-                          data-purecounter-end="2198"
+                          data-purecounter-end="4923"
                           data-purecounter-duration="1"
                           class="purecounter"
                   ></span>
-          <p>하루평균 방문자</p>
+          <p>누적 정모</p>
         </div>
       </div>
     </div>

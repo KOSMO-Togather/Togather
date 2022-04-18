@@ -138,25 +138,54 @@
                         document.getElementById('showGroupform').innerText = "관심사: "+inter;
                         $(result).each(function(){
                             $("#popularSection").append(
-                                "<div class=\"col-lg-4 col-md-6 d-flex align-items-stretch\">"
+                                "<div class=\"col-lg-4 col-md-6 d-flex align-items-stretch mb-4\">"
                                 +"<div class=\"course-item\">"
-                                +"<img src=\"/assets/img/course-1.jpg\" class=\"img-fluid\" alt=\"...\" />"
+                                +"<img src=\"/assets/img/groupImages/"+this.fname+"\" width=\"414px\" height=\"275px\"/>"
                                 +"<div class=\"course-content\">"
-                                +"<div class=\"d-flex justify-content-between align-items-center mb-3\" >"
+                                +"<div class=\"d-flex justify-content-between align-items-center mb-3\">"
                                 +"<h4>"+this.interest+"</h4>"
                                 +"<p class=\"price\">"+this.gloc+"</p>"
                                 +"</div>"
                                 +"<h3><a href=\"groupTab/groupInfo.do?gseq="+this.gseq+"&mnum=${m.mnum}\">"+this.gname+"</a></h3>"
+                                +"<div style=\"height: 40px; overflow:auto; margin-bottom: 15px\">"
                                 +"<p>"+this.gintro+"</p>"
+                                +"</div>"
+                                +"<div class=\"d-flex justify-content-between align-items-center\">"
+                                +"<div>"
                                 +"<p><i class=\"fa fa-map-marker-alt text-primary me-2\"></i>"+this.gloc+"</p>"
-                                +"<div class=\"trainer d-flex justify-content-between align-items-center\" >"
+                                +"</div>"
+                                +"<div>"
+                                <c:set var='loop_flag' value='false' />
+                                <c:if test='${m ne null }'>
+                                        <c:if test='${not loop_flag }'>
+                                            <c:forEach var='wishCheck' items='${wishCheckList}'>
+                                                <c:choose>
+                                                    <c:when test='${groupList.gseq eq wishCheck.gseq and wishCheck.flag eq 1}'>
+                                                        +"<button onclick='applyWishList(this)' type=\"button\" class=\"btn btn-danger mb-1\" value=\"${groupList.gseq}\">찜 취소</button>"
+                                                     <c:set var='loop_flag' value='true' />
+                                                    </c:when>
+                                                </c:choose>
+                                            </c:forEach>
+                                        </c:if>
+                                    <c:if test='${not loop_flag }'>
+                                        +"<button onclick='applyWishList(this)' type=\"button\" class=\"btn btn-outline-danger mb-1\" value=\"${groupList.gseq }\">찜 하기</button>"
+                                    <c:set var='loop_flag' value='false' />
+                                    </c:if>
+                                </c:if>
+                                +"</div>"
+                                +"</div>"
+                                +"<div class=\"trainer d-flex justify-content-between align-items-center\">"
                                 +"<div class=\"trainer-profile d-flex align-items-center\">"
-                                +"<img src=\"/assets/img/trainers/trainer-1.jpg\" class=\"img-fluid\" alt=\"\" />"
-                                + "<span>"+this.mname+"</span>"
+                                +"<h3><i class=\"bi bi-person-circle\"></i></h3>"
+                                +"<span style=\"margin-bottom: 7px\">"+this.mname+"</span>"
                                 +"</div>"
                                 +"<div class=\"trainer-rank d-flex align-items-center\">"
-                                +"<i class=\"bx bx-user\"></i>&nbsp;"+this.memInGroupCount+" &nbsp;&nbsp;"
-                                +"</div></div></div></div></div>"
+                                +"<i class=\"bx bx-user\"></i>&nbsp;"+this.memInGroupCount+""
+                                +"</div>"
+                                +"</div>"
+                                +"</div>"
+                                +"</div>"
+                                +"</div>"
                             );
                         })
                     }
@@ -325,8 +354,8 @@
                             console.log("index: " + index);
                             console.log("item: " + item);
                             $('#popularSection').append(
-                                "<div class='col-lg-4 col-md-6 d-flex align-items-stretch' id='listCard'>"
-                                +"<div class='course-item mt-5'>"
+                                "<div class='col-lg-4 col-md-6 d-flex align-items-stretch mb-4' id='listCard'>"
+                                +"<div class='course-item'>"
                                 +"<img src='/assets/img/groupImages/"+item.fname+"' width='414px' height='275px' alt='...'/>"
                                 +"<div class='course-content'>"
                                 +"<div class='d-flex justify-content-between align-items-center mb-3'>"
@@ -334,12 +363,15 @@
                                 +"<p class='price'>"+item.gloc+"</p>"
                                 +"</div>"
                                 +"<h3><a href='groupTab/groupInfo.do?gseq="+item.gseq+"&mnum=${m.mnum}'>"+item.gname+"</a></h3>"
+                                +"<div style='height:40px; overflow:auto; margin-bottom: 15px'>"
                                 +"<p>"+item.gintro+"</p>"
-                                +"<p><i class='fa fa-map-marker-alt text-primary me-2'></i>"+item.gloc+"</p>"
+                                +"</div>"
+                                +"<div class='d-flex justify-content-between align-items-center'>"
+                                +"<div><p><i class='fa fa-map-marker-alt text-primary me-2'></i>"+item.gloc+"</p></div>"
                                 +"<div class='trainer d-flex justify-content-between align-items-center'>"
                                 +"<div class='trainer-profile d-flex align-items-center'>"
-                                +"<img src='/assets/img/trainers/trainer-1.jpg' class='img-fluid' alt=''/>"
-                                +"<span>"+item.mname+"</span>"
+                                +" <h3><i class='bi bi-person-circle'></i></h3>"
+                                +"<span style='margin-bottom: 7px'>"+item.mname+"</span>"
                                 +"</div>"
                                 +"<div class='trainer-rank d-flex align-items-center'>"
                                 +"<i class='bx bx-user'></i>&nbsp;"+item.limit+"&nbsp;&nbsp;"
@@ -681,9 +713,11 @@
                             </div>
 
                             <h3><a href="groupTab/groupInfo.do?gseq=${groupList.gseq}&mnum=${m.mnum}">${groupList.gname}</a></h3>
+                            <div style="height: 40px; overflow:auto; margin-bottom: 15px">
                             <p>
                                     ${groupList.gintro}
                             </p>
+                            </div>
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
@@ -713,12 +747,8 @@
                                     class="trainer d-flex justify-content-between align-items-center"
                             >
                                 <div class="trainer-profile d-flex align-items-center">
-                                    <img
-                                            src="/assets/img/trainers/trainer-1.jpg"
-                                            class="img-fluid"
-                                            alt=""
-                                    />
-                                    <span>${namelist[status.index]}</span>
+                                    <h3><i class="bi bi-person-circle"></i></h3>
+                                    <span style="margin-bottom: 7px">${namelist[status.index]}</span>
                                 </div>
                                 <div class="trainer-rank d-flex align-items-center">
                                     <i class="bx bx-user"></i>&nbsp;${groupMemberCount[status.index]}

@@ -221,4 +221,20 @@ public class BoardController {
     ModelAndView mv = new ModelAndView("redirect:listPage");
     return mv;
   }
+
+  @PostMapping("/boardNextPostCheck")
+  @ResponseBody
+  public Long nextPostCheck(long bnum) {
+    Long nextBnum= service.boardNextPost(bnum);
+    return nextBnum;
+
+  }
+
+  @PostMapping("/boardPreviousPostCheck")
+  @ResponseBody
+  public Long previousPost(long bnum) {
+    Long previousBnum = service.boardPreviousPost(bnum);
+    return previousBnum;
+
+  }
 }

@@ -91,13 +91,13 @@ public class MyPageController {
 	public int updatemaddrandpfr_loc(Member member, HttpSession session) {
 		Member m = (Member)session.getAttribute("m");
 		String str = member.getMaddr();
-		String result = str.substring(0, str.length()-1);
-		System.out.println("str : " +str );
-		System.out.println("result : " +result );
+		String result = str.replaceFirst(","," ");
 		if(result.equals(m.getMaddr()) && member.getPfr_loc().equals(m.getPfr_loc())){
+			member.setMaddr(result);
 			return 0;
 		}else {
 			member.setMnum(m.getMnum());
+			member.setMaddr(result);
 			mypageservice.updatemaddrandpfr_loc(member);
 			m.setMaddr(member.getMaddr());
 			m.setPfr_loc(member.getPfr_loc());

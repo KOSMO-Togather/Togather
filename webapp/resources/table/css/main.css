@@ -59,9 +59,7 @@ li {
 
 /* ------------------------------------ */
 input {
-  display: block;
-  outline: none;
-  border: none !important;
+  display: inline-block;
 }
 
 textarea {

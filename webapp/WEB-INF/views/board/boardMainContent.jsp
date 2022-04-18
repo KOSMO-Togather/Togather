@@ -47,12 +47,61 @@
     <!-- google-fonts -->
     <link href="http://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
     <!-- //google-fonts -->
+    <!-- alert  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <!-- Font-Awesome-Icons-CSS -->
     <link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
     <!-- Template CSS Style link -->
     <link rel="stylesheet" href="/assets/css/style-liberty.css">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script type="text/javascript">
+
+        function previousPost(){
+            var bnum = ${bnum};
+            var result = {"bnum":bnum};
+            $(function(){
+                $.ajax({
+                    url: "boardPreviousPostCheck.json",
+                    type: "POST",
+                    data: result,
+                    success: function(data){
+                        var PreviousBnum =data;
+                        if($.isNumeric(data)){
+                            location.href="boardContent?bnum="+PreviousBnum+"&page=${page}&pageSize=${pageSize}";
+                        }else{
+                            Swal.fire({
+                                title:"이전 글이 없습니다",
+                                icon:"warning"
+                            });
+                        }
+                    }
+                });
+            });
+        }
+
+        function nextPost(){
+            var bnum = ${bnum};
+            var result = {"bnum":bnum};
+            $(function(){
+                $.ajax({
+                    url: "boardNextPostCheck.json",
+                    type: "POST",
+                    data: result,
+                    success: function(data){
+                        var nextBnum =data;
+                        if($.isNumeric(data)){
+                            location.href="boardContent?bnum="+nextBnum+"&page=${page}&pageSize=${pageSize}";
+                        }else if(jQuery.isEmptyObject(data)){
+                            Swal.fire({
+                                title:"마지막 글입니다",
+                                icon:"warning"
+                            });
+                        }
+                    }
+                });
+            });
+        }
         $(document).on("click","#postComment" ,function(){
             var outerform = document.getElementById('div#outerreplyform');
             var data = JSON.stringify({
@@ -179,13 +228,13 @@
                     <a href="#post" class="post">${board.bcategory}</a>
                     <p class="mt-4 mb-3">${board.bcontent}</p>
                     <div class="new-posts mt-5">
-                        <a class="prev-post pull-left" href="#prev"><span class="fa fa-arrow-left"
+                        <a class="prev-post pull-left" href="javascript:previousPost()"><span class="fa fa-arrow-left"
                                                                           aria-hidden="true"></span>
                             Previous Post</a>
                         <a href="boardUpdate?bnum=${bnum }">수정</a>
                         <a href="listPage?page=${page }&pageSize=${pageSize}">목록</a>
                         <a href="boardDelete?bnum=${bnum }">삭제</a>
-                        <a class="next-post pull-right" href="#next">Next Post <span class="fa fa-arrow-right"
+                        <a class="next-post pull-right" href="javascript:nextPost()">Next Post <span class="fa fa-arrow-right"
                                                                                      aria-hidden="true"></span></a>
                     </div>
                     <div id="outerreplyform" class="comments mt-5">
