@@ -11,4 +11,5 @@ public interface GBReplyMapper {
 	void gbrupdate(GBReply gbreply);
 	GBReply selectgbrseq(long gbrseq);
 	void gbrdelete(long gbrseq);
+
 }
