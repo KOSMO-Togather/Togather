@@ -212,5 +212,9 @@
 	<select id="kingName" resultType="String" parameterType="long">
 		select mname from member where mnum=(select mnum from grouptab where gseq=#{gseq})
 	</select>
+	<!-- 모임장 탈퇴 시 모임장이름 변경 -->
+	<update id="kingUpdate" parameterType="long">
+		update GROUPTAB set MNUM=(select min(MNUM) from MEM_IN_GROUP where GSEQ=#{gseq}) where GSEQ=#{gseq}
+	</update>
 
 </mapper>

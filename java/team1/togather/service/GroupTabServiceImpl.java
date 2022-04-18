@@ -216,5 +216,8 @@ public class GroupTabServiceImpl implements GroupTabService {
 	public String kingName(long gseq){
 		return groupTabMapper.kingName(gseq);
 	}
-
+	@Override
+	public void kingUpdate(long gseq) {
+		groupTabMapper.kingUpdate(gseq);
+	}
 }

@@ -34,6 +34,10 @@
 		<typeAlias alias="GroupTabGallery" type="team1.togather.domain.GroupTabGallery" />
 		<typeAlias alias="MembermgCriteria" type="team1.togather.domain.MembermgCriteria"/>
 		<typeAlias alias="MMPageMaker" type="team1.togather.domain.MMPageMaker" />
+		<typeAlias alias="MmGbCriteria" type="team1.togather.domain.MmGbCriteria"/>
+		<typeAlias alias="MmGbPageMaker" type="team1.togather.domain.MmGbPageMaker" />
+		<typeAlias alias="MmGbRCriteria" type="team1.togather.domain.MmGbRCriteria"/>
+		<typeAlias alias="MmGbRPageMaker" type="team1.togather.domain.MmGbRPageMaker" />
 
 	</typeAliases>
    <!-- 

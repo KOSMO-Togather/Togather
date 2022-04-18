@@ -475,8 +475,9 @@ public class GroupTabController {
 			groupTabService.delegate(memInGroup);
 			return "redirect:groupInfo.do?gseq="+gseq+"&mnum="+m.getMnum()+"";
 		}else {
-			System.out.println("mnum: " + mnum);
+			System.out.println("mnum111: " + mnum);
 			groupTabService.groupQuit(memInGroup); //모임장 탈퇴..
+			groupTabService.kingUpdate(gseq); // *추가된 부분*
 			MemInGroup mig = groupTabService.selectKing(memInGroup);
 
 			Long groupMemberCount = groupTabService.groupMemberCount(gseq);
