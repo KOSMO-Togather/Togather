@@ -196,4 +196,9 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.checkUserWithSessionKey(sessionKey);
 	}
 
+	@Override
+	public void viewChecked2(long meseq) {
+		mapper.viewChecked2(meseq);
+
+	}
 }

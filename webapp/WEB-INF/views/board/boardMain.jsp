@@ -269,6 +269,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                     name="boardSearch"
                     type="text"
                     aria-label="Text input with dropdown button"
+                    style="height: 40px;"
                   />
                 </form>
               </div>

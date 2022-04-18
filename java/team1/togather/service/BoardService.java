@@ -17,4 +17,6 @@ public interface BoardService {
 	void update(Board board);
 	public List<Board> getBoardBySearch(Map map);
 	void updateBView(Long bnum);
+	Long boardNextPost(Long bnum);
+	Long boardPreviousPost(Long bnum);
 }

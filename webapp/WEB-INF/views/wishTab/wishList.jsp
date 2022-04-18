@@ -79,6 +79,7 @@
                   success: function(result){
                       console.log("success!: "+result);
                       $(e).parents('.col-lg-4').remove();
+                      $('#numberOfWish').text(result);
                   },
                   error:function(error){
                       console.log("failure!: "+error);
@@ -112,8 +113,9 @@
 	              <div class="course-item">
 	                <img
 	                  src="/assets/img/groupImages/${groupList.fname }"
-	                  class="img-fluid"
-	                  alt="..."
+                      width="414px"
+                      height="275px"
+                      alt="그룹사진"
 	                />
 	                <div class="course-content">
 	                  <div
@@ -124,9 +126,11 @@
 	                  </div>
 	
 	                  <h3><a href="../groupTab/groupInfo.do?gseq=${groupList.gseq}&mnum=${m.mnum}">${groupList.gname}</a></h3>
-	                  <p>
+                        <div style="height: 40px; overflow:auto; margin-bottom: 15px">
+                        <p>
 				      		${groupList.gintro}
 	                  </p>
+                        </div>
 	                   <div class="d-flex justify-content-between align-items-center">
 	                  <div>
 	                  <p><i class="fa fa-map-marker-alt text-primary me-2"></i>${groupList.gloc}</p>
@@ -140,12 +144,8 @@
 	                    class="trainer d-flex justify-content-between align-items-center"
 	                  >
 	                    <div class="trainer-profile d-flex align-items-center">
-	                      <img
-	                        src="/assets/img/trainers/trainer-1.jpg"
-	                        class="img-fluid"
-	                        alt=""
-	                      />                   
-	                      <span>${namelist[status.index].mname}</span>        
+                            <h3><i class="bi bi-person-circle"></i></h3>
+                            <span style="margin-bottom: 7px">${namelist[status.index].mname}</span>
 	                    </div>
 	                    <div class="trainer-rank d-flex align-items-center">
 	                      <i class="bx bx-user"></i>&nbsp;&nbsp;${groupMemberCount[status.index]}

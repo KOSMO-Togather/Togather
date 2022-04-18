@@ -100,19 +100,17 @@
 	                  </div>
 	
 	                  <h3><a href="groupInfo.do?gseq=${myGrouplist.gseq}&mnum=${m.mnum}">${myGrouplist.gname}</a></h3>
-	                  <p>
+                        <div style="height: 40px; overflow:auto; margin-bottom: 15px">
+                        <p>
 	                    ${myGrouplist.gintro}
 	                  </p>
+                        </div>
 	                  <div
 	                    class="trainer d-flex justify-content-between align-items-center"
 	                  >
 	                    <div class="trainer-profile d-flex align-items-center">
-	                      <img
-	                        src="/assets/img/trainers/trainer-1.jpg"
-	                        class="img-fluid"
-	                        alt=""
-	                      />
-	                      <span>${namelist[status.index]}</span>
+                            <h3><i class="bi bi-person-circle"></i></h3>
+                            <span style="margin-bottom: 7px">${namelist[status.index]}</span>
 	                    </div>
 	                    <div class="trainer-rank d-flex align-items-center">
 	                      <i class="bx bx-user"></i>&nbsp;${groupMemberCount[status.index]}

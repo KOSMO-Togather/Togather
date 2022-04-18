@@ -40,5 +40,16 @@
    </update>
    <update id = "updateBView" parameterType="Long">
    		update BOARD set BVIEW=(select BVIEW+1 from BOARD where BNUM=#{bnum}) where BNUM=#{bnum} 
-   </update> 
-</mapper> 
+   </update>
+
+
+	<!-- Board에서 다음글로 들어가는  sql -->
+	<select id="boardNextPost" resultType="Long" parameterType="long">
+		<![CDATA[select min(bnum) from BOARD where bnum>(select bnum from BOARD where bnum =#{bnum}) order by bnum]]>
+	</select>
+
+	<!-- Board에서 이전글로 들어가는  sql -->
+	<select id="boardPreviousPost" resultType="Long" parameterType="long">
+		<![CDATA[select max(bnum) from BOARD where bnum<(select bnum from BOARD where bnum =#{bnum}) order by bnum]]>
+	</select>
+</mapper>

@@ -91,7 +91,7 @@
 						confirmButtonText: 'Yes'
 					});
 					return false;
-				}else if (result.isConfirmed) {
+				}else if(result.isConfirmed) {
 				var mnum = ${m.mnum};
 	  			var ga_seq = ${gatheringInfo.ga_seq};
 	  			var result = {"mnum":mnum,"ga_seq":ga_seq};
@@ -103,9 +103,8 @@
 	   					success: function(data){
 	   					}
   				});
-  				location.reload(); 
+  				location.reload();
 		  		});
-		  		
 			  }  			  
 			});
     	}

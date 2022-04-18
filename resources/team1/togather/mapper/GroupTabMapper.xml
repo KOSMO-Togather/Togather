@@ -66,7 +66,7 @@
       </select>
 	<!-- 마이그룹이름   -->
 	<select id="selectAllname" resultType="String">
-		select m.mname from member m,grouptab g where m.mnum=g.mnum and m.mnum=#{mnum} order by gseq desc
+		select mname from member m, (select mnum from grouptab where gseq=any(select gseq from MEM_IN_GROUP where mnum=#{mnum}) order by gseq desc)a where m.mnum=a.mnum
 	</select>
 	<select id="selectByGSeq" resultType="GroupTab" parameterType="long">
 		select * from GROUPTAB where GSEQ=#{gseq}

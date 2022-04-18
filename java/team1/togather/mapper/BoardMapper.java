@@ -26,6 +26,8 @@ public interface BoardMapper {
 	public List<Board> listPageCri(BoardCriteria cri); // 페이징처리(cri객체사용)
 	public Integer pageCount(); //db테이블 모든글 개수 계산 후 리턴
 	public List<Board> getBoardBySearch(Map map);
+	Long boardNextPost(Long bnum);
+	Long boardPreviousPost(Long bnum);
 
 	
 }

@@ -152,6 +152,7 @@
 								id="form3Example4c"
 								class="form-control"
 								value="${qanda.qcontent }"
+                                required
 							  ></textarea>
                           </div>
                         </div>

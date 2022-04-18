@@ -59,4 +59,12 @@ public class BoardServiceImpl implements BoardService {
 		System.out.println("updatebview서비스안 실행됨 bnum:"+bnum);
 		boardmapper.updateBView(bnum);
 	}
+	@Override
+	public Long boardNextPost(Long bnum){
+		return boardmapper.boardNextPost(bnum);
+	}
+	@Override
+	public Long boardPreviousPost(Long bnum){
+		return boardmapper.boardPreviousPost(bnum);
+	}
 }

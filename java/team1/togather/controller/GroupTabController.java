@@ -509,6 +509,12 @@ public class GroupTabController {
 		mv.addObject("gname", gname);
 		return mv;
 	}
+	@PostMapping("noticeChecked")
+	@ResponseBody
+	public String noticeChecked(MemInGathering m) {
+		groupTabService.endTimeNoticeChange(m);
+		return "ok";
+	}
 }
 
 

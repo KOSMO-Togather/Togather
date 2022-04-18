@@ -235,6 +235,7 @@ public class MemberController {
 	public ModelAndView messageContent(long meseq,IndexCriteria cri,HttpServletRequest request) {
 		Message messageContent = service.messageContent(meseq);
 		service.messageChecked(meseq);
+		service.viewChecked2(meseq);
 		ModelAndView mv = new ModelAndView("member/messageContent", "messageContent", messageContent);
 		if(request.getParameter("page")!=null) {
 			String pageAt = request.getParameter("page");

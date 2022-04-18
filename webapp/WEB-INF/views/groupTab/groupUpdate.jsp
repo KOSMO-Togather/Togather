@@ -102,8 +102,7 @@
                               >모임지역</label
                             >
 	                          <div class="col-md-4">
-				                <select id="selectGLoc" class="form-select border-0 py-3" name="gloc">
-				                  <option selected disabled>지역</option>
+				                <select id="selectGLoc" class="form-select border-0 py-3" name="gloc" required>
 				                  <option value="서울">서울</option>
 				                  <option value="경기">경기</option>
 				                  <option value="인천">인천</option>
@@ -215,7 +214,7 @@
                             class="btn btn-success"
                             style="margin-right: 30px"
                           >
-                            개설
+                            수정
                           </button>
                           <button type="button" class="btn btn-secondary">
                             취소

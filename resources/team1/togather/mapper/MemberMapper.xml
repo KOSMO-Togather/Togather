@@ -137,6 +137,10 @@
 	<select id="checkUserWithSessionKey" resultType="Member" parameterType="String">
 		select * from member where sessionKey =#{sessionKey}  and sessionLimit > SYSDATE
 	</select>
+	<!-- 확인한 메세지 인덱스 알림끄기 -->
+	<update id="viewChecked2" parameterType="Long">
+		update MESSAGE set viewcheck=1 where meseq=#{meseq}
+	</update>
 
 </mapper>
 

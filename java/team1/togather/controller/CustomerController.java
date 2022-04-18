@@ -132,15 +132,10 @@ public class CustomerController {
 	@PostMapping("/qaPreviousPostCheck")
 	@ResponseBody
 	public Long previousPost(long qseq,Member member) {
-		System.out.println("previousPost시작");
-		System.out.println("qanda: " +qseq);
-		System.out.println("권한: "+member.getAthur());
 		Long previousQseq = (long) 0;
 
 		if(member.getAthur()==0) {
-			System.out.println("if안");
 			previousQseq=service.previousPost(qseq);
-			System.out.println("if 안 previousQseq :"+previousQseq);
 		}else {
 			System.out.println("else안");
 			previousQseq=service.previousPostUser(qseq);
