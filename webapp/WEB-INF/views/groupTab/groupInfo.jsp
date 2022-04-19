@@ -724,7 +724,8 @@
   <section id="cource-details-tabs" class="cource-details-tabs">
     <div class="container" data-aos="fade-up">
       <div class="row">
-        <div class="col-lg-3">
+        <div class="col-lg-3" style="overflow: auto; height: 250px">
+          <h3>멤버 목록</h3>
           <ul class="nav nav-tabs flex-column">
             <c:forEach var='memInGroupName' items='${memInGroupName}' varStatus="index">
               <c:choose>
@@ -749,10 +750,10 @@
             <div class="tab-pane active show" id="tab-1">
               <div class="row">
                 <div class="col-lg-8 details order-2 order-lg-1">
-                  <h3>멤버정보</h3>
-                  <p> 이름: ${memberInfo.mname}</p>
-                  <p> 생년월일: ${memberInfo.birth} </p>
-                  <p> 거주지: ${memberInfo.maddr} </p>
+                  <h3>멤버 정보</h3>
+                  <p> <b>이름: </b>${memberInfo.mname}</p>
+                  <p> <b>생년월일: </b>${memberInfo.birth} </p>
+                  <p> <b>거주지: </b>${memberInfo.maddr} </p>
                 </div>
                 <div class="col-lg-4 text-center order-1 order-lg-2">
                 </div>

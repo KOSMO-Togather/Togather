@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team1.togather.mapper.GBReplyMapper">
 	<select id="gbrlist" resultType="GBReply" parameterType="long">
-		 select * from GBREPLY where GBNUM=#{gbnum} order by gbrseq desc
+		 select * from GBREPLY where GBNUM=#{gbnum} order by gbrseq
 	</select>
 	<insert id="gbrinsert" parameterType="GBReply">
 	    insert into GBREPLY values(GBR_SEQ.nextval, #{gbnum}, #{mname}, #{mnum}, #{gbrcontent}, #{gbr_like}, SYSDATE)
