@@ -246,7 +246,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       <!-- ======= Breadcrumbs ======= -->
       <div class="breadcrumbs" data-aos="fade-in">
         <div class="container">
-          <h1>작성한 모임게시판 글</h1>
+          <h1>작성한 모임게시판 댓글</h1>
         </div>
       </div>
       <!-- End Breadcrumbs -->

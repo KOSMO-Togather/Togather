@@ -54,13 +54,13 @@
 	<select id="selectAll" resultType="GroupTab" parameterType="IndexCriteria">
 			<![CDATA[
 		select * from (select ROWNUM rnum, aa.* from (select * from groupTab order by gseq desc) aa)
-		where rnum>#{startRow} and rnum<=#{endRow}
+		where rnum>#{startRow} and rnum<=#{endRow} order by gseq desc
 		]]>
 		</select>
 	<!-- 로그인 안했거나 본인 관심사에 관한 그룹이 없을때 인덱스 페이지 모임장 이름   -->
 	<select id="NoCategoryNames" resultType="String" parameterType="IndexCriteria">
          <![CDATA[
-		select mname from member m , (select mnum from (select ROWNUM rnum, aa.* from (select * from groupTab ) aa )
+		select mname from member m , (select mnum from (select ROWNUM rnum, aa.* from (select * from groupTab order by gseq desc) aa )
 									  where rnum>#{startRow}  and rnum<=#{endRow} order by gseq desc) a where m.mnum = a.mnum
 		]]>
       </select>

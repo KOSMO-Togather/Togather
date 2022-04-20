@@ -48,7 +48,9 @@
     <link href="/assets/css/style.css" rel="stylesheet" />
     
     <!-- Kakao Map API Key -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=11400a9267d93835389eb9255fcaad0b&libraries=services,clusterer"></script>
+    <script
+    type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=11400a9267d93835389eb9255fcaad0b&libraries=services,clusterer"></script>
   
     <!-- alert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
