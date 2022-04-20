@@ -138,7 +138,7 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
   <body>
     <!-- ======= Header ======= -->
-    <jsp:include page="../header.jsp" flush="true"/>
+    <jsp:include page="../header.jsp" flush="true" />
     <!-- End Header -->
     <main id="main">
       <!-- ======= Breadcrumbs ======= -->
@@ -240,7 +240,7 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <jsp:include page="../footer.jsp" flush="true"/>
+    <jsp:include page="../footer.jsp" flush="true" />
     <!-- End Footer -->
     <input type="hidden" id="latitude2" name="latitude" value="" />
     <input type="hidden" id="longitude2" name="longitude" value="" />

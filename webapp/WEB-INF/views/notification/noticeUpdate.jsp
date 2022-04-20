@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" import="java.util.*, team1.togather.domain.*"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+import="java.util.*, team1.togather.domain.*"%> <%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core" %> <%@ taglib prefix="fmt"
+uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,7 +33,10 @@
       href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="/assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
     <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
@@ -40,16 +44,16 @@
     <link href="/assets/css/style.css" rel="stylesheet" />
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script>
-      Kakao.init('11400a9267d93835389eb9255fcaad0b');
-      function signout(){
-        if(Kakao.Auth.getAccessToken() != null){
-          Kakao.Auth.logout(function(){
-            setTimeout(function(){
-              location.href="../member/logout.do";
-            },500);
+      Kakao.init("11400a9267d93835389eb9255fcaad0b");
+      function signout() {
+        if (Kakao.Auth.getAccessToken() != null) {
+          Kakao.Auth.logout(function () {
+            setTimeout(function () {
+              location.href = "../member/logout.do";
+            }, 500);
           });
-        }else{
-          location.href="../member/logout.do";
+        } else {
+          location.href = "../member/logout.do";
         }
       }
     </script>
@@ -57,7 +61,7 @@
 
   <body>
     <!-- ======= Header ======= -->
-    <jsp:include page="../header.jsp" flush="true"/>
+    <jsp:include page="../header.jsp" flush="true" />
     <!-- End Header -->
 
     <main id="main">
@@ -84,7 +88,12 @@
                   <div class="row justify-content-center">
                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                       <!--거주지/관심지역/이름/생년월일/비번/비번확인/전화번호/성별-->
-                      <form class="mx-1 mx-md-4" name="notification" method="post" action="noticeUpdate?nseq=${notification.nseq}">
+                      <form
+                        class="mx-1 mx-md-4"
+                        name="notification"
+                        method="post"
+                        action="noticeUpdate?nseq=${notification.nseq}"
+                      >
                         <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
@@ -96,12 +105,12 @@
                               name="ntitle"
                               id="form3Example1c"
                               class="form-control"
-                              value = "${notification.ntitle }"
+                              value="${notification.ntitle }"
                             />
                           </div>
                         </div>
 
-						<div class="d-flex flex-row align-items-center mb-0">
+                        <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
                             <label class="form-label mb-0" for="form3Example1c"
@@ -118,25 +127,20 @@
                           </div>
                         </div>
 
-                        
-                        
-						
-						<div class="d-flex flex-row align-items-center mb-0">
+                        <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
-                           <label class="form-label mb-0" for="form3Example4c"
-                            >세부내용</label
-							  >
-							  <textarea
-								name="ncontent"
-								placeholder="글을 작성해주세요"
-								row="10"
-								cols="53"
-								id="form3Example4c"
-								class="form-control"
-							
-								
-							  ></textarea>
+                            <label class="form-label mb-0" for="form3Example4c"
+                              >세부내용</label
+                            >
+                            <textarea
+                              name="ncontent"
+                              placeholder="글을 작성해주세요"
+                              row="10"
+                              cols="53"
+                              id="form3Example4c"
+                              class="form-control"
+                            ></textarea>
                           </div>
                         </div>
 
@@ -145,7 +149,6 @@
                         >
                           <button
                             type="submit"
-                            
                             class="btn btn-success"
                             style="margin-right: 30px"
                           >
@@ -169,7 +172,7 @@
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <jsp:include page="../footer.jsp" flush="true"/>
+    <jsp:include page="../footer.jsp" flush="true" />
     <!-- End Footer -->
   </body>
   <div id="preloader"></div>

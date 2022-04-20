@@ -88,7 +88,7 @@
                     View: ${gboard.gbview}
                     <p class="mt-4 mb-3">${gboard.gbcontent}
                     </p>
-                    <p class="mt-4 mb-3"><a href="gbfdownload.do?gbfname=${gboard.gbofname}&gbnum=${gboard.gbnum}">${gboard.gbofname}</a>
+                    <p style="color:gray" class="mt-4 mb-3" >업로드 된 파일:   <a style="color:#80d4ff"  href="../gboard/gbfdownload.do?gbfname=${gboard.gbofname}&gbnum=${gboard.gbnum}">${gboard.gbofname}</a>
                     </p>
 
 

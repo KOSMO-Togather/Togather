@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" import="java.util.*, team1.togather.domain.*"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+import="java.util.*, team1.togather.domain.*"%> <%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core" %> <%@ taglib prefix="fmt"
+uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,7 +33,10 @@
       href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="/assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
     <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
@@ -40,16 +44,16 @@
     <link href="/assets/css/style.css" rel="stylesheet" />
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script>
-      Kakao.init('11400a9267d93835389eb9255fcaad0b');
-      function signout(){
-        if(Kakao.Auth.getAccessToken() != null){
-          Kakao.Auth.logout(function(){
-            setTimeout(function(){
-              location.href="../member/logout.do";
-            },500);
+      Kakao.init("11400a9267d93835389eb9255fcaad0b");
+      function signout() {
+        if (Kakao.Auth.getAccessToken() != null) {
+          Kakao.Auth.logout(function () {
+            setTimeout(function () {
+              location.href = "../member/logout.do";
+            }, 500);
           });
-        }else{
-          location.href="../member/logout.do";
+        } else {
+          location.href = "../member/logout.do";
         }
       }
     </script>
@@ -57,7 +61,7 @@
 
   <body>
     <!-- ======= Header ======= -->
-    <jsp:include page="../header.jsp" flush="true"/>
+    <jsp:include page="../header.jsp" flush="true" />
     <!-- End Header -->
 
     <main id="main">
@@ -84,11 +88,16 @@
                   <div class="row justify-content-center">
                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                       <!--거주지/관심지역/이름/생년월일/비번/비번확인/전화번호/성별-->
-                      <form class="mx-1 mx-md-4" name="board" method="post" action="boardUpdate">
+                      <form
+                        class="mx-1 mx-md-4"
+                        name="board"
+                        method="post"
+                        action="boardUpdate"
+                      >
                         <input
-                        	type = "hidden"
-                        	name = bnum
-                        	value = "${board.bnum }"
+                          type="hidden"
+                          name="bnum"
+                          value="${board.bnum }"
                         />
                         <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
@@ -101,13 +110,12 @@
                               name="btitle"
                               id="form3Example1c"
                               class="form-control"
-                              value ="${board.btitle }"
+                              value="${board.btitle }"
                             />
-                            
                           </div>
                         </div>
-		
-						<div class="d-flex flex-row align-items-center mb-0">
+
+                        <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
                             <label class="form-label mb-0" for="form3Example1c"
@@ -118,7 +126,7 @@
                               name="mname"
                               id="form3Example1c"
                               class="form-control"
-                              value ="${board.mname }"
+                              value="${board.mname }"
                             />
                           </div>
                         </div>
@@ -126,10 +134,12 @@
                         <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
-                            <label class="form-label mb-0"
-                              >주제</label
+                            <label class="form-label mb-0">주제</label>
+                            <select
+                              class="form-control"
+                              name="bcategory"
+                              required
                             >
-                            <select class="form-control" name="bcategory" required>
                               <option value="">선택</option>
                               <option value="질문">질문</option>
                               <option value="모임관련">모임관련</option>
@@ -139,21 +149,22 @@
                             </select>
                           </div>
                         </div>
-                        
-						
-						<div class="d-flex flex-row align-items-center mb-0">
+
+                        <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
-                           <label class="form-label mb-0" for="form3Example4c"
-                            >모임소개</label
-							  >
-							  <textarea
-								name="bcontent"
-								row="10"
-								cols="53"
-								id="form3Example4c"
-								class="form-control"
-							  >${board.bcontent }</textarea>
+                            <label class="form-label mb-0" for="form3Example4c"
+                              >모임소개</label
+                            >
+                            <textarea
+                              name="bcontent"
+                              row="10"
+                              cols="53"
+                              id="form3Example4c"
+                              class="form-control"
+                            >
+${board.bcontent }</textarea
+                            >
                           </div>
                         </div>
 
@@ -162,13 +173,16 @@
                         >
                           <button
                             type="submit"
-                            
                             class="btn btn-success"
                             style="margin-right: 30px"
                           >
                             수정
                           </button>
-                          <button type="button" class="btn btn-secondary" onClick="location.href=../">
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            onClick="location.href=../"
+                          >
                             취소
                           </button>
                         </div>
@@ -186,7 +200,7 @@
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <jsp:include page="../footer.jsp" flush="true"/>
+    <jsp:include page="../footer.jsp" flush="true" />
     <!-- End Footer -->
   </body>
   <div id="preloader"></div>

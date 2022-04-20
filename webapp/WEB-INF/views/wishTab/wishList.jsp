@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" import="java.util.*, team1.togather.domain.*"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+import="java.util.*, team1.togather.domain.*"%> <%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core" %> <%@ taglib prefix="fmt"
+uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,57 +42,59 @@
       href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="/assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
     <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet" />
-      <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-      <script>
-          Kakao.init('11400a9267d93835389eb9255fcaad0b');
-          function signout(){
-              if(Kakao.Auth.getAccessToken() != null){
-                  Kakao.Auth.logout(function(){
-                      setTimeout(function(){
-                          location.href="../member/logout.do";
-                      },500);
-                  });
-              }else{
-                  location.href="../member/logout.do";
-              }
-          }
-      </script>
-      <script src="http://code.jquery.com/jquery-latest.js"></script>
-      <script>
-          function cancelWishList(e){
-              console.log($(e).val());
-              var data = JSON.stringify({
-                  gseq:$(e).val()
-
-              });
-              $.ajax({
-                  url:"../cancelWishList",
-                  type:"POST",
-                  dataType:"json",
-                  contentType:"application/json",
-                  data:data,
-                  success: function(result){
-                      console.log("success!: "+result);
-                      $(e).parents('.col-lg-4').remove();
-                      $('#numberOfWish').text(result);
-                  },
-                  error:function(error){
-                      console.log("failure!: "+error);
-                  }
-              });
-          }
-      </script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+      Kakao.init("11400a9267d93835389eb9255fcaad0b");
+      function signout() {
+        if (Kakao.Auth.getAccessToken() != null) {
+          Kakao.Auth.logout(function () {
+            setTimeout(function () {
+              location.href = "../member/logout.do";
+            }, 500);
+          });
+        } else {
+          location.href = "../member/logout.do";
+        }
+      }
+    </script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+      function cancelWishList(e) {
+        console.log($(e).val());
+        var data = JSON.stringify({
+          gseq: $(e).val(),
+        });
+        $.ajax({
+          url: "../cancelWishList",
+          type: "POST",
+          dataType: "json",
+          contentType: "application/json",
+          data: data,
+          success: function (result) {
+            console.log("success!: " + result);
+            $(e).parents(".col-lg-4").remove();
+            $("#numberOfWish").text(result);
+          },
+          error: function (error) {
+            console.log("failure!: " + error);
+          },
+        });
+      }
+    </script>
   </head>
 
   <body>
     <!-- ======= Header ======= -->
-    <jsp:include page="../header.jsp" flush="true"/>
+    <jsp:include page="../header.jsp" flush="true" />
     <!-- End Header -->
     <main id="main" data-aos="fade-in">
       <!-- ======= Breadcrumbs ======= -->
@@ -107,54 +110,71 @@
       <section id="courses" class="courses">
         <div class="container" data-aos="fade-up">
           <div class="row" data-aos="zoom-in" data-aos-delay="100">
-            	 <c:forEach var="groupList" items="${groupList}" varStatus="status" >
-          	
-	            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4">
-	              <div class="course-item">
-	                <img
-	                  src="/assets/img/groupImages/${groupList.fname }"
-                      width="414px"
-                      height="275px"
-                      alt="그룹사진"
-	                />
-	                <div class="course-content">
-	                  <div
-	                    class="d-flex justify-content-between align-items-center mb-3"
-	                  >
-	                    <h4>${groupList.interest}</h4>
-	                    <p class="price">${groupList.gloc}</p>
-	                  </div>
-	
-	                  <h3><a href="../groupTab/groupInfo.do?gseq=${groupList.gseq}&mnum=${m.mnum}">${groupList.gname}</a></h3>
-                        <div style="height: 40px; overflow:auto; margin-bottom: 15px">
+            <c:forEach var="groupList" items="${groupList}" varStatus="status">
+              <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4">
+                <div class="course-item">
+                  <img
+                    src="/assets/img/groupImages/${groupList.fname }"
+                    width="414px"
+                    height="275px"
+                    alt="그룹사진"
+                  />
+                  <div class="course-content">
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-3"
+                    >
+                      <h4>${groupList.interest}</h4>
+                      <p class="price">${groupList.gloc}</p>
+                    </div>
+
+                    <h3>
+                      <a
+                        href="../groupTab/groupInfo.do?gseq=${groupList.gseq}&mnum=${m.mnum}"
+                        >${groupList.gname}</a
+                      >
+                    </h3>
+                    <div
+                      style="height: 40px; overflow: auto; margin-bottom: 15px"
+                    >
+                      <p>${groupList.gintro}</p>
+                    </div>
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <div>
                         <p>
-				      		${groupList.gintro}
-	                  </p>
-                        </div>
-	                   <div class="d-flex justify-content-between align-items-center">
-	                  <div>
-	                  <p><i class="fa fa-map-marker-alt text-primary me-2"></i>${groupList.gloc}</p>
-	                  </div>
-	                  <div>
-                                <button onclick="cancelWishList(this)" type="button" class="btn btn-outline-danger mb-1" value="${groupList.gseq }">찜 취소</button>
-                                
+                          <i class="fa fa-map-marker-alt text-primary me-2"></i
+                          >${groupList.gloc}
+                        </p>
                       </div>
-	                  </div>
-	                  <div
-	                    class="trainer d-flex justify-content-between align-items-center"
-	                  >
-	                    <div class="trainer-profile d-flex align-items-center">
-                            <h3><i class="bi bi-person-circle"></i></h3>
-                            <span style="margin-bottom: 7px">${namelist[status.index].mname}</span>
-	                    </div>
-	                    <div class="trainer-rank d-flex align-items-center">
-	                      <i class="bx bx-user"></i>&nbsp;&nbsp;${groupMemberCount[status.index]}
-	                    </div>
-	                  </div>
-	                </div>
-	              </div>
-	            </div>
-	         
+                      <div>
+                        <button
+                          onclick="cancelWishList(this)"
+                          type="button"
+                          class="btn btn-outline-danger mb-1"
+                          value="${groupList.gseq }"
+                        >
+                          찜 취소
+                        </button>
+                      </div>
+                    </div>
+                    <div
+                      class="trainer d-flex justify-content-between align-items-center"
+                    >
+                      <div class="trainer-profile d-flex align-items-center">
+                        <h3><i class="bi bi-person-circle"></i></h3>
+                        <span style="margin-bottom: 7px"
+                          >${namelist[status.index].mname}</span
+                        >
+                      </div>
+                      <div class="trainer-rank d-flex align-items-center">
+                        <i class="bx bx-user"></i
+                        >&nbsp;&nbsp;${groupMemberCount[status.index]}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </c:forEach>
             <!-- End Course Item-->
           </div>
@@ -165,7 +185,7 @@
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <jsp:include page="../footer.jsp" flush="true"/>
+    <jsp:include page="../footer.jsp" flush="true" />
     <!-- End Footer -->
 
     <div id="preloader"></div>

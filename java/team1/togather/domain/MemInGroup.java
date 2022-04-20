@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemInGroup {
-	private long gseq;
-	private long mnum;
-	private long grade;
+
+  private long gseq;
+  private long mnum;
+  private long grade;
 }

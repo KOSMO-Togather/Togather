@@ -155,7 +155,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
   </head>
   <body>
     <!-- ======= Header ======= -->
-    <jsp:include page="../header.jsp" flush="true"/>
+    <jsp:include page="../header.jsp" flush="true" />
     <!-- End Header -->
 
     <main id="main" data-aos="fade-in">
@@ -269,7 +269,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                     name="boardSearch"
                     type="text"
                     aria-label="Text input with dropdown button"
-                    style="height: 40px;"
+                    style="height: 40px"
                   />
                 </form>
               </div>
@@ -344,7 +344,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <jsp:include page="../footer.jsp" flush="true"/>
+    <jsp:include page="../footer.jsp" flush="true" />
     <!-- End Footer -->
 
     <div id="preloader"></div>

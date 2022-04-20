@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" %> <%@ taglib
+prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -31,7 +31,10 @@
       href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="/assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
     <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
@@ -39,25 +42,24 @@
     <link href="/assets/css/style.css" rel="stylesheet" />
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script>
-      Kakao.init('11400a9267d93835389eb9255fcaad0b');
-      function signout(){
-        if(Kakao.Auth.getAccessToken() != null){
-          Kakao.Auth.logout(function(){
-            setTimeout(function(){
-              location.href="../member/logout.do";
-            },500);
+      Kakao.init("11400a9267d93835389eb9255fcaad0b");
+      function signout() {
+        if (Kakao.Auth.getAccessToken() != null) {
+          Kakao.Auth.logout(function () {
+            setTimeout(function () {
+              location.href = "../member/logout.do";
+            }, 500);
           });
-        }else{
-          location.href="../member/logout.do";
+        } else {
+          location.href = "../member/logout.do";
         }
       }
     </script>
-
   </head>
 
   <body>
     <!-- ======= Header ======= -->
-    <jsp:include page="../header.jsp" flush="true"/>
+    <jsp:include page="../header.jsp" flush="true" />
     <!-- End Header -->
 
     <main id="main">
@@ -84,10 +86,18 @@
                   <div class="row justify-content-center">
                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                       <!--거주지/관심지역/이름/생년월일/비번/비번확인/전화번호/성별-->
-                      <form name="f"  method="post" action="update">
-                        <input type="hidden" name="page" value="${page}"/>
-                        <input type="hidden" name="pageSize" value="${pageSize}"/>
-                        <input type="hidden" name="qseq" value="${qanda.qseq}"/>
+                      <form name="f" method="post" action="update">
+                        <input type="hidden" name="page" value="${page}" />
+                        <input
+                          type="hidden"
+                          name="pageSize"
+                          value="${pageSize}"
+                        />
+                        <input
+                          type="hidden"
+                          name="qseq"
+                          value="${qanda.qseq}"
+                        />
                         <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
@@ -104,7 +114,7 @@
                           </div>
                         </div>
 
-						<div class="d-flex flex-row align-items-center mb-0">
+                        <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
                             <label class="form-label mb-0" for="form3Example1c"
@@ -136,24 +146,22 @@
                           </div>
                         </div>
 
-
-
-						<div class="d-flex flex-row align-items-center mb-0">
+                        <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
-                           <label class="form-label mb-0" for="form3Example4c"
-                            >Q&A내용</label
-							  >
-							  <textarea
-								name="qcontent"
-								placeholder="글을 작성해주세요"
-								row="10"
-								cols="53"
-								id="form3Example4c"
-								class="form-control"
-								value="${qanda.qcontent }"
-                                required
-							  ></textarea>
+                            <label class="form-label mb-0" for="form3Example4c"
+                              >Q&A내용</label
+                            >
+                            <textarea
+                              name="qcontent"
+                              placeholder="글을 작성해주세요"
+                              row="10"
+                              cols="53"
+                              id="form3Example4c"
+                              class="form-control"
+                              value="${qanda.qcontent }"
+                              required
+                            ></textarea>
                           </div>
                         </div>
 
@@ -167,7 +175,11 @@
                           >
                             수정하기
                           </button>
-                          <button onclick="history.back()" type="button" class="btn btn-secondary">
+                          <button
+                            onclick="history.back()"
+                            type="button"
+                            class="btn btn-secondary"
+                          >
                             취소
                           </button>
                         </div>
@@ -185,7 +197,7 @@
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <jsp:include page="../footer.jsp" flush="true"/>
+    <jsp:include page="../footer.jsp" flush="true" />
     <!-- End Footer -->
   </body>
   <div id="preloader"></div>

@@ -1,6 +1,6 @@
-<%@ page contentType="text/html;charset=utf-8" session="true" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html;charset=utf-8" session="true" %> <%@ taglib
+uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <%@ taglib prefix="fmt"
+uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,7 +32,10 @@
       href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="/assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
     <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
@@ -83,16 +86,16 @@
     <link rel="stylesheet" type="text/css" href="/table/css/main.css" />
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script>
-      Kakao.init('11400a9267d93835389eb9255fcaad0b');
-      function signout(){
-        if(Kakao.Auth.getAccessToken() != null){
-          Kakao.Auth.logout(function(){
-            setTimeout(function(){
-              location.href="../member/logout.do";
-            },500);
+      Kakao.init("11400a9267d93835389eb9255fcaad0b");
+      function signout() {
+        if (Kakao.Auth.getAccessToken() != null) {
+          Kakao.Auth.logout(function () {
+            setTimeout(function () {
+              location.href = "../member/logout.do";
+            }, 500);
           });
-        }else{
-          location.href="../member/logout.do";
+        } else {
+          location.href = "../member/logout.do";
         }
       }
     </script>
@@ -100,7 +103,7 @@
 
   <body>
     <!-- ======= Header ======= -->
-    <jsp:include page="../header.jsp" flush="true"/>
+    <jsp:include page="../header.jsp" flush="true" />
     <!-- End Header -->
 
     <main id="main" data-aos="fade-in">
@@ -114,67 +117,69 @@
       <!-- End Breadcrumbs -->
 
       <!-- ======= Trainers Section ======= -->
-      
-	  <section id="trainers" class="trainers" style="padding-top: 0">
+
+      <section id="trainers" class="trainers" style="padding-top: 0">
         <div class="table">
           <div class="container-table100">
             <div class="wrap-table100">
               <div class="table100">
-					 
                 <table class="table">
-						<head>
-                            <tr align="center">
-                                <th width="10%">제목</th>
-                                <th width="60%">${noticeContent.ntitle}</th>
-                            </tr>
-                        </head>
-					<body>
-						<tr>
-							<td>작성일</td>
-							<td>${noticeContent.rdate}</td>						
-						</tr>
-						<tr>
-							 <td>글쓴이</td>
-                              <td>${noticeContent.mname} <span style='float:right'>조회수 : ${noticeContent.nview}</span></td>					
-						</tr> 
-						 <tr>
-                              <td colspan="2" align="center">
-                                 <p>
-								${noticeContent.ncontent}
-								 </p>
-                       
-                              </td>
-                          </tr>               
-					</body>
-				</table>
+                  <head>
+                    <tr align="center">
+                      <th width="10%">제목</th>
+                      <th width="60%">${noticeContent.ntitle}</th>
+                    </tr>
+                  </head>
+                  <body>
+                    <tr>
+                      <td>작성일</td>
+                      <td>${noticeContent.rdate}</td>
+                    </tr>
+                    <tr>
+                      <td>글쓴이</td>
+                      <td>
+                        ${noticeContent.mname}
+                        <span style="float: right"
+                          >조회수 : ${noticeContent.nview}</span
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" align="center">
+                        <p>${noticeContent.ncontent}</p>
+                      </td>
+                    </tr>
+                  </body>
+                </table>
 
-                <c:if test = "${ m.mname eq noticeContent.getMname() || m.athur eq 0 || m.athur eq 1}">
-						 <a 
-	                    type="submit"
-	                    class="btn btn-dark btn-sm mb-1"
-	                    style="float: right"
-	                    href="noticeUpdate?nseq=${noticeContent.nseq }"
-	                   >
-	                 	   수정
-						</a>
-						 <a 
-	                    type="submit"
-	                    class="btn btn-dark btn-sm mb-1"
-	                    style="float: right"
-	                    href="noticeDelete?nseq=${noticeContent.nseq }"                   
-	                   >
-	                 	   삭제
-						</a>
-				</c:if>
-						 <a 
-	                    type="submit"
-	                    class="btn btn-dark btn-sm mb-1"
-	                    style="float: center"
-	                    href="notice"
-	                   >
-	                 	   목록
-						</a>
-
+                <c:if
+                  test="${ m.mname eq noticeContent.getMname() || m.athur eq 0 || m.athur eq 1}"
+                >
+                  <a
+                    type="submit"
+                    class="btn btn-dark btn-sm mb-1"
+                    style="float: right"
+                    href="noticeUpdate?nseq=${noticeContent.nseq }"
+                  >
+                    수정
+                  </a>
+                  <a
+                    type="submit"
+                    class="btn btn-dark btn-sm mb-1"
+                    style="float: right"
+                    href="noticeDelete?nseq=${noticeContent.nseq }"
+                  >
+                    삭제
+                  </a>
+                </c:if>
+                <a
+                  type="submit"
+                  class="btn btn-dark btn-sm mb-1"
+                  style="float: center"
+                  href="notice"
+                >
+                  목록
+                </a>
               </div>
             </div>
           </div>
@@ -185,7 +190,7 @@
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <jsp:include page="../footer.jsp" flush="true"/>
+    <jsp:include page="../footer.jsp" flush="true" />
     <!-- End Footer -->
 
     <div id="preloader"></div>
