@@ -705,7 +705,7 @@
 </section>
 <!-- 섹션종료 -->
 <!-- ======= Popular Courses Section ======= -->
-<section id="popular-courses" class="courses">
+<section id="popular-courses" class="courses mt-0">
     <div class="container" data-aos="fade-up">
         <!-- id값 추가 확인! 0410-->
         <div id="section-title" class="section-title">

@@ -112,7 +112,7 @@
                             <div class="media-body comments-grid-right" style="width:700px">
                                         <h5>${mname }</h5>
                                         <ul class="p-0 comment">
-                                            <li class=""><fmt:formatDate value="${rdate}" pattern="yyyy-MM-dd (E) HH:mm" /></li>
+                                            <li class=""><fmt:formatDate value="${rdate}" pattern="yyyy-MM-dd" /></li>
                                         </ul>
                                         <p style="word-break:break-word">${gbrcontent}</p>
                                     </div>
