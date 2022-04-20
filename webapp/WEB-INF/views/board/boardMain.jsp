@@ -170,8 +170,8 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       <!-- ======= Trainers Section ======= -->
       <section id="trainers" class="trainers" style="padding-top: 0">
         <div class="table">
-          <div class="container-table100">
-            <div class="wrap-table100">
+          <div class="container-table100" >
+            <div class="wrap-table100" style="width: 1200px">
               <div class="button_group">
                 <button
                   class="btn btn-outline-dark btn-sm dropdown-toggle mb-1 mx-md-0"
@@ -212,12 +212,12 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                 <table id="boardTest">
                   <thead>
                     <tr class="table100-head">
-                      <th class="column1">글번호</th>
-                      <th class="column2">관심사</th>
-                      <th class="column3">제목</th>
-                      <th class="column4">작성자</th>
-                      <th class="column5">조회수</th>
-                      <th class="column6">등록일</th>
+                      <th class="col-sm-1">글번호</th>
+                      <th class="col-sm-2">관심사</th>
+                      <th class="col-sm-5">제목</th>
+                      <th class="col-sm-1">작성자</th>
+                      <th class="col-sm-1">조회수</th>
+                      <th class="col-sm-4">등록일</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -231,12 +231,12 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                         <tr
                           onClick="location.href='boardContent?bnum=${board.bnum}&page=${cri.page}&pageSize=${cri.pageSize}'"
                         >
-                          <td class="column1">${board.bnum}</td>
-                          <td class="column2">${board.bcategory }</td>
-                          <td class="column3">${board.btitle }</td>
-                          <td class="column4">${board.mname }</td>
-                          <td class="column5">${board.bview }</td>
-                          <td class="column6">
+                          <td class="col-sm-1">${board.bnum}</td>
+                          <td class="col-sm-2">${board.bcategory }</td>
+                          <td class="col-sm-5">${board.btitle }</td>
+                          <td class="col-sm-1">${board.mname }</td>
+                          <td class="col-sm-1">${board.bview }</td>
+                          <td class="col-sm-4">
                             <fmt:formatDate
                               value="${board.rdate }"
                               pattern="yyyy-MM-dd (E) HH:mm"
@@ -259,6 +259,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                     aria-expanded="false"
                     name="option"
                     id="option"
+                    style="margin-bottom: 5px"
                   >
                     <option value="btitle">제목</option>
                     <option value="bcategory">관심사</option>
@@ -269,7 +270,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                     name="boardSearch"
                     type="text"
                     aria-label="Text input with dropdown button"
-                    style="height: 40px"
+                    style="width:160px; height: 40px; border: solid 1px; border-radius: 5px"
                   />
                 </form>
               </div>

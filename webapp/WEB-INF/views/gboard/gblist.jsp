@@ -163,20 +163,11 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
           </ul>
           <i
             class="bi bi-journal-text"
-            style="margin-left: 1100px; font-weight: bold; width: 1500px"
+            style="font-weight: bold; width: 1500px"
           >
             총 게시글: ${pm.totalCount}개</i
           >
           <div class="button_group">
-            <button
-              class="btn btn-outline-dark btn-sm dropdown-toggle mb-1 mx-md-0"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              style="float: left"
-            >
-              페이지당 게시글 수
-            </button>
             <c:forEach var="gboard" items="${gboardList }">
               <ul class="dropdown-menu">
                 <li>
@@ -209,7 +200,6 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                 </li>
               </ul>
             </c:forEach>
-
             <a
               type="submit"
               class="btn btn-dark btn-sm mb-1"

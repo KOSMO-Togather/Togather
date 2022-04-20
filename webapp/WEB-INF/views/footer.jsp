@@ -62,7 +62,7 @@ session="true" contentType="text/html; charset=utf-8"%>
         <div class="col-lg-4 col-md-6 footer-newsletter">
           <h4>뉴스레터 구독하기</h4>
           <p>최신뉴스 및 프로모션 행사에 대한 안내메일을 받으실 수 있습니다.</p>
-          <form action="" method="post">
+          <form action="">
             <input type="email" name="email" /><input
               type="submit"
               value="Subscribe"
