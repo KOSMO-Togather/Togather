@@ -320,11 +320,15 @@
                 var gname = $("#gname").val();
                 var int_out = $("#int_out").val();
                 var gloc = $("#gloc").val();
-                var popularCourses = document.getElementById('popular-courses'); //모임리스트 보여주는 디자인 갖고오는 메소드
                 if(gname=="" && int_out=="" && gloc==""){
-                    alert("모임이름, 관심사, 지역 중 한 가지 이상을 입력해주세요.");
-                    $("#gname").focus();
-                    return false;
+                    Swal.fire({
+                        title: '모임이름, 관심사, 지역 중 <br/> 한 가지 이상을 입력해주세요.',
+                        icon: 'error',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes'
+                    }).then((result) => {
+                        location.href="../";
+                    });
                 }
 
                 $.ajax({
@@ -333,8 +337,15 @@
                     data: $("#searchForm").serialize(),
                     success: function(result){
                         if(result == ""){
-                            alert("검색하신 모임이 존재하지않습니다. ( 인덱스 페이지로 )");
-                            location.href="../";
+                            Swal.fire({
+                                title: '검색하신 모임이 존재하지않습니다.',
+                                text: '첫 페이지로 돌아갑니다.',
+                                icon: 'error',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Yes'
+                            }).then((result) => {
+                                location.href="../";
+                            });
                         }
                         console.log("result: " + result);
 
