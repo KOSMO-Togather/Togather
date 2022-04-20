@@ -9,11 +9,12 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GroupTabGallery {
-    private long galseq;
-    private long gseq;
-    private long mnum;
-    private String mname;
-    private String pname;
-    private int grade;
-    private MultipartFile uploadFile;
+
+  private long galseq;
+  private long gseq;
+  private long mnum;
+  private String mname;
+  private String pname;
+  private int grade;
+  private MultipartFile uploadFile;
 }

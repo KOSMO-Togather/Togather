@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WishCheck {
-    Long gseq;
-    Integer flag;
+
+  Long gseq;
+  Integer flag;
 }

@@ -1,6 +1,6 @@
-<%@ page contentType="text/html;charset=utf-8" session="false" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html;charset=utf-8" session="false" %> <%@ taglib
+uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <%@ taglib prefix="fmt"
+uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -49,16 +49,16 @@
     <link href="assets/css/style.css" rel="stylesheet" />
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script>
-      Kakao.init('11400a9267d93835389eb9255fcaad0b');
-      function signout(){
-        if(Kakao.Auth.getAccessToken() != null){
-          Kakao.Auth.logout(function(){
-            setTimeout(function(){
-              location.href="../member/logout.do";
-            },500);
+      Kakao.init("11400a9267d93835389eb9255fcaad0b");
+      function signout() {
+        if (Kakao.Auth.getAccessToken() != null) {
+          Kakao.Auth.logout(function () {
+            setTimeout(function () {
+              location.href = "../member/logout.do";
+            }, 500);
           });
-        }else{
-          location.href="../member/logout.do";
+        } else {
+          location.href = "../member/logout.do";
         }
       }
     </script>
@@ -66,7 +66,7 @@
 
   <body>
     <!-- ======= Header ======= -->
-    <jsp:include page="../header.jsp" flush="true"/>
+    <jsp:include page="../header.jsp" flush="true" />
     <!-- End Header -->
 
     <main id="main">
@@ -85,7 +85,9 @@
         <div class="container" data-aos="fade-up">
           <ul class="nav nav-tabs mb-3">
             <li class="nav-item">
-              <a class="nav-link" href="groupInfo.do?gseq=${groupInfo.gseq}">정보</a>
+              <a class="nav-link" href="groupInfo.do?gseq=${groupInfo.gseq}"
+                >정보</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">사진첩</a>
@@ -132,15 +134,26 @@
               </tr>
             </thead>
             <tbody>
-            <c:forEach items="boardList" var="groupBoard">
-              <tr>
-                <th scope="row">${groupBoard.gbnum}</th>
-                <td><a href="/groupBoard/read?gbnum=${groupboard.gbnum}">${groupBoard.gbtitle}</a></td>
-                <td>${groupBoard.mname}</td>
-                <td><span class="badge bg-red">${groupBoard.gbview}></span></td>
-                <td><fmt:formatDate value="${groupBoard.rdate}" pattern="yyyy-MM-dd (E) HH:mm" /></td>
-              </tr>
-             </c:forEach>
+              <c:forEach items="boardList" var="groupBoard">
+                <tr>
+                  <th scope="row">${groupBoard.gbnum}</th>
+                  <td>
+                    <a href="/groupBoard/read?gbnum=${groupboard.gbnum}"
+                      >${groupBoard.gbtitle}</a
+                    >
+                  </td>
+                  <td>${groupBoard.mname}</td>
+                  <td>
+                    <span class="badge bg-red">${groupBoard.gbview}></span>
+                  </td>
+                  <td>
+                    <fmt:formatDate
+                      value="${groupBoard.rdate}"
+                      pattern="yyyy-MM-dd (E) HH:mm"
+                    />
+                  </td>
+                </tr>
+              </c:forEach>
             </tbody>
           </table>
 
@@ -176,7 +189,7 @@
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <jsp:include page="../footer.jsp" flush="true"/>
+    <jsp:include page="../footer.jsp" flush="true" />
     <!-- End Footer -->
 
     <div id="preloader"></div>

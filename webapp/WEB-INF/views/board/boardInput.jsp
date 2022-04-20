@@ -61,7 +61,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
 
   <body>
     <!-- ======= Header ======= -->
-    <jsp:include page="../header.jsp" flush="true"/>
+    <jsp:include page="../header.jsp" flush="true" />
     <!-- End Header -->
 
     <main id="main">
@@ -130,7 +130,11 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                             <label class="form-label mb-0" for="form3Example4cd"
                               >주제</label
                             >
-                            <select class="form-control" name="bcategory" required>
+                            <select
+                              class="form-control"
+                              name="bcategory"
+                              required
+                            >
                               <option value="">선택</option>
                               <option value="질문">질문</option>
                               <option value="모임관련">모임관련</option>

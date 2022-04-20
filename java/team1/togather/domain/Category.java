@@ -8,9 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Category {
-	Long catenum;
-	String int_out;
-	String int_in;
-	String first_option;
-	String second_option;
+
+  Long catenum;
+  String int_out;
+  String int_in;
+  String first_option;
+  String second_option;
 }

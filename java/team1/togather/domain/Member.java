@@ -8,20 +8,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Member {
-    
-	private long mnum;
-	private String maddr;
-	private String pfr_loc;
-	private String mname;
-	private String gender;
-	private String birth;
-	private String pwd;
-	private String email;
-	private String phone;
-	private String category_first;
-	private String category_second;
-	private String category_third;
-	private long athur;
-	private String sessionkey;
-	private String sessionlimit;
+
+  private long mnum;
+  private String maddr;
+  private String pfr_loc;
+  private String mname;
+  private String gender;
+  private String birth;
+  private String pwd;
+  private String email;
+  private String phone;
+  private String category_first;
+  private String category_second;
+  private String category_third;
+  private long athur;
+  private String sessionkey;
+  private String sessionlimit;
 }

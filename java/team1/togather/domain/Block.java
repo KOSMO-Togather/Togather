@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Block {
-	private long bseq;
-	private long blocking;
-	private long blocked;
+
+  private long bseq;
+  private long blocking;
+  private long blocked;
 }

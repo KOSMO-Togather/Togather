@@ -8,8 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WishList {
-	Long wseq;
-	Long mnum;
-	Long gseq;
-	Integer flag;
+
+  Long wseq;
+  Long mnum;
+  Long gseq;
+  Integer flag;
 }

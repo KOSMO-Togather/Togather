@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=utf-8"  %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html;charset=utf-8" %> <%@ taglib
+uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,35 +41,40 @@
       href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="/assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
     <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet" />
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-	<script type="text/javascript" language="javascript" 
-		     src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-      <script>
-      Kakao.init('11400a9267d93835389eb9255fcaad0b');
-      function signout(){
-        if(Kakao.Auth.getAccessToken() != null){
-    	  Kakao.Auth.logout(function(){
-    	    setTimeout(function(){
-              location.href="../member/logout.do";
-           },500);
-         });
-        }else{
-        	location.href="../member/logout.do";
+    <script
+      type="text/javascript"
+      language="javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"
+    ></script>
+    <script>
+      Kakao.init("11400a9267d93835389eb9255fcaad0b");
+      function signout() {
+        if (Kakao.Auth.getAccessToken() != null) {
+          Kakao.Auth.logout(function () {
+            setTimeout(function () {
+              location.href = "../member/logout.do";
+            }, 500);
+          });
+        } else {
+          location.href = "../member/logout.do";
         }
       }
-      </script>
-    
+    </script>
   </head>
 
   <body>
     <!-- ======= Header ======= -->
-    <jsp:include page="../header.jsp" flush="true"/>
+    <jsp:include page="../header.jsp" flush="true" />
     <!-- End Header -->
     <main id="main">
       <!-- ======= Breadcrumbs ======= -->
@@ -93,33 +98,48 @@
                   <div class="row justify-content-center">
                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                       <!--모임지역/이름/모임소개/관심사/정원/모임사진-->
-                      <form class="mx-1 mx-md-4" method="post" action="groupUpdate.do" enctype="multipart/form-data">
-                      <input type="hidden" id="gseq" name="gseq" value="${updateList.gseq}"/>
+                      <form
+                        class="mx-1 mx-md-4"
+                        method="post"
+                        action="groupUpdate.do"
+                        enctype="multipart/form-data"
+                      >
+                        <input
+                          type="hidden"
+                          id="gseq"
+                          name="gseq"
+                          value="${updateList.gseq}"
+                        />
                         <div class="d-flex flex-row align-items-center mb-0">
                           <i class="bi bi-map fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
                             <label class="form-label mb-0" for="form3Example1c"
                               >모임지역</label
                             >
-	                          <div class="col-md-4">
-				                <select id="selectGLoc" class="form-select border-0 py-3" name="gloc" required>
-				                  <option value="서울">서울</option>
-				                  <option value="경기">경기</option>
-				                  <option value="인천">인천</option>
-				                  <option value="강원">강원</option>
-				                  <option value="충북">충북</option>
-				                  <option value="충남">충남</option>
-				                  <option value="전북">전북</option>
-				                  <option value="전남">전남</option>
-				                  <option value="경북">경북</option>
-				                  <option value="경남">경남</option>
-				                  <option value="제주">제주</option> 
-				                </select>
-				              </div>
+                            <div class="col-md-4">
+                              <select
+                                id="selectGLoc"
+                                class="form-select border-0 py-3"
+                                name="gloc"
+                                required
+                              >
+                                <option value="서울">서울</option>
+                                <option value="경기">경기</option>
+                                <option value="인천">인천</option>
+                                <option value="강원">강원</option>
+                                <option value="충북">충북</option>
+                                <option value="충남">충남</option>
+                                <option value="전북">전북</option>
+                                <option value="전남">전남</option>
+                                <option value="경북">경북</option>
+                                <option value="경남">경남</option>
+                                <option value="제주">제주</option>
+                              </select>
+                            </div>
                           </div>
                         </div>
 
-						<div class="d-flex flex-row align-items-center mb-0">
+                        <div class="d-flex flex-row align-items-center mb-0">
                           <i class="bi bi-tag fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
                             <label class="form-label mb-0" for="form3Example1c"
@@ -134,41 +154,43 @@
                             />
                           </div>
                         </div>
-                        
-						<div class="d-flex flex-row align-items-center mb-0">
+
+                        <div class="d-flex flex-row align-items-center mb-0">
                           <i class="bi bi-chat-right-text fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
-                           <label class="form-label mb-0" for="form3Example4c"
-                            >모임소개</label
-							  >
-							  <textarea
-								name="gintro"
-								placeholder="글을 작성해주세요"
-								maxlength="2000"
-								cols="53"
-								id="form3Example4c"
-								class="form-control"
-							  >${updateList.gintro}</textarea>
+                            <label class="form-label mb-0" for="form3Example4c"
+                              >모임소개</label
+                            >
+                            <textarea
+                              name="gintro"
+                              placeholder="글을 작성해주세요"
+                              maxlength="2000"
+                              cols="53"
+                              id="form3Example4c"
+                              class="form-control"
+                            >
+${updateList.gintro}</textarea
+                            >
                           </div>
                         </div>
-						
-						<div class="d-flex flex-row align-items-center mb-0">
+
+                        <div class="d-flex flex-row align-items-center mb-0">
                           <i class="bi bi-star fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
                             <label class="form-label mb-0" for="form3Example4cd"
                               >관심사</label
                             >
-				                <input 
-				                  type="text"
-                             	  id="form3Example1c"
-                             	  class="form-control"
-                             	  name="interest"
-                              	  value="${updateList.interest}"
-                              	  readonly
-                              />
+                            <input
+                              type="text"
+                              id="form3Example1c"
+                              class="form-control"
+                              name="interest"
+                              value="${updateList.interest}"
+                              readonly
+                            />
                           </div>
                         </div>
-                        
+
                         <div class="d-flex flex-row align-items-center mb-0">
                           <i class="bi bi-people fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
@@ -187,7 +209,7 @@
                             />
                           </div>
                         </div>
-                        
+
                         <div class="d-flex flex-row align-items-center mb-0">
                           <i class="bi bi-card-image fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
@@ -199,13 +221,13 @@
                               id="form3Example1c"
                               class="form-control"
                               name="uploadFile"
-							  accept="image/*"
-							  value="${updateList.fname}"
+                              accept="image/*"
+                              value="${updateList.fname}"
                               required
                             />
                           </div>
                         </div>
-                        
+
                         <div
                           class="d-flex justify-content-center mx-4 mb-3 mb-lg-4"
                         >
@@ -233,7 +255,7 @@
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <jsp:include page="../footer.jsp" flush="true"/>
+    <jsp:include page="../footer.jsp" flush="true" />
     <!-- End Footer -->
 
     <div id="preloader"></div>
