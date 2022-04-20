@@ -1,7 +1,7 @@
 # Togather
 
 ### 한국 소프트웨어 인재개발원(KOSMO) 1팀
-> <a href="https://github.com/dnjswjaghd" target="_blank">김진운</a> <a href="https://github.com/jisu3316" target="_blank">김지수</a> <a href="https://github.com/ParkBoom2" target="_blank">박범수</a> <a href="https://github.com/fa7271" target="_blank">송보석</a> <a href="https://github.com/cmkbeew" target="_blank">조현기</a> <a href="https://github.com/DanDChoi" target="_blank">최대현</a> 
+> [김진운](https://github.com/dnjswjaghd){:target="_blank"} <a href="https://github.com/dnjswjaghd" target="_blank">김진운</a> <a href="https://github.com/jisu3316" target="_blank">김지수</a> <a href="https://github.com/ParkBoom2" target="_blank">박범수</a> <a href="https://github.com/fa7271" target="_blank">송보석</a> <a href="https://github.com/cmkbeew" target="_blank">조현기</a> <a href="https://github.com/DanDChoi" target="_blank">최대현</a> 
 <br/>
 
 ### 프로젝트 개요
