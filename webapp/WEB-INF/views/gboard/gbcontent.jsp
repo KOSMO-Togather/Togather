@@ -112,8 +112,9 @@
 
                                 <div id="middleform" class="media-grid">
                                     <div class="media">
-                                        <a class="comment-img" href="#url"><img src="/assets/images/team1.jpg"
-                                                                                class="img-responsive" width="100px" alt="placeholder image"></a>
+                                        <div class="me"style="width: 100px; height: 100px; transform: scaleX(-1); left: 50%; right: 50%; margin-left: -40px;">
+                                            <h1><i class="bi bi-chat-dots"></i></h1>
+                                        </div>
                                         <div class="media-body comments-grid-right" style="width:700px">
                                             <h5>${gbreply.mname }</h5>
                                             <ul class="p-0 comment">

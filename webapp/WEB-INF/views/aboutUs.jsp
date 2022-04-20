@@ -177,158 +177,158 @@
   <!-- End Counts Section -->
 
   <!-- ======= 개발후기 Section(김진운, 김지수, 박범수, 송보석, 조현기, 최대현) ======= -->
-  <section id="testimonials" class="testimonials">
-    <div class="container" data-aos="fade-up">
-      <div class="section-title">
-        <h2>개발후기</h2>
-        <p>KOSMO 1팀의 개발 스토리</p>
-      </div>
+<%--  <section id="testimonials" class="testimonials">--%>
+<%--    <div class="container" data-aos="fade-up">--%>
+<%--      <div class="section-title">--%>
+<%--        <h2>개발후기</h2>--%>
+<%--        <p>KOSMO 1팀의 개발 스토리</p>--%>
+<%--      </div>--%>
 
-      <div
-              class="testimonials-slider swiper"
-              data-aos="fade-up"
-              data-aos-delay="100"
-      >
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <div class="testimonial-wrap">
-              <div class="testimonial-item">
-                <img
-                        src="/assets/img/testimonials/testimonials-1.jpg"
-                        class="testimonial-img"
-                        alt=""
-                />
-                <h3>김진운[팀장]</h3>
-                <h4>맡은 파트</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  같은 취미를 같이 즐기고 싶었던 갈증을 완벽히 해결해줬어요!
-                  &nbsp; 같은 지역에 사는 크루들과 공부도 하고
-                  취미활동까지!! &nbsp; 이젠 주말이 너무 기다려져요
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- End testimonial item -->
+<%--      <div--%>
+<%--              class="testimonials-slider swiper"--%>
+<%--              data-aos="fade-up"--%>
+<%--              data-aos-delay="100"--%>
+<%--      >--%>
+<%--        <div class="swiper-wrapper">--%>
+<%--          <div class="swiper-slide">--%>
+<%--            <div class="testimonial-wrap">--%>
+<%--              <div class="testimonial-item">--%>
+<%--                <img--%>
+<%--                        src="/assets/img/testimonials/testimonials-1.jpg"--%>
+<%--                        class="testimonial-img"--%>
+<%--                        alt=""--%>
+<%--                />--%>
+<%--                <h3>김진운[팀장]</h3>--%>
+<%--                <h4>맡은 파트</h4>--%>
+<%--                <p>--%>
+<%--                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>--%>
+<%--                  같은 취미를 같이 즐기고 싶었던 갈증을 완벽히 해결해줬어요!--%>
+<%--                  &nbsp; 같은 지역에 사는 크루들과 공부도 하고--%>
+<%--                  취미활동까지!! &nbsp; 이젠 주말이 너무 기다려져요--%>
+<%--                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>--%>
+<%--                </p>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--          <!-- End testimonial item -->--%>
 
-          <div class="swiper-slide">
-            <div class="testimonial-wrap">
-              <div class="testimonial-item">
-                <img
-                        src="/assets/img/testimonials/testimonials-2.jpg"
-                        class="testimonial-img"
-                        alt=""
-                />
-                <h3>김지수</h3>
-                <h4>맡은 파트</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Export tempor illum tamen malis malis eram quae irure esse
-                  labore quem cillum quid cillum eram malis quorum velit
-                  fore eram velit sunt aliqua noster fugiat irure amet legam
-                  anim culpa.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- End testimonial item -->
+<%--          <div class="swiper-slide">--%>
+<%--            <div class="testimonial-wrap">--%>
+<%--              <div class="testimonial-item">--%>
+<%--                <img--%>
+<%--                        src="/assets/img/testimonials/testimonials-2.jpg"--%>
+<%--                        class="testimonial-img"--%>
+<%--                        alt=""--%>
+<%--                />--%>
+<%--                <h3>김지수</h3>--%>
+<%--                <h4>맡은 파트</h4>--%>
+<%--                <p>--%>
+<%--                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>--%>
+<%--                  Export tempor illum tamen malis malis eram quae irure esse--%>
+<%--                  labore quem cillum quid cillum eram malis quorum velit--%>
+<%--                  fore eram velit sunt aliqua noster fugiat irure amet legam--%>
+<%--                  anim culpa.--%>
+<%--                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>--%>
+<%--                </p>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--          <!-- End testimonial item -->--%>
 
-          <div class="swiper-slide">
-            <div class="testimonial-wrap">
-              <div class="testimonial-item">
-                <img
-                        src="/assets/img/testimonials/bumsoo.jpg"
-                        class="testimonial-img"
-                        alt=""
-                />
-                <h3>박범수</h3>
-                <h4>모임게시판, 회원관리</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  프로젝트를 진행하면서 다양한 난관을 거치면서 성취감과 동시에 재미를 느낄 수 있었으며,
-                  프로젝트 진행 전과 후를 비교해 보았을 때
-                  어느순간 한 단계 성장해있는 자신을 보면서 뿌듯함과 대견함을 느낄 수 있었습니다.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- End testimonial item -->
+<%--          <div class="swiper-slide">--%>
+<%--            <div class="testimonial-wrap">--%>
+<%--              <div class="testimonial-item">--%>
+<%--                <img--%>
+<%--                        src="/assets/img/testimonials/bumsoo.jpg"--%>
+<%--                        class="testimonial-img"--%>
+<%--                        alt=""--%>
+<%--                />--%>
+<%--                <h3>박범수</h3>--%>
+<%--                <h4>모임게시판, 회원관리</h4>--%>
+<%--                <p>--%>
+<%--                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>--%>
+<%--                  프로젝트를 진행하면서 다양한 난관을 거치면서 성취감과 동시에 재미를 느낄 수 있었으며,--%>
+<%--                  프로젝트 진행 전과 후를 비교해 보았을 때--%>
+<%--                  어느순간 한 단계 성장해있는 자신을 보면서 뿌듯함과 대견함을 느낄 수 있었습니다.--%>
+<%--                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>--%>
+<%--                </p>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--          <!-- End testimonial item -->--%>
 
-          <div class="swiper-slide">
-            <div class="testimonial-wrap">
-              <div class="testimonial-item">
-                <img
-                        src="/assets/img/testimonials/testimonials-4.jpg"
-                        class="testimonial-img"
-                        alt=""
-                />
-                <h3>송보석</h3>
-                <h4>팀원</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa
-                  multos export minim fugiat minim velit minim dolor enim
-                  duis veniam ipsum anim magna sunt elit fore quem dolore
-                  labore illum veniam.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- End testimonial item -->
+<%--          <div class="swiper-slide">--%>
+<%--            <div class="testimonial-wrap">--%>
+<%--              <div class="testimonial-item">--%>
+<%--                <img--%>
+<%--                        src="/assets/img/testimonials/testimonials-4.jpg"--%>
+<%--                        class="testimonial-img"--%>
+<%--                        alt=""--%>
+<%--                />--%>
+<%--                <h3>송보석</h3>--%>
+<%--                <h4>팀원</h4>--%>
+<%--                <p>--%>
+<%--                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>--%>
+<%--                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa--%>
+<%--                  multos export minim fugiat minim velit minim dolor enim--%>
+<%--                  duis veniam ipsum anim magna sunt elit fore quem dolore--%>
+<%--                  labore illum veniam.--%>
+<%--                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>--%>
+<%--                </p>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--          <!-- End testimonial item -->--%>
 
-          <div class="swiper-slide">
-            <div class="testimonial-wrap">
-              <div class="testimonial-item">
-                <img
-                        src="/assets/img/testimonials/testimonials-5.jpg"
-                        class="testimonial-img"
-                        alt=""
-                />
-                <h3>조현기</h3>
-                <h4>팀원</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure
-                  aliqua veniam tempor noster veniam enim culpa labore duis
-                  sunt culpa nulla illum cillum fugiat legam esse veniam
-                  culpa fore nisi cillum quid.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- End testimonial item -->
-          <div class="swiper-slide">
-            <div class="testimonial-wrap">
-              <div class="testimonial-item">
-                <img
-                        src="/assets/img/testimonials/testimonials-5.jpg"
-                        class="testimonial-img"
-                        alt=""
-                />
-                <h3>최대현</h3>
-                <h4>정모, 사진첩, 프론트 구현</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure
-                  aliqua veniam tempor noster veniam enim culpa labore duis
-                  sunt culpa nulla illum cillum fugiat legam esse veniam
-                  culpa fore nisi cillum quid.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- End testimonial item -->
-        </div>
-        <div class="swiper-pagination"></div>
-      </div>
-    </div>
-  </section>
+<%--          <div class="swiper-slide">--%>
+<%--            <div class="testimonial-wrap">--%>
+<%--              <div class="testimonial-item">--%>
+<%--                <img--%>
+<%--                        src="/assets/img/testimonials/testimonials-5.jpg"--%>
+<%--                        class="testimonial-img"--%>
+<%--                        alt=""--%>
+<%--                />--%>
+<%--                <h3>조현기</h3>--%>
+<%--                <h4>팀원</h4>--%>
+<%--                <p>--%>
+<%--                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>--%>
+<%--                  Quis quorum aliqua sint quem legam fore sunt eram irure--%>
+<%--                  aliqua veniam tempor noster veniam enim culpa labore duis--%>
+<%--                  sunt culpa nulla illum cillum fugiat legam esse veniam--%>
+<%--                  culpa fore nisi cillum quid.--%>
+<%--                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>--%>
+<%--                </p>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--          <!-- End testimonial item -->--%>
+<%--          <div class="swiper-slide">--%>
+<%--            <div class="testimonial-wrap">--%>
+<%--              <div class="testimonial-item">--%>
+<%--                <img--%>
+<%--                        src="/assets/img/testimonials/testimonials-5.jpg"--%>
+<%--                        class="testimonial-img"--%>
+<%--                        alt=""--%>
+<%--                />--%>
+<%--                <h3>최대현</h3>--%>
+<%--                <h4>정모, 사진첩, 프론트 구현</h4>--%>
+<%--                <p>--%>
+<%--                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>--%>
+<%--                  Quis quorum aliqua sint quem legam fore sunt eram irure--%>
+<%--                  aliqua veniam tempor noster veniam enim culpa labore duis--%>
+<%--                  sunt culpa nulla illum cillum fugiat legam esse veniam--%>
+<%--                  culpa fore nisi cillum quid.--%>
+<%--                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>--%>
+<%--                </p>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--          <!-- End testimonial item -->--%>
+<%--        </div>--%>
+<%--        <div class="swiper-pagination"></div>--%>
+<%--      </div>--%>
+<%--    </div>--%>
+<%--  </section>--%>
   <!-- End Testimonials Section -->
 </main>
 <!-- End #main -->

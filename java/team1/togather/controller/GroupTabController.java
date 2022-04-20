@@ -137,7 +137,7 @@ public class GroupTabController {
 				MemInGathering notice = groupTabService.endTimeNotice(mig);
 				mv.addObject("endTimeGathering", endTimeGathering.get(0));
 				mv.addObject("name", memberName);
-				mv.addObject("notice", notice);
+				mv.addObject(          "notice", notice);
 				mv.addObject("gatheringName",endTimeGathering.get(0).getGa_name());
 			}else {
 				MemInGathering notice =new MemInGathering();
