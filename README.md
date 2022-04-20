@@ -1,7 +1,7 @@
 # Togather
 
 ### 한국 소프트웨어 인재개발원(KOSMO) 1팀
-> [김진운]() [김지수](https://github.com/jisu3316) [박범수]() [송보석]() [조현기]() [최대현](https://github.com/DanDChoi)
+> [김진운](https://github.com/dnjswjaghd) [김지수](https://github.com/jisu3316) [박범수](https://github.com/ParkBoom2) [송보석](https://github.com/fa7271) [조현기](https://github.com/cmkbeew) [최대현](https://github.com/DanDChoi)
 
 <br/>
 
@@ -16,7 +16,7 @@ _기획의도_<br/>
 <br/><br/>
 
 
-[시연영상](http://naver.com)
+[시연영상](https://www.youtube.com/)
 
 
 
