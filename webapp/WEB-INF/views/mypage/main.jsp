@@ -109,7 +109,7 @@
 							}
 						}else if(data==1){
 							Swal.fire({
-								title:"틀림",
+								title:"현재 비밀번호가 <br/>맞지 않습니다",
 								icon:"error"
 							});
 						}

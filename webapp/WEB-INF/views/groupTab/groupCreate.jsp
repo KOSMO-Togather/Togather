@@ -369,6 +369,7 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
                         method="post"
                         action="groupCreate.do?mnum=${m.mnum}"
                         enctype="multipart/form-data"
+                        autocomplete="off"
                       >
                         <div class="d-flex flex-row align-items-center mb-0">
                           <i class="bi bi-map fa-lg me-3 fa-fw"></i>

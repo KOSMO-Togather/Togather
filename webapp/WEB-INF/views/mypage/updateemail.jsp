@@ -71,7 +71,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       		if(emailcheck != null){
       			if (!check.test(emailcheck)) {
       				Swal.fire({
-      					title:"이메일을 제대로된 형식으로 입력해주세요.",
+      					title:"이메일을 제대로 된 <br/> 형식으로 입력해주세요.",
       					icon:"warnig"
       					});
       				$("#emailcheck").val("");
@@ -88,14 +88,14 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       				if(data == 1){
       					var emailcheck = $("emailcheck").val();
       					Swal.fire({
-      						title:"이미 존재하는 이메일입니다.",
+      						title:"이미 존재하는 <br/>이메일입니다.",
       						icon:"warning"
       						})
       					return false
       				}else{
       					var emailcheck = $("emailcheck").val();
       					Swal.fire({
-      						title:"사용 가능한 이메일 입니다..",
+      						title:"수정 가능한 <br/>이메일입니다",
       						icon:"success"
       						});
       				}
@@ -187,6 +187,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                         id="checkform"
                         name="checkform"
                         method="post"
+                        autocomplete="off"
                       >
                         <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>

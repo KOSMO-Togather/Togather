@@ -93,6 +93,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                         name="board"
                         method="post"
                         action="boardInsert"
+                        autocomplete="off"
                       >
                         <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
@@ -120,6 +121,8 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                               name="mname"
                               id="form3Example1c"
                               class="form-control"
+                              value="${m.mname}"
+                              readonly
                             />
                           </div>
                         </div>
@@ -149,7 +152,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
                             <label class="form-label mb-0" for="form3Example4c"
-                              >모임소개</label
+                              >내용</label
                             >
                             <textarea
                               name="bcontent"
@@ -170,7 +173,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                             class="btn btn-success"
                             style="margin-right: 30px"
                           >
-                            개설
+                            등록
                           </button>
                           <button type="button" class="btn btn-secondary">
                             취소

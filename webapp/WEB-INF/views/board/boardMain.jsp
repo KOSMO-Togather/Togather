@@ -198,15 +198,16 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                 </ul>
 
                 <!--운영자만 가능한 글쓰기 버튼-->
-
-                <a
-                  type="submit"
-                  class="btn btn-dark btn-sm mb-1"
-                  style="float: right"
-                  href="boardInput"
-                >
-                  글쓰기
-                </a>
+                <c:if test="${m ne null}">
+                  <a
+                    type="submit"
+                    class="btn btn-dark btn-sm mb-1"
+                    style="float: right"
+                    href="boardInput"
+                  >
+                    글쓰기
+                  </a>
+                </c:if>
               </div>
               <div class="table100">
                 <table id="boardTest">

@@ -8,7 +8,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>Pricing - Mentor Bootstrap Template</title>
+    <title>Togather</title>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 

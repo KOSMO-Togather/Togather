@@ -245,7 +245,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
               </div>
               <div
                 class="input-group input-group-sm mb-3"
-                style="width: 300px; height: auto"
+                style="width: 400px; height: auto"
               >
                 <form
                   name="searchbar"
@@ -258,6 +258,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                     aria-expanded="false"
                     name="option"
                     id="option"
+                    style="margin-bottom: 5px"
                   >
                     <option value="noption">선택</option>
                     <option value="ntitle">제목</option>
@@ -269,6 +270,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                     type="text"
                     onkeyup="enterCheck(this)"
                     aria-label="Text input with dropdown button"
+                    style="width:160px; height: 40px; border: solid 1px; border-radius: 5px"
                   />
                 </form>
               </div>

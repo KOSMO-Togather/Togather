@@ -160,6 +160,7 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
                 name="f"
                 action="gatheringCreate.do?gseq=${groupInfo.gseq}&mnum=${m.mnum}"
                 method="post"
+                autocomplete="off"
               >
                 <div class="form-outline mb-4">
                   <input

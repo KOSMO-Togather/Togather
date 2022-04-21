@@ -256,9 +256,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         <div class="container" data-aos="fade-up" style="margin-top: 10px">
           <ul class="nav nav-tabs mb-3">
             <li class="nav-item">
-              <a class="nav-link" href="MmGbListPage?mnum=${m.mnum}"
-                >모임게시판</a
-              >
+              <a class="nav-link" href="MmGbListPage?mnum=${mnum}">모임게시판</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page">모임게시판 댓글</a>

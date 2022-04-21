@@ -265,9 +265,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
               <a class="nav-link active" aria-current="page">모임게시판</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="MmGbRListPage?mnum=${mnum}&gseq=${gseq}"
-                >모임게시판 댓글</a
-              >
+              <a class="nav-link" href="MmGbRListPage?mnum=${mnum}">모임게시판 댓글</a>
             </li>
           </ul>
           <div class="button_group">

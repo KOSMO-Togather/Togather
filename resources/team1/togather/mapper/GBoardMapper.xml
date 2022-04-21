@@ -4,11 +4,10 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team1.togather.mapper.GBoardMapper">
 
-
 	<select id="gblistPageCri" resultType="GBoard" parameterType="GBoardCriteria">
       <![CDATA[
-		select * from (select ROWNUM rnum, aa.* from (select * from GROUPTAB_BOARD order by gbnum desc) aa)
-		where rnum>#{startRow} and rnum<=#{endRow} and gseq=#{gseq}
+		select * from (select ROWNUM rnum, aa.* from (select * from GROUPTAB_BOARD where gseq=#{gseq} order by gbnum desc) aa)
+		where rnum>#{startRow} and rnum<=#{endRow}
 		]]>
    </select>
 	<select id="gbpageCount" resultType="Integer" parameterType="long" >
