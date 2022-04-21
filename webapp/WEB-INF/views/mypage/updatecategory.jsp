@@ -522,7 +522,7 @@
 		$(function(){
 			$("#secondbutton").on("click",function(){
 				Swal.fire({
-					title: '두번째 카테고리를 삭제하시겠습니까,?',
+					title: '삭제하시겠습니까?',
 					icon: 'question',
 					showCancelButton: true,
 					confirmButtonColor: '#3085d6',
@@ -557,7 +557,7 @@
 		$(function(){
 			$("#thirdbutton").on("click",function(){
 				Swal.fire({
-					title: '두번째 카테고리를 삭제하시겠습니까,?',
+					title: '삭제하시겠습니까?',
 					icon: 'question',
 					showCancelButton: true,
 					confirmButtonColor: '#3085d6',

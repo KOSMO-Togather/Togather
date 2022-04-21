@@ -1,6 +1,6 @@
 package team1.togather.domain;
-
 import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,10 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 public class GBoardCriteria {
-
   private long page;
   private long pageSize;
-  private String option = "글쓴이";
+  private String option ="글쓴이";
   private String ocontent = "장";
   private long gseq;
 
@@ -20,18 +19,15 @@ public class GBoardCriteria {
     this.pageSize = pageSize;
     this.gseq = gseq;
   }
-
   public GBoardCriteria() {
     this.page = 1;
-    this.pageSize = 10;
+    this.pageSize = 5;
   }
-
   public long getStartRow() {
-    return (page - 1) * pageSize;
+    return (page-1)*pageSize;
   }
-
   public long getEndRow() {
-    return page * pageSize;
+    return page*pageSize;
   }
 
   public long getPage() {
@@ -39,7 +35,7 @@ public class GBoardCriteria {
   }
 
   public void setPage(long page) {
-    if (page <= 0) {
+    if(page <=0) {
       this.page = 1;
       return;
     }
@@ -51,21 +47,21 @@ public class GBoardCriteria {
   }
 
   public void setPageSize(long pageSize) {
-    if (pageSize <= 0 || pageSize > 100) {
+    if(pageSize <=0 || pageSize > 100) {
       this.pageSize = 10;
       return;
     }
     this.pageSize = pageSize;
   }
 
+
   public long getPageStart() {
-    return (this.page - 1) * this.pageSize;
+    return (this.page - 1)*this.pageSize;
   }
 
   public long getGseq() {
     return gseq;
   }
-
   public void setGseq(long gseq) {
     this.gseq = gseq;
   }

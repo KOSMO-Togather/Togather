@@ -165,7 +165,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       		var replyTo="";
       		replyTo+="<div class='leave-comment-form' id='div2'>";
       		replyTo+="<h3 class='aside-title'>답변하기</h3>";
-      		replyTo+="<form action='replyToMessage?to_mnum=${m.mnum}&from_mnum=${messageContent.to_mnum}&page=${page}&pageSize=${pageSize}&meseq=${messageContent.meseq}' method='post'>";
+      		replyTo+="<form action='replyToMessage?to_mnum=${m.mnum}&from_mnum=${messageContent.to_mnum}&page=${page}&pageSize=${pageSize}&meseq=${messageContent.meseq}' method='post' autocomplete='off'>";
       		replyTo+="<div class='input-grids'>";
       		replyTo+="<div class='form-group'>";
       		replyTo+="<input type='text' name='to_mname' class='form-control'  value='${m.mname}' required readonly>";

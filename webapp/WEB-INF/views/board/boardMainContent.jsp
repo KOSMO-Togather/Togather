@@ -125,9 +125,12 @@
                             $("#outerreplyform #middleform").empty();
                         }
                     }
-
-                    $(result).each(function(){
-
+                    let mnum=${m.mnum};
+                    let rseq = $('.hidden')
+                    let bool=true;
+                    $(result).each(function(index){
+                        bool=true;
+                        console.log("index: "+index);
                         if(this.content==null){
                             console.log("contentnull");
                             this.content=" ";
@@ -142,29 +145,41 @@
                             +"<h5>"+this.mname+"</h5>"
                             +"<ul class=\"p-0 comment\">"
                             +"<li>"+this.rdate+"</li>"
-                            +"<c:if test='${m ne null }'>"
-                            +"<li onclick=\"setR_like(this)\"><p>"+this.r_like+"</p><a><i class=\"bi bi-hand-thumbs-up\" aria-hidden=\"true\"></i>좋아요</a>"
-                            +"<div class=\"hiddenrseq\" style=\"display:none\">"+this.rseq+"</div></li>"
-                            +"<c:if test ='${ m.mnum eq replyList.mnum || m.athur ne 2}' >"
-                            +"<div align=\"right\">"
-                            +"<a style=\"color:blue\" href='../board/deleteReply?bnum="+this.bnum+"&rseq="+this.rseq+"'>삭제</a>"
-                            +"</div>"
-                            +"</c:if> </c:if>"
-                            +"<c:if test='${m eq null }'>"
+                            <c:if test='${m ne null }'>
+                            +"<li><p>"+this.r_like+"</p><a onclick=\"setR_like(this)\"><i class=\"bi bi-hand-thumbs-up\" aria-hidden=\"true\"></i>좋아요</a>"
+                            +"<div id='"+index+"'class=\"hiddenrseq\" style=\"display:none\">"+this.rseq+"</div></li>"
+                            +"<input type='hidden' id='input"+index+"' value='"+this.mnum+"'/>"
+                            </c:if>
+                            <c:if test='${m eq null }'>
                             +"<li>"
-                            +"<p>${replyList.r_like}</p>"
+                            +"<p>"+this.r_like+"</p>"
                             +"<a > 좋아요<i class=\"bi bi-hand-thumbs-up\" aria-hidden=\"true\"></i></a>"
-                            +"<div class=\"hiddenrseq\" style=\"display:none\">${replyList.rseq }</div>"
-                            +"</li></c:if>"
+                            +"<div class=\"hiddenrseq\" style=\"display:none\">"+this.rseq+"</div>"
+                            +"</li>"
+                            </c:if>
                             +"</ul>"
                             +"<p>"+this.content+"</p>"
                             +"</div></div></div>"
                         );
+
                         $("#content").val("");
                         var totalreply = result.length;
                         document.getElementById('commentsNum').innerHTML = "Recent Comments("+totalreply+")";
+                    });
+                    $(result).each(function(index){
+                        let hiddenRseq = $('#'+index).text();
 
-                    })
+                        if(mnum==this.mnum && hiddenRseq == this.rseq){
+                            let indexStr = String(index);
+                            console.log("indexStr: " );
+                            console.log("스트링합치기: "+'#'.concat(indexStr));
+                            $('#'.concat(indexStr)).after(
+                                "<div align=\"right\">"
+                                +"<a style=\"color:blue\" href='../board/deleteReply?bnum="+this.bnum+"&rseq="+this.rseq+"'>삭제</a>"
+                                +"</div>"
+                            );
+                        }
+                    });
                 },
                 error: function(error){
                     console.log("##postComment error");
@@ -261,7 +276,7 @@
 
                                                                 <div class="hiddenrseq" style="display:none">${replyList.rseq }</div>
                                                             </li>
-                                                            <c:if test = "${ m.mnum eq replyList.mnum || m.athur ne 2}" >
+                                                            <c:if test = '${ m.mnum eq replyList.mnum || m.athur ne 2}' >
                                                                 <div align="right">
                                                                     <a style="color:blue" href='../board/deleteReply?bnum=${replyList.bnum}&rseq=${replyList.rseq}'>삭제</a>
                                                                 </div>

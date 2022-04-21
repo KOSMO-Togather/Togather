@@ -161,45 +161,26 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
               <a class="nav-link active" aria-current="page" href="#">게시판</a>
             </li>
           </ul>
-          <i
-            class="bi bi-journal-text"
-            style="font-weight: bold; width: 1500px"
-          >
-            총 게시글: ${pm.totalCount}개</i
-          >
+          <i class="bi bi-journal-text" style="margin-left:1100px; font-weight : bold; width: 1500px">    총 게시글: ${pm.totalCount}개</i>
           <div class="button_group">
+            <button
+                    class="btn btn-outline-dark btn-sm dropdown-toggle mb-1 mx-md-0"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    style="float: left"
+            >
+              페이지당 게시글 수
+            </button>
             <c:forEach var="gboard" items="${gboardList }">
               <ul class="dropdown-menu">
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="gblistPage?pageSize=1&gseq=${gboard.gseq}"
-                    >1</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="gblistPage?pageSize=5&gseq=${gboard.gseq}"
-                    >5</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="gblistPage?pageSize=10&gseq=${gboard.gseq}"
-                    >10</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="gblistPage?pageSize=15&gseq=${gboard.gseq}"
-                    >15</a
-                  >
-                </li>
+                <li><a class="dropdown-item" href="gblistPage?pageSize=1&gseq=${gboard.gseq}">1</a></li>
+                <li><a class="dropdown-item" href="gblistPage?pageSize=5&gseq=${gboard.gseq}">5</a></li>
+                <li><a class="dropdown-item" href="gblistPage?pageSize=10&gseq=${gboard.gseq}">10</a></li>
+                <li><a class="dropdown-item" href="gblistPage?pageSize=15&gseq=${gboard.gseq}">15</a></li>
               </ul>
             </c:forEach>
+
             <a
               type="submit"
               class="btn btn-dark btn-sm mb-1"

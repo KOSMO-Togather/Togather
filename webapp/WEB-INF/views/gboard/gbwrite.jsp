@@ -96,6 +96,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                         method="post"
                         action="gbwrite.do?&gseq=${gseq}"
                         enctype="multipart/form-data"
+                        autocomplete="off"
                       >
                         <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>

@@ -131,8 +131,10 @@
                     console.log("##5showGroups success: "+result);
                     if(result.length==0){
                         $("#popularSection").empty();
+                        $("#pageDiv").hide();
                         document.getElementById('showGroupform').innerText = "해당 관심사의 개설된 모임이 없습니다";
                     }else{
+                        $("#pageDiv").show();
                         $("#popularSection").empty();
                         var inter = result[0].interest;
                         document.getElementById('showGroupform').innerText = "관심사: "+inter;
@@ -208,6 +210,7 @@
                     int_out:$(e).find('a').text()
                 },
                 success: function(result){
+                    $('#pageDiv').hide();
                     console.log("##success: "+result);
                     $("#addInCateForm").empty();
                     $("#addInCateForm2").empty();
@@ -327,6 +330,7 @@
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Yes'
                     }).then((result) => {
+                        $('#pageDiv').show();
                         location.href="../";
                     });
                 }
@@ -336,6 +340,7 @@
                     type: "GET",
                     data: $("#searchForm").serialize(),
                     success: function(result){
+                        $('#pageDiv').hide();
                         if(result == ""){
                             Swal.fire({
                                 title: '검색하신 모임이 존재하지않습니다.',
@@ -344,6 +349,7 @@
                                 confirmButtonColor: '#3085d6',
                                 confirmButtonText: 'Yes'
                             }).then((result) => {
+                                $('#pageDiv').show();
                                 location.href="../";
                             });
                         }
@@ -478,7 +484,7 @@
         data-wow-delay="0.1s"
         style="padding: 35px; background-color: #5fcf80"
 >
-    <form  id="searchForm">
+    <form  id="searchForm" autocomplete="off">
         <div class="container">
             <div class="row g-2">
                 <div class="col-md-10">
@@ -498,6 +504,7 @@
                                 <option value="아웃도어/여행">아웃도어/여행</option>
                                 <option value="외국/언어">외국/언어</option>
                                 <option value="음악/악기">음악/악기</option>
+                                <option value="운동/스포츠">운동/스포츠</option>
                                 <option value="차/오토바이">차/오토바이</option>
                                 <option value="요리/제조">요리/제조</option>
                                 <option value="업종/직무">업종/직무</option>
@@ -793,7 +800,7 @@
         </div>
     </div>
     <c:if test="${m ne null }">
-        <div>
+        <div id="pageDiv">
             <nav aria-label="Page navigation example">
                 <ul
                         id="paging"

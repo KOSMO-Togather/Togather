@@ -502,7 +502,7 @@
 			console.log("checkbox: "+checkbox);
 			if(!checkbox){
 					Swal.fire({
-						title:"ToGater 이용약관에 동의해주세용.",
+						title:"Togather 이용약관에<br/> 동의해주세요",
 						icon:"warning"
 						});
 					return false;
@@ -703,7 +703,7 @@
                         <span class="bg-light">OR</span>
                       </p>
                       <!--거주지/관심지역/이름/생년월일/비번/비번확인/전화번호/성별-->
-                      <form class="mx-1 mx-md-4" id="joinform">
+                      <form class="mx-1 mx-md-4" id="joinform" autocomplete="off">
                         <div class="d-flex flex-row align-items-center mb-0">
                           <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
@@ -730,7 +730,7 @@
                               name="email"
                               id="email_id"
                               class="form-control"
-                              placeholder="example@google.com"
+                              placeholder="example@gmail.com"
                               value=""
                             />
                           </div>
