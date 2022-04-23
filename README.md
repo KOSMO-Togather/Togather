@@ -20,7 +20,7 @@ _기획의도_<br/>
 <br/><br/>
 
 
-<a href="https://www.youtube.com" target="_blank">시연영상</a> 
+<a href="https://youtu.be/8GCJeK2E9IA" target="_blank">시연영상</a> 
 <br/>
 
 
