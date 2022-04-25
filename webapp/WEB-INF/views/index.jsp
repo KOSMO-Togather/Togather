@@ -10,7 +10,6 @@
     <title>Togather</title>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
-
     <!-- Favicons -->
     <link href="/assets/img/favicon.png" rel="icon" />
     <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
@@ -86,7 +85,6 @@
                         location.href="member/messageList?mnum="+mnum;
 
                     } else if (
-                        /* Read more about handling dismissals below */
                         result.dismiss === Swal.DismissReason.cancel
                     ) {//여기에 로직 알림끄는
                         var result = {"mnum":mnum};
