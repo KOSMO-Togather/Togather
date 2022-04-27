@@ -1,4 +1,6 @@
 # Togather
+Togather는 _모으다_ 는 뜻의 Gather와 _함께_ 라는 뜻의 Together를 합쳐 <br/>
+spelling은 To Gather를, 발음은 Together를 의도하여 만든 서비스명입니다.<br/>
 
 ### 한국 소프트웨어 인재개발원(KOSMO) 1팀
 > [김진운](https://github.com/dnjswjaghd)
