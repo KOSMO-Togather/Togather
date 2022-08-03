@@ -377,20 +377,13 @@ public class GatheringController {
   }
 
   @GetMapping("gatheringInfo.do") //정모 디테일
-  public ModelAndView gatheringInfo(
-    long ga_seq,
-    MemInGathering memInGathering
-  ) {
+  public ModelAndView gatheringInfo(long ga_seq, MemInGathering memInGathering) {
     Gathering gatheringInfo = gatheringService.ga_selectByGaSeqS(ga_seq);
     Long gatheringMemberCount = gatheringService.gatheringMemberCount(ga_seq);
     Member gatheringCreateName = gatheringService.gatheringCreaterName(ga_seq);
-    Long memInGatheringCheck = gatheringService.memInGatheringCheck(
-      memInGathering
-    );
+    Long memInGatheringCheck = gatheringService.memInGatheringCheck(memInGathering);
     log.info("#mnum memInGatheringCheck: " + memInGatheringCheck);
-    List<Map<String, String>> memInGatheringName = gatheringService.memInGatheringName(
-      memInGathering
-    );
+    List<Map<String, String>> memInGatheringName = gatheringService.memInGatheringName(memInGathering);
     try {
       getCoordinate(gatheringInfo.getGa_place());
     } catch (Exception e) {

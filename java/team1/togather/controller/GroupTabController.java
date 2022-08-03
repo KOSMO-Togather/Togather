@@ -332,10 +332,8 @@ public class GroupTabController {
   @PostMapping("gatheringCreateCheck")
   @ResponseBody
   public Long gatheringCreateCheck(long gseq) {
-    System.out.println("#Controller: " + gseq);
     Long check = groupTabService.gatheringCountInGroup(gseq);
     if (check >= 5) {
-      System.out.println("#gatheringCreateCheck: " + check);
       return (long) 0;
     } else {
       return (long) 1;
