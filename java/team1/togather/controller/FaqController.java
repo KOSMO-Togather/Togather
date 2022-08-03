@@ -1,14 +1,12 @@
 package team1.togather.controller;
 
 import java.util.List;
-
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import lombok.AllArgsConstructor;
 import team1.togather.domain.Faq;
 import team1.togather.service.FaqService;
 
@@ -16,42 +14,43 @@ import team1.togather.service.FaqService;
 @AllArgsConstructor
 @RequestMapping("faq")
 public class FaqController {
-	private FaqService faqService;
 
-	@GetMapping("faqList")
-	public ModelAndView list() {
-		List<Faq> list = faqService.listS();
-		ModelAndView mv = new ModelAndView("faq/faqList", "list", list);
-		return mv;
-	}
+  private FaqService faqService;
 
-	@GetMapping("faqInput")
-	public String faqInput() {
-		return "faq/faqInput";
-	}
+  @GetMapping("faqList")
+  public ModelAndView list() {
+    List<Faq> list = faqService.listS();
+    ModelAndView mv = new ModelAndView("faq/faqList", "list", list);
+    return mv;
+  }
 
-	@PostMapping("faqInput.do")
-	public String faqInput(Faq faq) {
-		faqService.insertS(faq);
-		return "redirect:faqList";
-	}
+  @GetMapping("faqInput")
+  public String faqInput() {
+    return "faq/faqInput";
+  }
 
-	@GetMapping("faqUpdate")
-	public ModelAndView faqUpdate(long fseq) {
-		Faq faq = faqService.selectBySeqS(fseq);
-		System.out.println("###faq.getFtitle() = " + faq.getFtitle());
-		ModelAndView mv = new ModelAndView("faq/faqUpdate", "faq", faq);
-		return mv;
-	}
+  @PostMapping("faqInput.do")
+  public String faqInput(Faq faq) {
+    faqService.insertS(faq);
+    return "redirect:faqList";
+  }
 
-	@PostMapping("faqUpdate")
-	public String faqUpdate(Faq faq) {
-		faqService.updateS(faq);
-		return "redirect:faqList";
-	}
-	@GetMapping("faqDelete")
-	public String faqDelete(long fseq) {
-		faqService.deleteS(fseq);
-		return "redirect:faqList";
-	}
+  @GetMapping("faqUpdate")
+  public ModelAndView faqUpdate(long fseq) {
+    Faq faq = faqService.selectBySeqS(fseq);
+    ModelAndView mv = new ModelAndView("faq/faqUpdate", "faq", faq);
+    return mv;
+  }
+
+  @PostMapping("faqUpdate")
+  public String faqUpdate(Faq faq) {
+    faqService.updateS(faq);
+    return "redirect:faqList";
+  }
+
+  @GetMapping("faqDelete")
+  public String faqDelete(long fseq) {
+    faqService.deleteS(fseq);
+    return "redirect:faqList";
+  }
 }

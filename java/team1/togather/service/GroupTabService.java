@@ -58,4 +58,5 @@ public interface GroupTabService {
 
 	List<GroupTab> searchGroup(GroupTab groupTab);
 	String kingName(long gseq);
+	void kingUpdate(long gseq);
 }

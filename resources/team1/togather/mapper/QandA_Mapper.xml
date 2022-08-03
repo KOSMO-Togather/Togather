@@ -71,7 +71,7 @@
 	</select>
 	<!-- 수정SQL -->
 	<update id="update" parameterType="QA">
-		update QA set QTITLE=#{qtitle},QCONTENT=#{qcontent},QPWD=#{qpwd} WHERE QSEQ=#{qseq}
+		update QA set QTITLE=#{qtitle}, QCONTENT=#{qcontent}, QPWD=#{qpwd} where QSEQ=#{qseq}
 	</update>
 	<!-- 조회수 -->
 	<update id="views" parameterType="QA">

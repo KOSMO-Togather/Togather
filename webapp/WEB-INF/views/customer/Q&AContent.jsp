@@ -143,7 +143,9 @@
 	   					success: function(data){
 	   						if(athur==0){
 	   							upDate();
-	   						}else{
+	   						}else if(athur==1){
+                                upDate();
+                            }else{
 		   						if(data==0){//없을때
 		   							Swal.fire({
 		   								title:"본인만 수정가능합니다",
@@ -171,7 +173,9 @@
 	   					success: function(data){
 	   						if(athur==0){
 	   							qaDelete();
-	   						}else{
+	   						}else if(athur==1){
+                                qaDelete();
+                            }else{
 		   						if(data==0){//없을때
 		   							Swal.fire({
 		   								title:"본인만 삭제가능합니다",
@@ -187,7 +191,7 @@
     	}
     	
     	function upDate(){
-    		location="qaUpDate?qseq=${qanda.qseq}";
+            location="qaUpDate?qseq=${qanda.qseq}&page=${page}&pageSize=${pageSize}";
     	}
     	function qaDelete(){
     		location="qaDelete?qseq=${qanda.qseq}";
@@ -216,12 +220,6 @@
     	}
     	
     	function comment(i,index,mnumCheck,athur){
-    		//var arr = new Array();
-    		//<c:forEach var="qaReply" items="${qaReply}">	              
-	       // 	arr.push({qarDate:"${qaReply.qardate}"});
-        	//</c:forEach>
-        	//console.log(arr);
-        	//console.log(arr[index].qarDate);
         	var num=index;
         	var liUp="liup";
     		liUp+=index;
@@ -281,66 +279,7 @@
 
   <body >
     <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top">
-        <div class="container d-flex align-items-center">
-            <h1 class="logo me-auto"><a href="../">Togather</a></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-            <nav id="navbar" class="navbar order-last order-lg-0">
-                <ul>
-                    <c:if test="${m.athur eq 0}">
-                        <li><a class="manage" href="../membermg/mmlistPage">회원관리</a></li>
-                    </c:if>
-                    <li><a class="active" href="../">Home</a></li>
-                    <li><a href="../about">About</a></li>
-                    <li><a href="../board/listPage">게시판</a></li>
-                    <c:if test="${m ne null}">
-                        <li><a href="../groupTab/myGroup.do?mnum=${m.mnum }">나의 모임</a></li><!--로그인시에만 보이게 하기-->
-                        <li><a href="../wishTab/wishList?mnum=${m.mnum }">찜목록
-                            <span id="numberOfWish" class="badge bg-dark text-white ms-1 rounded-pill">${wishsize }</span>
-                        </a></li>
-                    </c:if>
-                    <li class="dropdown">
-                        <a href="#"
-                        ><span>고객지원</span> <i class="bi bi-chevron-down"></i
-                        ></a>
-                        <ul>
-                            <li><a href="../notification/notice">공지사항</a></li>
-                            <li><a href="../faq/faqList">자주묻는 질문</a></li>
-                            <li><a href="qa">Q&A</a></li>
-                            <li><a href="../contact">Contact</a></li>
-                        </ul>
-                    </li>
-
-                    <c:choose>
-                        <c:when test="${m eq null}">
-                            <li><a href="../member/login.do">로그인 ${sessionScope.m} </a></li>
-                        </c:when>
-                        <c:otherwise>
-                            <li><a href="javascript:void(0);" onclick="signout();">로그아웃</a></li>
-                            <li><a href="../mypage/main">마이페이지</a></li>
-                        </c:otherwise>
-                    </c:choose>
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-
-            </nav>
-            <!-- .navbar -->
-
-            <!--로그인전에는 회원가입만 보이고 로그인하면 모임만들기만 보이게 하는건 어떤지??-->
-            <c:choose>
-                <c:when test="${m eq null}">
-                    <a href="../member/joinform.do" class="get-started-btn">회원가입</a>
-                </c:when>
-                <c:otherwise>
-                    <a href="../groupTab/groupCreate.do" class="get-started-btn">모임만들기</a>
-                </c:otherwise>
-            </c:choose>
-
-
-        </div>
-    </header>
+    <jsp:include page="../header.jsp" flush="true"/>
     <!-- End Header -->
     <main id="main">
       <!-- ======= Breadcrumbs ======= -->
@@ -349,10 +288,7 @@
           <h1>Q & A</h1>
         </div>
       </div>
-
-
-	  <section class="text-11 py-5">
-    <div class="text11 py-4">
+    <section id="course-details" class="course-details">
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 text11-content m-auto">
@@ -361,24 +297,6 @@
                     <h6><span class="fa fa-user mr-1 icon-color"></span>${qanda.mnum}, ${qanda.qdate}</h6>
                     <a href="#post" class="post"></a>
                     <p class="mt-4 mb-3">${qanda.qcontent}</p>
-                    
-
-                    <!--
-                    글 공유 
-                        <div class="social-share-blog mt-5 pb-4">
-                        <ul class="column3 social m-0 p-0">
-                            <li>
-                                <p class="m-0 mr-4">Share this post :</p>
-                            </li>
-                            <li><a href="#facebook" class="facebook"><span class="fab fa-facebook-f"></span></a>
-                            </li>
-                            <li><a href="#twitter" class="twitter"><span class="fab fa-twitter"></span></a></li>
-                            <li><a href="#instagram" class="instagram"><span class="fab fa-instagram"></span></a>
-                            </li>
-                            <li><a href="#linkedin" class="linkedin"><span class="fab fa-linkedin-in"></span></a>
-                            </li>
-                        </ul>
-                    </div> -->
                     <c:choose>
 						<c:when test="${m eq null}" >
 							<c:set var="athur" value="2"/>
@@ -410,8 +328,8 @@
                         <div class="comments-grids">
                             <!-- 여기부터 루프 -->
 
-<c:if test="${qaReply ne null }">
-<c:forEach var="qaReply" items="${qaReply }" varStatus="index">
+                <c:if test="${qaReply ne null }">
+                <c:forEach var="qaReply" items="${qaReply }" varStatus="index">
                             <div class="media-grid">
                                 <div class="media">
                                     <a class="comment-img" href="javascript:void(0)"><img src="/assets/img/trainers/trainer-1.jpg"
@@ -429,10 +347,10 @@
                                 </div>
                             </div>
                     </c:forEach>
-</c:if>
+                </c:if>
 					</div>
                 </div>
-                    <c:if test="${m.athur eq 0}">
+                    <c:if test="${m.athur eq 0 || m.athur eq 1}">
                     
 	                    <div class="leave-comment-form" id="comment">
 	                        <h3 class="aside-title">Leave a reply</h3>
@@ -453,103 +371,14 @@
 	                  </c:if>          
                 </div>      
             </div>
-        </div>
+
     </div>
 </section>
     </main>
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <footer id="footer">
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 footer-contact">
-                        <h3>Togather</h3>
-                        <p>
-                            서울시 금천구<br/>
-                            가산 디지털 2로 123<br/>
-                            월드메르디앙 2차<br/><br/>
-                            <strong>Phone:</strong>+82 2 1234 1234<br/>
-                            <strong>Email:</strong>service@togather.com<br/>
-                        </p>
-                    </div>
-
-                    <div class="col-lg-2 col-md-6 footer-links">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li>
-                                <i class="bx bx-chevron-right"></i> <a href="../">Home</a>
-                            </li>
-                            <li>
-                                <i class="bx bx-chevron-right"></i> <a href="../about">About us</a>
-                            </li>
-                            <li>
-                                <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
-                            </li>
-                            <li>
-                                <i class="bx bx-chevron-right"></i>
-                                <a href="#">Terms of service</a>
-                            </li>
-                            <li>
-                                <i class="bx bx-chevron-right"></i>
-                                <a href="#">Privacy policy</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div  class="col-lg-3 col-md-6 footer-links">
-                        <h4>Our Services</h4>
-                        <ul>
-                            <li>
-                                <i class="bx bx-chevron-right"></i> <a href="../notification/notice">공지사항</a>
-                            </li>
-                            <li>
-                                <i class="bx bx-chevron-right"></i>
-                                <a href="../faq/faqList">자주 묻는 질문</a>
-                            </li>
-                            <li>
-                                <i class="bx bx-chevron-right"></i>
-                                <a href="qa">Q & A</a>
-                            </li>
-                            <li>
-                                <i class="bx bx-chevron-right"></i> <a href="../contact">Contact</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 footer-newsletter">
-                        <h4>뉴스레터 구독하기</h4>
-                        <p>
-                            최신뉴스 및 프로모션 행사에 대한 안내메일을 받으실 수 있습니다.
-                        </p>
-                        <form action="" method="post">
-                            <input type="email" name="email"/><input
-                                type="submit"
-                                value="Subscribe"
-                        />
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container d-md-flex py-4">
-            <div class="me-md-auto text-center text-md-start">
-                <div class="copyright">
-                    &copy; Copyright<strong><span>Togather</span></strong
-                >. All Rights Reserved
-                </div>
-            </div>
-            <div class="social-links text-center text-md-right pt-3 pt-md-0">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-            </div>
-        </div>
-    </footer>
+    <jsp:include page="../footer.jsp" flush="true"/>
     <!-- End Footer -->
 
     <div id="preloader"></div>

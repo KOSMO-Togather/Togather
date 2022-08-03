@@ -1,11 +1,11 @@
 package team1.togather.controller;
 
-//git test
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import team1.togather.domain.Board;
 import team1.togather.domain.BoardCriteria;
-import team1.togather.domain.Member;
 import team1.togather.domain.PageMaker;
 import team1.togather.domain.Reply;
 import team1.togather.service.BoardService;
@@ -41,17 +40,6 @@ public class BoardController {
     Integer page,
     Integer pageSize
   ) {
-    System.out.println(
-      "listRest안 option: " +
-      option +
-      " boardSearch: " +
-      boardSearch +
-      " page: " +
-      page +
-      " pagesize: " +
-      pageSize
-    );
-
     Map<String, String> map = new HashMap<String, String>();
     BoardCriteria cri = new BoardCriteria(page, pageSize);
     map.put("option", option);
@@ -68,6 +56,13 @@ public class BoardController {
     return replyservice.getReply(reply.getBnum());
   }
 
+  @GetMapping("deleteReply")
+  public String deleteReply(Reply reply, HttpSession session) {
+    Long rseq = reply.getRseq();
+    replyservice.deleteReply(rseq);
+    return "redirect:boardContent?bnum=" + reply.getBnum() + "";
+  }
+
   @GetMapping("/listCri")
   public void listCriGET(Model model, BoardCriteria cri) {
     model.addAttribute("boardList", service.listCri(cri));
@@ -76,8 +71,6 @@ public class BoardController {
   @ResponseBody
   @PostMapping("setR_like")
   public Long setR_like(@RequestBody Reply reply) {
-    System.out.println("보컨 setRlike mnum: " + reply.getMnum());
-    System.out.println("보드컨트롤러setR_like rseq: " + reply.getRseq());
     Map<String, Object> map = new HashMap<>();
     map.put("rseq", reply.getRseq());
     map.put("mnum", reply.getMnum());
@@ -97,16 +90,13 @@ public class BoardController {
     Model model,
     HttpServletRequest request
   ) {
-    System.out.println("board컨트롤러안 listpageGET: cri값: " + cri);
     model.addAttribute("boardList", service.listCri(cri)); // =listPageCri()
     if (request.getParameter("page") != null) {
       String pageAt = request.getParameter("page");
-      System.out.println("현재 페이지: " + pageAt);
       cri.setPage(Integer.parseInt(pageAt));
     }
     if (request.getParameter("pageSize") != null) {
       String pageSize = request.getParameter("pageSize");
-      System.out.println("현재 페이지사이즈: " + pageSize);
       cri.setPageSize(Integer.parseInt(pageSize));
     }
     PageMaker pm = new PageMaker();
@@ -124,7 +114,6 @@ public class BoardController {
     Model model,
     HttpServletRequest request
   ) {
-    System.out.println("board컨트롤러안 listpageGET: cri값: " + cri);
     model.addAttribute("boardList", service.listCri(cri)); // =listPageCri()
     if (request.getParameter("page") != null) {
       String pageAt = request.getParameter("page");
@@ -182,6 +171,7 @@ public class BoardController {
     }
     mv.addObject("bnum", bnum);
     mv.addObject("reply", reply);
+    for (Reply li : reply) {}
     mv.addObject("totalReply", reply.size());
     return mv;
   }
@@ -201,9 +191,22 @@ public class BoardController {
 
   @PostMapping("boardUpdate")
   public ModelAndView commitBoardUpdate(Board board) {
-    System.out.println("commit~안 board의 bnum: " + board.getBnum());
     service.update(board);
     ModelAndView mv = new ModelAndView("redirect:listPage");
     return mv;
+  }
+
+  @PostMapping("/boardNextPostCheck")
+  @ResponseBody
+  public Long nextPostCheck(long bnum) {
+    Long nextBnum = service.boardNextPost(bnum);
+    return nextBnum;
+  }
+
+  @PostMapping("/boardPreviousPostCheck")
+  @ResponseBody
+  public Long previousPost(long bnum) {
+    Long previousBnum = service.boardPreviousPost(bnum);
+    return previousBnum;
   }
 }

@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=utf-8"  %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html;charset=utf-8" %> <%@ taglib
+uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,94 +41,40 @@
       href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="/assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
     <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet" />
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-	<script type="text/javascript" language="javascript" 
-		     src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-      <script>
-      Kakao.init('11400a9267d93835389eb9255fcaad0b');
-      function signout(){
-        if(Kakao.Auth.getAccessToken() != null){
-    	  Kakao.Auth.logout(function(){
-    	    setTimeout(function(){
-              location.href="../member/logout.do";
-           },500);
-         });
-        }else{
-        	location.href="../member/logout.do";
+    <script
+      type="text/javascript"
+      language="javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"
+    ></script>
+    <script>
+      Kakao.init("11400a9267d93835389eb9255fcaad0b");
+      function signout() {
+        if (Kakao.Auth.getAccessToken() != null) {
+          Kakao.Auth.logout(function () {
+            setTimeout(function () {
+              location.href = "../member/logout.do";
+            }, 500);
+          });
+        } else {
+          location.href = "../member/logout.do";
         }
       }
-      </script>
-    
+    </script>
   </head>
 
   <body>
     <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top">
-      <div class="container d-flex align-items-center">
-        <h1 class="logo me-auto"><a href="../">Togather</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-        <nav id="navbar" class="navbar order-last order-lg-0">
-          <ul>
-            <c:if test="${m.athur eq 0}">
-              <li><a class="manage" href="../membermg/mmlistPage">회원관리</a></li>
-            </c:if>
-            <li><a class="active" href="../">Home</a></li>
-            <li><a href="../about">About</a></li>
-            <li><a href="../board/listPage">게시판</a></li>
-            <c:if test="${m ne null}">
-              <li><a href="../groupTab/myGroup.do?mnum=${m.mnum }">나의 모임</a></li><!--로그인시에만 보이게 하기-->
-              <li><a href="../wishTab/wishList?mnum=${m.mnum }">찜목록
-                <span id="numberOfWish" class="badge bg-dark text-white ms-1 rounded-pill">${wishsize }</span>
-              </a></li>
-            </c:if>
-            <li class="dropdown">
-              <a href="#"
-              ><span>고객지원</span> <i class="bi bi-chevron-down"></i
-              ></a>
-              <ul>
-                <li><a href="../notification/notice">공지사항</a></li>
-                <li><a href="../faq/faqList">자주묻는 질문</a></li>
-                <li><a href="../qa">Q&A</a></li>
-                <li><a href="../contact">Contact</a></li>
-              </ul>
-            </li>
-
-            <c:choose>
-              <c:when test="${m eq null}">
-                <li><a href="../member/login.do">로그인 ${sessionScope.m} </a></li>
-              </c:when>
-              <c:otherwise>
-                <li><a href="javascript:void(0);" onclick="signout();">로그아웃</a></li>
-                <li><a href="../mypage/main">마이페이지</a></li>
-              </c:otherwise>
-            </c:choose>
-          </ul>
-          <i class="bi bi-list mobile-nav-toggle"></i>
-
-        </nav>
-        <!-- .navbar -->
-
-        <!--로그인전에는 회원가입만 보이고 로그인하면 모임만들기만 보이게 하는건 어떤지??-->
-        <c:choose>
-          <c:when test="${m eq null}">
-            <a href="../member/joinform.do" class="get-started-btn">회원가입</a>
-          </c:when>
-          <c:otherwise>
-            <a href="../groupTab/groupCreate.do" class="get-started-btn">모임만들기</a>
-          </c:otherwise>
-        </c:choose>
-
-
-      </div>
-    </header>
+    <jsp:include page="../header.jsp" flush="true" />
     <!-- End Header -->
     <main id="main">
       <!-- ======= Breadcrumbs ======= -->
@@ -152,34 +98,48 @@
                   <div class="row justify-content-center">
                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                       <!--모임지역/이름/모임소개/관심사/정원/모임사진-->
-                      <form class="mx-1 mx-md-4" method="post" action="groupUpdate.do" enctype="multipart/form-data">
-                      <input type="hidden" id="gseq" name="gseq" value="${updateList.gseq}"/>
+                      <form
+                        class="mx-1 mx-md-4"
+                        method="post"
+                        action="groupUpdate.do"
+                        enctype="multipart/form-data"
+                      >
+                        <input
+                          type="hidden"
+                          id="gseq"
+                          name="gseq"
+                          value="${updateList.gseq}"
+                        />
                         <div class="d-flex flex-row align-items-center mb-0">
                           <i class="bi bi-map fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
                             <label class="form-label mb-0" for="form3Example1c"
                               >모임지역</label
                             >
-	                          <div class="col-md-4">
-				                <select id="selectGLoc" class="form-select border-0 py-3" name="gloc">
-				                  <option selected disabled>지역</option>
-				                  <option value="서울">서울</option>
-				                  <option value="경기">경기</option>
-				                  <option value="인천">인천</option>
-				                  <option value="강원">강원</option>
-				                  <option value="충북">충북</option>
-				                  <option value="충남">충남</option>
-				                  <option value="전북">전북</option>
-				                  <option value="전남">전남</option>
-				                  <option value="경북">경북</option>
-				                  <option value="경남">경남</option>
-				                  <option value="제주">제주</option> 
-				                </select>
-				              </div>
+                            <div class="col-md-4">
+                              <select
+                                id="selectGLoc"
+                                class="form-select border-0 py-3"
+                                name="gloc"
+                                required
+                              >
+                                <option value="서울">서울</option>
+                                <option value="경기">경기</option>
+                                <option value="인천">인천</option>
+                                <option value="강원">강원</option>
+                                <option value="충북">충북</option>
+                                <option value="충남">충남</option>
+                                <option value="전북">전북</option>
+                                <option value="전남">전남</option>
+                                <option value="경북">경북</option>
+                                <option value="경남">경남</option>
+                                <option value="제주">제주</option>
+                              </select>
+                            </div>
                           </div>
                         </div>
 
-						<div class="d-flex flex-row align-items-center mb-0">
+                        <div class="d-flex flex-row align-items-center mb-0">
                           <i class="bi bi-tag fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
                             <label class="form-label mb-0" for="form3Example1c"
@@ -194,41 +154,43 @@
                             />
                           </div>
                         </div>
-                        
-						<div class="d-flex flex-row align-items-center mb-0">
+
+                        <div class="d-flex flex-row align-items-center mb-0">
                           <i class="bi bi-chat-right-text fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
-                           <label class="form-label mb-0" for="form3Example4c"
-                            >모임소개</label
-							  >
-							  <textarea
-								name="gintro"
-								placeholder="글을 작성해주세요"
-								maxlength="2000"
-								cols="53"
-								id="form3Example4c"
-								class="form-control"
-							  >${updateList.gintro}</textarea>
+                            <label class="form-label mb-0" for="form3Example4c"
+                              >모임소개</label
+                            >
+                            <textarea
+                              name="gintro"
+                              placeholder="글을 작성해주세요"
+                              maxlength="2000"
+                              cols="53"
+                              id="form3Example4c"
+                              class="form-control"
+                            >
+${updateList.gintro}</textarea
+                            >
                           </div>
                         </div>
-						
-						<div class="d-flex flex-row align-items-center mb-0">
+
+                        <div class="d-flex flex-row align-items-center mb-0">
                           <i class="bi bi-star fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
                             <label class="form-label mb-0" for="form3Example4cd"
                               >관심사</label
                             >
-				                <input 
-				                  type="text"
-                             	  id="form3Example1c"
-                             	  class="form-control"
-                             	  name="interest"
-                              	  value="${updateList.interest}"
-                              	  readonly
-                              />
+                            <input
+                              type="text"
+                              id="form3Example1c"
+                              class="form-control"
+                              name="interest"
+                              value="${updateList.interest}"
+                              readonly
+                            />
                           </div>
                         </div>
-                        
+
                         <div class="d-flex flex-row align-items-center mb-0">
                           <i class="bi bi-people fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
@@ -247,7 +209,7 @@
                             />
                           </div>
                         </div>
-                        
+
                         <div class="d-flex flex-row align-items-center mb-0">
                           <i class="bi bi-card-image fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-2">
@@ -259,13 +221,13 @@
                               id="form3Example1c"
                               class="form-control"
                               name="uploadFile"
-							  accept="image/*"
-							  value="${updateList.fname}"
+                              accept="image/*"
+                              value="${updateList.fname}"
                               required
                             />
                           </div>
                         </div>
-                        
+
                         <div
                           class="d-flex justify-content-center mx-4 mb-3 mb-lg-4"
                         >
@@ -274,7 +236,7 @@
                             class="btn btn-success"
                             style="margin-right: 30px"
                           >
-                            개설
+                            수정
                           </button>
                           <button type="button" class="btn btn-secondary">
                             취소
@@ -293,96 +255,7 @@
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <footer id="footer">
-      <div class="footer-top">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-md-6 footer-contact">
-              <h3>Togather</h3>
-              <p>
-                서울시 금천구<br/>
-                가산 디지털 2로 123<br/>
-                월드메르디앙 2차<br/><br/>
-                <strong>Phone:</strong>+82 2 1234 1234<br/>
-                <strong>Email:</strong>service@togather.com<br/>
-              </p>
-            </div>
-
-            <div class="col-lg-2 col-md-6 footer-links">
-              <h4>Useful Links</h4>
-              <ul>
-                <li>
-                  <i class="bx bx-chevron-right"></i> <a href="../">Home</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i> <a href="../about">About us</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="#">Terms of service</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="#">Privacy policy</a>
-                </li>
-              </ul>
-            </div>
-
-            <div  class="col-lg-3 col-md-6 footer-links">
-              <h4>Our Services</h4>
-              <ul>
-                <li>
-                  <i class="bx bx-chevron-right"></i> <a href="../notification/notice">공지사항</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="../faq/faqList">자주 묻는 질문</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="../qa">Q & A</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i> <a href="../contact">Contact</a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-lg-4 col-md-6 footer-newsletter">
-              <h4>뉴스레터 구독하기</h4>
-              <p>
-                최신뉴스 및 프로모션 행사에 대한 안내메일을 받으실 수 있습니다.
-              </p>
-              <form action="" method="post">
-                <input type="email" name="email"/><input
-                      type="submit"
-                      value="Subscribe"
-              />
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="container d-md-flex py-4">
-        <div class="me-md-auto text-center text-md-start">
-          <div class="copyright">
-            &copy; Copyright<strong><span>Togather</span></strong
-          >. All Rights Reserved
-          </div>
-        </div>
-        <div class="social-links text-center text-md-right pt-3 pt-md-0">
-          <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-          <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-          <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-          <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-          <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-        </div>
-      </div>
-    </footer>
+    <jsp:include page="../footer.jsp" flush="true" />
     <!-- End Footer -->
 
     <div id="preloader"></div>

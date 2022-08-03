@@ -66,66 +66,7 @@
 
 <body>
 <!-- ======= Header ======= -->
-<header id="header" class="fixed-top">
-  <div class="container d-flex align-items-center">
-    <h1 class="logo me-auto"><a href="/">Togather</a></h1>
-    <!-- Uncomment below if you prefer to use an image logo -->
-    <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-    <nav id="navbar" class="navbar order-last order-lg-0">
-      <ul>
-        <c:if test="${m.athur eq 0}">
-          <li><a class="manage" href="/membermg/mmlistPage">회원관리</a></li>
-        </c:if>
-        <li><a class="active" href="/">Home</a></li>
-        <li><a href="about">About</a></li>
-        <li><a href="board/listPage">게시판</a></li>
-        <c:if test="${m ne null}">
-          <li><a href="groupTab/myGroup.do?mnum=${m.mnum }">나의 모임</a></li><!--로그인시에만 보이게 하기-->
-          <li><a href="wishTab/wishList?mnum=${m.mnum }">찜목록
-            <span id="numberOfWish" class="badge bg-dark text-white ms-1 rounded-pill">${wishsize }</span>
-          </a></li>
-        </c:if>
-        <li class="dropdown">
-          <a href="#"
-          ><span>고객지원</span> <i class="bi bi-chevron-down"></i
-          ></a>
-          <ul>
-            <li><a href="notification/notice">공지사항</a></li>
-            <li><a href="faq/faqList">자주묻는 질문</a></li>
-            <li><a href="qa">Q&A</a></li>
-            <li><a href="contact">Contact</a></li>
-          </ul>
-        </li>
-
-        <c:choose>
-          <c:when test="${m eq null}">
-            <li><a href="member/login.do">로그인 ${sessionScope.m} </a></li>
-          </c:when>
-          <c:otherwise>
-            <li><a href="javascript:void(0);" onclick="signout();">로그아웃</a></li>
-            <li><a href="mypage/main">마이페이지</a></li>
-          </c:otherwise>
-        </c:choose>
-      </ul>
-      <i class="bi bi-list mobile-nav-toggle"></i>
-
-    </nav>
-    <!-- .navbar -->
-
-    <!--로그인전에는 회원가입만 보이고 로그인하면 모임만들기만 보이게 하는건 어떤지??-->
-    <c:choose>
-      <c:when test="${m eq null}">
-        <a href="member/joinform.do" class="get-started-btn">회원가입</a>
-      </c:when>
-      <c:otherwise>
-        <a href="groupTab/groupCreate.do" class="get-started-btn">모임만들기</a>
-      </c:otherwise>
-    </c:choose>
-
-
-  </div>
-</header>
+<jsp:include page="header.jsp" flush="true"/>
 <!-- End Header -->
 
 <main id="main">
@@ -194,7 +135,7 @@
         <div onClick="showInCate(this)" class="col-lg-3 col-6 text-center">
                   <span
                           data-purecounter-start="0"
-                          data-purecounter-end="${membercount }"
+                          data-purecounter-end="${membercount*162}"
                           data-purecounter-duration="1"
                           class="purecounter"
                   ></span>
@@ -204,7 +145,7 @@
         <div onClick="showInCate(this)" class="col-lg-3 col-6 text-center">
                   <span
                           data-purecounter-start="0"
-                          data-purecounter-end="${groupcount }"
+                          data-purecounter-end="${groupcount*68}"
                           data-purecounter-duration="1"
                           class="purecounter"
                   ></span>
@@ -214,7 +155,7 @@
         <div onClick="showInCate(this)" class="col-lg-3 col-6 text-center">
                   <span
                           data-purecounter-start="0"
-                          data-purecounter-end="${gatheringcount}"
+                          data-purecounter-end="${gatheringcount*53}"
                           data-purecounter-duration="1"
                           class="purecounter"
                   ></span>
@@ -224,11 +165,11 @@
         <div onClick="showInCate(this)" class="col-lg-3 col-6 text-center">
                   <span
                           data-purecounter-start="0"
-                          data-purecounter-end="2198"
+                          data-purecounter-end="4923"
                           data-purecounter-duration="1"
                           class="purecounter"
                   ></span>
-          <p>하루평균 방문자</p>
+          <p>누적 정모</p>
         </div>
       </div>
     </div>
@@ -236,253 +177,164 @@
   <!-- End Counts Section -->
 
   <!-- ======= 개발후기 Section(김진운, 김지수, 박범수, 송보석, 조현기, 최대현) ======= -->
-  <section id="testimonials" class="testimonials">
-    <div class="container" data-aos="fade-up">
-      <div class="section-title">
-        <h2>개발후기</h2>
-        <p>KOSMO 1팀의 개발 스토리</p>
-      </div>
+<%--  <section id="testimonials" class="testimonials">--%>
+<%--    <div class="container" data-aos="fade-up">--%>
+<%--      <div class="section-title">--%>
+<%--        <h2>개발후기</h2>--%>
+<%--        <p>KOSMO 1팀의 개발 스토리</p>--%>
+<%--      </div>--%>
 
-      <div
-              class="testimonials-slider swiper"
-              data-aos="fade-up"
-              data-aos-delay="100"
-      >
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <div class="testimonial-wrap">
-              <div class="testimonial-item">
-                <img
-                        src="/assets/img/testimonials/testimonials-1.jpg"
-                        class="testimonial-img"
-                        alt=""
-                />
-                <h3>김진운[팀장]</h3>
-                <h4>맡은 파트</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  같은 취미를 같이 즐기고 싶었던 갈증을 완벽히 해결해줬어요!
-                  &nbsp; 같은 지역에 사는 크루들과 공부도 하고
-                  취미활동까지!! &nbsp; 이젠 주말이 너무 기다려져요
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- End testimonial item -->
+<%--      <div--%>
+<%--              class="testimonials-slider swiper"--%>
+<%--              data-aos="fade-up"--%>
+<%--              data-aos-delay="100"--%>
+<%--      >--%>
+<%--        <div class="swiper-wrapper">--%>
+<%--          <div class="swiper-slide">--%>
+<%--            <div class="testimonial-wrap">--%>
+<%--              <div class="testimonial-item">--%>
+<%--                <img--%>
+<%--                        src="/assets/img/testimonials/testimonials-1.jpg"--%>
+<%--                        class="testimonial-img"--%>
+<%--                        alt=""--%>
+<%--                />--%>
+<%--                <h3>김진운[팀장]</h3>--%>
+<%--                <h4>맡은 파트</h4>--%>
+<%--                <p>--%>
+<%--                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>--%>
+<%--                  같은 취미를 같이 즐기고 싶었던 갈증을 완벽히 해결해줬어요!--%>
+<%--                  &nbsp; 같은 지역에 사는 크루들과 공부도 하고--%>
+<%--                  취미활동까지!! &nbsp; 이젠 주말이 너무 기다려져요--%>
+<%--                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>--%>
+<%--                </p>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--          <!-- End testimonial item -->--%>
 
-          <div class="swiper-slide">
-            <div class="testimonial-wrap">
-              <div class="testimonial-item">
-                <img
-                        src="/assets/img/testimonials/testimonials-2.jpg"
-                        class="testimonial-img"
-                        alt=""
-                />
-                <h3>김지수</h3>
-                <h4>맡은 파트</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Export tempor illum tamen malis malis eram quae irure esse
-                  labore quem cillum quid cillum eram malis quorum velit
-                  fore eram velit sunt aliqua noster fugiat irure amet legam
-                  anim culpa.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- End testimonial item -->
+<%--          <div class="swiper-slide">--%>
+<%--            <div class="testimonial-wrap">--%>
+<%--              <div class="testimonial-item">--%>
+<%--                <img--%>
+<%--                        src="/assets/img/testimonials/testimonials-2.jpg"--%>
+<%--                        class="testimonial-img"--%>
+<%--                        alt=""--%>
+<%--                />--%>
+<%--                <h3>김지수</h3>--%>
+<%--                <h4>맡은 파트</h4>--%>
+<%--                <p>--%>
+<%--                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>--%>
+<%--                  Export tempor illum tamen malis malis eram quae irure esse--%>
+<%--                  labore quem cillum quid cillum eram malis quorum velit--%>
+<%--                  fore eram velit sunt aliqua noster fugiat irure amet legam--%>
+<%--                  anim culpa.--%>
+<%--                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>--%>
+<%--                </p>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--          <!-- End testimonial item -->--%>
 
-          <div class="swiper-slide">
-            <div class="testimonial-wrap">
-              <div class="testimonial-item">
-                <img
-                        src="/assets/img/testimonials/bumsoo.jpg"
-                        class="testimonial-img"
-                        alt=""
-                />
-                <h3>박범수</h3>
-                <h4>모임게시판, 회원관리</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  프로젝트를 진행하면서 다양한 난관을 거치면서 성취감과 동시에 재미를 느낄 수 있었으며,
-                  프로젝트 진행 전과 후를 비교해 보았을 때
-                  어느순간 한 단계 성장해있는 자신을 보면서 뿌듯함과 대견함을 느낄 수 있었습니다.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- End testimonial item -->
+<%--          <div class="swiper-slide">--%>
+<%--            <div class="testimonial-wrap">--%>
+<%--              <div class="testimonial-item">--%>
+<%--                <img--%>
+<%--                        src="/assets/img/testimonials/bumsoo.jpg"--%>
+<%--                        class="testimonial-img"--%>
+<%--                        alt=""--%>
+<%--                />--%>
+<%--                <h3>박범수</h3>--%>
+<%--                <h4>모임게시판, 회원관리</h4>--%>
+<%--                <p>--%>
+<%--                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>--%>
+<%--                  프로젝트를 진행하면서 다양한 난관을 거치면서 성취감과 동시에 재미를 느낄 수 있었으며,--%>
+<%--                  프로젝트 진행 전과 후를 비교해 보았을 때--%>
+<%--                  어느순간 한 단계 성장해있는 자신을 보면서 뿌듯함과 대견함을 느낄 수 있었습니다.--%>
+<%--                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>--%>
+<%--                </p>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--          <!-- End testimonial item -->--%>
 
-          <div class="swiper-slide">
-            <div class="testimonial-wrap">
-              <div class="testimonial-item">
-                <img
-                        src="/assets/img/testimonials/testimonials-4.jpg"
-                        class="testimonial-img"
-                        alt=""
-                />
-                <h3>송보석</h3>
-                <h4>팀원</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa
-                  multos export minim fugiat minim velit minim dolor enim
-                  duis veniam ipsum anim magna sunt elit fore quem dolore
-                  labore illum veniam.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- End testimonial item -->
+<%--          <div class="swiper-slide">--%>
+<%--            <div class="testimonial-wrap">--%>
+<%--              <div class="testimonial-item">--%>
+<%--                <img--%>
+<%--                        src="/assets/img/testimonials/testimonials-4.jpg"--%>
+<%--                        class="testimonial-img"--%>
+<%--                        alt=""--%>
+<%--                />--%>
+<%--                <h3>송보석</h3>--%>
+<%--                <h4>팀원</h4>--%>
+<%--                <p>--%>
+<%--                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>--%>
+<%--                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa--%>
+<%--                  multos export minim fugiat minim velit minim dolor enim--%>
+<%--                  duis veniam ipsum anim magna sunt elit fore quem dolore--%>
+<%--                  labore illum veniam.--%>
+<%--                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>--%>
+<%--                </p>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--          <!-- End testimonial item -->--%>
 
-          <div class="swiper-slide">
-            <div class="testimonial-wrap">
-              <div class="testimonial-item">
-                <img
-                        src="/assets/img/testimonials/testimonials-5.jpg"
-                        class="testimonial-img"
-                        alt=""
-                />
-                <h3>조현기</h3>
-                <h4>팀원</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure
-                  aliqua veniam tempor noster veniam enim culpa labore duis
-                  sunt culpa nulla illum cillum fugiat legam esse veniam
-                  culpa fore nisi cillum quid.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- End testimonial item -->
-          <div class="swiper-slide">
-            <div class="testimonial-wrap">
-              <div class="testimonial-item">
-                <img
-                        src="/assets/img/testimonials/testimonials-5.jpg"
-                        class="testimonial-img"
-                        alt=""
-                />
-                <h3>최대현</h3>
-                <h4>정모, 사진첩, 프론트 구현</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure
-                  aliqua veniam tempor noster veniam enim culpa labore duis
-                  sunt culpa nulla illum cillum fugiat legam esse veniam
-                  culpa fore nisi cillum quid.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- End testimonial item -->
-        </div>
-        <div class="swiper-pagination"></div>
-      </div>
-    </div>
-  </section>
+<%--          <div class="swiper-slide">--%>
+<%--            <div class="testimonial-wrap">--%>
+<%--              <div class="testimonial-item">--%>
+<%--                <img--%>
+<%--                        src="/assets/img/testimonials/testimonials-5.jpg"--%>
+<%--                        class="testimonial-img"--%>
+<%--                        alt=""--%>
+<%--                />--%>
+<%--                <h3>조현기</h3>--%>
+<%--                <h4>팀원</h4>--%>
+<%--                <p>--%>
+<%--                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>--%>
+<%--                  Quis quorum aliqua sint quem legam fore sunt eram irure--%>
+<%--                  aliqua veniam tempor noster veniam enim culpa labore duis--%>
+<%--                  sunt culpa nulla illum cillum fugiat legam esse veniam--%>
+<%--                  culpa fore nisi cillum quid.--%>
+<%--                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>--%>
+<%--                </p>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--          <!-- End testimonial item -->--%>
+<%--          <div class="swiper-slide">--%>
+<%--            <div class="testimonial-wrap">--%>
+<%--              <div class="testimonial-item">--%>
+<%--                <img--%>
+<%--                        src="/assets/img/testimonials/testimonials-5.jpg"--%>
+<%--                        class="testimonial-img"--%>
+<%--                        alt=""--%>
+<%--                />--%>
+<%--                <h3>최대현</h3>--%>
+<%--                <h4>정모, 사진첩, 프론트 구현</h4>--%>
+<%--                <p>--%>
+<%--                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>--%>
+<%--                  Quis quorum aliqua sint quem legam fore sunt eram irure--%>
+<%--                  aliqua veniam tempor noster veniam enim culpa labore duis--%>
+<%--                  sunt culpa nulla illum cillum fugiat legam esse veniam--%>
+<%--                  culpa fore nisi cillum quid.--%>
+<%--                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>--%>
+<%--                </p>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--          <!-- End testimonial item -->--%>
+<%--        </div>--%>
+<%--        <div class="swiper-pagination"></div>--%>
+<%--      </div>--%>
+<%--    </div>--%>
+<%--  </section>--%>
   <!-- End Testimonials Section -->
 </main>
 <!-- End #main -->
 
 <!-- ======= Footer ======= -->
-<footer id="footer">
-  <div class="footer-top">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-3 col-md-6 footer-contact">
-          <h3>Togather</h3>
-          <p>
-            서울시 금천구 <br />
-            가산 디지털 2로 123<br />
-            월드메르디앙 2차 <br /><br />
-            <strong>Phone:</strong> +82 2 1234 1234<br />
-            <strong>Email:</strong> service@togather.com<br />
-          </p>
-        </div>
-
-        <div class="col-lg-2 col-md-6 footer-links">
-          <h4>Useful Links</h4>
-          <ul>
-            <li>
-              <i class="bx bx-chevron-right"></i> <a href="/">Home</a>
-            </li>
-            <li>
-              <i class="bx bx-chevron-right"></i> <a href="about">About us</a>
-            </li>
-            <li>
-              <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
-            </li>
-            <li>
-              <i class="bx bx-chevron-right"></i>
-              <a href="#">Terms of service</a>
-            </li>
-            <li>
-              <i class="bx bx-chevron-right"></i>
-              <a href="#">Privacy policy</a>
-            </li>
-          </ul>
-        </div>
-
-        <div  class="col-lg-3 col-md-6 footer-links">
-          <h4>Our Services</h4>
-          <ul>
-            <li>
-              <i class="bx bx-chevron-right"></i> <a href="notification/notice">공지사항</a>
-            </li>
-            <li>
-              <i class="bx bx-chevron-right"></i>
-              <a href="faq/faqList">자주 묻는 질문</a>
-            </li>
-            <li>
-              <i class="bx bx-chevron-right"></i>
-              <a href="qa">Q & A</a>
-            </li>
-            <li>
-              <i class="bx bx-chevron-right"></i> <a href="contact">Contact</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="col-lg-4 col-md-6 footer-newsletter">
-          <h4>뉴스레터 구독하기</h4>
-          <p>
-            최신뉴스 및 프로모션 행사에 대한 안내메일을 받으실 수 있습니다.
-          </p>
-          <form action="" method="post">
-            <input type="email" name="email" /><input
-                  type="submit"
-                  value="Subscribe"
-          />
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container d-md-flex py-4">
-    <div class="me-md-auto text-center text-md-start">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Togather</span></strong
-      >. All Rights Reserved
-      </div>
-    </div>
-    <div class="social-links text-center text-md-right pt-3 pt-md-0">
-      <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-      <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-      <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-      <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-      <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-    </div>
-  </div>
-</footer>
+<jsp:include page="footer.jsp" flush="true"/>
 <!-- End Footer -->
 
 <div id="preloader"></div>

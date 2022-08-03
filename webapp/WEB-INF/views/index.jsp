@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <%@ page session="true" contentType="text/html; charset=utf-8"%>
 <%@page isELIgnored="false" %>
 <!DOCTYPE html>
@@ -11,7 +10,6 @@
     <title>Togather</title>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
-
     <!-- Favicons -->
     <link href="/assets/img/favicon.png" rel="icon" />
     <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
@@ -87,7 +85,6 @@
                         location.href="member/messageList?mnum="+mnum;
 
                     } else if (
-                        /* Read more about handling dismissals below */
                         result.dismiss === Swal.DismissReason.cancel
                     ) {//여기에 로직 알림끄는
                         var result = {"mnum":mnum};
@@ -132,32 +129,63 @@
                     console.log("##5showGroups success: "+result);
                     if(result.length==0){
                         $("#popularSection").empty();
+                        $("#pageDiv").hide();
                         document.getElementById('showGroupform').innerText = "해당 관심사의 개설된 모임이 없습니다";
                     }else{
+                        $("#pageDiv").show();
                         $("#popularSection").empty();
                         var inter = result[0].interest;
                         document.getElementById('showGroupform').innerText = "관심사: "+inter;
                         $(result).each(function(){
                             $("#popularSection").append(
-                                "<div class=\"col-lg-4 col-md-6 d-flex align-items-stretch\">"
+                                "<div class=\"col-lg-4 col-md-6 d-flex align-items-stretch mb-4\">"
                                 +"<div class=\"course-item\">"
-                                +"<img src=\"/assets/img/course-1.jpg\" class=\"img-fluid\" alt=\"...\" />"
+                                +"<img src=\"/assets/img/groupImages/"+this.fname+"\" width=\"414px\" height=\"275px\"/>"
                                 +"<div class=\"course-content\">"
-                                +"<div class=\"d-flex justify-content-between align-items-center mb-3\" >"
+                                +"<div class=\"d-flex justify-content-between align-items-center mb-3\">"
                                 +"<h4>"+this.interest+"</h4>"
                                 +"<p class=\"price\">"+this.gloc+"</p>"
                                 +"</div>"
                                 +"<h3><a href=\"groupTab/groupInfo.do?gseq="+this.gseq+"&mnum=${m.mnum}\">"+this.gname+"</a></h3>"
+                                +"<div style=\"height: 40px; overflow:auto; margin-bottom: 15px\">"
                                 +"<p>"+this.gintro+"</p>"
+                                +"</div>"
+                                +"<div class=\"d-flex justify-content-between align-items-center\">"
+                                +"<div>"
                                 +"<p><i class=\"fa fa-map-marker-alt text-primary me-2\"></i>"+this.gloc+"</p>"
-                                +"<div class=\"trainer d-flex justify-content-between align-items-center\" >"
+                                +"</div>"
+                                +"<div>"
+                                <c:set var='loop_flag' value='false' />
+                                <c:if test='${m ne null }'>
+                                        <c:if test='${not loop_flag }'>
+                                            <c:forEach var='wishCheck' items='${wishCheckList}'>
+                                                <c:choose>
+                                                    <c:when test='${groupList.gseq eq wishCheck.gseq and wishCheck.flag eq 1}'>
+                                                        +"<button onclick='applyWishList(this)' type='button' class='btn btn-danger mb-1' value="+this.gseq+">찜 취소</button>"
+                                                     <c:set var='loop_flag' value='true' />
+                                                    </c:when>
+                                                </c:choose>
+                                            </c:forEach>
+                                        </c:if>
+                                    <c:if test='${not loop_flag }'>
+                                        +"<button onclick='applyWishList(this)' type='button' class='btn btn-outline-danger mb-1' value="+this.gseq+">찜 하기</button>"
+                                    <c:set var='loop_flag' value='false' />
+                                    </c:if>
+                                </c:if>
+                                +"</div>"
+                                +"</div>"
+                                +"<div class=\"trainer d-flex justify-content-between align-items-center\">"
                                 +"<div class=\"trainer-profile d-flex align-items-center\">"
-                                +"<img src=\"/assets/img/trainers/trainer-1.jpg\" class=\"img-fluid\" alt=\"\" />"
-                                + "<span>"+this.mname+"</span>"
+                                +"<h3><i class=\"bi bi-person-circle\"></i></h3>"
+                                +"<span style=\"margin-bottom: 7px\">"+this.mname+"</span>"
                                 +"</div>"
                                 +"<div class=\"trainer-rank d-flex align-items-center\">"
-                                +"<i class=\"bx bx-user\"></i>&nbsp;"+this.memInGroupCount+" &nbsp;&nbsp;"
-                                +"</div></div></div></div></div>"
+                                +"<i class=\"bx bx-user\"></i>&nbsp;"+this.memInGroupCount+""
+                                +"</div>"
+                                +"</div>"
+                                +"</div>"
+                                +"</div>"
+                                +"</div>"
                             );
                         })
                     }
@@ -180,6 +208,7 @@
                     int_out:$(e).find('a').text()
                 },
                 success: function(result){
+                    $('#pageDiv').hide();
                     console.log("##success: "+result);
                     $("#addInCateForm").empty();
                     $("#addInCateForm2").empty();
@@ -292,11 +321,16 @@
                 var gname = $("#gname").val();
                 var int_out = $("#int_out").val();
                 var gloc = $("#gloc").val();
-                var popularCourses = document.getElementById('popular-courses'); //모임리스트 보여주는 디자인 갖고오는 메소드
                 if(gname=="" && int_out=="" && gloc==""){
-                    alert("모임이름, 관심사, 지역 중 한 가지 이상을 입력해주세요.");
-                    $("#gname").focus();
-                    return false;
+                    Swal.fire({
+                        title: '모임이름, 관심사, 지역 중 <br/> 한 가지 이상을 입력해주세요.',
+                        icon: 'error',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes'
+                    }).then((result) => {
+                        $('#pageDiv').show();
+                        location.href="../";
+                    });
                 }
 
                 $.ajax({
@@ -304,9 +338,18 @@
                     type: "GET",
                     data: $("#searchForm").serialize(),
                     success: function(result){
+                        $('#pageDiv').hide();
                         if(result == ""){
-                            alert("검색하신 모임이 존재하지않습니다. ( 인덱스 페이지로 )");
-                            location.href="../";
+                            Swal.fire({
+                                title: '검색하신 모임이 존재하지않습니다.',
+                                text: '첫 페이지로 돌아갑니다.',
+                                icon: 'error',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Yes'
+                            }).then((result) => {
+                                $('#pageDiv').show();
+                                location.href="../";
+                            });
                         }
                         console.log("result: " + result);
 
@@ -326,31 +369,54 @@
                             console.log("index: " + index);
                             console.log("item: " + item);
                             $('#popularSection').append(
-                                "<div class='col-lg-4 col-md-6 d-flex align-items-stretch' id='listCard'>"
-                                +"<div class='course-item mt-5'>"
-                                +"<img src='/assets/img/groupImages/"+item.fname+"' width='414px' height='275px' alt='...'/>"
-                                +"<div class='course-content'>"
-                                +"<div class='d-flex justify-content-between align-items-center mb-3'>"
-                                +"<h4>"+item.interest+"</h4>"
-                                +"<p class='price'>"+item.gloc+"</p>"
+                                "<div class='col-lg-4 col-md-6 d-flex align-items-stretch mb-4'>"
+                                    +"<div class='course-item'>"
+                                        +"<img src='/assets/img/groupImages/"+item.fname+"' width='414px' height='275px' alt='...'/>"
+                                    +"<div class='course-content'>"
+                                        +"<div class='d-flex justify-content-between align-items-center mb-3'>"
+                                            +"<h4>"+item.interest+"</h4>"
+                                            +"<p class='price'>"+item.gloc+"</p>"
+                                        +"</div>"
+                                        +"<h3><a href='groupTab/groupInfo.do?gseq="+item.gseq+"&mnum=${m.mnum}'>"+item.gname+"</a></h3>"
+                                        +"<div style='height:40px; overflow:auto; margin-bottom: 15px'>"
+                                            +"<p>"+item.gintro+"</p>"
+                                        +"</div>"
+                                        +"<div class='d-flex justify-content-between align-items-center'>"
+                                        +"<div><p><i class='fa fa-map-marker-alt text-primary me-2'></i>"+item.gloc+"</p></div>"
+                                        +"<div>"
+                                            <c:set var='loop_flag' value='false' />
+                                            <c:if test='${m ne null }'>
+                                                <c:if test='${not loop_flag}'>
+                                                    <c:forEach var='wishCheck' items='${wishCheckList }'>
+                                                        <c:choose>
+                                                            <c:when test='${groupList.gseq eq wishCheck.gseq and wishCheck.flag eq 1 }'>
+                                                                +"<button onclick='applyWishList(this)' type='button' class='btn btn-danger mb-1' value="+item.gseq+">찜 취소</button>"
+                                                                <c:set var='loop_flag' value='true' />
+                                                            </c:when>
+                                                        </c:choose>
+                                                    </c:forEach>
+                                                </c:if>
+                                                <c:if test='${not loop_flag }'>
+                                                    +"<button onclick='applyWishList(this)' type='button' class='btn btn-outline-danger mb-1' value="+item.gseq+">찜 하기</button>"
+                                                    <c:set var='loop_flag' value='false' />
+                                                </c:if>
+                                            </c:if>
+                                        +"</div>"
+                                        +"</div>"
+                                    +"<div class='trainer d-flex justify-content-between align-items-center'>"
+                                    +"<div class='trainer-profile d-flex align-items-center'>"
+                                    +"<h3><i class='bi bi-person-circle'></i></h3>"
+                                    +"<span style='margin-bottom: 7px'>"+item.mname+"</span>"
+                                    +"</div>"
+                                    +"<div class='trainer-rank d-flex align-items-center'>"
+                                    +"<i class='bx bx-user'></i>&nbsp;"+item.limit+"&nbsp;&nbsp;"
+                                    +"</div>"
+                                    +"</div>"
+                                    +"</div>"
+                                    +"</div>"
+                                    +"</div>"
                                 +"</div>"
-                                +"<h3><a href='groupTab/groupInfo.do?gseq="+item.gseq+"&mnum=${m.mnum}'>"+item.gname+"</a></h3>"
-                                +"<p>"+item.gintro+"</p>"
-                                +"<p><i class='fa fa-map-marker-alt text-primary me-2'></i>"+item.gloc+"</p>"
-                                +"<div class='trainer d-flex justify-content-between align-items-center'>"
-                                +"<div class='trainer-profile d-flex align-items-center'>"
-                                +"<img src='/assets/img/trainers/trainer-1.jpg' class='img-fluid' alt=''/>"
-                                +"<span>"+item.mname+"</span>"
-                                +"</div>"
-                                +"<div class='trainer-rank d-flex align-items-center'>"
-                                +"<i class='bx bx-user'></i>&nbsp;"+item.limit+"&nbsp;&nbsp;"
-                                +"</div>"
-                                +"</div>"
-                                +"</div>"
-                                +"</div>"
-                                +"</div>"
-                                +"</div>"
-                                +"</section>"
+
                             );
                         })
                     },
@@ -360,9 +426,7 @@
                 });
             });
         });
-
     </script>
-
 </head>
 
 <body>
@@ -388,64 +452,7 @@
         onclick='buttonCheck(${message},${loginCheck})'
 />
 <!-- ======= Header ======= -->
-<header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
-        <h1 class="logo me-auto"><a href="/">Togather</a></h1>
-
-        <nav id="navbar" class="navbar order-last order-lg-0">
-            <ul>
-                <c:if test="${m.athur eq 0}">
-                    <li><a class="manage" href="/membermg/mmlistPage">회원관리</a></li>
-                </c:if>
-                <li><a class="active" href="/">Home</a></li>
-                <li><a href="about">About</a></li>
-                <li><a href="board/listPage">게시판</a></li>
-                <c:if test="${m ne null}">
-                    <li><a href="groupTab/myGroup.do?mnum=${m.mnum }">나의 모임</a></li><!--로그인시에만 보이게 하기-->
-                    <li><a href="wishTab/wishList?mnum=${m.mnum }">찜목록
-                        <span id="numberOfWish" class="badge bg-dark text-white ms-1 rounded-pill">${wishsize }</span>
-                    </a></li>
-                </c:if>
-                <li class="dropdown">
-                    <a href="#"
-                    ><span>고객지원</span> <i class="bi bi-chevron-down"></i
-                    ></a>
-                    <ul>
-                        <li><a href="notification/notice">공지사항</a></li>
-                        <li><a href="faq/faqList">자주묻는 질문</a></li>
-                        <li><a href="qa">Q&A</a></li>
-                        <li><a href="contact">Contact</a></li>
-                    </ul>
-                </li>
-
-                <c:choose>
-                    <c:when test="${m eq null}">
-                        <li><a href="member/login.do">로그인 ${sessionScope.m} </a></li>
-                    </c:when>
-                    <c:otherwise>
-                        <li><a href="javascript:void(0);" onclick="signout();">로그아웃</a></li>
-                        <li><a href="mypage/main">마이페이지</a></li>
-                    </c:otherwise>
-                </c:choose>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-
-        </nav>
-        <!-- .navbar -->
-
-        <!--로그인전에는 회원가입만 보이고 로그인하면 모임만들기만 보이게 하는건 어떤지??-->
-        <c:choose>
-            <c:when test="${m eq null}">
-                <a href="member/joinform.do" class="get-started-btn">회원가입</a>
-            </c:when>
-            <c:otherwise>
-                <a href="groupTab/groupCreate.do" class="get-started-btn">모임만들기</a>
-            </c:otherwise>
-        </c:choose>
-
-
-    </div>
-</header>
+<jsp:include page="header.jsp" flush="true"/>
 <!-- End Header -->
 
 <!-- ======= Video Section ======= -->
@@ -475,7 +482,7 @@
         data-wow-delay="0.1s"
         style="padding: 35px; background-color: #5fcf80"
 >
-    <form  id="searchForm">
+    <form  id="searchForm" autocomplete="off">
         <div class="container">
             <div class="row g-2">
                 <div class="col-md-10">
@@ -495,6 +502,7 @@
                                 <option value="아웃도어/여행">아웃도어/여행</option>
                                 <option value="외국/언어">외국/언어</option>
                                 <option value="음악/악기">음악/악기</option>
+                                <option value="운동/스포츠">운동/스포츠</option>
                                 <option value="차/오토바이">차/오토바이</option>
                                 <option value="요리/제조">요리/제조</option>
                                 <option value="업종/직무">업종/직무</option>
@@ -543,7 +551,7 @@
             <div onClick="showInCate(this)" class="col-lg-3 col-6 text-center">
                   <span
                           data-purecounter-start="0"
-                          data-purecounter-end="${membercount }"
+                          data-purecounter-end="${membercount+11320}"
                           data-purecounter-duration="1"
                           class="purecounter"
                   ></span>
@@ -553,7 +561,7 @@
             <div onClick="showInCate(this)" class="col-lg-3 col-6 text-center">
                   <span
                           data-purecounter-start="0"
-                          data-purecounter-end="${groupcount }"
+                          data-purecounter-end="${groupcount+682}"
                           data-purecounter-duration="1"
                           class="purecounter"
                   ></span>
@@ -563,7 +571,7 @@
             <div onClick="showInCate(this)" class="col-lg-3 col-6 text-center">
                   <span
                           data-purecounter-start="0"
-                          data-purecounter-end="${gatheringcount}"
+                          data-purecounter-end="${gatheringcount+1321}"
                           data-purecounter-duration="1"
                           class="purecounter"
                   ></span>
@@ -573,11 +581,11 @@
             <div onClick="showInCate(this)" class="col-lg-3 col-6 text-center">
                   <span
                           data-purecounter-start="0"
-                          data-purecounter-end="2198"
+                          data-purecounter-end="${gatheringcount+6923}"
                           data-purecounter-duration="1"
                           class="purecounter"
                   ></span>
-                <p>하루평균 방문자</p>
+                <p>누적 정모</p>
             </div>
         </div>
     </div>
@@ -713,9 +721,8 @@
 </section>
 <!-- 섹션종료 -->
 <!-- ======= Popular Courses Section ======= -->
-<section id="popular-courses" class="courses">
+<section id="popular-courses" class="courses mt-0">
     <div class="container" data-aos="fade-up">
-        <!-- id값 추가 확인! 0410-->
         <div id="section-title" class="section-title">
             <h2>소모임</h2>
             <p id="showGroupform">Popular Groups</p>
@@ -741,9 +748,11 @@
                             </div>
 
                             <h3><a href="groupTab/groupInfo.do?gseq=${groupList.gseq}&mnum=${m.mnum}">${groupList.gname}</a></h3>
+                            <div style="height: 40px; overflow:auto; margin-bottom: 15px">
                             <p>
                                     ${groupList.gintro}
                             </p>
+                            </div>
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
@@ -773,12 +782,8 @@
                                     class="trainer d-flex justify-content-between align-items-center"
                             >
                                 <div class="trainer-profile d-flex align-items-center">
-                                    <img
-                                            src="/assets/img/trainers/trainer-1.jpg"
-                                            class="img-fluid"
-                                            alt=""
-                                    />
-                                    <span>${namelist[status.index]}</span>
+                                    <h3><i class="bi bi-person-circle"></i></h3>
+                                    <span style="margin-bottom: 7px">${namelist[status.index]}</span>
                                 </div>
                                 <div class="trainer-rank d-flex align-items-center">
                                     <i class="bx bx-user"></i>&nbsp;${groupMemberCount[status.index]}
@@ -792,7 +797,7 @@
         </div>
     </div>
     <c:if test="${m ne null }">
-        <div>
+        <div id="pageDiv">
             <nav aria-label="Page navigation example">
                 <ul
                         id="paging"
@@ -836,96 +841,7 @@
 <!-- End #main -->
 
 <!-- ======= Footer ======= -->
-<footer id="footer">
-    <div class="footer-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3>Togather</h3>
-                    <p>
-                        서울시 금천구 <br />
-                        가산 디지털 2로 123<br />
-                        월드메르디앙 2차 <br /><br />
-                        <strong>Phone:</strong> +82 2 1234 1234<br />
-                        <strong>Email:</strong> service@togather.com<br />
-                    </p>
-                </div>
-
-                <div class="col-lg-2 col-md-6 footer-links">
-                    <h4>Useful Links</h4>
-                    <ul>
-                        <li>
-                            <i class="bx bx-chevron-right"></i> <a href="/">Home</a>
-                        </li>
-                        <li>
-                            <i class="bx bx-chevron-right"></i> <a href="about">About us</a>
-                        </li>
-                        <li>
-                            <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
-                        </li>
-                        <li>
-                            <i class="bx bx-chevron-right"></i>
-                            <a href="#">Terms of service</a>
-                        </li>
-                        <li>
-                            <i class="bx bx-chevron-right"></i>
-                            <a href="#">Privacy policy</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div  class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li>
-                            <i class="bx bx-chevron-right"></i> <a href="notification/notice">공지사항</a>
-                        </li>
-                        <li>
-                            <i class="bx bx-chevron-right"></i>
-                            <a href="faq/faqList">자주 묻는 질문</a>
-                        </li>
-                        <li>
-                            <i class="bx bx-chevron-right"></i>
-                            <a href="qa">Q & A</a>
-                        </li>
-                        <li>
-                            <i class="bx bx-chevron-right"></i> <a href="contact">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-4 col-md-6 footer-newsletter">
-                    <h4>뉴스레터 구독하기</h4>
-                    <p>
-                        최신뉴스 및 프로모션 행사에 대한 안내메일을 받으실 수 있습니다.
-                    </p>
-                    <form action="" method="post">
-                        <input type="email" name="email" /><input
-                            type="submit"
-                            value="Subscribe"
-                    />
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container d-md-flex py-4">
-        <div class="me-md-auto text-center text-md-start">
-            <div class="copyright">
-                &copy; Copyright <strong><span>Togather</span></strong
-            >. All Rights Reserved
-            </div>
-        </div>
-        <div class="social-links text-center text-md-right pt-3 pt-md-0">
-            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-        </div>
-    </div>
-</footer>
+<jsp:include page="footer.jsp" flush="true"/>
 <!-- End Footer -->
 
 <div id="preloader"></div>

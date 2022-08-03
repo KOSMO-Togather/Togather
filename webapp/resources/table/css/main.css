@@ -59,9 +59,7 @@ li {
 
 /* ------------------------------------ */
 input {
-  display: block;
-  outline: none;
-  border: none !important;
+  display: inline-block;
 }
 
 textarea {
@@ -121,7 +119,7 @@ iframe {
 }
 /*대현수정 0412*/
 .wrap-table100 {
-  width: 900px;
+  width: 1200px;
 }
 
 table {

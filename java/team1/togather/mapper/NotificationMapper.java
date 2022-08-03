@@ -14,9 +14,7 @@ public interface NotificationMapper {
 	List<Notification> list();
 	ArrayList<Notification> list(int pageAt, int ps);		//페이지
 	ArrayList<Notification> list(String option, String ocontent);// 옵션이랑
-
 	ArrayList<String> getCategory();
-
 
 	//조회수
 	public void updateNView(Long nseq);

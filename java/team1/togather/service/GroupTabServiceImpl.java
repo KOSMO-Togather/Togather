@@ -3,10 +3,8 @@ package team1.togather.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.stereotype.Service;
-
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 import team1.togather.domain.*;
 import team1.togather.domain.GroupTabGallery;
 import team1.togather.mapper.GroupTabMapper;
@@ -14,207 +12,215 @@ import team1.togather.mapper.GroupTabMapper;
 @Service
 @AllArgsConstructor
 public class GroupTabServiceImpl implements GroupTabService {
-	private GroupTabMapper groupTabMapper;
 
-	@Override
-	public List<GroupTab> selectAllS(IndexCriteria cri) {
-		List<GroupTab> list = groupTabMapper.selectAll(cri);
-		return list;
-	}
+  private GroupTabMapper groupTabMapper;
 
-	@Override
-	public GroupTab selectByGSeqS(long gseq) {
-		return groupTabMapper.selectByGSeq(gseq);
-	}
+  @Override
+  public List<GroupTab> selectAllS(IndexCriteria cri) {
+    List<GroupTab> list = groupTabMapper.selectAll(cri);
+    return list;
+  }
 
-	@Override
-	public void insertS(GroupTab groupTab) {
-		groupTabMapper.insert(groupTab);
-	}
+  @Override
+  public GroupTab selectByGSeqS(long gseq) {
+    return groupTabMapper.selectByGSeq(gseq);
+  }
 
-	@Override
-	public void updateS(GroupTab groupTab) {
-		groupTabMapper.update(groupTab);
-	}
+  @Override
+  public void insertS(GroupTab groupTab) {
+    groupTabMapper.insert(groupTab);
+  }
 
-	@Override
-	public void deleteS(long gseq) {
-		groupTabMapper.delete(gseq);
-	}
-	//03.16지수추가
-	@Override
-	public List<String> selectAllname(long mnum) {
+  @Override
+  public void updateS(GroupTab groupTab) {
+    groupTabMapper.update(groupTab);
+  }
 
-		return groupTabMapper.selectAllname(mnum);
-	}
+  @Override
+  public void deleteS(long gseq) {
+    groupTabMapper.delete(gseq);
+  }
 
-	@Override
-	public long groupCount() {
+  //03.16지수추가
+  @Override
+  public List<String> selectAllname(long mnum) {
+    return groupTabMapper.selectAllname(mnum);
+  }
 
-		return groupTabMapper.groupCount();
-	}
+  @Override
+  public long groupCount() {
+    return groupTabMapper.groupCount();
+  }
 
-	@Override
-	public Long groupMemberCount(long gseq) {
-		return groupTabMapper.groupMemberCount(gseq);
-	}
+  @Override
+  public Long groupMemberCount(long gseq) {
+    return groupTabMapper.groupMemberCount(gseq);
+  }
 
-	@Override
-	public Member groupInfoMemberName(long gseq) {
+  @Override
+  public Member groupInfoMemberName(long gseq) {
+    return groupTabMapper.groupInfoMemberName(gseq);
+  }
 
-		return groupTabMapper.groupInfoMemberName(gseq);
-	}
+  @Override
+  public void memInGroup(MemInGroup memInGroup) {
+    groupTabMapper.memInGroup(memInGroup);
+  }
 
-	@Override
-	public void memInGroup(MemInGroup memInGroup) {
-		groupTabMapper.memInGroup(memInGroup);
-	}
+  @Override
+  public Long grade(MemInGroup memInGroup) {
+    return groupTabMapper.grade(memInGroup);
+  }
 
-	@Override
-	public Long grade(MemInGroup memInGroup) {
-		return groupTabMapper.grade(memInGroup);
-	}
-	//03.17지수추가
-	@Override
-	public Long memInGroupCheck(MemInGroup memInGroup) {
-		return groupTabMapper.memInGroupCheck(memInGroup);
-	}
+  //03.17지수추가
+  @Override
+  public Long memInGroupCheck(MemInGroup memInGroup) {
+    return groupTabMapper.memInGroupCheck(memInGroup);
+  }
 
-	@Override
-	public void groupQuit(MemInGroup memInGroup) {
-		groupTabMapper.groupQuit(memInGroup);
-	}
+  @Override
+  public void groupQuit(MemInGroup memInGroup) {
+    groupTabMapper.groupQuit(memInGroup);
+  }
 
-	@Override
-	public List<Map<String,String>> memInGroupName(MemInGroup memInGroup) {
-		return groupTabMapper.memInGroupName(memInGroup);
-	}
+  @Override
+  public List<Map<String, String>> memInGroupName(MemInGroup memInGroup) {
+    return groupTabMapper.memInGroupName(memInGroup);
+  }
 
-	@Override
-	public void memInGroupDelete(long gseq) {
-		groupTabMapper.memInGroupDelete(gseq);
+  @Override
+  public void memInGroupDelete(long gseq) {
+    groupTabMapper.memInGroupDelete(gseq);
+  }
 
-	}
+  @Override
+  public List<GroupTab> myGroup(MemInGroup memInGroup) {
+    return groupTabMapper.myGroup(memInGroup);
+  }
 
-	@Override
-	public List<GroupTab> myGroup(MemInGroup memInGroup) {
-		return groupTabMapper.myGroup(memInGroup);
-	}
+  @Override
+  public GroupTab insertGroupInfo(GroupTab groupTab) {
+    return groupTabMapper.insertGroupInfo(groupTab);
+  }
 
-	@Override
-	public GroupTab insertGroupInfo(GroupTab groupTab) {
+  @Override
+  public List<GroupTab> loginGroupList(Map<String, Object> map) {
+    List<GroupTab> list = groupTabMapper.loginGroupList(map);
+    return list;
+  }
 
-		return groupTabMapper.insertGroupInfo(groupTab);
-	}
+  @Override
+  public Integer pageCount(Member member) {
+    return groupTabMapper.pageCount(member);
+  }
 
-	@Override
-	public List<GroupTab> loginGroupList(Map<String,Object> map) {
-		List<GroupTab> list = groupTabMapper.loginGroupList(map);
-		return list;
-	}
+  @Override
+  public Integer notCategorypageCount() {
+    return groupTabMapper.notCategorypageCount();
+  }
 
-	@Override
-	public Integer pageCount(Member member) {
-		return groupTabMapper.pageCount(member);
-	}
+  @Override
+  public long LIMIT(MemInGroup memInGroup) {
+    return groupTabMapper.LIMIT(memInGroup);
+  }
 
-	@Override
-	public Integer notCategorypageCount() {
+  @Override
+  public List<String> NoCategoryNames(IndexCriteria cri) {
+    return groupTabMapper.NoCategoryNames(cri);
+  }
 
-		return groupTabMapper.notCategorypageCount();
-	}
+  @Override
+  public void quitGroupDeleteGathering(long mnum) {
+    groupTabMapper.quitGroupDeleteGathering(mnum);
+  }
 
-	@Override
-	public long LIMIT(MemInGroup memInGroup) {
-		return groupTabMapper.LIMIT(memInGroup);
-	}
+  @Override
+  public Long gatheringCountInGroup(long gseq) {
+    return groupTabMapper.gatheringCountInGroup(gseq);
+  }
 
-	@Override
-	public List<String> NoCategoryNames(IndexCriteria cri) {
-		return groupTabMapper.NoCategoryNames(cri);
-	}
+  @Override
+  public List<String> groupMemberNames(Map<String, Object> map) {
+    return groupTabMapper.groupMemberNames(map);
+  }
 
-	@Override
-	public void quitGroupDeleteGathering(long mnum) {
-		groupTabMapper.quitGroupDeleteGathering(mnum);
-	}
+  @Override
+  public List<HashMap<String, Object>> endTime(HashMap<String, Object> map) {
+    return groupTabMapper.endTime(map);
+  }
 
-	@Override
-	public Long gatheringCountInGroup(long gseq) {
-		return groupTabMapper.gatheringCountInGroup(gseq);
-	}
+  @Override
+  public List<Gathering> endTimeGathring(String ga_date) {
+    return groupTabMapper.endTimeGathring(ga_date);
+  }
 
-	@Override
-	public List<String> groupMemberNames(Map<String, Object> map) {
-		return groupTabMapper.groupMemberNames(map);
-	}
+  @Override
+  public String endTimeName(long gseq) {
+    return groupTabMapper.endTimeName(gseq);
+  }
 
-	@Override
-	public List<HashMap<String,Object>> endTime(HashMap<String,Object> map) {
-		return groupTabMapper.endTime(map);
-	}
+  @Override
+  public void gatheringDelete(String ga_date) {
+    groupTabMapper.gatheringDelete(ga_date);
+  }
 
-	@Override
-	public List<Gathering> endTimeGathring(String ga_date) {
-		return groupTabMapper.endTimeGathring(ga_date);
-	}
+  @Override
+  public MemInGathering endTimeNotice(MemInGathering mig) {
+    return groupTabMapper.endTimeNotice(mig);
+  }
 
-	@Override
-	public String endTimeName(long gseq) {
-		return groupTabMapper.endTimeName(gseq);
-	}
+  @Override
+  public void endTimeNoticeChange(MemInGathering mig) {
+    groupTabMapper.endTimeNoticeChange(mig);
+  }
 
-	@Override
-	public void gatheringDelete(String ga_date) {
-		groupTabMapper.gatheringDelete(ga_date);
-	}
+  @Override
+  public void galleryUpload(GroupTabGallery groupTabGallery) {
+    groupTabMapper.galleryUpload(groupTabGallery);
+  }
 
-	@Override
-	public MemInGathering endTimeNotice(MemInGathering mig) {
-		return groupTabMapper.endTimeNotice(mig);
-	}
+  @Override
+  public List<GroupTabGallery> selectPhoto(HashMap<String, Object> map) {
+    return groupTabMapper.selectPhoto(map);
+  }
 
-	@Override
-	public void endTimeNoticeChange(MemInGathering mig) {
-		groupTabMapper.endTimeNoticeChange(mig);
-	}
-	@Override
-	public void galleryUpload(GroupTabGallery groupTabGallery){
-		groupTabMapper.galleryUpload(groupTabGallery);
-	}
-	@Override
-	public List<GroupTabGallery> selectPhoto(HashMap<String, Object> map){
-		return groupTabMapper.selectPhoto(map);
-	}
-	@Override
-	public Integer galleryPageCount(long gseq){
-		return groupTabMapper.galleryPageCount(gseq);
-	}
-	@Override
-	public void galleryDelete(GroupTabGallery groupTabGallery) {
-		groupTabMapper.galleryDelete(groupTabGallery);
-	}
-	@Override
-	public Integer writerCheck(GroupTabGallery groupTabGallery) {
-		return groupTabMapper.writerCheck(groupTabGallery);
-	}
-	@Override
-	public void delegate(MemInGroup memInGroup) {
-		groupTabMapper.delegate(memInGroup);
-	}
+  @Override
+  public Integer galleryPageCount(long gseq) {
+    return groupTabMapper.galleryPageCount(gseq);
+  }
 
-	@Override
-	public MemInGroup selectKing(MemInGroup memInGroup) {
-		return groupTabMapper.selectKing(memInGroup);
-	}
+  @Override
+  public void galleryDelete(GroupTabGallery groupTabGallery) {
+    groupTabMapper.galleryDelete(groupTabGallery);
+  }
 
-	@Override
-	public List<GroupTab> searchGroup(GroupTab groupTab){
-		return groupTabMapper.searchGroup(groupTab);
-	}
-	@Override
-	public String kingName(long gseq){
-		return groupTabMapper.kingName(gseq);
-	}
+  @Override
+  public Integer writerCheck(GroupTabGallery groupTabGallery) {
+    return groupTabMapper.writerCheck(groupTabGallery);
+  }
 
+  @Override
+  public void delegate(MemInGroup memInGroup) {
+    groupTabMapper.delegate(memInGroup);
+  }
+
+  @Override
+  public MemInGroup selectKing(MemInGroup memInGroup) {
+    return groupTabMapper.selectKing(memInGroup);
+  }
+
+  @Override
+  public List<GroupTab> searchGroup(GroupTab groupTab) {
+    return groupTabMapper.searchGroup(groupTab);
+  }
+
+  @Override
+  public String kingName(long gseq) {
+    return groupTabMapper.kingName(gseq);
+  }
+
+  @Override
+  public void kingUpdate(long gseq) {
+    groupTabMapper.kingUpdate(gseq);
+  }
 }

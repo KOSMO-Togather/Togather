@@ -63,6 +63,7 @@ public interface GroupTabMapper {
 	//인덱스 검색
 	List<GroupTab> searchGroup(GroupTab groupTab);
 	String kingName(long gseq);
+	void kingUpdate(long gseq);
 }
 
 
