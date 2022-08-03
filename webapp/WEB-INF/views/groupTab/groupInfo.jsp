@@ -663,9 +663,7 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
                 <p>${groupMemberCount}/${groupInfo.limit}</p>
               </div>
               <!-- 정모목록 부분-->
-              <c:if
-                test="${memInGroupCheck ne null || m.athur eq 0 || m.athur eq 1}"
-              >
+              <c:if test="${memInGroupCheck ne null || m.athur eq 0 || m.athur eq 1}">
                 <div class="accordion acoordion-flush" id="accordionExample">
                   <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
@@ -688,10 +686,8 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
                     >
                       <c:forEach items="${gatheringList}" var="gathering">
                         <div class="accordion-body">
-                          <a
-                            href="../gathering/gatheringInfo.do?ga_seq=${gathering.ga_seq}&mnum=${m.mnum}"
-                            >${gathering.ga_name}</a
-                          >
+                          <a href="../gathering/gatheringInfo.do?ga_seq=${gathering.ga_seq}&mnum=${m.mnum}"
+                            >${gathering.ga_name}</a>
                         </div>
                       </c:forEach>
                     </div>
