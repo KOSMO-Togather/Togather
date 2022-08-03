@@ -7,15 +7,16 @@
 	<select id="loginGroupList" resultType="GroupTab" parameterType="Map">
 			<![CDATA[
 		select * from (select ROWNUM rnum, aa.* from
-			(select * from grouptab where interest = any(SELECT email FROM MEMBER where MNUM =#{mnum}
-														 UNION ALL
-														 SELECT CATEGORY_FIRST FROM MEMBER WHERE MNUM = #{mnum}
-														 UNION ALL
-														 SELECT CATEGORY_SECOND FROM MEMBER WHERE MNUM = #{mnum}
-														 UNION ALL
-														 SELECT CATEGORY_THIRD FROM MEMBER WHERE MNUM = #{mnum}
-														 INTERSECT
-														 SELECT INTEREST FROM GROUPTAB )order by gseq desc) aa )where rnum>#{startRow} and rnum<=#{endRow}
+			(select * from grouptab where interest =
+			  any(SELECT email FROM MEMBER where MNUM =#{mnum}
+							 UNION ALL
+							 SELECT CATEGORY_FIRST FROM MEMBER WHERE MNUM = #{mnum}
+							 UNION ALL
+							 SELECT CATEGORY_SECOND FROM MEMBER WHERE MNUM = #{mnum}
+							 UNION ALL
+							 SELECT CATEGORY_THIRD FROM MEMBER WHERE MNUM = #{mnum}
+							 INTERSECT
+							 SELECT INTEREST FROM GROUPTAB )order by gseq desc) aa )where rnum>#{startRow} and rnum<=#{endRow}
 		]]>
 		</select>
 	<!-- 로그인했을때 관심사 그룹들의 모임장이름 -->
